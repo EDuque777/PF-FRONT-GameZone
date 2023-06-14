@@ -14,7 +14,6 @@ function App() {
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
-
     </div>
   );
   
