@@ -2,6 +2,7 @@
 //! REVISAR COMO HACER QUE SE SUMEN LOS PRECIOS DE LOS PRODUCTOS
 //! REVISAR LA DIVISION Y EL RENDER
 //! RALIZAR LOS ACTIONS, REDUCER Y APLICAR EL PERSIST
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
