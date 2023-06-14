@@ -1,12 +1,15 @@
 import React from "react";
-
+import NavBar from "../../components/NavBar/NavBar";
+import Carousel from "../../components/Carousel/Carousel"
 
 
 const Home = () => {
     return(
-        <>
-        <h1>Home Page</h1>
-        </>
+        <div className="bg-gray-light">
+                <NavBar />
+                <h1 className="text-gray-letters">HOME</h1>
+                <Carousel />
+        </div>
         
     );
 }
