@@ -7,12 +7,12 @@
   .footer-section h4 {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #f1f1f1; /* Color de texto gris casi blanco */
+    color: #f1f1f1;
   }
   
   .footer-section p {
     margin: 5px 0;
-    color: #f1f1f1; /* Color de texto gris casi blanco */
+    color: #f1f1f1;
   }
   
   .footer-section img {
@@ -29,7 +29,7 @@
     margin: 0 20px;
   }
   
-  /* Agregar márgenes a los enlaces específicos */
+  
   .footer-section > div > a {
     margin-bottom: 5px;
   }
@@ -55,8 +55,8 @@
     border-bottom: none; 
   }
   
-  /* Agrega el estilo para el fondo negro y el color de texto en el contenedor principal */
+  
   .footer-container {
     background-color: black;
-    color: #f1f1f1; /* Color de texto gris casi blanco */
+    color: #f1f1f1; 
   }
