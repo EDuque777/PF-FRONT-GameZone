@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, getDetail } from "../../redux/actions";
-import style from "./Detail.module.css";
+//import style from "./Detail.module.css";
 
 const Detail = (props) => {
     const dispatch = useDispatch();
@@ -36,13 +36,13 @@ const Detail = (props) => {
       return (
         <div>
             <h1>Nombre: {game.name}</h1>
-            <img className={style.header_image} src={imageURL} alt="Game" />
+            {/* <img className={style.header_image} src={imageURL} alt="Game" />
             <h3>Edad requerida: {required_age}</h3>
             <h3>Descripción: {detailed_description}</h3>
             <h3>Sobre el juego: {about_the_game}</h3>
             <h3>Desarrolladores: {developers}</h3>
             <h3>Plataformas: {platforms}</h3>
-            <h4>ID: {game.id}</h4>
+            <h4>ID: {game.id}</h4> */}
         </div>
       )
 

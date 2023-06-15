@@ -112,6 +112,7 @@ export const getGamesNewReleases = () => {
 //? funciones del carrito
 export const addCart = (game) => {
     return function(dispatch){
+        console.log(game);
         dispatch({
             type: ADD_TO_CART,
             payload: game,
