@@ -11,7 +11,7 @@ console.log(offers)
 
 return(
     <div className={style.container}>
-        <h2 className={style.text}>carrousel</h2>
+        <h2 className={style.text}>   carrousel   </h2>
     </div>
 )
 }
