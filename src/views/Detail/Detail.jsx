@@ -1,3 +1,4 @@
+
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { clearDetail, getDetail } from "../../redux/actions";
@@ -19,6 +20,7 @@
 //           .catch(() => {
 //             setLoading(false);
 //           });
+
     
 //         // Limpia los detalles cuando el componente se desmonta
 //         return () => {
@@ -30,6 +32,7 @@
 //         return <div>Cargando...</div>; 
 //       }
     
+
 //       if (!game) {
 //         return <div>No se encontró el juego.</div>; 
 //       }
@@ -51,3 +54,4 @@
 // }
 
 // export default Detail;
+

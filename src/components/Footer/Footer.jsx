@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import fb from "../../assets/fbimg.png";
-import twitter from "../../assets/twitterimg.png";
-import linkedin from "../../assets/linkedinimg.png";
-import insta from "../../assets/instaimg.png";
 import styles from "./Footer.module.css";
+
+import {faLinkedin,faGithub,faTwitter,faInstagram,faFacebook} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 const Footer = () => {
     return(
         <div className={styles["footer-container"]}>
             <div className={styles["footer-section"]}>
                 <div className={styles["footer-column"]}>
-                    <h4>Compania</h4>
+                    <h7>Compania</h7>
                     <a href="/aboutus">
                         <p>Sobre nosotros</p>
                     </a>
@@ -22,24 +22,15 @@ const Footer = () => {
                         <p>Contacto</p>
                     </a>
                 </div>
-                <div className={styles["footer-column"]}>
-                    <h4>Siguenos</h4>
-                    <div className={styles["social-media-icons"]}>
-                        <p ><img src={fb} alt=""/></p>
-                        <p><img src={twitter} alt=""/></p>
-                        <p><img src={linkedin} alt=""/></p>
-                        <p><img src={insta} alt=""/></p>
-                    </div>
-                </div>
             </div>
 
-            {/* <hr></hr> */}
 
-            <div className={styles["divider"]}></div>
 
+    
             <div className={styles["footer-section"]}>
+            <div className={styles["footer-column"]}>
                 <a href="/terminos">
-                    <p>Terminos y condiciones</p>
+                    <h7>Terminos y condiciones</h7>
                 </a>
                 <a href="/privacidad">
                     <p>Privacidad</p>
@@ -49,6 +40,21 @@ const Footer = () => {
                 </a>
             </div>
         </div>
+        <div className={styles["footer-section"]}>
+                <div className={styles["footer-column"]}>
+                    <h7>Siguenos</h7>
+                    <div className={styles["social-media-icons"]}>
+                        <FontAwesomeIcon className="w-6 h-6" icon={faLinkedin} size="l"/>
+                        <FontAwesomeIcon className="w-6 h-6" icon={faGithub} size="l"/>
+                        <FontAwesomeIcon icon={faTwitter} size="l" />
+                        <FontAwesomeIcon icon={faFacebook} size="l"/>
+                        <FontAwesomeIcon icon={faInstagram} size="l"/>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     );
 }
 

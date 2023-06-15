@@ -20,6 +20,7 @@ const CardsContainer = () => {
   return (
     <div>
         {   
+
           gameOffer.map(game => {
               return (
                 <Card 
@@ -31,6 +32,7 @@ const CardsContainer = () => {
               />
               )
           })}
+
  
     </div>
   )
