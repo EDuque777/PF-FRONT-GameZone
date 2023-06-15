@@ -1,0 +1,46 @@
+.titleCarrito {
+  color: white;
+}
+
+.shoppingCart {
+  margin: 20px;
+}
+
+.botonBorrar {
+  color: white;
+  background-color: red;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.botonComprar button {
+  color: white;
+  background-color: green;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.emptyCart {
+  padding: 20px;
+  border-radius: 4px;
+  color: white;
+}
+
+.cajitaItems {
+  box-sizing: border-box;
+  list-style-type: none;
+  padding: 0;
+}
+
+.cajitaResumen {
+  align-items: center;
+  margin-top: 20px;
+}
+
+.cajitaTotal {
+  font-weight: bold;
+}
