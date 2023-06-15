@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50px;
+    background-color: #070707;
+}
+.button{
+    background-color: #070707;
+    border: none;
+    color:rgb(160, 160, 160);
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 20px;
+transition: 500ms;
+}
+.button:hover{
+    color:rgb(207, 207, 207);
+    transition: 500ms;
+}
