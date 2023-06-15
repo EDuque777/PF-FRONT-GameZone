@@ -3,7 +3,38 @@ import * as act from "./actions"
 const initialState = {
     games: [],
     cart: [],
-    gameDetail: [],
+    gameDetail: [
+        {"name": "BattleBit Remastered - Supporter Pack 1",
+        "steam_appid": 2390150,
+        "required_age": 0,
+        "is_free": false,
+        "detailed_description": "Introducing the &quot;Supporter Pack 1&quot; DLC, a fantastic collection of exclusive skins that not only amps up your soldier's look but also shows your support towards the developers. With awesome armor parts and weapon skins, you'll rock the battlefield in style while expressing your appreciation for the hard work behind the game.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/2390150/extras/Steam2.png?t=1686847501\" /><h2 class=\"bb_tag\">This Pack Contains Skins for:</h2><br>Assault Rifles<br><ul class=\"bb_ul\"><li> ScarH<br></li><li> G36C<br></li><li> HK419<br></li><li> M4A1<br></li><li> FAL<br></li><li> AUG<br></li><li> ASVAL<br></li><li> AK15<br></li><li> ACR<br></li><li> AK5C<br></li><li> AK74<br></li><li> ?</li></ul><br>SMG<br><ul class=\"bb_ul\"><li> MP5<br></li><li> MP7<br></li><li> UMP45<br></li><li> Kriss Vector<br></li><li> Scorpion EVO</li></ul><br><br>Pistols:<br><ul class=\"bb_ul\"><li> M9<br></li><li> USP<br></li><li> MP443<br></li><li> M9</li></ul><br>Long Range Rifles:<br><ul class=\"bb_ul\"><li> L96<br></li><li> MK14<br></li><li> MK20<br></li><li> SV-98</li></ul><br>LMGs<br><ul class=\"bb_ul\"><li> M249<br></li><li> MG36<br></li><li> ?<br></li><li> ?</li></ul><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/2390150/extras/SteamSecre.png?t=1686847501\" /><br>The Pack does also features Content for non- released content already! It will unlock once the Items go public.<h2 class=\"bb_tag\">Also featuring the following Armors:</h2><br>Backpacks:<br><ul class=\"bb_ul\"><li> US - Travelpack<br></li><li> RU - Travelpack</li></ul><br>Helmets:<br><ul class=\"bb_ul\"><li> RU- Drivercap<br></li><li> US - Hoodiecover<br></li><li> US - Glasses &amp; Scarf<br></li><li> RU - Ushanka<br></li><li> US - Eisengard<br></li><li> RU - Killer<br></li><li> RU - Spacemarine<br></li><li> US - Future War</li></ul>",
+        "about_the_game": "Introducing the &quot;Supporter Pack 1&quot; DLC, a fantastic collection of exclusive skins that not only amps up your soldier's look but also shows your support towards the developers. With awesome armor parts and weapon skins, you'll rock the battlefield in style while expressing your appreciation for the hard work behind the game.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/2390150/extras/Steam2.png?t=1686847501\" /><h2 class=\"bb_tag\">This Pack Contains Skins for:</h2><br>Assault Rifles<br><ul class=\"bb_ul\"><li> ScarH<br></li><li> G36C<br></li><li> HK419<br></li><li> M4A1<br></li><li> FAL<br></li><li> AUG<br></li><li> ASVAL<br></li><li> AK15<br></li><li> ACR<br></li><li> AK5C<br></li><li> AK74<br></li><li> ?</li></ul><br>SMG<br><ul class=\"bb_ul\"><li> MP5<br></li><li> MP7<br></li><li> UMP45<br></li><li> Kriss Vector<br></li><li> Scorpion EVO</li></ul><br><br>Pistols:<br><ul class=\"bb_ul\"><li> M9<br></li><li> USP<br></li><li> MP443<br></li><li> M9</li></ul><br>Long Range Rifles:<br><ul class=\"bb_ul\"><li> L96<br></li><li> MK14<br></li><li> MK20<br></li><li> SV-98</li></ul><br>LMGs<br><ul class=\"bb_ul\"><li> M249<br></li><li> MG36<br></li><li> ?<br></li><li> ?</li></ul><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/2390150/extras/SteamSecre.png?t=1686847501\" /><br>The Pack does also features Content for non- released content already! It will unlock once the Items go public.<h2 class=\"bb_tag\">Also featuring the following Armors:</h2><br>Backpacks:<br><ul class=\"bb_ul\"><li> US - Travelpack<br></li><li> RU - Travelpack</li></ul><br>Helmets:<br><ul class=\"bb_ul\"><li> RU- Drivercap<br></li><li> US - Hoodiecover<br></li><li> US - Glasses &amp; Scarf<br></li><li> RU - Ushanka<br></li><li> US - Eisengard<br></li><li> RU - Killer<br></li><li> RU - Spacemarine<br></li><li> US - Future War</li></ul>",
+        "short_description": "Get Your Style On with Support Pack 1: Show Some Love! This expansion doesn't just bring you a ton of jaw-dropping cosmetic upgrades to rock your look, but it's also a sweet way to show some love and support for the amazing devs behind the scenes.",
+        "fullgame": {
+        "appid": "671860",
+        "name": "BattleBit Remastered"
+        },
+        "supported_languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+        "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/2390150/header.jpg?t=1686847501",
+        "capsule_image": "https://cdn.akamai.steamstatic.com/steam/apps/2390150/capsule_231x87.jpg?t=1686847501",
+        "capsule_imagev5": "https://cdn.akamai.steamstatic.com/steam/apps/2390150/capsule_184x69.jpg?t=1686847501",
+        "website": null,
+        "pc_requirements": {
+        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows 10 (x64) - Windows 11 (x64)<br></li><li><strong>Processor:</strong> Intel Core i5-2310<br></li><li><strong>Memory:</strong> 6 GB RAM<br></li><li><strong>Graphics:</strong> Geforce GTS 450 or equivalent or better<br></li><li><strong>DirectX:</strong> Version 11<br></li><li><strong>Network:</strong> Broadband Internet connection<br></li><li><strong>Storage:</strong> 2 GB available space<br></li><li><strong>Additional Notes:</strong> Requires a 64-bit processor and operating system</li></ul>",
+        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows 10 (x64) - Windows 11 (x64)<br></li><li><strong>Processor:</strong> Intel Core i5 4th Generation and above<br></li><li><strong>Memory:</strong> 8 GB RAM<br></li><li><strong>Graphics:</strong> Geforce GTX 600 Series or equivalent or better<br></li><li><strong>DirectX:</strong> Version 11<br></li><li><strong>Network:</strong> Broadband Internet connection<br></li><li><strong>Storage:</strong> 2 GB available space<br></li><li><strong>Additional Notes:</strong> Requires a 64-bit processor and operating system</li></ul>"
+        },
+        "mac_requirements": {
+        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>",
+        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>"
+        },
+        "linux_requirements": {
+        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>",
+        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>"
+        }
+            
+        }
+    ],
     gameComingSoon: [
         {
             "id": 2390150,

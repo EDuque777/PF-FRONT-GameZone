@@ -1,8 +1,9 @@
 
+
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { clearDetail, getDetail } from "../../redux/actions";
-// import style from "./Detail.module.css";
+// // import style from "./Detail.module.css";
 
 
 // const Detail = (props) => {
@@ -13,7 +14,7 @@
 //     useEffect(() => {
 //         const id = props.match.params.id;
 //         setLoading(true);
-//         dispatch(getDetail(id))
+//         dispatch(gameDetail(id))
 //           .then(() => {
 //             setLoading(false);
 //           })
@@ -40,7 +41,7 @@
 //       return (
 //         <div>
 //             <h1>Nombre: {game.name}</h1>
-//             <img className={style.header_image} src={imageURL} alt="Game" />
+//             <img src={imageURL} alt="Game" />
 //             <h3>Edad requerida: {required_age}</h3>
 //             <h3>Descripción: {detailed_description}</h3>
 //             <h3>Sobre el juego: {about_the_game}</h3>
