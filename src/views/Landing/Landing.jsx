@@ -10,7 +10,6 @@ const Landing = () => {
         <Link to="/home">
             <button className={styles.button}>INGRESAR</button>
         </Link>
-       
         </div>
         
     );
