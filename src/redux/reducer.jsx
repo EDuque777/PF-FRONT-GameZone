@@ -2,6 +2,7 @@ import * as act from "./actions"
 
 const initialState = {
     games: [],
+    total: 0,
     cart: [],
     gameDetail: [],
     gameComingSoon: [
@@ -1097,6 +1098,12 @@ const rootReducer=(state = initialState, action) => {
                 gameDetail: action.payload
             }
 
+        case act.CLEAR_DETAIL:
+            return {
+                ...state,
+                gameDetail: null
+            }
+
         case act.GET_GAMES_OFFER:
             return {
                 ...state,
@@ -1121,12 +1128,6 @@ const rootReducer=(state = initialState, action) => {
                 gamesTopSellers: action.payload
             }
 
-        case act.CLEAR_DETAIL:
-            return {
-                ...state,
-                gameDetail: null
-            }
-
         //?casos del carrito de compra
         case act.ADD_TO_CART:
             return {
@@ -1141,6 +1142,7 @@ const rootReducer=(state = initialState, action) => {
             }
 
         case act.REMOVE_ALL_TO_CART:
+
 
         case act.CLEAR_CART:
             return {

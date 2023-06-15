@@ -1,7 +1,7 @@
 //* Rellenar cuando se este realizando el redux e importar los componentes necesarios...
 //! RALIZAR LOS ACTIONS, REDUCER Y APLICAR EL PERSIST
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
 import NavBar from "../../components/NavBar/NavBar";
@@ -10,7 +10,6 @@ import NavBar from "../../components/NavBar/NavBar";
 const ShoppingCart = () => {
 
     const cart = useSelector(state => state.cart)
-    const dispatch = useDispatch()
     //! Revisar si remover por id u o de otra forma
     return (
         <div>
@@ -29,6 +28,7 @@ const ShoppingCart = () => {
                         return (
                             <li key={game.id} >
                             <Card 
+                            id={game.id}
                             name={game.name} 
                             image={game.image}
                             price={game.price}
