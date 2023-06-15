@@ -10,23 +10,22 @@ import NavBar from "../../components/NavBar/NavBar";
 const ShoppingCart = () => {
 
     const cart = useSelector(state => state.cart)
-    console.log(cart);
     const dispatch = useDispatch()
-
     //! Revisar si remover por id u o de otra forma
-    
     return (
         <div>
             <NavBar />
             <br />
-            <h2>Carrito de Compras</h2>
+            <h2 className="tituloCarrito">Carrito de Compras</h2>
             <br />
             {cart.length === 0 ? (
-                <p> No hay juegos en el carrito... </p>
+                <div className=""> 
+                    <p> No hay juegos en el carrito... </p>
+                </div>
             ) : (
-                <ul>
+            <div>
+                <ul className="cajitaItems">
                     {cart.map(game => {
-                        //console.log(game)
                         return (
                             <li key={game.id} >
                             <Card 
@@ -38,7 +37,19 @@ const ShoppingCart = () => {
                         )})
                     }
                 </ul>
-                
+                <div className="cajitaResumen">
+                    <div className="cajitaTotal">
+                        <h4>TOTAL:</h4>
+                    </div>
+                    <div className="bottonBorrar">
+                        <button>{/* poner icono para borrar todo del carrito */}Borrar</button>
+                    </div>
+                    <div>
+                        <button className="botonComprar">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
             )}
         </div>
     )

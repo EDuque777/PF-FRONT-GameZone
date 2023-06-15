@@ -1129,7 +1129,6 @@ const rootReducer=(state = initialState, action) => {
 
         //?casos del carrito de compra
         case act.ADD_TO_CART:
-            console.log(action.payload);
             return {
                 ...state,
                 cart: [...state.cart, ...action.payload]
@@ -1138,7 +1137,7 @@ const rootReducer=(state = initialState, action) => {
         case act.REMOVE_TO_CART:
             return {
                 ...state,
-                cart: state.cart.filter((game) => game.id !== action.payload )
+                cart: state.cart.filter((game) => game.id !== action.payload)
             }
 
         case act.REMOVE_ALL_TO_CART:
