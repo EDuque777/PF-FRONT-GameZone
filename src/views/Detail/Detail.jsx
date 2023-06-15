@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, getDetail } from "../../redux/actions";
-// import style from "./Detail.module.css";
+import style from "./Detail.module.css";
 
-
-const Detail = () => {
-   
+const Detail = (props) => {
     const dispatch = useDispatch();
-    const game = useSelector((state) => state.gameDetail);
-    console.log(game);
-    const [loading, setLoading] = useState(true);
+    // const game = useSelector((state) => state.gameDetail);
+    const gameHC = useSelector((state) => state.gameDetail)
+    console.log(gameHC);
+    // const [loading, setLoading] = useState(true);
 
     // useEffect(() => {
     //     const id = props.match.params.id;
     //     setLoading(true);
-    //     dispatch(getDetail(id))
+
+    //     dispatch(gameDetail(id))
     //       .then(() => {
     //         setLoading(false);
     //       })
@@ -23,7 +23,8 @@ const Detail = () => {
     //       });
 
     
-    //     // Limpia los detalles cuando el componente se desmonta
+        // Limpia los detalles cuando el componente se desmonta
+
     //     return () => {
     //       dispatch(clearDetail());
     //     };
@@ -34,23 +35,26 @@ const Detail = () => {
     //   }
     
 
-    //   if (!game) {
+
+    //   if (!gameHC) {
     //     return <div>No se encontró el juego.</div>; 
+    //   }else{
+        
     //   }
 
       return (
-            !game ? 
-            (
-                <h1>
-                    CARGANDO...
-                </h1>
-            ) : (
-                <div>
-                    <h1>name: {game.name}</h1>
-                    
-                </div>
-            )   
+        <div className={style.info}>
+            <h1 className={style.name}>{gameHC.name}</h1>
+            <img className={style.img} src={gameHC.header_image} alt="Game" />
+            <h2> <strong>Edad minima: </strong> {gameHC.required_age}</h2>
+            <h2> <strong>Descripción: </strong>{gameHC.detailed_description}</h2>
+            <h2> <strong>Sobre el juego: </strong> {gameHC.about_the_game}</h2>
+            <h2> <strong>Desarrolladores: </strong> {gameHC.developers}</h2>
+            <h2> <strong>Idiomas: </strong> {gameHC.supported_languages}</h2>
+            <h2> <strong>ID :</strong> {gameHC.steam_appid}</h2>
+        </div>
       )
+
 }
 
 export default Detail;

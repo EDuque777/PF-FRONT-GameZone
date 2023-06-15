@@ -1,0 +1,23 @@
+.info{
+    color: rgb(189, 189, 189);
+
+
+}
+
+.img{
+  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 750px;
+
+}
+
+.name{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.info h2 {
+    font-size: 25px; 
+  }
