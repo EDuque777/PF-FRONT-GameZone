@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import style from "./Carousel.module.css"
 
-const carousel = ()=>{
+const Carousel = ()=>{
+
+    
+    const offers = useSelector((state)=> state.gameOffer)
+
+console.log(offers)
 
 return(
-    <div >
-        <h2>carrusel de imagenes</h2>
+    <div className={style.container}>
+        <h2 className={style.text}>   carrousel   </h2>
     </div>
 )
 }
-export default carousel;
+export default Carousel;

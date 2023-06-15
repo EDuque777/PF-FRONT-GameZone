@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const Home = () => {
 
     const gameOffer = useSelector(state => state.gameOffer)
-    console.log(gameOffer);
+
 
     return(
         <div className="bg-gray-light">

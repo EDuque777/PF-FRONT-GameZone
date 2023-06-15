@@ -9,7 +9,7 @@ const CardsContainer = () => {
     
     const gamesHome = useSelector(state => state.games)
     const gameOffer = useSelector(state => state.gameOffer)
-    console.log(gameOffer);
+
 
   return (
     <div>
