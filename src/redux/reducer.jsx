@@ -1120,7 +1120,8 @@ const initialState = {
             "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1309990/header.jpg?t=1686748706",
             "controller_support": "full"
             }
-    ]
+    ],
+    gamesFiltered: [],
 };
 
 const rootReducer=(state = initialState, action) => {

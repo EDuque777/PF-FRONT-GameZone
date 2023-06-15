@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
+import { useHistory  } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, getDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 
 const Detail = (props) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     // const game = useSelector((state) => state.gameDetail);
     const gameHC = useSelector((state) => state.gameDetail)
     console.log(gameHC);
     // const [loading, setLoading] = useState(true);
 
+    const handleBack = () => {
+      //dispatch(clearDetail())
+      history.push("/home")
+    }
+
     // useEffect(() => {
     //     const id = props.match.params.id;
     //     setLoading(true);
-
     //     dispatch(gameDetail(id))
     //       .then(() => {
     //         setLoading(false);
@@ -22,8 +28,7 @@ const Detail = (props) => {
     //         setLoading(false);
     //       });
 
-    
-        // Limpia los detalles cuando el componente se desmonta
+    // Limpia los detalles cuando el componente se desmonta
 
     //     return () => {
     //       dispatch(clearDetail());
@@ -44,6 +49,7 @@ const Detail = (props) => {
 
       return (
         <div className={style.info}>
+            <button onClick={() => {handleBack()}}> Back </button>
             <h1 className={style.name}>{gameHC.name}</h1>
             <img className={style.img} src={gameHC.header_image} alt="Game" />
             <h2> <strong>Edad minima: </strong> {gameHC.required_age}</h2>
