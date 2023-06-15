@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, getDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 
-
 const Detail = (props) => {
     const dispatch = useDispatch();
     // const game = useSelector((state) => state.gameDetail);
@@ -14,6 +13,7 @@ const Detail = (props) => {
     // useEffect(() => {
     //     const id = props.match.params.id;
     //     setLoading(true);
+
     //     dispatch(gameDetail(id))
     //       .then(() => {
     //         setLoading(false);
@@ -24,6 +24,7 @@ const Detail = (props) => {
 
     
         // Limpia los detalles cuando el componente se desmonta
+
     //     return () => {
     //       dispatch(clearDetail());
     //     };
@@ -33,6 +34,7 @@ const Detail = (props) => {
     //     return <div>Cargando...</div>; 
     //   }
     
+
 
     //   if (!gameHC) {
     //     return <div>No se encontró el juego.</div>; 
@@ -52,7 +54,6 @@ const Detail = (props) => {
             <h2> <strong>ID :</strong> {gameHC.steam_appid}</h2>
         </div>
       )
-
 
 }
 

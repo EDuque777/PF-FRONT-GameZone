@@ -1170,15 +1170,31 @@ const rootReducer=(state = initialState, action) => {
 
         //?casos del carrito de compra
         case act.ADD_TO_CART:
+    
+            const addGame = action.payload
+            const updateCart = [...state.cart, addGame]
+            console.log(addGame);
+            const updatePrice = state.total + addGame.price
+
             return {
                 ...state,
-                cart: [...state.cart, ...action.payload]
+                cart: updateCart,
+                total: updatePrice
             }
 
         case act.REMOVE_TO_CART:
+            
+            const removeGameId = action.payload
+            const updateGameRemoveCart = state.cart.filter((game) => game.id !== removeGameId)
+            const gameRemoved = state.cart.find(game => game.id === removeGameId)
+            console.log(gameRemoved);
+            const updateTotalPrice = state.total - gameRemoved.price
+            console.log(gameRemoved.price);
+            console.log(updateTotalPrice);
             return {
                 ...state,
-                cart: state.cart.filter((game) => game.id !== action.payload)
+                cart: updateGameRemoveCart,
+                total: updateTotalPrice
             }
 
         case act.REMOVE_ALL_TO_CART:

@@ -15,7 +15,7 @@ const Card = (props) => {
     const history = useHistory()
     
     const handleAdd = () => {
-        dispatch(act.addCart([{ id, price, name, image }]))
+        dispatch(act.addCart({ id, price, name, image }))
     }
     const handleRemove = (id) => {
         dispatch(act.removeCart(id))
