@@ -18,6 +18,7 @@ const CardsContainer = () => {
             gameOffer.map(game => {
                 return (
                     <Card key={game.id} 
+                    id={game.id}
                     image={game.large_capsule_image}
                     name={game.name}
                     price={game.final_price}
