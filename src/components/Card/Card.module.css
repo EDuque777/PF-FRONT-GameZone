@@ -1,18 +1,25 @@
 .box {
+  background-color: rgb(28, 28, 28);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #4d4d4d;
     border-radius: 5px;
     width: 200px;
+    transition: 500ms;
+  }
+  .box:hover{
+    background-color: rgb(39, 39, 39);
+    transition: 500ms;
   }
   
   .box image {
     max-width: 100%;
     height: auto;
     margin-bottom: 10px;
+    border-radius: 5px;
   }
   
   .box h1 {
@@ -37,4 +44,15 @@
   
   .box button:hover {
     background-color: #45a049;
+  }
+  .image{
+    border-radius: 10px;
+    width: 300px;
+  }
+  .name{
+    color: rgb(189, 189, 189);
+  }
+  .price{
+    color: rgb(189, 189, 189);
+
   }

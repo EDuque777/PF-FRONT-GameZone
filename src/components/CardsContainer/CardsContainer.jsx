@@ -1,33 +1,29 @@
-import React from 'react'
+import React from 'react';
 import Card from '../Card/Card';
-import styles from "./CardsContainer.module.css"
-import { useSelector } from 'react-redux'
+import styles from "./CardsContainer.module.css";
+import { useSelector } from 'react-redux';
 
-const CardsContainer = () => {
-    
-  const gamesHome = useSelector(state => state.games)
-  const gameOffer = useSelector(state => state.gameOffer)
-  const gameComingSoon = useSelector(state => state.gameComingSoon)
-  const gamesNewReleases = useSelector(state => state.gamesNewReleases)
-  const gamesTopSellers = useSelector(state => state.gamesTopSellers)
+
+const CardsContainer = (props) => {
+  
+  const { gameComingSoon } = props;
 
   return (
-    <div className='home'>
-      <div className=''> 
-        {gameOffer.map(game => {
-            return (
-              <Card 
-              key={game.id}
-              id={game.id} 
-              image={game.large_capsule_image}
-              name={game.name}
-              price={game.final_price}
-            />
-            )
-        })}
-      </div>
-    </div>
-  )
-}
+    <div className={styles.container}>
+      {   
+        gameComingSoon.map(game => (
+          <Card 
+            key={game.id}
+            id={game.id} 
+            image={game.large_capsule_image}
+            name={game.name}
+            price={game.final_price}
+          />
+        ))
+      }
 
-export default CardsContainer
+    </div>
+  );
+};
+
+export default CardsContainer;

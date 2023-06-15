@@ -11,7 +11,6 @@ const Landing = () => {
             <button className={styles.button}>INGRESAR</button>
         </Link>
         <h1 className={styles.subHeading}>Descubre la emoción en GAME ZONE. Adquiere los mejores juegos en nuestra tienda en línea. ¡Sumérgete en aventuras inolvidables y desafía tus habilidades!</h1>
-       
         </div>
         
     );
