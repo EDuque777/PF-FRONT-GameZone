@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import * as act from "../../redux/actions";
-import fafa from "./Card.module.css";
+import style from "./Card.module.css";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 //! FIJARSE COMO VIENE
@@ -28,11 +28,11 @@ const Card = (props) => {
     const isShoppCartRoute = location.pathname === "/cart";
 
   return (
-        <li className={fafa.box} >
+        <li className={style.box} >
             <div onClick={() => {handleClick(id)}}>
-                <img src={image} alt={name} width="150px" height="38px" ></img>
-                <h1 >{name}</h1>
-                <h3>${price} ARG</h3>
+                <img className={style.image} src={image} alt={name} width="150px" height="38px" ></img>
+                <h1 className={style.name}>{name}</h1>
+                <h3 className={style.price}>${price} ARG</h3>
             </div>
             {!isShoppCartRoute ? (
                 <button onClick={() => {handleAdd()}}> Add to cart </button>

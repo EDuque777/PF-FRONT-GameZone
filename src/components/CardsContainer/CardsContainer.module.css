@@ -1,0 +1,9 @@
+.container {
+    width: 90vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr)); /* Cambiamos a 6 columnas */
+    grid-gap: 20px;
+    margin-bottom: 50px;
+    text-decoration: none;
+  }
