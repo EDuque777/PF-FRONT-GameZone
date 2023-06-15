@@ -17,7 +17,6 @@ const gamesTopSellers = useSelector(state => state.gamesTopSellers)
     return(
         <div className={style.container}>
                 <NavBar />
-                {/* <img src={logoImage} alt="GAME ZONE" className={`${style.logo} ${style.enlarged}`} /> */}
                 <h1 className="text-gray-letters">HOME</h1>
                 {/* <Carousel /> */}
                 <h3 className={style.title}> Games coming soon </h3>
