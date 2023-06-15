@@ -12,9 +12,7 @@ const Home = () => {
                 <NavBar />
                 <h1 className="text-gray-letters">HOME</h1>
                 <Carousel />
-                <CardsContainer 
-                
-                />
+                <CardsContainer />
         </div>
         
     );
