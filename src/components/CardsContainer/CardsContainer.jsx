@@ -3,9 +3,10 @@ import Card from '../Card/Card';
 import styles from "./CardsContainer.module.css";
 import { useSelector } from 'react-redux';
 
-const CardsContainer = (props) => {
-  const { gameComingSoon } = props;
 
+const CardsContainer = (props) => {
+  
+  const { gameComingSoon } = props;
 
   return (
     <div className={styles.container}>
@@ -20,6 +21,7 @@ const CardsContainer = (props) => {
           />
         ))
       }
+
     </div>
   );
 };

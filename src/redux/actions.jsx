@@ -112,7 +112,6 @@ export const getGamesNewReleases = () => {
 //? funciones del carrito
 export const addCart = (game) => {
     return function(dispatch){
-        console.log(game);
         dispatch({
             type: ADD_TO_CART,
             payload: game,
@@ -120,10 +119,10 @@ export const addCart = (game) => {
     }
 }
 
-export const removeCart = (gameId) => {
+export const removeCart = (id) => {
     return {
         type: REMOVE_TO_CART,
-        payload: gameId,
+        payload: id,
     }
 }
 

@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 //! FIJARSE COMO VIENE
 const Card = (props) => {
 
-    //console.log(props);
     const {id, price, name, image} = props
     
     const dispatch = useDispatch()
@@ -18,8 +17,8 @@ const Card = (props) => {
     const handleAdd = () => {
         dispatch(act.addCart([{ id, price, name, image }]))
     }
-    const handleRemove = (gameId) => {
-        dispatch(act.removeCart(gameId))
+    const handleRemove = (id) => {
+        dispatch(act.removeCart(id))
     }
     const handleClick = (id) => {
         history.push(`/detail/${id}`);
@@ -35,9 +34,9 @@ const Card = (props) => {
                 <h3 className={style.price}>${price} ARG</h3>
             </div>
             {!isShoppCartRoute ? (
-                <button onClick={() => {handleAdd()}}> Add to cart </button>
+                <button onClick={() => {handleAdd()}}>Add to cart</button>
             ) : (
-                <button onClick={() => handleRemove(id)}>Sacar</button>
+                <button onClick={() => {handleRemove(id)}}>Sacar</button>
             )}
         </li>
     )

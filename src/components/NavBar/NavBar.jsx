@@ -12,7 +12,6 @@ const navBar = () =>{
         <button className={style.button} >Wishlist</button>
         <Link to="/cart"><button className={style.button} >Shopping cart</button></Link>
 </div>
-
     )
 }
 export default navBar;

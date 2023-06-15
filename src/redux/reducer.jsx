@@ -2,6 +2,7 @@ import * as act from "./actions"
 
 const initialState = {
     games: [],
+    total: 0,
     cart: [],
     gameDetail: [
         {"name": "BattleBit Remastered - Supporter Pack 1",
@@ -1128,6 +1129,12 @@ const rootReducer=(state = initialState, action) => {
                 gameDetail: action.payload
             }
 
+        case act.CLEAR_DETAIL:
+            return {
+                ...state,
+                gameDetail: null
+            }
+
         case act.GET_GAMES_OFFER:
             return {
                 ...state,
@@ -1152,15 +1159,8 @@ const rootReducer=(state = initialState, action) => {
                 gamesTopSellers: action.payload
             }
 
-        case act.CLEAR_DETAIL:
-            return {
-                ...state,
-                gameDetail: null
-            }
-
         //?casos del carrito de compra
         case act.ADD_TO_CART:
-            console.log(action.payload);
             return {
                 ...state,
                 cart: [...state.cart, ...action.payload]
@@ -1169,10 +1169,11 @@ const rootReducer=(state = initialState, action) => {
         case act.REMOVE_TO_CART:
             return {
                 ...state,
-                cart: state.cart.filter((game) => game.id !== action.payload )
+                cart: state.cart.filter((game) => game.id !== action.payload)
             }
 
         case act.REMOVE_ALL_TO_CART:
+
 
         case act.CLEAR_CART:
             return {
