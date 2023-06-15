@@ -7,17 +7,12 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
 
-    const gameOffer = useSelector(state => state.gameOffer)
-
-
     return(
         <div className="bg-gray-light">
                 <NavBar />
                 <h1 className="text-gray-letters">HOME</h1>
                 <Carousel />
-                <CardsContainer 
-                
-                />
+                <CardsContainer />
         </div>
         
     );

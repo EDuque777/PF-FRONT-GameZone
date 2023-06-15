@@ -3,6 +3,7 @@
 // import { clearDetail, getDetail } from "../../redux/actions";
 // import style from "./Detail.module.css";
 
+
 // const Detail = (props) => {
 //     const dispatch = useDispatch();
 //     const game = useSelector((state) => state.game);
@@ -45,6 +46,7 @@
 //             <h4>ID: {game.id}</h4>
 //         </div>
 //       )
+
 
 // }
 

@@ -8,16 +8,15 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 //! FIJARSE COMO VIENE
 const Card = (props) => {
 
-    console.log(props);
+    //console.log(props);
     const {id, price, name, image} = props
-    console.log(image);
     
     const dispatch = useDispatch()
     const location = useLocation()
     const history = useHistory()
     
     const handleAdd = () => {
-        dispatch(act.addCart())
+        dispatch(act.addCart([{ id, price, name, image }]))
     }
     const handleRemove = (gameId) => {
         dispatch(act.removeCart(gameId))
@@ -33,10 +32,10 @@ const Card = (props) => {
             <div onClick={() => {handleClick(id)}}>
                 <img src={image} alt={name} width="150px" height="38px" ></img>
                 <h1 >{name}</h1>
-                <h3>{price}</h3>
+                <h3>${price} ARG</h3>
             </div>
             {!isShoppCartRoute ? (
-                    <button onClick={() => {handleAdd()}}> Add to cart </button>
+                <button onClick={() => {handleAdd()}}> Add to cart </button>
             ) : (
                 <button onClick={() => handleRemove(id)}>Sacar</button>
             )}
