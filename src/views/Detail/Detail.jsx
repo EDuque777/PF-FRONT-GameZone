@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearDetail } from "../../redux/actions";
+import { clearDetail, getDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 
 const Detail = (props) => {
