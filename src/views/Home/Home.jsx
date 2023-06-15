@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 
 const Home = () => {
-    
+
     return(
         <div className="bg-gray-light">
                 <NavBar />
