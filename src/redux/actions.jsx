@@ -15,12 +15,12 @@ export const GET_GAMES_NEW_RELEASES = "GET_GAMES_NEW_RELEASES"
 export const getGames = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(``)
+            const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/allGames`)
             console.log(response);
-            const games = response.data
+            const game = response.data
             dispatch({
                 type: GET_GAMES,
-                payload: games
+                payload: game
             })
         } catch (error) {
             console.log(error.message);            
