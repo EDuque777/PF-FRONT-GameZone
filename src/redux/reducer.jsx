@@ -4,47 +4,7 @@ const initialState = {
     games: [],
     total: 0,
     cart: [],
-    gameDetail: 
-        {"name": "BattleBit Remastered - Supporter Pack 1",
-        "steam_appid": 2390150,
-        "required_age": 0,
-        "is_free": false,
-
-        "detailed_description": "Presentamos el DLC Supporter Pack, una fantástica colección de máscaras exclusivas que no solo mejora el aspecto de tu soldado, sino que también muestra tu apoyo a los desarrolladores. Con asombrosas piezas de armadura y diseños de armas, lucirás en el campo de batalla con estilo mientras expresas tu aprecio por el arduo trabajo detrás del juego.",
-
-        "about_the_game": "Presentamos el paquete de apoyo de DLC, una fantástica colección de máscaras exclusivas que no solo mejora el aspecto de tu soldado, sino que también muestra tu apoyo a los desarrolladores. Con asombrosas piezas de armadura y diseños de armas, lucirás en el campo de batalla con estilo mientras expresas tu aprecio por el arduo trabajo detrás del juego.",
-
-        "short_description": "Get Your Style On with Support Pack 1: Show Some Love! This expansion doesn't just bring you a ton of jaw-dropping cosmetic upgrades to rock your look, but it's also a sweet way to show some love and support for the amazing devs behind the scenes.",
-
-        "supported_languages": "Idiomas en inglés con soporte de audio completo",
-        
-        "fullgame": {
-        "appid": "671860",
-        "name": "BattleBit Remastered"
-        },
-       
-        "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/671860/capsule_616x353.jpg?t=1686841355",
-        "capsule_image": "https://cdn.akamai.steamstatic.com/steam/apps/2390150/capsule_231x87.jpg?t=1686847501",
-        "capsule_imagev5": "https://cdn.akamai.steamstatic.com/steam/apps/2390150/capsule_184x69.jpg?t=1686847501",
-        "website": null,
-        "pc_requirements": {
-        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows 10 (x64) - Windows 11 (x64)<br></li><li><strong>Processor:</strong> Intel Core i5-2310<br></li><li><strong>Memory:</strong> 6 GB RAM<br></li><li><strong>Graphics:</strong> Geforce GTS 450 or equivalent or better<br></li><li><strong>DirectX:</strong> Version 11<br></li><li><strong>Network:</strong> Broadband Internet connection<br></li><li><strong>Storage:</strong> 2 GB available space<br></li><li><strong>Additional Notes:</strong> Requires a 64-bit processor and operating system</li></ul>",
-        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows 10 (x64) - Windows 11 (x64)<br></li><li><strong>Processor:</strong> Intel Core i5 4th Generation and above<br></li><li><strong>Memory:</strong> 8 GB RAM<br></li><li><strong>Graphics:</strong> Geforce GTX 600 Series or equivalent or better<br></li><li><strong>DirectX:</strong> Version 11<br></li><li><strong>Network:</strong> Broadband Internet connection<br></li><li><strong>Storage:</strong> 2 GB available space<br></li><li><strong>Additional Notes:</strong> Requires a 64-bit processor and operating system</li></ul>"
-        },
-        "mac_requirements": {
-        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>",
-        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>"
-        },
-        "linux_requirements": {
-        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>",
-        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>"
-        },
-        "developers": [
-            "DIMPS"
-            ],
-            
-        }
-    ,
+    gameDetail:null,
     gameComingSoon: [
         {
             "id": 2390150,
@@ -1122,7 +1082,6 @@ const initialState = {
             }
     ]
 };
-
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
 
@@ -1133,6 +1092,7 @@ const rootReducer=(state = initialState, action) => {
             }
 
         case act.GET_DETAIL:
+
             return {
                 ...state,
                 gameDetail: action.payload
