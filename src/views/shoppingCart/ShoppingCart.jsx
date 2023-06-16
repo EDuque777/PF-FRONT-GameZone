@@ -15,8 +15,6 @@ const ShoppingCart = () => {
     const history = useHistory()
     const cart = useSelector(state => state.cart)
     const totalPrice = useSelector(state => state.total)
-    //console.log(totalPrice);
-    //console.log(cart)
 
     const handleRemove = () => {
         dispatch(act.clearCart())
@@ -50,7 +48,6 @@ const ShoppingCart = () => {
                     </div>
                 </div>
             </div>
-                
             ) : (
             <div className={styles.container}>
                 <div className={styles.juegosContainer}>
@@ -74,8 +71,8 @@ const ShoppingCart = () => {
                         <h4>TOTAL: ${totalPrice} USD</h4>
                     </div>
                     <div className={styles.botones}>
-                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Borrar</button>
-                        <button className={styles.botonComprar} onClick={() => {handleBuy()}}>Comprar</button>
+                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
+                        <button className={styles.botonComprar} onClick={() => {handleBuy()}}>Buy</button>
                     </div>
                 </div>
             </div>

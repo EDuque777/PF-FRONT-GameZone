@@ -11,10 +11,11 @@ const Home = () => {
 
 const dispatch = useDispatch()
 const gameOffer = useSelector(state => state.gameOffer)
-const gameComingSoon = useSelector(state => state.gameComingSoon)
+//const gameComingSoon = useSelector(state => state.gameComingSoon)
 const gamesNewReleases = useSelector(state => state.gamesNewReleases)
 const gamesTopSellers = useSelector(state => state.gamesTopSellers)
 const games = useSelector(state => state.games)
+console.log(games);
 
     useEffect(() => {
         dispatch(act.getGames())

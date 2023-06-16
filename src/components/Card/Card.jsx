@@ -34,8 +34,10 @@ const Card = (props) => {
                 <h3 className={style.price}> ${price}</h3>
             </div>
             {!isShoppCartRoute ? (
+                //! tiene que estar primero en la whishlist y despues al shop
                 <button onClick={() => {handleAdd()}}>Add to cart</button>
             ) : (
+                //! y el boton tienen que estar en ambas, tanto tienda como whish
                 <button onClick={() => {handleRemove(id)}}>Sacar</button>
             )}
         </li>
