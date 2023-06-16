@@ -4,7 +4,7 @@ const initialState = {
     games: [],
     total: 0,
     cart: [],
-    gameDetail: {},
+    gameDetail: null,
     gameComingSoon: null,
     gameOffer: null,
     gamesTopSellers: null,
@@ -22,7 +22,7 @@ const rootReducer=(state = initialState, action) => {
             }
 
         case act.GET_DETAIL:
-
+            console.log(action.payload);
             return {
                 ...state,
                 gameDetail: action.payload
@@ -82,13 +82,13 @@ const rootReducer=(state = initialState, action) => {
                 total: updateTotalPrice
             }
 
-        case act.REMOVE_ALL_TO_CART:
-
+        // case act.REMOVE_ALL_TO_CART:
 
         case act.CLEAR_CART:
             return {
                 ...state,
-                cart: []
+                cart: [],
+                total: 0
             }
 
         

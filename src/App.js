@@ -4,8 +4,9 @@ import React from 'react';
 import {useState, useEffect} from "react";
 import { useDispatch } from 'react-redux';
 import { Routes, Route, useLocation, useNavigate} from 'react-router-dom';
-import { Landing, Home, ShoppingCart, Detail } from "./views";
+import { Landing, Home, ShoppingCart, Detail, Whishlist } from "./views";
 import Footer from './components/Footer/Footer';
+
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
+      <Route path="/whishlist" render={() => <Whishlist />} />
       <Footer/>
       </>
       
