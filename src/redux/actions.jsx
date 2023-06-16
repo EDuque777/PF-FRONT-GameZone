@@ -15,8 +15,7 @@ export const GET_GAMES_NEW_RELEASES = "GET_GAMES_NEW_RELEASES"
 export const getGames = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(``)
-            console.log(response);
+            const response = await axios.get(`http://localhost:3001/allGames`)
             const games = response.data
             dispatch({
                 type: GET_GAMES,

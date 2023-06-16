@@ -11,8 +11,7 @@ const gameOffer = useSelector(state => state.gameOffer)
 const gameComingSoon = useSelector(state => state.gameComingSoon)
 const gamesNewReleases = useSelector(state => state.gamesNewReleases)
 const gamesTopSellers = useSelector(state => state.gamesTopSellers)
-
-
+const gameAll = useSelector(state => state.games)
 
     return(
         <div className={style.container}>
@@ -27,6 +26,8 @@ const gamesTopSellers = useSelector(state => state.gamesTopSellers)
                 <CardsContainer gameComingSoon={gameOffer} />
                 <h3 className={style.title}> New releases </h3>
                 <CardsContainer gameComingSoon={gamesNewReleases} />
+                <h3>old games</h3>
+                <CardsContainer gameComingSoon={gameAll} />
         </div>
         
     );
