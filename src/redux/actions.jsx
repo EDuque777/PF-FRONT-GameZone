@@ -29,20 +29,19 @@ export const getGames = () => {
     }
 }
 
-export const getDetail = (id) => {
-    return async function(dispatch) {
-    try {
+export const gameDetail = (id) => {
+    return async function (dispatch) {
+        try {
             const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/search/${id}`)
-            //console.log(response);
-            const detail = response.data
-            //console.log(detail);
             dispatch({
                 type: GET_DETAIL,
-                payload: detail
+                payload: response.data
             })
-    } catch (error) {
-        console.log(error.message);
-    }}
+        } catch (error) {
+            console.log(error.message);
+        }
+        
+    }
 }
 
 export const clearDetail = () => {
@@ -95,7 +94,6 @@ export const getGamesTopSellers = () => {
         } catch (error) {
             console.log(error.message);
         }
-       
     }
 }
 
@@ -132,14 +130,7 @@ export const removeCart = (id) => {
     }
 }
 
-// export const removeCart = (gameId) => {
-//     return function (dispatch){
-//         dispatch({
-//             type: REMOVE_TO_CART,
-//             payload: gameId,
-//         })
-//     }
-// }
+
 
 export const removeAllCart = () => {
     return {

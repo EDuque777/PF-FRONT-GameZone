@@ -10,8 +10,8 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
-};
 
+};
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
 
@@ -22,6 +22,7 @@ const rootReducer=(state = initialState, action) => {
             }
 
         case act.GET_DETAIL:
+
             return {
                 ...state,
                 gameDetail: action.payload
@@ -59,7 +60,6 @@ const rootReducer=(state = initialState, action) => {
 
         //?casos del carrito de compra
         case act.ADD_TO_CART:
-    
             const addGame = action.payload
             const updateCart = [...state.cart, addGame]
             const updatePrice = state.total + addGame.price
@@ -71,7 +71,6 @@ const rootReducer=(state = initialState, action) => {
             }
 
         case act.REMOVE_TO_CART:
-            
             const removeGameId = action.payload
             const updateGameRemoveCart = state.cart.filter((game) => game.id !== removeGameId)
             const gameRemoved = state.cart.find(game => game.id === removeGameId)

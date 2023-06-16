@@ -26,7 +26,7 @@ const Card = (props) => {
 
     const isShoppCartRoute = location.pathname === "/cart";
 
-  return (
+    return (
         <li className={style.box} >
             <div onClick={() => {handleClick(id)}}>
                 <img className={style.image} src={image} alt={name} width="150px" height="38px" ></img>

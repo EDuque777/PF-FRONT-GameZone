@@ -18,7 +18,7 @@ function App() {
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
-      <Route exact path="/detail/:id" render={(props) => <Detail {...props}/>} />
+      <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Footer/>
       </>
       
