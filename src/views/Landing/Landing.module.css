@@ -5,7 +5,7 @@
 
 .container {
   position: relative;
-  height: 100vh;
+  height: 90.5vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,12 +25,18 @@
   background-size: cover;
   background-position: center;
 }
-  
-  .logo {
-    width: 600px;
-    height: auto;
-    margin-bottom: 1rem;
-  }
+.logo {
+  width: 600px;
+  height: auto;
+  margin-bottom: 1rem;
+  animation: animarImagen 2s ease-in-out ; /* Aplica la animación */
+}
+
+@keyframes animarImagen {
+  0% { transform: scale(0.5); } /* Estado inicial */
+  50% { transform: scale(1); } /* Escala al 110% a la mitad de la animación */
+  100% { transform: scale(1); } /* Vuelve al estado inicial */
+}
 
   .enlarged {
     width: 900px; 
@@ -49,6 +55,11 @@
     font-family: "Higher";
     transition: color 0.2s;
     font-weight: bold;
+    transition: 500ms;
+}
+.button:hover{
+  font-size: 6rem;
+  transition: 500ms;
 }
 
 .heading {
@@ -60,5 +71,6 @@
   .subHeading{
     color: rgb(224, 220, 220);
     font-size: 30px;
-    
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
   }
