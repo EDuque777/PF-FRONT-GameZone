@@ -24,13 +24,16 @@ const games = useSelector(state => state.games)
         dispatch(act.getGamesTopSellers())
     }, [dispatch])
 
+
+
     return(
         <div className={style.container}>
                 <NavBar />
                 <h1 className="text-gray-letters">HOME</h1>
-                {/* <Carousel /> */}
-                <h3 className={style.title}> Games coming soon </h3>
-                <CardsContainer gameComingSoon={gameComingSoon} />
+                <Carousel /> 
+                <div>
+                    <input className={style.search} placeholder="   search..."type="text" />
+                </div>
                 <h3 className={style.title}> Top sells </h3>
                 <CardsContainer gameComingSoon={gamesTopSellers} />
                 <h3 className={style.title}> Game offers </h3>
