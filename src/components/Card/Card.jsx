@@ -31,7 +31,7 @@ const Card = (props) => {
             <div onClick={() => {handleClick(id)}}>
                 <img className={style.image} src={image} alt={name} width="150px" height="38px" ></img>
                 <h1 className={style.name}>{name}</h1>
-                <h3 className={style.price}>${price} ARG</h3>
+                <h3 className={style.price}> ${price}</h3>
             </div>
             {!isShoppCartRoute ? (
                 <button onClick={() => {handleAdd()}}>Add to cart</button>

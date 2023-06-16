@@ -17,7 +17,7 @@ export const getGames = () => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/allGames`)
-            console.log(response);
+            //console.log(response);
             const game = response.data
             dispatch({
                 type: GET_GAMES,
@@ -56,7 +56,7 @@ export const getGamesOffer = () => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/specials`)
-            console.log(response);
+            //console.log(response);
             dispatch({
                 type: GET_GAMES_OFFER,
                 payload: response.data
@@ -71,7 +71,7 @@ export const getGamesComingSoon = () => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/coming`)
-            console.log(response);
+            //console.log(response);
             dispatch({
                 type: GET_GAMES_COMING_SOON,
                 payload: response.data
@@ -86,7 +86,7 @@ export const getGamesTopSellers = () => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/sellers`)
-            console.log(response);
+            //console.log(response);
             dispatch({
                 type: GET_GAMES_TOP_SELLERS,
                 payload: response.data
@@ -101,7 +101,7 @@ export const getGamesNewReleases = () => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/releases`)
-            console.log(response);
+            //console.log(response);
             dispatch({
                 type: GET_GAMES_NEW_RELEASES,
                 payload: response.data
@@ -130,12 +130,11 @@ export const removeCart = (id) => {
     }
 }
 
-
-
-export const removeAllCart = () => {
-    return {
-    }
-}
+// export const removeAllCart = () => {
+//     return {
+//         type: REMOVE_ALL_TO_CART,
+//     }
+// }
 
 export const clearCart = ()  => {
     return  {
