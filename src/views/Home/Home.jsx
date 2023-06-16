@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import Carousel from "../../components/Carousel/Carousel"
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
@@ -15,10 +15,13 @@ const gameComingSoon = useSelector(state => state.gameComingSoon)
 const gamesNewReleases = useSelector(state => state.gamesNewReleases)
 const gamesTopSellers = useSelector(state => state.gamesTopSellers)
 const games = useSelector(state => state.games)
-console.log(games);
 
     useEffect(() => {
         dispatch(act.getGames())
+        dispatch(act.getGamesOffer())
+        dispatch(act.getGamesNewReleases())
+        dispatch(act.getGamesComingSoon())
+        dispatch(act.getGamesTopSellers())
     }, [dispatch])
 
     return(

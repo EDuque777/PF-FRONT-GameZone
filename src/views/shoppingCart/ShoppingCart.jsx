@@ -25,11 +25,12 @@ const ShoppingCart = () => {
                     <p> No hay juegos en el carrito... </p>
                 </div>
             ) : (
-            <div>
-                <ul className={styles.cajitaItems}>
+            <div className={styles.container}>
+                <div className={styles.juegosContainer}>
+                <div className={styles.cajitaItems}>
                     {cart.map(game => {
                         return (
-                            <li key={game.id} >
+                            <li className={styles.li} key={game.id} >
                             <Card 
                             id={game.id}
                             name={game.name} 
@@ -39,15 +40,14 @@ const ShoppingCart = () => {
                             </li>
                         )})
                     }
-                </ul>
+                </div>
+                </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4>TOTAL: ${totalPrice} ARG </h4>
+                        <h4>TOTAL: $ {totalPrice} </h4>
                     </div>
-                    <div className={styles.botonBorrar}>
-                        <button>{/* poner icono para borrar todo del carrito */}Borrar</button>
-                    </div>
-                    <div>
+                    <div className={styles.botones}>
+                        <button className={styles.botonBorrar}>{/* poner icono para borrar todo del carrito */}Borrar</button>
                         <button className={styles.botonComprar}>Comprar</button>
                     </div>
                 </div>
