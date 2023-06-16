@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHistory  } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
@@ -7,8 +8,6 @@ const Detail = (props) => {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   console.log(game)
-
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

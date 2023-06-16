@@ -18,18 +18,19 @@ const ShoppingCart = () => {
         <div>
             <NavBar />
             <br />
-            <h2 className="tituloCarrito">Carrito de Compras</h2>
+            <h2 className={styles.titleCarrito}>Carrito de Compras</h2>
             <br />
             {cart.length === 0 ? (
-                <div className=""> 
+                <div className={styles.emptyCart}> 
                     <p> No hay juegos en el carrito... </p>
                 </div>
             ) : (
-            <div>
-                <ul className="cajitaItems">
+            <div className={styles.container}>
+                <div className={styles.juegosContainer}>
+                <div className={styles.cajitaItems}>
                     {cart.map(game => {
                         return (
-                            <li key={game.id} >
+                            <li className={styles.li} key={game.id} >
                             <Card 
                             id={game.id}
                             name={game.name} 
@@ -39,20 +40,18 @@ const ShoppingCart = () => {
                             </li>
                         )})
                     }
-                </ul>
-                <div className="cajitaResumen">
-                    <div className="cajitaTotal">
-                        <h4>TOTAL: ${totalPrice} ARG </h4>
+                </div>
+                </div>
+                <div className={styles.cajitaResumen}>
+                    <div className={styles.cajitaTotal}>
+                        <h4>TOTAL: $ {totalPrice} </h4>
                     </div>
-                    <div className="bottonBorrar">
-                        <button>{/* poner icono para borrar todo del carrito */}Borrar</button>
-                    </div>
-                    <div>
-                        <button className="">Comprar</button>
+                    <div className={styles.botones}>
+                        <button className={styles.botonBorrar}>{/* poner icono para borrar todo del carrito */}Borrar</button>
+                        <button className={styles.botonComprar}>Comprar</button>
                     </div>
                 </div>
             </div>
-
             )}
         </div>
     )
