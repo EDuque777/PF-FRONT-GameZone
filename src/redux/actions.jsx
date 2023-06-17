@@ -10,12 +10,14 @@ export const GET_GAMES_OFFER = "GET_GAMES_OFFER"
 export const GET_GAMES_COMING_SOON = "GET_GAMES_COMING_SOON"
 export const GET_GAMES_TOP_SELLERS = "GET_GAMES_TOP_SELLERS"
 export const GET_GAMES_NEW_RELEASES = "GET_GAMES_NEW_RELEASES"
+export const FILTER_DB = "FILTER_DB"
+export const ORDER = "ORDER"
 
 //? funciones de peticiones
 export const getGames = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`http://localhost:3001/allGames`)
+            const response = await axios.get(`allGames`)
             const games = response.data
             dispatch({
                 type: GET_GAMES,
@@ -143,5 +145,13 @@ export const clearCart = ()  => {
     return  {
             type:CLEAR_CART  
     }
+}
+
+export const filterGamesDb = (value) => {
+    return {type: FILTER_DB, payload: value}
+}
+
+export const orderGamesDb = (value) => {
+    return {type: ORDER, payload: value}
 }
 

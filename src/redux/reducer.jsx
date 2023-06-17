@@ -1207,7 +1207,18 @@ const rootReducer=(state = initialState, action) => {
                 cart: []
             }
 
-        
+            case act.FILTER_DB:
+                const allGamesFilteredDb = state.games.filter(game => {
+                  if (action.payload === "allGames") {
+                    return true; 
+                  } else {
+                    return game.includes(action.payload) 
+                  }
+                });
+                return {
+                  ...state,
+                  gamesFiltered: allGamesFilteredDb
+            };              
 
         default:
             return {...state};
