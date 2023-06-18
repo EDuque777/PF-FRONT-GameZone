@@ -111,6 +111,21 @@ const rootReducer=(state = initialState, action) => {
                     gamesNameDb: action.payload
                 }
 
+            case act.ORDER:
+                const allGamesCopy = [...state.games];
+                let sortedGames;
+                      
+                if (action.payload === "AN") {
+                    sortedGames = allGamesCopy.sort((a, b) => a.name.localeCompare(b.name));
+                }else if (action.payload === "DN") {
+                    sortedGames = allGamesCopy.sort((a, b) => b.name.localeCompare(a.name)); 
+                }
+                      
+                return {
+                    ...state,
+                    games: sortedGames
+                };
+
         default:
             return {...state};
     }
