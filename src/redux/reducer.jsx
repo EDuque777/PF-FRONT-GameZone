@@ -3,18 +3,20 @@ import * as act from "./actions"
 const initialState = {
     games: [],
     total: 0,
+    counter: 0,
     cart: [],
+    whishList: [],
     gameDetail: null,
     gameComingSoon: null,
     gameOffer: null,
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
-
 };
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
 
+//? CASOS DE PETICIONES
         case act.GET_GAMES:
             return {
                 ...state,
@@ -64,7 +66,7 @@ const rootReducer=(state = initialState, action) => {
                 gamesTopSellers: action.payload
             }
 
-        //?casos del carrito de compra
+//?CASOS DEL CARRITO
         case act.ADD_TO_CART:
             const addGame = action.payload
             const updateCart = [...state.cart, addGame]
@@ -88,16 +90,34 @@ const rootReducer=(state = initialState, action) => {
                 total: updateTotalPrice
             }
 
-        // case act.REMOVE_ALL_TO_CART:
-
         case act.CLEAR_CART:
             return {
                 ...state,
                 cart: [],
                 total: 0
             }
-
         
+//? CASOS DE LA LISTA DE DESEADOS
+        case act.ADD_TO_WHISH_LIST:
+            return {
+                ...state,
+                whishList: [...state.whishList, action.payload],
+                counter: ++ state.counter,
+            }
+
+        case act.REMOVE_TO_WHISH_LIST:
+            return{
+                ...state,
+                whishList: state.whishList.filter( game => game.id !== action.payload),
+                counter: -- state.counter,
+            }
+
+        case act.CLEAR_WHISH_LIST:
+            return {
+                ...state,
+                whishList: [],
+                counter: 0
+            }
 
         default:
             return {...state};

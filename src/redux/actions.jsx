@@ -1,7 +1,6 @@
 import axios from "axios";
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_TO_CART = "REMOVE_TO_CART"
-export const REMOVE_ALL_TO_CART = "REMOVE_ALL_TO_CART"
 export const CLEAR_CART = "CLEAR_CART"
 export const GET_GAMES = "GET_GAMES"
 export const GET_DETAIL = "GET_DETAIL"
@@ -11,9 +10,12 @@ export const GET_GAMES_COMING_SOON = "GET_GAMES_COMING_SOON"
 export const GET_GAMES_TOP_SELLERS = "GET_GAMES_TOP_SELLERS"
 export const GET_GAMES_NEW_RELEASES = "GET_GAMES_NEW_RELEASES"
 export const GET_BY_NAME = "GET_BY_NAME"
+export const ADD_TO_WHISH_LIST = "ADD_TO_WHISH_LIST"
+export const REMOVE_TO_WHISH_LIST = "REMOVE_TO_WHISH_LIST"
+export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
-//? funciones de peticiones
+//? FUNCIONES DE PETICIONES
 export const getGames = () => {
 
     return async function (dispatch) {
@@ -130,7 +132,7 @@ export const getGamesNewReleases = () => {
     }
 }
 
-//? funciones del carrito
+//? FUNCIONES DEL CARRITO
 export const addCart = (game) => {
     return function(dispatch){
         dispatch({
@@ -141,6 +143,7 @@ export const addCart = (game) => {
 }
 
 export const removeCart = (id) => {
+    console.log(id);
     return {
         type: REMOVE_TO_CART,
         payload: id,
@@ -159,3 +162,32 @@ export const clearCart = ()  => {
     }
 }
 
+
+//? FUNCIONES DE LA LISTA DE DESEADOS
+
+export const addWhishList = (game) => {
+    return function (dispatch) {
+        console.log(game);
+        dispatch({
+            type: ADD_TO_WHISH_LIST,
+            payload: game
+        })
+    }
+}
+
+export const removeWhishList = (id) => {
+    return function (dispatch) {
+        dispatch({
+            type: REMOVE_TO_WHISH_LIST,
+            payload: id
+        })
+    }
+}
+
+export const clearWhishList = () => {
+     return function (dispatch) {
+        dispatch({
+            type: CLEAR_WHISH_LIST,
+        })
+     }
+}
