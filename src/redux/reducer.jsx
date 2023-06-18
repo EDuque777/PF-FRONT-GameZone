@@ -9,7 +9,8 @@ const initialState = {
     gameOffer: null,
     gamesTopSellers: null,
     gamesNewReleases: null,
-    gamesFiltered: null,
+    gamesFiltered: [],
+    gamesNameDb:[]
 
 };
 const rootReducer=(state = initialState, action) => {
@@ -102,7 +103,13 @@ const rootReducer=(state = initialState, action) => {
                 return {
                   ...state,
                   gamesFiltered: allGamesFilteredDb
-            };              
+            };
+            
+            case act.GAMES_NAME:
+                return {
+                    ...state,
+                    gamesNameDb: action.payload
+                }
 
         default:
             return {...state};

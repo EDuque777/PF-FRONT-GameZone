@@ -12,6 +12,7 @@ export const GET_GAMES_TOP_SELLERS = "GET_GAMES_TOP_SELLERS"
 export const GET_GAMES_NEW_RELEASES = "GET_GAMES_NEW_RELEASES"
 export const FILTER_DB = "FILTER_DB"
 export const ORDER = "ORDER"
+export const GAMES_NAME = "GAMES_NAME"
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? funciones de peticiones
@@ -22,7 +23,7 @@ export const getGames = () => {
             const games = response.data
             dispatch({
                 type: GET_GAMES,
-                payload: game
+                payload: games
             })
         } catch (error) {
             console.log(error.message);            
@@ -33,7 +34,7 @@ export const getGames = () => {
 export const gameDetail = (id) => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/search/${id}`)
+            const response = await axios.get(`search/${id}`)
             dispatch({
                 type: GET_DETAIL,
                 payload: response.data
@@ -56,7 +57,7 @@ export const clearDetail = () => {
 export const getGamesOffer = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/specials`)
+            const response = await axios.get(`specials`)
             //console.log(response);
             dispatch({
                 type: GET_GAMES_OFFER,
@@ -71,7 +72,7 @@ export const getGamesOffer = () => {
 export const getGamesComingSoon = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/coming`)
+            const response = await axios.get(`coming`)
             //console.log(response);
             dispatch({
                 type: GET_GAMES_COMING_SOON,
@@ -86,7 +87,7 @@ export const getGamesComingSoon = () => {
 export const getGamesTopSellers = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/sellers`)
+            const response = await axios.get(`sellers`)
             //console.log(response);
             dispatch({
                 type: GET_GAMES_TOP_SELLERS,
@@ -101,7 +102,7 @@ export const getGamesTopSellers = () => {
 export const getGamesNewReleases = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`https://pf-back-gamezone-production.up.railway.app/releases`)
+            const response = await axios.get(`releases`)
             //console.log(response);
             dispatch({
                 type: GET_GAMES_NEW_RELEASES,
@@ -150,4 +151,16 @@ export const filterGamesDb = (value) => {
 export const orderGamesDb = (value) => {
     return {type: ORDER, payload: value}
 }
+
+export const gamesName = (name) => {
+    const endpoint = `nameGames?name=${name}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GAMES_NAME,
+            payload: data
+        })
+    }
+}
+
 
