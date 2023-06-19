@@ -5,12 +5,9 @@ import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import NavBar from "../../components/NavBar/NavBar";
 
-
 const Detail = (props) => {
   
-  
-const history = useHistory()
-
+  const history = useHistory()
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
@@ -25,7 +22,6 @@ const history = useHistory()
       dispatch(clearDetail());
     };
   }, [dispatch, props.match]);
-
   // Elimina etiquetas HTML y caracteres especiales con una regex
   function sanitizeText(text) {
     if (typeof text === "string") {
