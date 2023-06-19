@@ -19,8 +19,15 @@
     "react-redux": "^7.2.9",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
+<<<<<<< HEAD
     "react-select": "^5.7.3",
+=======
+
+    "react-select": "^5.7.3",
+
+>>>>>>> d4e254f812a992ac05887ab4614c02698c514e99
     "react-spinners": "^0.13.8",
+
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
