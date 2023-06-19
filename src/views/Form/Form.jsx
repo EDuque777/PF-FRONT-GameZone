@@ -1,5 +1,7 @@
 import React from "react";
+import Select from "react-select";
 import styles from "./Form.module.css";
+import countries from "./countries";
 
 const Form = () => {
   const handleSignIn = () => {
@@ -20,6 +22,8 @@ const Form = () => {
     e.preventDefault();
   };
 
+  const [selectedCountry, setSelectedCountry] = React.useState(null);
+
   return (
     <div className={`${styles.container} ${styles["right-panel-active"]}`}>
       {/* Sign Up */}
@@ -27,8 +31,15 @@ const Form = () => {
         <form action="#" className={styles.form} id="form1" onSubmit={handleForm1Submit}>
           <h2 className={styles["form__title"]}>Create Account</h2>
           <input type="text" placeholder="Name" className={styles.input} />
+          <input type="text" placeholder="User Name" className={styles.input} />
           <input type="email" placeholder="Email" className={styles.input} />
           <input type="password" placeholder="Password" className={styles.input} />
+          <Select
+            placeholder="Select a country"
+            options={countries}
+            id={selectedCountry}
+            onChange={setSelectedCountry}
+          />
           <button className={styles.btn}>Sign Up</button>
         </form>
       </div>
