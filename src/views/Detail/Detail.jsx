@@ -51,47 +51,88 @@ const handleback = () =>{
           <PacmanLoader color="#123abc" size={80} speedMultiplier={1} />
         </div>
       ) : (
-        <>
-          <h1 className={style.name} translate="no">
+        
+        <div className={style.container}>
+          
+        <div className={style.container_juego}>
+          <div className={style.container_texto}>
+            <div className={style.name_margen}>
+        <h1 className={style.name} translate="no">
             {sanitizeText(game[props.match.params.id].data.name)}
-          </h1>
-          <br></br>
-          <img
+          </h1 >
+            </div>
+            <p className={style.descripcion}>{sanitizeText(game[props.match.params.id].data.detailed_description)}</p>
+
+          <div className={style.comprar}>
+            <p className={style.texto_comprar}>{`Comprar ${sanitizeText(game[props.match.params.id].data.name)}`}</p>
+            <div className={style.div_comprar}>
+            <p className={style.texto_precio}>{`Precio ${sanitizeText(game[props.match.params.id].data.price_overview)}`}
+            </p>
+            <button className={style.boton}>Add to Cart</button>
+            </div>
+          </div>
+
+
+          </div>
+
+        
+        <div className={style.image}>
+        <img
             className={style.img}
             src={game[props.match.params.id].data.header_image}
             alt="Game"
-          />
-          <br></br>
-          <p>{sanitizeText(game[props.match.params.id].data.detailed_description)}</p>
+            />
+        </div>  
+  
+            </div>
+          
+          
+
+
+          <div className={style.detail_container}>
+
+          <div className={style.detail_left}>
           <h2>
-          <br></br>
             <strong>Requisitos </strong>
           </h2>
           <p>{sanitizeText(game[props.match.params.id].data.pc_requirements.minimum)}</p>
           <h2>
-          <br></br>
             <strong>Idiomas </strong> 
           </h2>
-          <h2>
+          <p>
           {sanitizeText(game[props.match.params.id].data.supported_languages)}
-          </h2>
-          <br></br>
+          </p>
+          
           <h2>
             <strong>Edad mínima </strong>
           </h2>
           <p>{game[props.match.params.id].data.required_age}</p>
-          <br></br>
-          <h2>
+          
+          
           <h2>
             <strong>Desarrolladores </strong>
           </h2>
           <p translate="no">{sanitizeText(game[props.match.params.id].data.developers)}</p>
-          <br></br>
+          
+          <h2>
             <strong>ID :</strong>
+
           </h2>
+          
           <p>{game[props.match.params.id].data.steam_appid}</p>
-          <br></br>
-        </>
+
+
+          
+          
+          </div>
+          <div className={style.detail_rigth}>
+
+            <div className={style.detail_uno}> <strong>Classification</strong></div>
+            <div className={style.detail_dos}> <strong>Achievements</strong></div>
+            <div className={style.detail_tres}> <strong>Metacritic</strong></div>
+          </div>
+          </div>
+          </div>
       )}
 
     </div>
@@ -100,3 +141,5 @@ const handleback = () =>{
 
 
 export default Detail;
+
+
