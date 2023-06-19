@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 
-
 const Detail = (props) => {
 
+const history = useHistory()
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   // const [loading, setLoading] = useState(true);
@@ -34,6 +34,11 @@ const Detail = (props) => {
   //   return <div>Cargando...</div>;
   // }
 
+const handleback = () =>{
+  history.push("/home")
+}
+
+
   return (
     game === undefined || game === null ? (
       <div>
@@ -41,6 +46,7 @@ const Detail = (props) => {
       </div>
     ) : (
       <div className={style.info}>
+        <button className={style.back} onClick={()=>{handleback()}}>back</button>
       <h1 className={style.name}>{game && game[props.match.params.id].data.name}</h1>
       <img className={style.img} src={game && game[props.match.params.id].data.header_image} alt="Game" />
       <h2>
