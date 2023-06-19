@@ -2,6 +2,8 @@ import React from "react";
 import style from "./NavBar.module.css"
 import { Link } from "react-router-dom";
 import logoImage from "../../assets/LOGOGAMEZONE2.png";
+import usuario from "../../assets/usuario.png"
+
 
 const navBar = () =>{
 
@@ -12,6 +14,7 @@ return (
         <img className={style.image} src={logoImage} alt="logoimage" />
         </Link>
         <Link to="/cart"><button className={style.button} >Shopping cart</button></Link>
+        <img src={usuario} className={style.usuario} />
     </div>
     )
 }
