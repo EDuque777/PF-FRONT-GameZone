@@ -65,7 +65,7 @@ const handleback = () =>{
           <p>{sanitizeText(game[props.match.params.id].data.detailed_description)}</p>
           <h2>
           <br></br>
-            <strong>Requerimientos </strong>
+            <strong>Requisitos </strong>
           </h2>
           <p>{sanitizeText(game[props.match.params.id].data.pc_requirements.minimum)}</p>
           <h2>
