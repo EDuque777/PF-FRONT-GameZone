@@ -4,6 +4,7 @@ import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import NavBar from "../../components/NavBar/NavBar";
+import { useHistory } from "react-router-dom";
 
 const Detail = (props) => {
   
