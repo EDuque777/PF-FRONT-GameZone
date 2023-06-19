@@ -11,13 +11,13 @@ const Footer = () => {
         <div className={styles["footer-container"]}>
             <div className={styles["footer-section"]}>
                 <div className={styles["footer-column"]}>
-                    <h7>Compania</h7>
+                    <p>Compania</p>
                     <a href="/aboutus">
                         <p>Sobre nosotros</p>
                     </a>
-                    <a href="/prensa">
+                    {/* <a href="/prensa">
                         <p>Prensa</p>
-                    </a>
+                    </a> */}
                     <a href="/contacto">
                         <p>Contacto</p>
                     </a>
@@ -30,7 +30,7 @@ const Footer = () => {
             <div className={styles["footer-section"]}>
             <div className={styles["footer-column"]}>
                 <a href="/terminos">
-                    <h7>Terminos y condiciones</h7>
+                    <p>Terminos y condiciones</p>
                 </a>
                 <a href="/privacidad">
                     <p>Privacidad</p>
@@ -42,13 +42,13 @@ const Footer = () => {
         </div>
         <div className={styles["footer-section"]}>
                 <div className={styles["footer-column"]}>
-                    <h7>Siguenos</h7>
+                    <p>Siguenos</p>
                     <div className={styles["social-media-icons"]}>
-                        <FontAwesomeIcon className="w-6 h-6" icon={faLinkedin} size="l"/>
-                        <FontAwesomeIcon className="w-6 h-6" icon={faGithub} size="l"/>
-                        <FontAwesomeIcon icon={faTwitter} size="l" />
-                        <FontAwesomeIcon icon={faFacebook} size="l"/>
-                        <FontAwesomeIcon icon={faInstagram} size="l"/>
+                        <FontAwesomeIcon className="w-6 h-6" icon={faLinkedin} size="xl"/>
+                        <FontAwesomeIcon className="w-6 h-6" icon={faGithub} size="xl"/>
+                        <FontAwesomeIcon icon={faTwitter} size="xl" />
+                        <FontAwesomeIcon icon={faFacebook} size="xl"/>
+                        <FontAwesomeIcon icon={faInstagram} size="xl"/>
             
                     </div>
                 </div>
