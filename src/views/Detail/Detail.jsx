@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
-import NavBar from "../../components/NavBar/NavBar"
+import NavBar from "../../components/NavBar/NavBar";
 
 const Detail = (props) => {
+  
+  const history = useHistory()
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
@@ -20,7 +22,6 @@ const Detail = (props) => {
       dispatch(clearDetail());
     };
   }, [dispatch, props.match]);
-
   // Elimina etiquetas HTML y caracteres especiales con una regex
   function sanitizeText(text) {
     if (typeof text === "string") {
@@ -35,6 +36,11 @@ const Detail = (props) => {
     return text;
   }
   
+
+const handleback = () =>{
+  history.push("/home")
+}
+
 
   return (
     <div className={style.info}>
@@ -86,6 +92,7 @@ const Detail = (props) => {
           <br></br>
         </>
       )}
+
     </div>
   );
 };

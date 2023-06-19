@@ -1,6 +1,7 @@
 //* Rellenar cuando se este realizando el redux e importar los componentes necesarios...
 //!APLICAR EL PERSIST
 import React from "react";
+import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as act from "../../redux/actions";
@@ -14,12 +15,28 @@ const ShoppingCart = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const cart = useSelector(state => state.cart)
+    //console.log(cart);
     const totalPrice = useSelector(state => state.total)
-    //console.log(totalPrice);
-    //console.log(cart)
 
     const handleRemove = () => {
-        dispatch(act.clearCart())
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              dispatch(act.clearCart())
+            }
+          })
     }
     const handleBuy = () => {
         history.push("/buy")
@@ -29,14 +46,14 @@ const ShoppingCart = () => {
         <div>
             <NavBar />
             <br />
-            <h2 className={styles.titleCarrito}>Carrito de Compras</h2>
+            <h2 className={styles.titleCarrito}>Shopping Cart</h2>
             <br />
             {cart.length === 0 ? (
                 <div className={styles.container}>
                     <div className={styles.juegosContainer}>
                         <div className={styles.cajitaItems}>
                             <div className={styles.emptyCart}> 
-                                <p> No hay juegos en el carrito... </p>
+                                <p> There are no games in the cart... </p>
                             </div>
                         </div>
                     </div>
@@ -45,12 +62,11 @@ const ShoppingCart = () => {
                         <h4>TOTAL: $ {totalPrice} </h4>
                     </div>
                     <div className={styles.botones}>
-                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Borrar</button>
-                        <button className={styles.botonComprar}>Comprar</button>
+                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
+                        <button className={styles.botonComprar}>Buy</button>
                     </div>
                 </div>
             </div>
-                
             ) : (
             <div className={styles.container}>
                 <div className={styles.juegosContainer}>
@@ -74,8 +90,8 @@ const ShoppingCart = () => {
                         <h4>TOTAL: ${totalPrice} USD</h4>
                     </div>
                     <div className={styles.botones}>
-                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Borrar</button>
-                        <button className={styles.botonComprar} onClick={() => {handleBuy()}}>Comprar</button>
+                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
+                        <button className={styles.botonComprar} onClick={() => {handleBuy()}}>Buy</button>
                     </div>
                 </div>
             </div>
