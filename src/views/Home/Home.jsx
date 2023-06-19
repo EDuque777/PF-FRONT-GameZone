@@ -48,6 +48,8 @@ const [name, setName] = useState("")
                     {/* REVISAR BIEN HACER EL DISEÑO Y LA BUSQUEDA */}
                     <input className={style.search} placeholder="   search..."type="text" onChange={e => handleChange(e)}  onKeyDown={handleKeyDown} onClick={(e) => {handleButton(e)}}/>
                     <button > buscar</button>
+                <h3>All Games</h3>
+                <CardsContainer gameComingSoon={games} />
                 </div>
                 <h3 className={style.title}> Top sells </h3>
                 <CardsContainer gameComingSoon={gamesTopSellers} />
@@ -55,8 +57,6 @@ const [name, setName] = useState("")
                 <CardsContainer gameComingSoon={gameOffer} />
                 <h3 className={style.title}> New releases </h3>
                 <CardsContainer gameComingSoon={gamesNewReleases} />
-                <h3>All Games</h3>
-                <CardsContainer gameComingSoon={games} />
         </div>
         
     );
