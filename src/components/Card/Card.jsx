@@ -80,7 +80,7 @@ const Card = (props) => {
                 <img className={style.image} src={image} alt={name} width="150px" height="38px" ></img>
                 <h1 className={style.name}>{name}</h1>
             </div>
-                <h3 className={style.price}>$ {price}</h3>
+                <h3 className={style.price}> {price}</h3>
             {!isShoppCartRoute && !isWhishListRoute && (
                 //! tiene que estar primero en la whishlist y despues al shop
                 <div>

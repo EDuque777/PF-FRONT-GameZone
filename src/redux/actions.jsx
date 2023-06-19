@@ -150,12 +150,6 @@ export const removeCart = (id) => {
     }
 }
 
-// export const removeAllCart = () => {
-//     return {
-//         type: REMOVE_ALL_TO_CART,
-//     }
-// }
-
 export const clearCart = ()  => {
     return  {
             type:CLEAR_CART  
