@@ -146,3 +146,31 @@ export const clearCart = ()  => {
     }
 }
 
+// Action de Create User
+
+export const postCreateUser = (data) => {
+    return async function (dispatch) {
+        try {
+           const user = await axios.post("http://localhost:3001/crearCuenta",data)
+
+           console.log(user.data)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+//Accion de Loguear Usuario
+
+export const postLogin = (datos) =>{
+    return async function (dispatch) {
+        try {
+            const userTwo = await axios.post("http://localhost:3001/iniciarSesion",datos)
+
+            console.log(userTwo.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
