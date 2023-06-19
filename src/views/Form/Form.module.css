@@ -1,6 +1,6 @@
 :root {
 	/* COLORS */
-	--white: #00000021;
+	--white: #242323;
 	--purple: #7800A2;
 	--lightpurple: #7800A2;
 
@@ -30,10 +30,7 @@ body {
 .form__title {
 	font-weight: 600;
   color: #ffffff;
-  background-color: #161616;
-  border-radius: 1000px;
-	margin: 30px;
-	margin-bottom: 1.25rem;
+
 }
 
 .link {

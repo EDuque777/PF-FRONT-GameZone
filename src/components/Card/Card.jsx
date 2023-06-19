@@ -1,45 +1,102 @@
 import React from 'react'
-import { useDispatch } from "react-redux";
+import Swal from "sweetalert2"
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import * as act from "../../redux/actions";
-import fafa from "./Card.module.css";
+import style from "./Card.module.css";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-//! FIJARSE COMO VIENE
 const Card = (props) => {
 
-    console.log(props);
     const {id, price, name, image} = props
-    console.log(image);
     
     const dispatch = useDispatch()
     const location = useLocation()
     const history = useHistory()
+    const cart = useSelector(state => state.cart)
+    const whishList = useSelector(state => state.whishList)
     
     const handleAdd = () => {
-        dispatch(act.addCart())
+        const cartList = cart.find( game => game.id === id)
+        if (cartList) {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'el juego ya se encuentra en el carrito',
+                showConfirmButton: false,
+                timer: 2000
+               }) 
+            //alert("el producto ya se encuentra en la lista")
+        } else {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Juego agregado correctamente",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(act.addCart({ id, price, name, image }))
+        }   
     }
-    const handleRemove = (gameId) => {
-        dispatch(act.removeCart(gameId))
+    const handleAddWhish = () => {
+        const gameInWhishList = whishList.find(game => game.id === id)
+        if(gameInWhishList) {
+           Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'el juego ya se encuentra en la lista',
+                showConfirmButton: false,
+                timer: 2000
+           }) 
+           //alert("el producto ya se encuentra en la lista")
+        } else {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Juego agregado correctamente",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(act.addWhishList({ id, price, name, image }))
+        }
+    }
+    const handleRemove = () => {
+        dispatch(act.removeCart(id))
+    }
+    const handelRemoveWhishList = () => {
+        dispatch(act.removeWhishList(id))
     }
     const handleClick = (id) => {
         history.push(`/detail/${id}`);
     }
 
     const isShoppCartRoute = location.pathname === "/cart";
+    const isWhishListRoute =location.pathname === "/whishlist";
+    //const formattedPrice = price.toString().replace(/[^0-9]/g,'');
 
-  return (
-        <li className={fafa.box} >
+    return (
+        <li className={style.box} key={id}>
             <div onClick={() => {handleClick(id)}}>
-                <img src={image} alt={name} width="150px" height="38px" ></img>
-                <h1 >{name}</h1>
-                <h3>{price}</h3>
+                <img className={style.image} src={image} alt={name} width="150px" height="38px" ></img>
+                <h1 className={style.name}>{name}</h1>
             </div>
-            {!isShoppCartRoute ? (
-                    <button onClick={() => {handleAdd()}}> Add to cart </button>
-            ) : (
-                <button onClick={() => handleRemove(id)}>Sacar</button>
+                <h3 className={style.price}> {price}</h3>
+            {!isShoppCartRoute && !isWhishListRoute && (
+                //! tiene que estar primero en la whishlist y despues al shop
+                <div>
+                    <button onClick={() => {handleAddWhish()}}>Add to WhishList</button>
+                    <button onClick={() => {handleAdd()}}>Add to cart</button>
+                </div>
             )}
+            {isWhishListRoute && (
+                <div>
+                    <button onClick={() => {handleAdd()}}>Add to cart</button>
+                    <button onClick={() => {handelRemoveWhishList()}}>Take out</button>
+                </div>
+            )}
+            {isShoppCartRoute && (
+                <button onClick={() => {handleRemove()}}>Take out</button>
+            )} 
         </li>
     )
 }

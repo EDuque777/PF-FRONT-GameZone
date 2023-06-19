@@ -1,8 +1,11 @@
 import React from "react";
+import Select from "react-select";
 import styles from "./Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { postCreateUser, postLogin } from "../../redux/actions";
+import countries from "./countries";
+
 
 const Form = () => {
 
@@ -182,10 +185,14 @@ const Form = () => {
     console.log(datosTwo) //se envian los datos al backend
   };
 
+
   useEffect(() => {
     Validation()
     ValidationTwo()
   }, [datos, setIsFormModified, setIsValid, datosTwo, setIsFormModifiedTwo, setIsValidTwo])
+
+  const [selectedCountry, setSelectedCountry] = React.useState(null);
+
 
   return (
     <div className={`${styles.container} ${styles["right-panel-active"]}`}>
@@ -193,6 +200,7 @@ const Form = () => {
       <div className={`${styles.container__form} ${styles["container--signup"]}`}>
         <form action="#" className={styles.form} id="form1" onSubmit={handleForm1Submit}>
           <h2 className={styles["form__title"]}>Create Account</h2>
+
           <input type="text" placeholder="Name" name="name" value={datos.name} onChange={(e) => handleChange(e)} className={styles.input} />
           { error.name && <span style={{color : "red"}} >{error.name}</span>}
           <input type="email" placeholder="Email" name="email" value={datos.email} onChange={(e) => handleChange(e)} className={styles.input} />
@@ -200,6 +208,12 @@ const Form = () => {
           <input type="password" placeholder="Password" name="password" value={datos.password} onChange={(e) => handleChange(e)} className={styles.input} />
           { error.password && <span style={{color : "red"}} >{error.password}</span>}
           <button className={styles.btn} disabled={!isValid} >Sign Up</button>
+          <Select
+            placeholder="Select a country"
+            options={countries}
+            id={selectedCountry}
+            onChange={setSelectedCountry}
+          />
         </form>
       </div>
 
