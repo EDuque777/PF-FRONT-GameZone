@@ -4,10 +4,12 @@ import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import NavBar from "../../components/NavBar/NavBar";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Detail = (props) => {
   
   const history = useHistory()
+
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
