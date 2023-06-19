@@ -1,0 +1,14 @@
+.container{
+
+}
+.title{
+    color:aliceblue;
+    font-size: 25px;
+
+}
+.search{
+    background-color: rgb(68, 68, 68);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
