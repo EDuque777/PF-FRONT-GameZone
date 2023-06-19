@@ -205,7 +205,7 @@ export const postLogin = (datos) =>{
             console.log(error)
         }
     }
-
+}
 export const clearWhishList = () => {
      return function (dispatch) {
         dispatch({
