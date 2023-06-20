@@ -77,7 +77,7 @@ const ShoppingCart = () => {
                                 <Card 
                                 id={game.id}
                                 name={game.name} 
-                                image={game.image}
+                                image={game.image || game.capsule_image}
                                 price={game.price}
                                 />
                                 </li>
