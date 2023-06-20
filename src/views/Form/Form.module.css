@@ -16,10 +16,14 @@
 		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-body {
+.body_form {
 	align-items: center;
 	background-color: var(--white);
-	background: url("../../assets/GameZone\ Wp.png");
+
+ 	background: url("../../assets/GameZone\ Wp.png"); 
+
+	
+
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;

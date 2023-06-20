@@ -1,9 +1,9 @@
-import React from 'react'
-import Swal from "sweetalert2"
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import * as act from "../../redux/actions";
-import style from "./Card.module.css";
+import React, { useRef, useEffect } from 'react';
+import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import * as act from '../../redux/actions';
+import style from './Card.module.css';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Card = (props) => {
@@ -70,9 +70,32 @@ const Card = (props) => {
     const handelRemoveWhishList = () => {
         dispatch(act.removeWhishList(id))
     }
-    const handleClick = (id) => {
-        history.push(`/detail/${id}`);
+  };
+
+  const handleRemove = () => {
+    dispatch(act.removeCart(id));
+  };
+
+  const handelRemoveWhishList = () => {
+    dispatch(act.removeWhishList(id));
+  };
+
+  const handleClick = (id) => {
+    history.push(`/detail/${id}`);
+  };
+
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    if (titleRef.current) {
+      const titleElement = titleRef.current;
+      const maxTitleLength = 35;
+      const title = titleElement.innerText;
+      if (title.length > maxTitleLength) {
+        titleElement.innerText = title.slice(0, maxTitleLength) + '...';
+      }
     }
+  }, []);
 
     return (
         <li className={style.box} key={id}>
@@ -101,4 +124,5 @@ const Card = (props) => {
     )
 }
 
-export default Card
+
+export default Card;

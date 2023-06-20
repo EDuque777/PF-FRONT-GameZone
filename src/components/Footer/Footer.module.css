@@ -1,5 +1,6 @@
 
   .footer-container {
+    text-decoration: none;
     background-color: #070707;
     color: #f1f1f1; 
     display: flex;
@@ -9,6 +10,7 @@
 
   .footer-container p {
     font-size: 18px;
+    text-decoration: none;
   }
 
 
@@ -16,6 +18,7 @@
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
+    text-decoration: none;
   }
   
 
@@ -23,6 +26,12 @@
   .footer-section p {
     margin: 3px 0;
     color: #f1f1f1;
+    text-decoration: none; /* Agrega esta línea */
+  }
+  .footer-section a {
+    margin: 3px 0;
+    color: #f1f1f1;
+    text-decoration: none; /* Agrega esta línea */
   }
   
   .footer-section img {

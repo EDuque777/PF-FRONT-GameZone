@@ -40,14 +40,16 @@ const handleGoToCard = (cardNumber) => {
 };
 
 useEffect(() => {
-    const interval = setInterval(() => {
-        handleNextCard();
-    }, 4000);
+    if (gameComingSoon && gameComingSoon.length > 0) {
+        const interval = setInterval(() => {
+            handleNextCard();
+        }, 4000);
 
-    return () => {
-        clearInterval(interval);
-    };
-}, [currentCard]);
+        return () => {
+            clearInterval(interval);
+        };
+    }
+}, [currentCard, gameComingSoon]);
 
     const indexOfLastCharacter = currentCard * charactersPerPage;
     const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;

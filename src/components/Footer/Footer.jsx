@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 
-import {faLinkedin,faGithub,faTwitter,faInstagram,faFacebook} from "@fortawesome/free-brands-svg-icons";
+import {faLinkedin,faGithub,faTwitter,faInstagram,faFacebook, faSearchengin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -11,15 +11,15 @@ const Footer = () => {
         <div className={styles["footer-container"]}>
             <div className={styles["footer-section"]}>
                 <div className={styles["footer-column"]}>
-                    <p>Compania</p>
+                    <p>Company</p>
                     <a href="/aboutus">
-                        <p>Sobre nosotros</p>
+                        <p>About us</p>
                     </a>
                     {/* <a href="/prensa">
                         <p>Prensa</p>
                     </a> */}
                     <a href="/contacto">
-                        <p>Contacto</p>
+                        <p>Contact</p>
                     </a>
                 </div>
             </div>
@@ -30,26 +30,26 @@ const Footer = () => {
             <div className={styles["footer-section"]}>
             <div className={styles["footer-column"]}>
                 <a href="/terminos">
-                    <p>Terminos y condiciones</p>
+                    <p>Terms and conditions</p>
                 </a>
                 <a href="/privacidad">
-                    <p>Privacidad</p>
+                    <p>Privacy</p>
                 </a>
                 <a href="/seguridad">
-                    <p>Seguridad</p>
+                    <p>Security</p>
                 </a>
             </div>
         </div>
         <div className={styles["footer-section"]}>
                 <div className={styles["footer-column"]}>
-                    <p>Siguenos</p>
+                    <p>follow us</p>
                     <div className={styles["social-media-icons"]}>
                         <FontAwesomeIcon className="w-6 h-6" icon={faLinkedin} size="xl"/>
                         <FontAwesomeIcon className="w-6 h-6" icon={faGithub} size="xl"/>
                         <FontAwesomeIcon icon={faTwitter} size="xl" />
                         <FontAwesomeIcon icon={faFacebook} size="xl"/>
                         <FontAwesomeIcon icon={faInstagram} size="xl"/>
-            
+
                     </div>
                 </div>
             </div>

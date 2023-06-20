@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
@@ -91,12 +92,15 @@ const Detail = (props) => {
               </p>
               <div className={style.comprar}>
                 <p className={style.texto_comprar}>
-                  {`Comprar ${sanitizeText(game[props.match.params.id].data.name)}`}
+                  {`Buy ${sanitizeText(game[props.match.params.id].data.name)}`}
                 </p>
                 <div className={style.div_comprar}>
-                  <p className={style.texto_precio}>
-                    {`Precio ${gamePrice}`}
-                  </p>
+                <p className={style.texto_precio}>
+                  {`Price: ${
+                    sanitizeText(game[props.match.params.id].data.price_overview?.final_formatted) ||
+                    "Free"
+                  }`}
+                </p>
                   <button onClick={() => handleAdd(game[props.match.params.id].data)} className={style.boton}>
                     Add to Cart
                   </button>
@@ -115,19 +119,19 @@ const Detail = (props) => {
           <div className={style.detail_container}>
             <div className={style.detail_left}>
               <h2>
-                <strong>Requisitos </strong>
+                <strong>Requirements </strong>
               </h2>
               <p>{sanitizeText(game[props.match.params.id].data.pc_requirements.minimum)}</p>
               <h2>
-                <strong>Idiomas </strong>
+                <strong>Languages </strong>
               </h2>
               <p>{sanitizeText(game[props.match.params.id].data.supported_languages)}</p>
               <h2>
-                <strong>Edad mínima </strong>
+                <strong>Minimum age </strong>
               </h2>
               <p>{game[props.match.params.id].data.required_age}</p>
               <h2>
-                <strong>Desarrolladores </strong>
+                <strong>Developers </strong>
               </h2>
               <p translate="no">{sanitizeText(game[props.match.params.id].data.developers)}</p>
               <h2>
@@ -154,3 +158,8 @@ const Detail = (props) => {
 };
 
 export default Detail;
+
+
+
+
+

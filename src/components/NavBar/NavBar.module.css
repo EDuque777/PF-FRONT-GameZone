@@ -1,41 +1,77 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 60px;
-    background-color: #070707;
-}
-.button{
-    width: auto;
-    background-color: #070707;
-    border: none;
-    color:rgb(206, 206, 206);
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 10px;
-    font-size: 20px;
-    transition: 500ms;
-    border: solid #070707;
-    border-radius: 10px;
-    padding:6px,
-}
-.button:hover{
-    color:rgb(243, 243, 243);
-    transition: 500ms;
-    background-color: rgb(43, 43, 43);;
-}
-.image{
-    margin-left: 350px;
-    margin-right: 100px;
-    height: 90px;
-    width: auto;
-    margin-top: -15px;
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: #070707;
+  padding: 0 20px;
 }
 
-.usuario{
-    height: 40px;
-    width: 40px;
-    margin-top: 10px;
-    margin-right: 40px;
-    cursor: pointer;
+.logoContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Agrega esta línea */
+}
+
+.button {
+  background-color: #070707;
+  border: none;
+  color: rgb(206, 206, 206);
+  font-size: 20px;
+  transition: 500ms;
+  border: solid #070707;
+  border-radius: 10px;
+  padding: 6px;
+  margin-right: 50px;
+}
+
+.button:hover {
+  color: rgb(243, 243, 243);
+  background-color: rgb(43, 43, 43);
+  transition: 500ms;
+}
+
+.image {
+  height: 90px;
+  width: auto;
+  margin-left: 150px;
+}
+
+.usuario {
+  height: 40px;
+  width: 40px;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 50px;
+}
+
+.buttonWish {
+  background-color: #070707;
+  border: none;
+  color: rgb(206, 206, 206);
+  font-size: 20px;
+  transition: 500ms;
+  border: solid #070707;
+  border-radius: 10px;
+  padding: 6px;
+  margin-left: 50px;
+}
+.centeredLogo {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonWish:hover {
+  color: rgb(243, 243, 243);
+  background-color: rgb(43, 43, 43);
+  transition: 500ms;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 97.9%;
+  z-index: 999;
 }
