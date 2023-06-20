@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import Carousel from "../../components/Carousel/Carousel"
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
+import Filters from "../../components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Home.module.css"
 import * as act from "../../redux/actions"
@@ -15,7 +16,7 @@ const gameOffer = useSelector(state => state.gameOffer)
 const gamesNewReleases = useSelector(state => state.gamesNewReleases)
 const gamesTopSellers = useSelector(state => state.gamesTopSellers)
 const games = useSelector(state => state.games)
-console.log(games);
+//console.log(games);
 
     useEffect(() => {
         dispatch(act.getGames())
@@ -34,6 +35,7 @@ console.log(games);
                 <Carousel /> 
                 <div>
                     <input className={style.search} placeholder="   search..."type="text" />
+                    <Filters/>
                 </div>
                 <h3 className={style.title}> Top sells </h3>
                 <CardsContainer gameComingSoon={gamesTopSellers} />

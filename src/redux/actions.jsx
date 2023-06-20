@@ -13,6 +13,7 @@ export const GET_GAMES_NEW_RELEASES = "GET_GAMES_NEW_RELEASES"
 export const FILTER_DB = "FILTER_DB"
 export const ORDER = "ORDER"
 export const GAMES_NAME = "GAMES_NAME"
+export const PLATFORMS = "PLATFORMS"
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? funciones de peticiones
@@ -158,6 +159,17 @@ export const gamesName = (name) => {
         const {data} = await axios.get(endpoint);
         return dispatch({
             type: GAMES_NAME,
+            payload: data
+        })
+    }
+}
+
+export const platformAll = () => {
+    const endpoint = `/platformGames`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: PLATFORMS,
             payload: data
         })
     }

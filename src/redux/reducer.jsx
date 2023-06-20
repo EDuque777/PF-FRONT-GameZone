@@ -10,7 +10,8 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: [],
-    gamesNameDb:[]
+    gamesNameDb:[],
+    platformAllDb: []
 
 };
 const rootReducer=(state = initialState, action) => {
@@ -125,6 +126,12 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     games: sortedGames
                 };
+
+            case act.PLATFORMS:
+                return {
+                    ...state,
+                    platformAllDb: action.payload
+                }
 
         default:
             return {...state};
