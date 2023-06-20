@@ -8,9 +8,9 @@ const Landing = () => {
         <div className={styles.container}>
         <img src={logoImage} alt="GAME ZONE" className={`${styles.logo} ${styles.enlarged}`} />
         <Link to="/home">
-            <button className={styles.button}>INGRESAR</button>
+            <button className={styles.button}>start</button>
         </Link>
-        <h1 className={styles.subHeading}>Descubre la emoción en GAME ZONE. Adquiere los mejores juegos en nuestra tienda en línea. ¡Sumérgete en aventuras inolvidables y desafía tus habilidades!</h1>
+        <h1 className={styles.subHeading}>Discover the excitement in GAME ZONE. Get the best games in our online store. Dive into unforgettable adventures and challenge your skills!</h1>
         </div>
         
     );
