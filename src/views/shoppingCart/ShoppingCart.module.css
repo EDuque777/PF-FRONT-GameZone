@@ -7,12 +7,13 @@
 }
 
 .container{
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: space-around;
 }
 
 .juegosContainer{
+
   margin: 10px ;
   display: flex;
   border-radius: 10px;
@@ -41,7 +42,7 @@
 
 .cajitaResumen {
   display: flex;
-  background-color: #6c757d;
+  background-color: #2E2E2E;
   flex-direction: column;
   height: 50vh;
   width: 30vw;
@@ -54,14 +55,14 @@
 .cajitaTotal {
   border-radius: 15px;
   margin-top: auto;
-  background-color: #26292b;
+  background-color: #202020;
   width: 90%;
   height: 75%;
   font-weight: bold;
 }
 
 .botones{
-  background-color: #26292b;
+  background-color: #202020;
   border-radius: 15px;
   position: relative;
   margin-top: auto;
