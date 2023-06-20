@@ -16,7 +16,6 @@ const Home = () => {
   const games = useSelector(state => state.games);
   const [name, setName] = useState("");
 
-
   useEffect(() => {
     dispatch(act.getGames());
     dispatch(act.getGamesOffer());

@@ -5,21 +5,20 @@ import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import NavBar from "../../components/NavBar/NavBar";
-import { useHistory, useLocation } from "react-router-dom";
-import Card from "../../components/Card/Card";
+import { useHistory} from "react-router-dom";
 import * as act from "../../redux/actions";
 import Swal from "sweetalert2"
 
 const Detail = (props) => {
 
-  const {id, price, name, image} = props
-
+  const { id } = props
+  
   const history = useHistory();
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
   const cart = useSelector(state => state.cart)
-
+  //console.log(game);
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
       const id = props.match.params.id;
@@ -40,7 +39,7 @@ const Detail = (props) => {
     return text;
   }
 
-  const handleAdd = (game) => {
+  const handleAdd = () => {
     const cartList = cart.find( game => game.id === id)
         if (cartList) {
             Swal.fire({
@@ -58,9 +57,16 @@ const Detail = (props) => {
                 showConfirmButton: false,
                 timer: 2000
             })
-    dispatch(act.addCart(game));
+            console.log({id: bkId, image: img, name:name , price: price });
+    dispatch(act.addCart({id: bkId, image: img, name:name , price: price}));
   };
 }
+
+  const price = game && (game[props.match.params.id]?.data?.price_overview?.initial)
+  const gamePrice = game && (game[props.match.params.id]?.data?.price_overview?.final_formatted);
+  const img = game && game[props.match.params.id].data.header_image;
+  const bkId = game && game[props.match.params.id].data.steam_appid;
+  const name = game && game[props.match.params.id].data.name
 
   const handleBack = () => {
     history.push("/home");
@@ -68,7 +74,6 @@ const Detail = (props) => {
 
   return (
     <div className={style.info}>
-      <NavBar />
       {isLoading ? (
         <div className={style.loading}>
           <PacmanLoader color="#123abc" size={80} speedMultiplier={1} />
@@ -96,7 +101,6 @@ const Detail = (props) => {
                     "Free"
                   }`}
                 </p>
-
                   <button onClick={() => handleAdd(game[props.match.params.id].data)} className={style.boton}>
                     Add to Cart
                   </button>
