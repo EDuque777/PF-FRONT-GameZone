@@ -14,16 +14,10 @@ const gamesNewReleases = useSelector(state => state.gamesNewReleases)
 const gamesTopSellers = useSelector(state => state.gamesTopSellers)
 const games = useSelector(state => state.games)
 const [name, setName] = useState("")
-//console.log(games);
-
-console.log(games)
+//console.log(games)
 
     useEffect(() => {
-
-
-        // dispatch(act.getGames())
-
-
+        dispatch(act.getGames())
         dispatch(act.getGamesOffer())
         dispatch(act.getGamesNewReleases())
         dispatch(act.getGamesComingSoon())
@@ -48,14 +42,10 @@ console.log(games)
 
     return(
         <div className={style.container}>
-                <NavBar />
                 <Carousel /> 
                 <div>
                     <input className={style.search} placeholder="   search..."type="text" onChange={e => handleChange(e)}  onKeyDown={handleKeyDown}/>
                     <button  onClick={(e) => {handleButton(e)}} > buscar</button>
-                <h3>All Games</h3>
-                <CardsContainer gameComingSoon={games} />
-
                 </div>
                 <h3 className={style.title}>All Games</h3>
                 <CardsContainer gameComingSoon={games} />

@@ -9,12 +9,10 @@ const navBar = () =>{
 
 return (
     <div className={style.container}>
-        <Link to="/whishlist"><button className={style.button} >Wishlist</button> </Link>
-        <Link to="/home">
-        <img className={style.image} src={logoImage} alt="logoimage" />
-        </Link>
+        <Link to="/whishlist"><button className={style.button} >Wishlist</button></Link>
+        <Link to="/home"><img className={style.image} src={logoImage} alt="logoimage" /></Link>
         <Link to="/cart"><button className={style.button} >Shopping cart</button></Link>
-        <img src={usuario} className={style.usuario} />
+        <Link to="/form"><img src={usuario} className={style.usuario} /></Link>
     </div>
     )
 }

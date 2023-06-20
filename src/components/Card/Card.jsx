@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 const Card = (props) => {
 
     const {id, price, name, image} = props
-    
     const dispatch = useDispatch()
     const location = useLocation()
     const history = useHistory()
@@ -20,7 +19,6 @@ const Card = (props) => {
     const wholePart = Math.floor(price / 100);
     const partDecimal = (price % 100).toString().padStart(2, '0');
     const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
-    //console.log(formattedNumber);
 
     const handleAdd = () => {
         const cartList = cart.find( game => game.id === id)
@@ -41,7 +39,7 @@ const Card = (props) => {
                 showConfirmButton: false,
                 timer: 2000
             })
-            dispatch(act.addCart({ id, price: formattedNumber, name, image }))
+            dispatch(act.addCart({ id, price: price, name, image }))
         }   
     }
     const handleAddWhish = () => {
@@ -63,7 +61,7 @@ const Card = (props) => {
                 showConfirmButton: false,
                 timer: 2000
             })
-            dispatch(act.addWhishList({ id, price: formattedNumber, name, image }))
+            dispatch(act.addWhishList({ id, price: price, name, image }))
         }
     }
     const handleRemove = () => {
@@ -82,7 +80,7 @@ const Card = (props) => {
                 <img className={style.image} src={image} alt={name} ></img>
                 <h1 className={style.name}>{name}</h1>
             </div>
-                <h3 className={style.price}> {formattedNumber} </h3>
+                <h3 className={style.price}>{formattedNumber}</h3>
             {!isShoppCartRoute && !isWhishListRoute && (
                 //! tiene que estar primero en la whishlist y despues al shop
                 <div>
