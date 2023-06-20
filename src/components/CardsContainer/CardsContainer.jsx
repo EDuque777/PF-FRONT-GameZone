@@ -5,26 +5,32 @@ import styles from "./CardsContainer.module.css";
 
 const CardsContainer = (props) => {
   const { gameComingSoon } = props;
-
   if (gameComingSoon === null) {
     return <p>Loading...</p>;
   } else if (!Array.isArray(gameComingSoon)) {
     return <p>Invalid data</p>;
   } else {
     const uniqueGames = gameComingSoon.filter(
-      (game, index, self) => index === self.findIndex((g) => g.id === game.id)
-    );
+
+      (game, index, self) =>
+        index === self.findIndex((g) => g.id === game.id)
+    )
+
+
     return (
       <div className={styles.container}>
         {uniqueGames.map((game, index) => (
           <Card
             key={`${game.id}-${index}`}
-            id={game.id}
-            image={game.capsule_image || game.large_capsule_image}
-            name={game.name}
-            price={game.price_overview || game.final_price}
-          />
-        ))}
+
+              id={game.id} 
+              image={game.capsule_image || game.large_capsule_image} 
+              name={game.name} 
+              price={(game.price_overview || game.final_price)}
+            />
+          ))
+        }
+
       </div>
     );
   }

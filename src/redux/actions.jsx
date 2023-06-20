@@ -217,6 +217,7 @@ export const postLogin = (datos) =>{
         }
     }
 }
+
 export const clearWhishList = () => {
      return function (dispatch) {
         dispatch({
@@ -224,4 +225,4 @@ export const clearWhishList = () => {
         })
      }
 
-}
+    }

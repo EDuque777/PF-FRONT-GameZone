@@ -15,7 +15,13 @@ const Card = (props) => {
     const history = useHistory()
     const cart = useSelector(state => state.cart)
     const whishList = useSelector(state => state.whishList)
-    
+    const isShoppCartRoute = location.pathname === "/cart";
+    const isWhishListRoute =location.pathname === "/whishlist";
+    const wholePart = Math.floor(price / 100);
+    const partDecimal = (price % 100).toString().padStart(2, '0');
+    const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
+    //console.log(formattedNumber);
+
     const handleAdd = () => {
         const cartList = cart.find( game => game.id === id)
         if (cartList) {
@@ -35,7 +41,7 @@ const Card = (props) => {
                 showConfirmButton: false,
                 timer: 2000
             })
-            dispatch(act.addCart({ id, price, name, image }))
+            dispatch(act.addCart({ id, price: formattedNumber, name, image }))
         }   
     }
     const handleAddWhish = () => {
@@ -57,7 +63,7 @@ const Card = (props) => {
                 showConfirmButton: false,
                 timer: 2000
             })
-            dispatch(act.addWhishList({ id, price, name, image }))
+            dispatch(act.addWhishList({ id, price: formattedNumber, name, image }))
         }
     }
     const handleRemove = () => {
@@ -70,17 +76,13 @@ const Card = (props) => {
         history.push(`/detail/${id}`);
     }
 
-    const isShoppCartRoute = location.pathname === "/cart";
-    const isWhishListRoute =location.pathname === "/whishlist";
-    //const formattedPrice = price.toString().replace(/[^0-9]/g,'');
-
     return (
         <li className={style.box} key={id}>
             <div className={style.imagecontainer}  onClick={() => {handleClick(id)}}>
                 <img className={style.image} src={image} alt={name} ></img>
                 <h1 className={style.name}>{name}</h1>
             </div>
-                <h3 className={style.price}> {price}</h3>
+                <h3 className={style.price}> {formattedNumber} </h3>
             {!isShoppCartRoute && !isWhishListRoute && (
                 //! tiene que estar primero en la whishlist y despues al shop
                 <div>
