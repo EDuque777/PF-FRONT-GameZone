@@ -15,6 +15,7 @@ const Detail = (props) => {
   const {id, price, name, image} = props
 
   const history = useHistory();
+
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;

@@ -51,8 +51,9 @@ export const gameDetail = (id) => {
 export const getByName = (name) => {
     return async function(dispatch) {
         try {
+            console.log(name)
             const response = await axios.get(`nameGames?name=${name}`)
-            console.log(response);
+            console.log(response.data);
             dispatch({
                 type: GET_BY_NAME,
                 payload: response.data
@@ -88,18 +89,28 @@ export const getGamesOffer = () => {
 
 export const getGamesComingSoon = () => {
     return async function (dispatch) {
-        try {
-            const response = await axios.get(`coming`)
-            //console.log(response);
-            dispatch({
-                type: GET_GAMES_COMING_SOON,
-                payload: response.data
-            })
-        } catch (error) {
-            console.log(error.message);
-        }
+    try {
+        const response = await axios.get(`coming`);
+        
+        const games = response.data;
+
+        // Eliminar objetos duplicados
+        const uniqueGames = games.filter((game, index, self) => {
+            return (
+            index ===
+            self.findIndex((g) => g.id === game.id)
+            );
+        });
+
+        dispatch({
+            type: GET_GAMES_COMING_SOON,
+            payload: uniqueGames
+        });
+    } catch (error) {
+        console.log(error.message);
     }
-}
+    };
+};
 
 export const getGamesTopSellers = () => {
     return async function (dispatch) {
