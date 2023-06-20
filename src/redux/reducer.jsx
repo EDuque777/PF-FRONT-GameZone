@@ -24,6 +24,7 @@ const rootReducer=(state = initialState, action) => {
             }
         
         case act.GET_BY_NAME:
+            console.log(action.payload)
             return {
                 ...state,
                 games: action.payload
