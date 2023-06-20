@@ -55,7 +55,6 @@ const Detail = (props) => {
                 showConfirmButton: false,
                 timer: 2000
             })
-            console.log({id: bkId, image: img, name:name , price: price });
     dispatch(act.addCart({id: bkId, image: img, name:name , price: price}));
   };
 }

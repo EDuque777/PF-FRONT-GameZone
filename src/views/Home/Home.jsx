@@ -57,7 +57,6 @@ const Home = () => {
             onChange={e => handleChange(e)}
             onKeyDown={handleKeyDown}
           />
-
           <FontAwesomeIcon
             className={style.buttonsearch}
             onClick={name.trim() !== "" ? handleButton : undefined}
