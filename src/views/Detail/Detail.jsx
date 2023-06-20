@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
-import { useHistory } from "react-router-dom";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import NavBar from "../../components/NavBar/NavBar";
