@@ -78,8 +78,8 @@ const Card = (props) => {
 
     return (
         <li className={style.box} key={id}>
-            <div onClick={() => {handleClick(id)}}>
-                <img className={style.image} src={image} alt={name} width="150px" height="38px" ></img>
+            <div className={style.imagecontainer}  onClick={() => {handleClick(id)}}>
+                <img className={style.image} src={image} alt={name} ></img>
                 <h1 className={style.name}>{name}</h1>
             </div>
                 <h3 className={style.price}> {formattedNumber} </h3>
