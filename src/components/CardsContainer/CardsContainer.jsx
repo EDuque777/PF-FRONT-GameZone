@@ -16,15 +16,19 @@ const CardsContainer = (props) => {
         index === self.findIndex((g) => g.id === game.id)
     )
 
+// console.log(props.appid);
+
     return (
       <div className={styles.container}>
         {uniqueGames.map((game, index) => (
           <Card
-            key={`${game.id}-${index}`}
-            id={game.id} 
+            key={`${game.appid}-${index}`}
+            id={game.id}
+            appid={game.appid} 
             image={game.capsule_image || game.large_capsule_image} 
             name={game.name} 
-            price={(game.price_overview?.final || game.price_overview || game.final_price)}
+            price={( game.price_overview?.final || game.price_overview  || game.final_price )}
+
             />
           ))
         }
