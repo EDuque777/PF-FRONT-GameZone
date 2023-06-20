@@ -8,7 +8,7 @@ import store from './redux/store'
 import { Provider } from 'react-redux'
 
 axios.defaults.baseURL = "http://localhost:3001/";
-//axios.defaults.baseURL = "https://pf-back-gamezone-production.up.railway.app/"
+// axios.defaults.baseURL = "https://pf-back-gamezone-production.up.railway.app/"
 
 ReactDOM.render(
 
