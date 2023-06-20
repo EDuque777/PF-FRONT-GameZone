@@ -24,7 +24,7 @@ const CardsContainer = (props) => {
             id={game.id} 
             image={game.capsule_image || game.large_capsule_image} 
             name={game.name} 
-            price={(game.price_overview || game.final_price)}
+            price={(game.price_overview  || game.final_price)}
             />
           ))
         }

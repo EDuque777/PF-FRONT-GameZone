@@ -13,8 +13,8 @@ function App() {
   return (
     <div className="App">
       <head><script src="https://kit.fontawesome.com/5c35a66fab.js" crossorigin="anonymous"></script></head>
-      {location.pathname !== "/" && <NavBar/>}
       <>
+      {location.pathname !== "/" && <NavBar/>}
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 

@@ -47,7 +47,6 @@ const Home = () => {
 
   return (
     <div className={style.homeContainer}>
-      <NavBar />
       <Carousel />
       <div>
         <div className={style.searchcontainer}>
@@ -69,7 +68,6 @@ const Home = () => {
         <h3>All Games</h3>
         <CardsContainer gameComingSoon={selectedGames} />
       </div>
-
       <h3 className={style.title}>Top sells</h3>
       <CardsContainer gameComingSoon={gamesTopSellers} />
       <h3 className={style.title}>Game offers</h3>
