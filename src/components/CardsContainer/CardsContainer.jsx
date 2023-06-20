@@ -6,7 +6,6 @@ import styles from "./CardsContainer.module.css";
 const CardsContainer = (props) => {
   
   const { gameComingSoon } = props;
-
   if (gameComingSoon === null) {
     return (
       <p>Loading...</p>
@@ -17,6 +16,7 @@ const CardsContainer = (props) => {
       (game, index, self) =>
         index === self.findIndex((g) => g.id === game.id)
     )
+
     return (
       <div className={styles.container}>
         {  
@@ -24,9 +24,9 @@ const CardsContainer = (props) => {
             <Card 
             key={`${game.id}-${index}`}
               id={game.id} 
-              image={game.capsule_image || game.large_capsule_image}
-              name={game.name } 
-              price={game.price_overview || game.final_price}
+              image={game.capsule_image || game.large_capsule_image} 
+              name={game.name} 
+              price={(game.price_overview || game.final_price)}
             />
           ))
         }

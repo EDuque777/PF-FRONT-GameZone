@@ -15,7 +15,6 @@ const ShoppingCart = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const cart = useSelector(state => state.cart)
-    //console.log(cart);
     const totalPrice = useSelector(state => state.total)
 
     const handleRemove = () => {
@@ -41,12 +40,12 @@ const ShoppingCart = () => {
     const handleBuy = () => {
         history.push("/buy")
     }
- 
+
     return (
-        <div>
+        <div >
             <NavBar />
             <br />
-            <h2 className={styles.titleCarrito}>Shopping Cart</h2>
+            <h2 className={styles.titleCarrito} >Shopping Cart</h2>
             <br />
             {cart.length === 0 ? (
                 <div className={styles.container}>
@@ -59,7 +58,7 @@ const ShoppingCart = () => {
                     </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4>TOTAL: $ {totalPrice} </h4>
+                        <h4 className={styles.titleCarrito}>TOTAL: $ {totalPrice} </h4>
                     </div>
                     <div className={styles.botones}>
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
@@ -73,12 +72,13 @@ const ShoppingCart = () => {
                     <div className={styles.cajitaItems}>
                         {cart.map(game => {
                             return (
-                                <li className={styles.li} key={game.id} >
-                                <Card 
+                                <li className={styles.li} >
+                                <Card
+                                key={game.id} 
                                 id={game.id}
                                 name={game.name} 
                                 image={game.image || game.capsule_image}
-                                price={game.price}
+                                price={(game.price * 100) || (game.final_price * 100)}
                                 />
                                 </li>
                             )})
@@ -87,7 +87,7 @@ const ShoppingCart = () => {
                 </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4>TOTAL: ${totalPrice} USD</h4>
+                        <h4 className={styles.titleCarrito}>TOTAL: ${totalPrice} USD</h4>
                     </div>
                     <div className={styles.botones}>
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
