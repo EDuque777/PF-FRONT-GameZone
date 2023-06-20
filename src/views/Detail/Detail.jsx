@@ -89,9 +89,13 @@ const Detail = (props) => {
                   {`Buy ${sanitizeText(game[props.match.params.id].data.name)}`}
                 </p>
                 <div className={style.div_comprar}>
-                  <p className={style.texto_precio}>
-                    {`Price ${sanitizeText(game[props.match.params.id].data.price_overview?.final_formatted)}`}
-                  </p>
+                <p className={style.texto_precio}>
+                  {`Price: ${
+                    sanitizeText(game[props.match.params.id].data.price_overview?.final_formatted) ||
+                    "Free"
+                  }`}
+                </p>
+
                   <button onClick={() => handleAdd(game[props.match.params.id].data)} className={style.boton}>
                     Add to Cart
                   </button>
@@ -149,3 +153,8 @@ const Detail = (props) => {
 };
 
 export default Detail;
+
+
+
+
+
