@@ -7,7 +7,7 @@ import style from './Card.module.css';
 import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
-  const { id, price, name, image } = props;
+  const { id, price, price2, name, image, appid } = props;
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
@@ -71,8 +71,8 @@ const Card = (props) => {
     dispatch(act.removeWhishList(id));
   };
 
-  const handleClick = (id) => {
-    history.push(`/detail/${id}`);
+  const handleClick = (appid, id) => {
+    history.push(`/detail/${appid || id}`);
   };
 
   const titleRef = useRef(null);
@@ -88,13 +88,15 @@ const Card = (props) => {
     }
   }, []);
 
+  console.log(appid);
+
   return (
-    <li className={style.box} key={id}>
-      <div className={style.imagecontainer} onClick={() => { handleClick(id) }}>
+    <li className={style.box} key={id || appid}>
+      <div className={style.imagecontainer} onClick={() => { handleClick(id || appid) }}>
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}>{formattedNumber}</h3>
+      <h3 className={style.price}>{formattedNumber || price2}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>
@@ -115,3 +117,4 @@ const Card = (props) => {
 };
 
 export default Card;
+

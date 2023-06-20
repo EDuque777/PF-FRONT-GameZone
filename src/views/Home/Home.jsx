@@ -32,7 +32,7 @@ const Home = () => {
   const handleButton = (e) => {
     if (name.trim() !== "") {
       dispatch(act.getByName(name));
-
+      // console.log(name);
     }
   };
 
@@ -45,6 +45,7 @@ const Home = () => {
   // Verificar si el array de juegos tiene al menos 14 elementos
   const selectedGames = games.length >= 14 ? games.slice(0, 14) : games;
 
+  
   return (
     <div className={style.homeContainer}>
       <Carousel />
