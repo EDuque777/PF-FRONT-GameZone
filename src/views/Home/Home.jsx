@@ -14,14 +14,14 @@ const gamesNewReleases = useSelector(state => state.gamesNewReleases)
 const gamesTopSellers = useSelector(state => state.gamesTopSellers)
 const games = useSelector(state => state.games)
 const [name, setName] = useState("")
-//console.log(games);
+console.log(games);
 
-console.log(games)
+
 
     useEffect(() => {
 
 
-        // dispatch(act.getGames())
+        dispatch(act.getGames())
 
 
         dispatch(act.getGamesOffer())

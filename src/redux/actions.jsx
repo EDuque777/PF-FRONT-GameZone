@@ -21,7 +21,7 @@ export const getGames = () => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`allGames`)
-            //console.log(response);
+            // console.log(response);
             const game = response.data
             dispatch({
                 type: GET_GAMES,
