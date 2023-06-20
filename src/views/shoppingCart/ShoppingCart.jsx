@@ -78,8 +78,8 @@ const ShoppingCart = () => {
                                 key={game.id} 
                                 id={game.id}
                                 name={game.name} 
-                                image={game.image}
-                                price={game.price * 100}
+                                image={game.image || game.capsule_image}
+                                price={(game.price * 100) || (game.final_price * 100)}
                                 />
                                 </li>
                             )})
