@@ -15,7 +15,6 @@ const ShoppingCart = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const cart = useSelector(state => state.cart)
-    //console.log(cart);
     const totalPrice = useSelector(state => state.total)
 
     const handleRemove = () => {
