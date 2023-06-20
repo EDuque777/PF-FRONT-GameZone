@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
-import NavBar from "../../components/NavBar/NavBar";
-import { useHistory} from "react-router-dom";
 import * as act from "../../redux/actions";
 import Swal from "sweetalert2"
 
