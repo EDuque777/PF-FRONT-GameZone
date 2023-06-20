@@ -16,6 +16,7 @@ const WhishList = () => {
       <NavBar />
       <br />
       <h2 className={styles.titleCarrito}>WhishList</h2>
+      <div className={styles.titleCarrito}>{counter}</div>
       <br />
         {list.length === 0 ? (
           <div className={styles.container}>
@@ -23,6 +24,7 @@ const WhishList = () => {
                 <div className={styles.cajitaItems}>
                     <div className={styles.emptyCart}> 
                         <p> You haven't added a game to the list yet... </p>
+                        
                     </div>
                 </div>
             </div>

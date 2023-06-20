@@ -1,46 +1,77 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 60px;
-    background-color: #070707;
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: #070707;
+  padding: 0 20px;
 }
-.button{
-    background-color: #070707;
-    border: none;
-    color:rgb(206, 206, 206);
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 10px;
-    font-size: 20px;
-transition: 500ms;
-border: solid #070707;
-border-radius: 10px;
-padding:3px
+
+.logoContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Agrega esta línea */
 }
-.button:hover{
-    color:rgb(243, 243, 243);
-    border: solid rgb(56, 56, 56);
-    transition: 500ms;
-    background-color: rgb(43, 43, 43);;
+
+.button {
+  background-color: #070707;
+  border: none;
+  color: rgb(206, 206, 206);
+  font-size: 20px;
+  transition: 500ms;
+  border: solid #070707;
+  border-radius: 10px;
+  padding: 6px;
+  margin-right: 50px;
 }
-.image{
-    margin-left: 350px;
-    margin-right: 100px;
-height: 70px;
-width: 145px;
-transition: 500ms;
+
+.button:hover {
+  color: rgb(243, 243, 243);
+  background-color: rgb(43, 43, 43);
+  transition: 500ms;
 }
-.image:hover{
-    height: 90px;
-width: 165px;
-transition: 500ms;
-transform: translateY(-15px); 
+
+.image {
+  height: 90px;
+  width: auto;
+  margin-left: 150px;
 }
-.usuario{
-    height: 40px;
-    width: 40px;
-    margin-top: 10px;
-    margin-right: 40px;
-    cursor: pointer;
+
+.usuario {
+  height: 40px;
+  width: 40px;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 50px;
+}
+
+.buttonWish {
+  background-color: #070707;
+  border: none;
+  color: rgb(206, 206, 206);
+  font-size: 20px;
+  transition: 500ms;
+  border: solid #070707;
+  border-radius: 10px;
+  padding: 6px;
+  margin-left: 50px;
+}
+.centeredLogo {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonWish:hover {
+  color: rgb(243, 243, 243);
+  background-color: rgb(43, 43, 43);
+  transition: 500ms;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 97.9%;
+  z-index: 999;
 }
