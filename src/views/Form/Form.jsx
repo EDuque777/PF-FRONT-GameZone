@@ -25,6 +25,7 @@ const Form = () => {
   const [selectedCountry, setSelectedCountry] = React.useState(null);
 
   return (
+    <div className={styles.body_form}>
     <div className={`${styles.container} ${styles["right-panel-active"]}`}>
       {/* Sign Up */}
       <div className={`${styles.container__form} ${styles["container--signup"]}`}>
@@ -67,6 +68,7 @@ const Form = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 
