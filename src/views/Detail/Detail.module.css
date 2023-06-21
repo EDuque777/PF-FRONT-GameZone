@@ -71,6 +71,13 @@
   width: 100%;
 }
 
+.container_videos{
+  display: flex;
+  /* outline: orange solid 3px; */
+  height: 25%;
+  width: 100%;
+}
+
 
 
 
@@ -85,7 +92,7 @@
   /* height: 80%; */
   height: 400px;
   width: 100%;
-  outline: green solid 3px;
+  /* outline: green solid 3px; */
   overflow-y: scroll;
   font-size: 1.25rem;
   color:  rgb(206, 206, 206);
@@ -102,14 +109,14 @@
   background-color: grey;
   color: rgb(206, 206, 206);
   /* padding-left: 10px; */
-  outline: yellow solid 3px;
+  /* outline: yellow solid 3px; */
 }
 
 
 
 .texto_comprar{
 
-  outline: green solid 3px;
+  /* outline: green solid 3px; */
   font-size: 2rem;
   color:  rgb(206, 206, 206);
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
