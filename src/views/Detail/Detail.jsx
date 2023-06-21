@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
@@ -12,17 +12,41 @@ const Detail = (props) => {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
-
+  const cart = useSelector(state => state.cart)
+  // const categories = game && game[props.match.params.id]?.data.categories;
+  const genres = game && game[props.match.params.id]?.data.genres;
+  const [videoUrl, setVideoUrl] = useState("");
+  const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
+  
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
       const id = props.match.params.id;
-      dispatch(gameDetail(id));
+      dispatch(gameDetail(id))
+        .then(() => {
+          const video = game[id]?.data.movies?.[0]?.mp4?.max || "";
+          setVideoUrl(video);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setVideoUrl("");
     }
 
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch, props.match]);
+  }, [dispatch, props.match.params.id]);
+
+  useEffect(() => {
+    if (game && props.match.params.id) {
+      const id = props.match.params.id;
+      const video = game[id]?.data.movies?.[0]?.mp4?.max || "ssdds";
+      setVideoUrl(video);
+    }
+  }, [game, props.match.params.id]);
+  
+  
 
   function sanitizeText(text) {
     if (typeof text === "string") {
@@ -82,6 +106,7 @@ const Detail = (props) => {
                 </div>
               </div>
             </div>
+            <div className={style.container_imagenes}>
             <div className={style.image}>
               <img
                 className={style.img}
@@ -89,14 +114,49 @@ const Detail = (props) => {
                 alt="Game"
               />
             </div>
+            
+            <div className={style.container_screenshots}>
+  {videoUrl && (
+    <video className={style.video} controls>
+      <source src={videoUrl} type="video/mp4" />
+    </video>
+  )}
+  {!videoUrl && game &&
+    game[props.match.params.id]?.data.screenshots.slice(0, 4).map((screenshot, index) => (
+      <div key={index} className={style[`container_screenshots${index + 1}`]}>
+        <img
+          className={style.img}
+          src={screenshot.path_full}
+          alt={`Screenshot ${index + 1}`}
+        />
+      </div>
+    ))}
+          {videoUrl && game &&
+            game[props.match.params.id]?.data.screenshots.slice(0, 3).map((screenshot, index) => (
+              <div key={index} className={style[`container_screenshots${index + 1}`]}>
+                <img
+                  className={style.img}
+                  src={screenshot.path_full}
+                  alt={`Screenshot ${index + 1}`}
+                />
+              </div>
+            ))}
+        </div>
+
+          </div>
           </div>
 
+
+
           <div className={style.detail_container}>
+
+            
             <div className={style.detail_left}>
               <h2>
                 <strong>Requirements </strong>
               </h2>
               <p>{sanitizeText(game[props.match.params.id].data.pc_requirements.minimum)}</p>
+              <p>{sanitizeText(game[props.match.params.id].data.pc_requirements.recommended)}</p>
               <h2>
                 <strong>Languages </strong>
               </h2>
@@ -109,31 +169,40 @@ const Detail = (props) => {
                 <strong>Developers </strong>
               </h2>
               <p translate="no">{sanitizeText(game[props.match.params.id].data.developers)}</p>
+            </div>
+
+
+
+
+            <div className={style.detail_rigth}>
+              <h2>
+                <strong>Categories</strong>
+              </h2>
+              {categoriesLimited && categoriesLimited.map((category) => (
+                <p key={category.id}>{sanitizeText(category.description)}</p>
+              ))}
+              <h2>
+                <strong>Genres </strong>
+              </h2>
+              {genres && genres.map((genre) => (<p key={genre.id}>{sanitizeText(genre.description)}</p>))}
+              <h2>
+                <strong>Released date </strong>
+              </h2>
+              <p>{game[props.match.params.id].data.release_date.date}</p>
               <h2>
                 <strong>ID :</strong>
               </h2>
               <p>{game[props.match.params.id].data.steam_appid}</p>
             </div>
-            <div className={style.detail_rigth}>
-              <div className={style.detail_uno}>
-                <strong>Classification</strong>
-              </div>
-              <div className={style.detail_dos}>
-                <strong>Achievements</strong>
-              </div>
-              <div className={style.detail_tres}>
-                <strong>Metacritic</strong>
-              </div>
+              
             </div>
           </div>
-        </div>
       )}
     </div>
   );
 };
 
 export default Detail;
-
 
 
 
