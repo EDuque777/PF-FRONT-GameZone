@@ -49,14 +49,14 @@ const Detail = (props) => {
                }) 
         } else {
             Swal.fire({
-                position: "top-end",
+                position: "center",
                 icon: "success",
                 title: "Juego agregado correctamente",
                 showConfirmButton: false,
                 timer: 2000
             })
-            console.log({id: bkId, image: img, name:name , price: price });
-    dispatch(act.addCart({id: bkId, image: img, name:name , price: price}));
+
+    dispatch(act.addCart({id: bkId, image: img, name:name , price: isNaN(price) ? 0 : price}));
   };
 }
 

@@ -64,11 +64,11 @@ const Card = (props) => {
   };
 
   const handleRemove = () => {
-    dispatch(act.removeCart(id));
+    dispatch(act.removeCart(id || appid));
   };
 
   const handelRemoveWhishList = () => {
-    dispatch(act.removeWhishList(id));
+    dispatch(act.removeWhishList(id || appid));
   };
 
   const handleClick = (appid, id) => {
