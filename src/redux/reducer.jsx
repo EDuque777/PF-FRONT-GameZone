@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import * as act from "./actions"
 
 const initialState = {
@@ -70,9 +71,26 @@ const rootReducer=(state = initialState, action) => {
 //?CASOS DEL CARRITO
         case act.ADD_TO_CART:
             const addGame = action.payload
+            const existingGame = state.cart.find(game => game.id === addGame.id)
+            if (existingGame) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'the game is already in the cart',
+                    showConfirmButton: false,
+                    timer: 2000
+                   })
+                return state; 
+            }
+                Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Game added successfully",
+                showConfirmButton: false,
+                timer: 2000
+            }) 
             const updateCart = [...state.cart, addGame]
             const updatePrice = state.total + addGame.price
-            
             return {
                 ...state,
                 cart: updateCart,
@@ -84,7 +102,6 @@ const rootReducer=(state = initialState, action) => {
             const updateGameRemoveCart = state.cart.filter((game) => game.id !== removeGameId)
             const gameRemoved = state.cart.find(game => game.id === removeGameId)
             const updateTotalPrice = state.total - gameRemoved.price;
-
             return {
                 ...state,
                 cart: updateGameRemoveCart,
@@ -100,9 +117,28 @@ const rootReducer=(state = initialState, action) => {
         
 //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
+            const addList = action.payload
+            const gameInWhishList = state.whishList.find(game => game.id === addList.id);
+            if (gameInWhishList) {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'the game is already in the list',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            return state;
+            }   
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Game added successfully",
+                showConfirmButton: false,
+                timer: 2000
+            })
             return {
                 ...state,
-                whishList: [...state.whishList, action.payload],
+                whishList: [...state.whishList, addList],
                 counter: ++ state.counter,
             }
 

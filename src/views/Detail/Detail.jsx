@@ -5,11 +5,8 @@ import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import * as act from "../../redux/actions";
-import Swal from "sweetalert2"
 
 const Detail = (props) => {
-
-  const { id } = props
   
   const history = useHistory();
   const dispatch = useDispatch();
@@ -20,8 +17,7 @@ const Detail = (props) => {
   const genres = game && game[props.match.params.id]?.data.genres;
   const [videoUrl, setVideoUrl] = useState("");
   const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
-
-  //console.log(game);
+  
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
       const id = props.match.params.id;
@@ -62,29 +58,11 @@ const Detail = (props) => {
   }
 
   const handleAdd = () => {
-    const cartList = cart.find( game => game.id === id)
-        if (cartList) {
-            Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'the game is already in the cart',
-                showConfirmButton: false,
-                timer: 2000
-               }) 
-        } else {
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Game added successfully",
-                showConfirmButton: false,
-                timer: 2000
-            })
     dispatch(act.addCart({id: bkId, image: img, name:name , price: isNaN(price) ? 0 : price}));
-  };
 }
 
   const price = game && (game[props.match.params.id]?.data?.price_overview?.initial)
-  const gamePrice = game && (game[props.match.params.id]?.data?.price_overview?.final_formatted);
+  //const gamePrice = game && (game[props.match.params.id]?.data?.price_overview?.final_formatted);
   const img = game && game[props.match.params.id].data.header_image;
   const bkId = game && game[props.match.params.id].data.steam_appid;
   const name = game && game[props.match.params.id].data.name
