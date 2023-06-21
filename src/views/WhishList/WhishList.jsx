@@ -13,7 +13,6 @@ const WhishList = () => {
 
   return (
     <div>
-      <NavBar />
       <br />
       <h2 className={styles.titleCarrito}>WhishList</h2>
       <div className={styles.titleCarrito}>{counter}</div>

@@ -4,76 +4,75 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import * as act from '../../redux/actions';
 import style from './Card.module.css';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
-  const { id, price, name, image } = props;
-
+  const { id, price, price2, name, image, appid } = props;
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  const cart = useSelector((state) => state.cart);
-  const whishList = useSelector((state) => state.whishList);
-  const isShoppCartRoute = location.pathname === '/cart';
-  const isWhishListRoute = location.pathname === '/whishlist';
+  const cart = useSelector(state => state.cart);
+  const whishList = useSelector(state => state.whishList);
+  const isShoppCartRoute = location.pathname === "/cart";
+  const isWhishListRoute = location.pathname === "/whishlist";
   const wholePart = Math.floor(price / 100);
   const partDecimal = (price % 100).toString().padStart(2, '0');
   const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
 
   const handleAdd = () => {
-    const cartList = cart.find((game) => game.id === id);
+    const cartList = cart.find(game => game.id === id);
     if (cartList) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'El juego ya se encuentra en el carrito',
+        title: 'el juego ya se encuentra en el carrito',
         showConfirmButton: false,
-        timer: 2000,
+        timer: 2000
       });
     } else {
       Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Juego agregado correctamente',
+        position: "top-end",
+        icon: "success",
+        title: "Juego agregado correctamente",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 2000
       });
-      dispatch(act.addCart({ id, price: formattedNumber, name, image }));
+      dispatch(act.addCart({ id, price: price, name, image }));
     }
   };
 
   const handleAddWhish = () => {
-    const gameInWhishList = whishList.find((game) => game.id === id);
+    const gameInWhishList = whishList.find(game => game.id === id);
     if (gameInWhishList) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'El juego ya se encuentra en la lista',
+        title: 'el juego ya se encuentra en la lista',
         showConfirmButton: false,
-        timer: 2000,
+        timer: 2000
       });
     } else {
       Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Juego agregado correctamente',
+        position: "top-end",
+        icon: "success",
+        title: "Juego agregado correctamente",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 2000
       });
-      dispatch(act.addWhishList({ id, price: formattedNumber, name, image }));
+      dispatch(act.addWhishList({ id, price: price, name, image }));
     }
   };
 
   const handleRemove = () => {
-    dispatch(act.removeCart(id));
+    dispatch(act.removeCart(id || appid));
   };
 
   const handelRemoveWhishList = () => {
-    dispatch(act.removeWhishList(id));
+    dispatch(act.removeWhishList(id || appid));
   };
 
-  const handleClick = (id) => {
-    history.push(`/detail/${id}`);
+  const handleClick = (appid, id) => {
+    history.push(`/detail/${appid || id}`);
   };
 
   const titleRef = useRef(null);
@@ -89,30 +88,33 @@ const Card = (props) => {
     }
   }, []);
 
+  //console.log(appid);
+
   return (
-    <li className={style.box} key={id}>
-      <div className={style.imagecontainer} onClick={() => handleClick(id)}>
+    <li className={style.box} key={id || appid}>
+      <div className={style.imagecontainer} onClick={() => { handleClick(id || appid) }}>
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}> {formattedNumber} </h3>
+      <h3 className={style.price}>{formattedNumber || price2}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
-        <div className={style.buttoncontainer}>
-          <button className={style.button} onClick={() => handleAddWhish()}>Add to WhishList</button>
-          <button className={style.buttonadd} onClick={() => handleAdd()}>Add to cart</button>
+        <div>
+          <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>
+          <button className={style.buttonadd} onClick={() => { handleAdd() }}>Add to cart</button>
         </div>
       )}
       {isWhishListRoute && (
-        <div className={style.buttoncontainer}>
-          <button className={style.button} onClick={() => handleAdd()}>Add to cart</button>
-          <button className={style.buttonadd} onClick={() => handelRemoveWhishList()}>Take out</button>
+        <div>
+          <button className={style.buttonadd} onClick={() => { handleAdd() }}>Add to cart</button>
+          <button className={style.botonBorrar} onClick={() => { handelRemoveWhishList() }}>Take out</button>
         </div>
       )}
       {isShoppCartRoute && (
-        <button onClick={() => handleRemove()}>Take out</button>
+        <button className={style.botonBorrar} onClick={() => { handleRemove() }}>Take out</button>
       )}
     </li>
   );
 };
 
 export default Card;
+

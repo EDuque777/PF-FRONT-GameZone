@@ -46,7 +46,6 @@ const ShoppingCart = () => {
 
     return (
         <div >
-            <NavBar />
             <br />
             <h2 className={styles.titleCarrito} >Shopping Cart</h2>
             <br />
@@ -63,7 +62,7 @@ const ShoppingCart = () => {
                     <div className={styles.cajitaTotal}>
                         <h4 className={styles.titleCarrito}>TOTAL: $ {formattedTotalPrice} </h4>
                     </div>
-                    <div className={styles.botones}>
+                    <div className={styles.botones}> 
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
                         <button className={styles.botonComprar}>Buy</button>
                     </div>
@@ -75,13 +74,13 @@ const ShoppingCart = () => {
                     <div className={styles.cajitaItems}>
                         {cart.map(game => {
                             return (
-                                <li className={styles.li} >
+                                <li className={styles.li} >  
                                 <Card
                                 key={game.id} 
                                 id={game.id}
                                 name={game.name} 
                                 image={game.image || game.capsule_image}
-                                price={(game.price) || (game.final_price)}
+                                price={game.price_overview?.final || game.price || game.final_price }
                                 />
                                 </li>
                             )})

@@ -2,6 +2,7 @@ import * as act from "./actions"
 
 const initialState = {
     games: [],
+    search: [],
     total: 0,
     counter: 0,
     cart: [],
@@ -24,14 +25,13 @@ const rootReducer=(state = initialState, action) => {
             }
         
         case act.GET_BY_NAME:
-            // console.log(action.payload)
+            //console.log(action.payload)
             return {
                 ...state,
-                games: action.payload
+                search: action.payload
             }
 
         case act.GET_DETAIL:
-            // console.log(action.payload);
             return {
                 ...state,
                 gameDetail: action.payload
@@ -72,7 +72,7 @@ const rootReducer=(state = initialState, action) => {
             const addGame = action.payload
             const updateCart = [...state.cart, addGame]
             const updatePrice = state.total + addGame.price
-
+            
             return {
                 ...state,
                 cart: updateCart,
@@ -83,7 +83,7 @@ const rootReducer=(state = initialState, action) => {
             const removeGameId = action.payload
             const updateGameRemoveCart = state.cart.filter((game) => game.id !== removeGameId)
             const gameRemoved = state.cart.find(game => game.id === removeGameId)
-            const updateTotalPrice = state.total - gameRemoved.price
+            const updateTotalPrice = state.total - gameRemoved.price;
 
             return {
                 ...state,
