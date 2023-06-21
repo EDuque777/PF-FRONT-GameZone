@@ -43,19 +43,19 @@ const Detail = (props) => {
             Swal.fire({
                 position: 'center',
                 icon: 'warning',
-                title: 'el juego ya se encuentra en el carrito',
+                title: 'the game is already in the cart',
                 showConfirmButton: false,
                 timer: 2000
                }) 
         } else {
             Swal.fire({
-                position: "top-end",
+                position: "center",
                 icon: "success",
-                title: "Juego agregado correctamente",
+                title: "Game added successfully",
                 showConfirmButton: false,
                 timer: 2000
             })
-    dispatch(act.addCart({id: bkId, image: img, name:name , price: price}));
+    dispatch(act.addCart({id: bkId, image: img, name:name , price: isNaN(price) ? 0 : price}));
   };
 }
 

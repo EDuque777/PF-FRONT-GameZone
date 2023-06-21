@@ -65,7 +65,7 @@ const Home = () => {
             size="xl"
           />
         </div>
-        <h3>All Games</h3>
+        <h3 className={style.title}>All Games</h3>
         <CardsContainer gameComingSoon={selectedGames} />
       </div>
       <h3 className={style.title}>Top sells</h3>

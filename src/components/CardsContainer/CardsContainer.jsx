@@ -10,17 +10,15 @@ const CardsContainer = (props) => {
   } else if (!Array.isArray(gameComingSoon)) {
     return <p>Invalid data</p>;
   } else {
-    const uniqueGames = gameComingSoon.filter(
-
-      (game, index, self) =>
-        index === self.findIndex((g) => g.id === game.id)
-    )
-
-// console.log(props.appid);
+    // const uniqueGames = gameComingSoon.filter(
+    //   (game, index, self) =>
+    //     index === self.findIndex((g) => g.id === game.id)
+    //)
+    // console.log(props.appid);
 
     return (
       <div className={styles.container}>
-        {uniqueGames.map((game, index) => (
+        {gameComingSoon.map((game, index) => (
           <Card
             key={`${game.appid}-${index}`}
             id={game.id}
