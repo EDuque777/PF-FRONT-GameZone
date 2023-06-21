@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Home = () => {
   const dispatch = useDispatch();
   const gameOffer = useSelector(state => state.gameOffer);
+  const search = useSelector(state => state.search);
   const gamesNewReleases = useSelector(state => state.gamesNewReleases);
   const gamesTopSellers = useSelector(state => state.gamesTopSellers);
   const games = useSelector(state => state.games);
@@ -45,7 +46,7 @@ const Home = () => {
   // Verificar si el array de juegos tiene al menos 14 elementos
   const selectedGames = games.length >= 14 ? games.slice(0, 14) : games;
 
-  
+  console.log(search)
   return (
     <div className={style.homeContainer}>
       <Carousel />
@@ -65,6 +66,7 @@ const Home = () => {
             size="xl"
           />
         </div>
+        <CardsContainer gameComingSoon={search} />
         <h3 className={style.title}>All Games</h3>
         <CardsContainer gameComingSoon={selectedGames} />
       </div>

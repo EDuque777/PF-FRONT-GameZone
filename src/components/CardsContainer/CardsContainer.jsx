@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from '../Card/Card';
 import styles from "./CardsContainer.module.css";
-//import { useSelector } from 'react-redux';
 
 const CardsContainer = (props) => {
   const { gameComingSoon } = props;
@@ -10,11 +9,7 @@ const CardsContainer = (props) => {
   } else if (!Array.isArray(gameComingSoon)) {
     return <p>Invalid data</p>;
   } else {
-    // const uniqueGames = gameComingSoon.filter(
-    //   (game, index, self) =>
-    //     index === self.findIndex((g) => g.id === game.id)
-    //)
-    // console.log(props.appid);
+    const uniqueGames = gameComingSoon
 
     return (
       <div className={styles.container}>

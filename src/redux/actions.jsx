@@ -53,7 +53,7 @@ export const getByName = (name) => {
         try {
             //console.log(name)
             const response = await axios.get(`nameGames?name=${name}`)
-            console.log(response.data);
+            
             dispatch({
                 type: GET_BY_NAME,
                 payload: response.data
