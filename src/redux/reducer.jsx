@@ -2,6 +2,7 @@ import * as act from "./actions"
 
 const initialState = {
     games: [],
+    search: [],
     total: 0,
     counter: 0,
     cart: [],
@@ -27,7 +28,7 @@ const rootReducer=(state = initialState, action) => {
             // console.log(action.payload)
             return {
                 ...state,
-                games: action.payload
+                search: action.payload
             }
 
         case act.GET_DETAIL:

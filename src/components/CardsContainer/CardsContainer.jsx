@@ -10,11 +10,12 @@ const CardsContainer = (props) => {
   } else if (!Array.isArray(gameComingSoon)) {
     return <p>Invalid data</p>;
   } else {
-    const uniqueGames = gameComingSoon.filter(
+    const uniqueGames = gameComingSoon
+    // .filter(
 
-      (game, index, self) =>
-        index === self.findIndex((g) => g.id === game.id)
-    )
+    //   (game, index, self) =>
+    //     index === self.findIndex((g) => g.id === game.id)
+    // )
 
 // console.log(props.appid);
 
