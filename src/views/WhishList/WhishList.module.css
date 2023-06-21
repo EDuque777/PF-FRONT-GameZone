@@ -3,7 +3,7 @@
   }
 
 .container{
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: space-around;
 }
@@ -14,12 +14,12 @@
     border-radius: 10px;
     width: 50%;
     justify-content: space-around;
-    background-color: #6c757d;
+    background-color: #2E2E2E;
 }
 
 .cajitaItems {
     display: flex;
-    background-color: #26292b;
+    background-color: #202020;
     margin: 10px 0;
     border-radius: 10px;
     width: 95%;

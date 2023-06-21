@@ -5,13 +5,20 @@ import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import NavBar from "../../components/NavBar/NavBar";
+import { useHistory, useLocation } from "react-router-dom";
+import Card from "../../components/Card/Card";
+import * as act from "../../redux/actions";
+import Swal from "sweetalert2"
 
 const Detail = (props) => {
-  
-  const history = useHistory()
+
+  const {id, price, name, image} = props
+
+  const history = useHistory();
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
+  const cart = useSelector(state => state.cart)
 
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
@@ -23,79 +30,132 @@ const Detail = (props) => {
       dispatch(clearDetail());
     };
   }, [dispatch, props.match]);
-  // Elimina etiquetas HTML y caracteres especiales con una regex
+
   function sanitizeText(text) {
     if (typeof text === "string") {
-      // Elimina etiquetas HTML y caracteres especiales
       text = text.replace(/<\/?[^>]+(>|$)/g, "");
-  
-      // Elimina asteriscos
       text = text.replace(/\*\*/g, "");
-  
       return text;
     }
     return text;
   }
-  
 
-const handleback = () =>{
-  history.push("/home")
+  const handleAdd = (game) => {
+    const cartList = cart.find( game => game.id === id)
+        if (cartList) {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'el juego ya se encuentra en el carrito',
+                showConfirmButton: false,
+                timer: 2000
+               }) 
+        } else {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Juego agregado correctamente",
+                showConfirmButton: false,
+                timer: 2000
+            })
+    dispatch(act.addCart(game));
+  };
 }
 
+  const handleBack = () => {
+    history.push("/home");
+  };
 
   return (
     <div className={style.info}>
-    <NavBar />
+      <NavBar />
       {isLoading ? (
         <div className={style.loading}>
           <PacmanLoader color="#123abc" size={80} speedMultiplier={1} />
         </div>
       ) : (
-        <>
-          <h1 className={style.name} translate="no">
-            {sanitizeText(game[props.match.params.id].data.name)}
-          </h1>
-          <br></br>
-          <img
-            className={style.img}
-            src={game[props.match.params.id].data.header_image}
-            alt="Game"
-          />
-          <br></br>
-          <p>{sanitizeText(game[props.match.params.id].data.detailed_description)}</p>
-          <h2>
-          <br></br>
-            <strong>Requerimientos </strong>
-          </h2>
-          <p>{sanitizeText(game[props.match.params.id].data.pc_requirements.minimum)}</p>
-          <h2>
-          <br></br>
-            <strong>Idiomas </strong> 
-          </h2>
-          <h2>
-          {sanitizeText(game[props.match.params.id].data.supported_languages)}
-          </h2>
-          <br></br>
-          <h2>
-            <strong>Edad mínima </strong>
-          </h2>
-          <p>{game[props.match.params.id].data.required_age}</p>
-          <br></br>
-          <h2>
-          <h2>
-            <strong>Desarrolladores </strong>
-          </h2>
-          <p translate="no">{sanitizeText(game[props.match.params.id].data.developers)}</p>
-          <br></br>
-            <strong>ID :</strong>
-          </h2>
-          <p>{game[props.match.params.id].data.steam_appid}</p>
-          <br></br>
-        </>
-      )}
+        <div className={style.container}>
+          <div className={style.container_juego}>
+            <div className={style.container_texto}>
+              <div className={style.name_margen}>
+                <h1 className={style.name} translate="no">
+                  {sanitizeText(game[props.match.params.id].data.name)}
+                </h1>
+              </div>
+              <p className={style.descripcion}>
+                {sanitizeText(game[props.match.params.id].data.detailed_description)}
+              </p>
+              <div className={style.comprar}>
+                <p className={style.texto_comprar}>
+                  {`Buy ${sanitizeText(game[props.match.params.id].data.name)}`}
+                </p>
+                <div className={style.div_comprar}>
+                <p className={style.texto_precio}>
+                  {`Price: ${
+                    sanitizeText(game[props.match.params.id].data.price_overview?.final_formatted) ||
+                    "Free"
+                  }`}
+                </p>
 
+                  <button onClick={() => handleAdd(game[props.match.params.id].data)} className={style.boton}>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className={style.image}>
+              <img
+                className={style.img}
+                src={game[props.match.params.id].data.header_image}
+                alt="Game"
+              />
+            </div>
+          </div>
+
+          <div className={style.detail_container}>
+            <div className={style.detail_left}>
+              <h2>
+                <strong>Requirements </strong>
+              </h2>
+              <p>{sanitizeText(game[props.match.params.id].data.pc_requirements.minimum)}</p>
+              <h2>
+                <strong>Languages </strong>
+              </h2>
+              <p>{sanitizeText(game[props.match.params.id].data.supported_languages)}</p>
+              <h2>
+                <strong>Minimum age </strong>
+              </h2>
+              <p>{game[props.match.params.id].data.required_age}</p>
+              <h2>
+                <strong>Developers </strong>
+              </h2>
+              <p translate="no">{sanitizeText(game[props.match.params.id].data.developers)}</p>
+              <h2>
+                <strong>ID :</strong>
+              </h2>
+              <p>{game[props.match.params.id].data.steam_appid}</p>
+            </div>
+            <div className={style.detail_rigth}>
+              <div className={style.detail_uno}>
+                <strong>Classification</strong>
+              </div>
+              <div className={style.detail_dos}>
+                <strong>Achievements</strong>
+              </div>
+              <div className={style.detail_tres}>
+                <strong>Metacritic</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Detail;
+
+
+
+
+

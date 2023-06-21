@@ -1,10 +1,51 @@
 import React from "react";
 import Select from "react-select";
 import styles from "./Form.module.css";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { postCreateUser, postLogin } from "../../redux/actions";
 import countries from "./countries";
 import NavBar from '../../components/NavBar/NavBar'
 
+
 const Form = () => {
+
+  const dispatch = useDispatch()
+
+  const [ datos, setDatos ] = useState({
+    name : "",
+    //user_name : "",
+    email : "",
+    password : "",
+    //country : ""
+  })
+
+  const [ datosTwo, setDatosTwo ] = useState({
+    email : "",
+    password : ""
+  })
+
+  const [ error, setError ] = useState({
+    name : "",
+    //user_name : "",
+    email : "",
+    password : "",
+    //country : ""
+  })
+
+  const [ errorTwo, setErrorTwo ] = useState({
+    email : "",
+    password : ""
+  })
+
+  const [ isFormModified, setIsFormModified ] = useState(false)
+
+  const [ isValid, setIsValid ] = useState(false)
+
+  const [ isFormModifiedTwo, setIsFormModifiedTwo ] = useState(false)
+
+  const [ isValidTwo, setIsValidTwo ] = useState(false)
+
   const handleSignIn = () => {
     const container = document.querySelector(`.${styles.container}`);
     container.classList.remove(styles["right-panel-active"]);
@@ -34,6 +75,10 @@ const Form = () => {
 
   const handleForm2Submit = (e) => {
     e.preventDefault();
+
+    dispatch(postLogin(datosTwo))
+
+    console.log(datosTwo) //se envian los datos al backend
   };
 
   return (
