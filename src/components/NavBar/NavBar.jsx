@@ -1,21 +1,65 @@
-import React from "react";
-import style from "./NavBar.module.css"
+import React, { useState, useEffect } from "react";
+import style from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 import logoImage from "../../assets/LOGOGAMEZONE2.png";
-import usuario from "../../assets/usuario.png"
+import usuario from "../../assets/usuario.png";
 
+const NavBar = () => {
+    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+    const [isNavbarFixed, setIsNavbarFixed] = useState(false);
 
-const navBar = () =>{
+    const handleSubMenuToggle = () => {
+        setIsSubMenuOpen(!isSubMenuOpen);
+    };
 
-return (
-    <div className={style.container}>
-        <Link to="/whishlist"><button className={style.button} >Wishlist</button> </Link>
-        <Link to="/home">
-        <img className={style.image} src={logoImage} alt="logoimage" />
-        </Link>
-        <Link to="/cart"><button className={style.button} >Shopping cart</button></Link>
-        <img src={usuario} className={style.usuario} />
-    </div>
-    )
-}
-export default navBar;
+    useEffect(() => {
+        const handleScroll = () => {
+            const isFixed = window.pageYOffset > 0;
+            setIsNavbarFixed(isFixed);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    return (
+        <div className={`custom-navbar ${isNavbarFixed ? style.fixedNavbar : ""}`}>
+            <Link to="/home">
+                <img className={style.img} src={logoImage} width="300px" alt="Logo" />
+            </Link>
+            <ul>
+                <li>
+                    <Link to="/home">Home</Link>
+                </li>
+
+                <li>
+                    <Link to="/cart">Shopping Cart</Link>
+                </li>
+                <li>
+                    <div className={style.usuarioContainer}>
+                        <img
+                            src={usuario}
+                            className={style.usuario}
+                            alt="user"
+                            onClick={handleSubMenuToggle}
+                        />
+                        {isSubMenuOpen && (
+                            <ul className={style.submenu}>
+                                <li>
+                                    <Link to="">Perfil</Link>
+                                    <Link to="/whishlist">Wish List</Link>
+                                    <Link to="/form">Log Out</Link>
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    );
+};
+
+export default NavBar;
