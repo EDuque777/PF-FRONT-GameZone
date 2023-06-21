@@ -59,7 +59,6 @@ const Home = () => {
             onChange={e => handleChange(e)}
             onKeyDown={handleKeyDown}
           />
-
           <FontAwesomeIcon
             className={style.buttonsearch}
             onClick={name.trim() !== "" ? handleButton : undefined}
@@ -67,8 +66,8 @@ const Home = () => {
             size="xl"
           />
         </div>
-                  <CardsContainer gameComingSoon={search} />
-        <h3>All Games</h3>
+        <CardsContainer gameComingSoon={search} />
+        <h3 className={style.title}>All Games</h3>
         <CardsContainer gameComingSoon={selectedGames} />
       </div>
       <h3 className={style.title}>Top sells</h3>

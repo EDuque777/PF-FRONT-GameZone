@@ -25,7 +25,7 @@ const rootReducer=(state = initialState, action) => {
             }
         
         case act.GET_BY_NAME:
-            // console.log(action.payload)
+            //console.log(action.payload)
             return {
                 ...state,
                 search: action.payload

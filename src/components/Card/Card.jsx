@@ -88,7 +88,7 @@ const Card = (props) => {
     }
   }, []);
 
-  console.log(appid);
+  //console.log(appid);
 
   return (
     <li className={style.box} key={id || appid}>
