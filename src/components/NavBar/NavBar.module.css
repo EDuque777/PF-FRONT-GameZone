@@ -1,77 +1,95 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-  background-color: #070707;
-  padding: 0 20px;
+@import url('https://fonts.googleapis.com/css?family=Dosis:300,400,500');
+
+.fixedNavbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #141414;
+    height: 95px;
+    z-index: 998!important;
+    transition: background-color 0.3s ease-in;
 }
 
-.logoContainer {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Agrega esta línea */
+.img {
+    position: absolute;
+    top: -20px;
 }
 
-.button {
-  background-color: #070707;
-  border: none;
-  color: rgb(206, 206, 206);
-  font-size: 20px;
-  transition: 500ms;
-  border: solid #070707;
-  border-radius: 10px;
-  padding: 6px;
-  margin-right: 50px;
+
+ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.button:hover {
-  color: rgb(243, 243, 243);
-  background-color: rgb(43, 43, 43);
-  transition: 500ms;
+
+li {
+    float: left;
+    padding: 10px 50px;
 }
 
-.image {
-  height: 90px;
-  width: auto;
-  margin-left: 150px;
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 20px;
+    padding: 2px;
+
+
+
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+
+
+
+li a:hover {
+    color: #ff002b;
+
 }
 
 .usuario {
-  height: 40px;
-  width: 40px;
-  margin-top: 10px;
-  cursor: pointer;
-  margin-right: 50px;
+    height: 40px;
+    width: 40px;
+    margin-top: 10px;
+    cursor: pointer;
+    margin-right: 50px;
 }
 
-.buttonWish {
-  background-color: #070707;
-  border: none;
-  color: rgb(206, 206, 206);
-  font-size: 20px;
-  transition: 500ms;
-  border: solid #070707;
-  border-radius: 10px;
-  padding: 6px;
-  margin-left: 50px;
-}
-.centeredLogo {
-  display: flex;
-  justify-content: center;
+.usuarioContainer {
+    position: relative;
 }
 
-.buttonWish:hover {
-  color: rgb(243, 243, 243);
-  background-color: rgb(43, 43, 43);
-  transition: 500ms;
+.submenu {
+    position: absolute;
+    top: 43px;
+    right: 0;
+    background-color: rgba(56, 55, 55, 0.479);
+    padding: 0px 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(253, 3, 3, 0.39);
 }
 
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 97.9%;
-  z-index: 999;
+.submenu:hover {
+    box-shadow: 0 2px 4px rgb(253, 3, 3);
+}
+
+.submenu li {
+    text-decoration: none;
+    font-size: 16px;
+    white-space: nowrap;
+    margin: 10px;
+}
+
+.submenu li a:hover {
+    color: #ff002b;
 }
