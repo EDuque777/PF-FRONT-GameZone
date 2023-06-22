@@ -10,14 +10,14 @@ import Swal from "sweetalert2"
 
 import Rating from '../../components/Rating/Rating';
 
-const Opinion = () => {
-  return (
-    <div className={style.opinion1}>
-      <h1>opinion</h1>
-      <Rating rating={4} /> 
-    </div>
-  );
-};
+// const Opinion = ({ rating }) => {
+//   return (
+//     <div className={style.opinion1}>
+//       <h1>opinion</h1>
+//       <Rating rating={4} /> 
+//     </div>
+//   );
+// };
 
 
 const Detail = (props) => {
@@ -158,7 +158,7 @@ const Detail = (props) => {
     </video>
   )}
   {!videoUrl && game &&
-    game[props.match.params.id]?.data.screenshots.slice(0, 4).map((screenshot, index) => (
+    game[props.match.params.id]?.data.screenshots?.slice(0, 4).map((screenshot, index) => (
       <div key={index} className={style[`container_screenshots${index + 1}`]}>
         <img
           className={style.img}
@@ -168,7 +168,7 @@ const Detail = (props) => {
       </div>
     ))}
           {videoUrl && game &&
-            game[props.match.params.id]?.data.screenshots.slice(0, 3).map((screenshot, index) => (
+            game[props.match.params.id]?.data.screenshots?.slice(0, 3).map((screenshot, index) => (
               <div key={index} className={style[`container_screenshots${index + 1}`]}>
                 <img
                   className={style.img}
@@ -276,7 +276,4 @@ const Detail = (props) => {
 };
 
 export default Detail;
-
-
-
 
