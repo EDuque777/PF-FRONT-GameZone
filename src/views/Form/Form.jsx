@@ -84,7 +84,6 @@ const Form = () => {
   return (
     
     <div className={styles.body_form}>
-      <NavBar />
       <div className={`${styles.container} ${styles["right-panel-active"]}`}>
         {/* Sign Up */}
         <div className={`${styles.container__form} ${styles["container--signup"]}`}>

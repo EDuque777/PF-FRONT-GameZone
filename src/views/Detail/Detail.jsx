@@ -20,7 +20,6 @@ const Detail = (props) => {
   const categoriesLimited = game && game[props.match.params.id]?.data.categories?.slice(0, 3);
   //const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
 
-console.log(1)
 
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
