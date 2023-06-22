@@ -10,10 +10,9 @@ const CardsContainer = (props) => {
     return <p>Invalid data</p>;
   } else {
     const uniqueGames = gameComingSoon
-
     return (
       <div className={styles.container}>
-        {gameComingSoon.map((game, index) => (
+        {uniqueGames.map((game, index) => (
           <Card
             key={`${game.appid}-${index}`}
             id={game.id}
