@@ -13,6 +13,7 @@
   flex-direction: column;
   background: url("../../assets/Container.png");
   backdrop-filter: blur(10px);
+  /* outline: red solid 3px; */
   
   
 }
@@ -26,7 +27,6 @@
   align-items: center;
   margin: 1rem auto;
   align-content: center;
-  gap: 1%;
   background: #232323;
 
 }
@@ -40,8 +40,8 @@
   /* outline: yellow solid 3px; */
   flex-direction: column;
   background: #070606;
-  margin: 3% 0;
-  margin-left: 3rem;
+  margin: 3% 1.5rem;
+  /* margin-left: 3% 1.5rem; */
 
 }
 
@@ -50,8 +50,8 @@
   /* outline: pink solid 3px; */
   width: 48%;
   height: 500px;
-  margin: 3% 0;
-  margin-right: 3rem;
+  margin: 3% 1.5rem;
+  /* margin-right: 33% 1.5rem; */
   flex-direction: column;
 
   
@@ -106,7 +106,7 @@
   font-size: 2.5rem;
   display: flex;
   width: 100%;
-  background-color: grey;
+  background-color: #343434;
   color: rgb(206, 206, 206);
   /* padding-left: 10px; */
   /* outline: yellow solid 3px; */
@@ -120,7 +120,7 @@
   font-size: 2rem;
   color:  rgb(206, 206, 206);
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-  background-color: grey;
+  background-color: #343434;
   display: flex;
   height: 100%;
   width: 60%;
@@ -143,7 +143,7 @@
   width: 100%;
   /* outline: rosybrown solid 3px; */
   align-items: center;
-  background-color: grey;
+  background-color: #343434;
   justify-content: center;
 
 
@@ -194,7 +194,6 @@
   margin: 1rem auto;
   justify-content: space-around;
   background-color: #232323;
-
   align-items: center;
   max-height: fit-content;
   box-sizing: content-box;
@@ -264,10 +263,74 @@
 
 
 
-/* .detail_rigth div{
-display: flex;
-width: 45%;
-height: 30%;
-background-color: #343434;
-margin: 1.5rem;
-} */
+.reviews_container{
+  display: flex;
+  width: 90%;
+  height: 800px;
+  /* outline: yellow solid 3px; */
+  margin: 1rem auto;
+  background-color: #232323;
+  max-height: fit-content;
+  box-sizing: content-box;
+  
+}
+
+.promedio{
+  display: flex;
+  height: 300px;
+  width: 300px;
+  color: white;
+  /* outline: blue solid 3px; */
+  flex-direction: column;
+  background-color: #343434;
+  margin-left:  100px; 
+  margin-top: 100px; 
+}
+
+.opiniones{
+  display: flex;
+  height: 600px;
+  width: 70%;
+  color: white;
+  /* outline: green solid 3px; */
+  flex-direction: column;
+  gap: 10px;
+  max-height: fit-content;
+  box-sizing: content-box;
+  margin:  100px;
+}
+
+
+
+.opinion{
+  display: flex;
+  height: 33%;
+  width: 100%;
+  color: white;
+  /* outline: white solid 3px; */
+  background-color: #343434; 
+}
+
+.opinioncontenido{
+  display: flex;
+  height: 33%;
+  width: 100%;
+  color: white;
+  background-color: #343434;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+
+.opinion h3,
+.opinion p:first-of-type {
+  margin-bottom: 3px;
+}
+
+
+
+
+
+
