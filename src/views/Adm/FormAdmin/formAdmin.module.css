@@ -1,0 +1,29 @@
+.container {
+  color: white;
+  background-color: #070707;
+}
+
+.alert {
+  margin-bottom: 10px;
+}
+
+.display_5 {
+  margin-bottom: 20px;
+}
+
+.form_control {
+  margin-bottom: 10px;
+}
+
+.add_btn {
+  margin-top: 10px;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.btn_sm {
+  margin-right: 5px;
+}
+
