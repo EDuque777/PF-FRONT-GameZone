@@ -14,12 +14,15 @@ export const GET_BY_NAME = "GET_BY_NAME"
 export const ADD_TO_WHISH_LIST = "ADD_TO_WHISH_LIST"
 export const REMOVE_TO_WHISH_LIST = "REMOVE_TO_WHISH_LIST"
 export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
+export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
+export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
 export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const PUBLISHERS = "PUBLISHERS"
 export const GENRES = "GENRES"
+
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
@@ -177,7 +180,36 @@ export const removeCart = (id) => {
 
 export const clearCart = ()  => {
     return  {
-            type:CLEAR_CART  
+            type: CLEAR_CART  
+    }
+}
+
+export const createOrder = (totalPrice, cartGames) => {
+    return async function (dispatch) {
+        try {
+            const response = await axios.post("/createOrder", {totalPrice, cartGames})
+            if (response.status === 200) {
+                dispatch({
+                    type: CREATE_ORDER_SUCCESS,
+                    payload: response.data
+                })
+                const data = response.data
+                const paymentLink = data.links[1].href
+                window.location.href = paymentLink
+            } else {
+                dispatch(createOrderFailure('Error creating order'));
+            }
+        } catch (error) {
+            dispatch(createOrderFailure('Error creating order'));
+            console.error('Error creating order:', error.message);
+        }
+    }
+}
+
+export const createOrderFailure = (errorMessage) => {
+    return {
+        type: CREATE_ORDER_FAILURE,
+        payload: errorMessage
     }
 }
 

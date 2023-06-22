@@ -14,15 +14,16 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
+    orderCreated: false,
+    error: null
     gamesPlatforms: [],
     languagesGames: [],
     categoriesGames: [],
     developersGames: [],
     publishersGames: [],
     genresGames: [],
-
-
 };
+
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
 
@@ -126,6 +127,20 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 cart: [],
                 total: 0
+            }
+
+        case act.CREATE_ORDER_SUCCESS:
+            return {
+                ...state,
+                orderCreated: true,
+                error: null
+            }
+
+        case act.CREATE_ORDER_FAILURE:
+            return {
+                ...state,
+                orderCreated: false,
+                error: action.payload
             }
         
 //? CASOS DE LA LISTA DE DESEADOS
