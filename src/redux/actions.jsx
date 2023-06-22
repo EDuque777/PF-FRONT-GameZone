@@ -2,6 +2,7 @@ import axios from "axios";
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_TO_CART = "REMOVE_TO_CART"
 export const CLEAR_CART = "CLEAR_CART"
+export const CLEAR_SEARCH = "CLEAR_SEARCH"
 export const GET_GAMES = "GET_GAMES"
 export const GET_DETAIL = "GET_DETAIL"
 export const CLEAR_DETAIL = "CLEAR_DETAIL"
@@ -74,6 +75,13 @@ export const clearDetail = () => {
     return function (dispatch){
         dispatch({
             type: CLEAR_DETAIL
+        })
+    }
+}
+export const clearSearch = () => {
+    return function (dispatch){
+        dispatch({
+            type: CLEAR_SEARCH
         })
     }
 }

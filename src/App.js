@@ -4,6 +4,7 @@ import { Route, useLocation } from 'react-router-dom';
 import { Landing, Home, ShoppingCart, Detail, Whishlist , Form} from "./views";
 import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
+import Search from "./views/Search/Search"
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route path="/form" render={() => <Form/>} /> 
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
+      <Route path="/search" render={() => <Search />} />
       <Footer/>
       </>
       

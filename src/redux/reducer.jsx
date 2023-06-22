@@ -50,6 +50,11 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 gameDetail: null
             }
+        case act.CLEAR_SEARCH:
+            return {
+                ...state,
+                search: []
+            }
 
         case act.GET_GAMES_OFFER:
             return {
