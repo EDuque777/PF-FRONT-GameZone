@@ -16,14 +16,12 @@ const Detail = (props) => {
   // const categories = game && game[props.match.params.id]?.data.categories;
   const genres = game && game[props.match.params.id]?.data.genres;
   const [videoUrl, setVideoUrl] = useState("");
-<<<<<<< HEAD
-  const categoriesLimited = game && game[props.match.params.id]?.data.categories?.slice(0, 3);
 
-  //console.log(game);
-=======
-  const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
-  
->>>>>>> 962dade1353083aad0f83ccf25d2fb255ff316ca
+  const categoriesLimited = game && game[props.match.params.id]?.data.categories?.slice(0, 3);
+  //const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
+
+console.log(1)
+
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
       const id = props.match.params.id;
