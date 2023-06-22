@@ -14,7 +14,16 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
+    orderCreated: false,
+    error: null
+    gamesPlatforms: [],
+    languagesGames: [],
+    categoriesGames: [],
+    developersGames: [],
+    publishersGames: [],
+    genresGames: [],
 };
+
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
 
@@ -42,6 +51,11 @@ const rootReducer=(state = initialState, action) => {
             return {
                 ...state,
                 gameDetail: null
+            }
+        case act.CLEAR_SEARCH:
+            return {
+                ...state,
+                search: []
             }
 
         case act.GET_GAMES_OFFER:
@@ -114,6 +128,20 @@ const rootReducer=(state = initialState, action) => {
                 cart: [],
                 total: 0
             }
+
+        case act.CREATE_ORDER_SUCCESS:
+            return {
+                ...state,
+                orderCreated: true,
+                error: null
+            }
+
+        case act.CREATE_ORDER_FAILURE:
+            return {
+                ...state,
+                orderCreated: false,
+                error: action.payload
+            }
         
 //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
@@ -154,6 +182,42 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 whishList: [],
                 counter: 0
+            }
+
+        case act.PLATFORMS:
+            return {
+                ...state,
+                gamesPlatforms: action.payload
+            }
+
+        case act.LANGUAGES:
+            return {
+                ...state,
+                languagesGames: action.payload
+            }
+
+        case act.CATEGORIES:
+            return {
+                ...state,
+                categoriesGames: action.payload
+            }
+
+        case act.DEVELOPERS:
+            return {
+                ...state,
+                developersGames: action.payload
+            }
+
+        case act.PUBLISHERS:
+            return {
+                ...state,
+                publishersGames: action.payload
+            }
+
+        case act.GENRES:
+            return {
+                ...state,
+                genresGames: action.payload
             }
 
         default:

@@ -27,11 +27,17 @@ return (
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/adminForm" render={() => <AdminForm />} />
       {location.pathname !== "/dashboard" && <Footer/>}
+      <Route path="/search" render={() => <Search />} />
+      <Footer/>
     </>
   </div>
 );
+
+      
+
 
   
 }
 
 export default App;
+
