@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis:300,400,500');
 
+
 .fixedNavbar {
     position: fixed;
     top: 0;
@@ -11,51 +12,50 @@
     transition: background-color 0.3s ease-in;
 }
 
+
 .img {
     position: absolute;
     top: -20px;
     left: 0px;
 }
 
-
-ul {
-    margin: 0;
-    padding: 0;
+.NaV {
+    list-style-type: none;
     display: flex;
+    margin: 10;
+    padding: 0;
     justify-content: flex-end;
     align-items: center;
+    font-family: 'Dosis', sans-serif;
 }
 
-
-li {
-    float: left;
-    padding: 10px 50px;
-}
-
-li a {
+.NaV > li > a {
     display: block;
     color: white;
     text-align: center;
     text-decoration: none;
     letter-spacing: 2px;
-    font-size: 20px;
-    padding: 2px;
-
-
-
-    -webkit-transition: all 0.3s ease-in;
-    -moz-transition: all 0.3s ease-in;
-    -ms-transition: all 0.3s ease-in;
-    -o-transition: all 0.3s ease-in;
-    transition: all 0.3s ease-in;
+    font-size: 18px;
+    margin: auto;
+    padding-left: 0px;
+    padding-right: 30px;
+    letter-spacing: 2px;
+    font-weight: 500;
 }
 
+.NaV > li > a:hover {
+    color: #711792;
+}
 
-
-
-li a:hover {
-    color: #ff002b;
-
+.fixedNavbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #141414;
+    height: 84px;
+    z-index: 998!important;
+   transition:.5s ease all;
 }
 
 .usuario {
@@ -73,27 +73,50 @@ li a:hover {
     list-style-type: none;
 }
 .submenu {
+    text-decoration: none;
     position: absolute;
-    top: 43px;
-    right: 0;
+    top: 45px; 
+    right: 73px;
     background-color: rgba(56, 55, 55, 0.479);
-    padding: 0px 20px;
+    padding: 0 30px;
     border-radius: 15px;
+
     box-shadow: 0 2px 4px rgba(253, 3, 3, 0.39);
     list-style-type: none;
-}
 
+    /*box-shadow: 0 2px 4px #7117928e;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    white-space: nowrap;*/
+
+}
 .submenu:hover {
-    box-shadow: 0 2px 4px rgb(253, 3, 3);
+    box-shadow: 0 2px 4px #fffeff;
 }
 
-.submenu li {
-    text-decoration: none;
-    font-size: 16px;
-    white-space: nowrap;
-    margin: 10px;
+
+
+.usuarioContainer:hover .submenu {
+    display: block; 
 }
+
+.submenu > li {
+    text-decoration: none;
+    font-size: 17px;
+    margin: 10px;
+    list-style-type: none; 
+}
+
 
 .submenu li a:hover {
     color: #ff002b;
 }
+
+
+.submenu li a {
+    text-decoration: none;
+    color: white;
+}
+
+

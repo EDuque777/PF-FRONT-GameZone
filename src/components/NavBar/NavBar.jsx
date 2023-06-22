@@ -89,6 +89,7 @@ const NavBar = () => {
                 <img className={style.img} src={logoImage} width="300px" alt="Logo" />
             </Link>
             <ul className={style.NaV}>
+
                 <li>
                     <Link to="/home">Home</Link>
                 </li>
@@ -124,9 +125,12 @@ const NavBar = () => {
                     )
                 }
 
+
             </ul>
         </div>
     );
 };
 
-export default NavBar;
+ export default NavBar; 
+
+
