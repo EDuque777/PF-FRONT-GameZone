@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postCreateUser, postLogin } from "../../redux/actions";
 import countries from "./countries";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 //import NavBar from '../../components/NavBar/NavBar'
 
 
@@ -198,7 +199,7 @@ const Form = () => {
     container.classList.add(styles["right-panel-active"]);
   };
 
-  const handleForm1Submit = (e) => {
+  const handleForm1Submit = async (e) => {
     e.preventDefault();
 
     const nameError = validateName()
@@ -212,6 +213,11 @@ const Form = () => {
     // Restante da lógica de envio do formulário
 
     if (password !== confirmPassword) {
+      Swal.fire(
+        'Ups!',
+        'Password does not match!',
+        'error'
+      )
       setErrorConfirmPassword("Passwords Do Not Match");
     }else if (password === confirmPassword) {
       setErrorConfirmPassword('')
@@ -232,12 +238,28 @@ const Form = () => {
       confirmPassword
     }
 
+    if (!datos.name || !datos.user_name || !datos.password || !datos.country || !datos.confirmPassword) {
+      Swal.fire(
+        'Ups!',
+        'The fields are empty!',
+        'error'
+      )
+      //alert("ups hay datos en form")
+    }else{
+
+      Swal.fire(
+        'Create Account',
+        'Congratulations you are part of GameZone',
+        'success'
+      )
+
+      await dispatch(postCreateUser(datos))
+      history.push("/form")
+    }
+
     // Realizar la acción de envío del formulario aquí
-    dispatch(postCreateUser(datos))
 
-    alert("Inicia Sesion")
-
-    history.push("/form")
+    //alert("Inicia Sesion")
 
     //console.log()
   };
@@ -255,11 +277,41 @@ const Form = () => {
       passwordLogin,
     }
 
-    await dispatch(postLogin(datosTwo))
+    if (!datosTwo.emailLogin || !datosTwo.passwordLogin) {
+      Swal.fire(
+        'Ups!',
+        'The fields are empty!',
+        'error'
+      )
+      //alert("los campos estan vacios")
+    }else{
 
-    history.push("/home")
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-start',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+      })
+      await dispatch(postLogin(datosTwo))
 
-    alert("sesion Iniciada")
+      history.push("/home")
+    }
+
+  
+
+
+
+    //alert("sesion Iniciada")
 
     //console.log(datosTwo) //se envian los datos al backend
   };

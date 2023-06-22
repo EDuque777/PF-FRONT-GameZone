@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import logoImage from "../../assets/LOGOGAMEZONE2.png";
 import usuario from "../../assets/usuario.png";
 import { logoutUser } from "../../redux/actions";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
@@ -35,6 +36,8 @@ const NavBar = () => {
 
     console.log(conteo)
 
+    //console.log(Cookies.getJSON("token"))
+
     const datosUser =  JSON.parse(localStorage.getItem("user"));
 
     const validationUser = () => {
@@ -53,8 +56,26 @@ const NavBar = () => {
     }, [datosUser])
 
     const removerDatos = async () => {
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+          
+        Toast.fire({
+            icon: 'success',
+            title: 'Closed session'
+        })
+
         await localStorage.removeItem("user");
-        await Cookie.remove("token")
+        await Cookies.remove("token")
         await dispatch(logoutUser())
 
         history.push("/")
