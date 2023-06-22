@@ -31,11 +31,8 @@ const NavBar = () => {
                 <img className={style.img} src={logoImage} width="300px" alt="Logo" />
             </Link>
             <ul className={style.NaV}>
-                <li>
+                <li className={style.NaV}>
                     <Link to="/home">Home</Link>
-                </li>
-
-                <li>
                     <Link to="/cart">Shopping Cart</Link>
                 </li>
                 <li>
@@ -48,9 +45,13 @@ const NavBar = () => {
                         />
                         {isSubMenuOpen && (
                             <ul className={style.submenu}>
-                                <li>
+                                <li className={style.modules}>
                                     <Link to="">Perfil</Link>
+                                </li>
+                                <li>
                                     <Link to="/whishlist">Wish List</Link>
+                                </li>
+                                <li>
                                     <Link to="/form">Log Out</Link>
                                 </li>
                             </ul>
@@ -62,4 +63,6 @@ const NavBar = () => {
     );
 };
 
-export default NavBar;
+ export default NavBar; 
+
+
