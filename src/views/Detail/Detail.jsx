@@ -5,23 +5,32 @@ import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import * as act from "../../redux/actions";
-import Swal from "sweetalert2"
+
+
+import Rating from '../../components/Rating/Rating';
+
+// const Opinion = ({ rating }) => {
+//   return (
+//     <div className={style.opinion1}>
+//       <h1>opinion</h1>
+//       <Rating rating={4} /> 
+//     </div>
+//   );
+// };
+
 
 const Detail = (props) => {
-
-  const { id } = props
   
   const history = useHistory();
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
-  const cart = useSelector(state => state.cart)
+  //const cart = useSelector(state => state.cart)
   // const categories = game && game[props.match.params.id]?.data.categories;
   const genres = game && game[props.match.params.id]?.data.genres;
   const [videoUrl, setVideoUrl] = useState("");
   const categoriesLimited = game && game[props.match.params.id]?.data.categories?.slice(0, 3);
-
-  //console.log(game);
+  //const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
       const id = props.match.params.id;
@@ -62,29 +71,11 @@ const Detail = (props) => {
   }
 
   const handleAdd = () => {
-    const cartList = cart.find( game => game.id === id)
-        if (cartList) {
-            Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'the game is already in the cart',
-                showConfirmButton: false,
-                timer: 2000
-               }) 
-        } else {
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Game added successfully",
-                showConfirmButton: false,
-                timer: 2000
-            })
     dispatch(act.addCart({id: bkId, image: img, name:name , price: isNaN(price) ? 0 : price}));
-  };
 }
 
   const price = game && (game[props.match.params.id]?.data?.price_overview?.initial)
-  const gamePrice = game && (game[props.match.params.id]?.data?.price_overview?.final_formatted);
+  //const gamePrice = game && (game[props.match.params.id]?.data?.price_overview?.final_formatted);
   const img = game && game[props.match.params.id].data.header_image;
   const bkId = game && game[props.match.params.id].data.steam_appid;
   const name = game && game[props.match.params.id].data.name
@@ -144,7 +135,7 @@ const Detail = (props) => {
     </video>
   )}
   {!videoUrl && game &&
-    game[props.match.params.id]?.data.screenshots.slice(0, 4).map((screenshot, index) => (
+    game[props.match.params.id]?.data.screenshots?.slice(0, 4).map((screenshot, index) => (
       <div key={index} className={style[`container_screenshots${index + 1}`]}>
         <img
           className={style.img}
@@ -154,7 +145,7 @@ const Detail = (props) => {
       </div>
     ))}
           {videoUrl && game &&
-            game[props.match.params.id]?.data.screenshots.slice(0, 3).map((screenshot, index) => (
+            game[props.match.params.id]?.data.screenshots?.slice(0, 3).map((screenshot, index) => (
               <div key={index} className={style[`container_screenshots${index + 1}`]}>
                 <img
                   className={style.img}
@@ -218,6 +209,43 @@ const Detail = (props) => {
             </div>
               
             </div>
+
+
+            <div className={style.reviews_container}>
+                
+                <div className={style.promedio}>
+                  <h1>Promedio</h1>
+                </div>
+                <div className={style.opiniones}>
+                  <div className={style.opinion}>
+                  <div className={style.opinioncontenido}>
+                    <h3>Peter</h3>
+                    <p>18/05/2023</p>
+                    <Rating />
+                    <p>Global Offensive takes no chances and it's hard to tell who it was made for. Source and 1.6 players will feel at home with the tried and true CS mechanics and traditional game modes, but GO gives them few reasons to migrate, other than flashy graphics on a few of the old maps. Conversely, newcomers to the series will find Counter-Strike's steep learning curve rather discouraging.</p>
+                    </div>
+                  </div>
+                  <div className={style.opinion}>
+                  <div className={style.opinioncontenido}>
+                    <h3>John</h3>
+                    <p>20/01/2023</p>
+                    <Rating />
+                    <p>It may lack some of the community niceties, beloved maps (Assault, anyone?), and little features of past games, but Global Offensive delivers on the promise of a faithful, polished, and better looking Counter-Strike for whoever wants it. Even if the community doesn't meet the golden standard of 1.6 and Source, CS:GO will remain a multiplayer classic for those willi</p>
+                  </div>
+                  </div>
+                  <div className={style.opinion}>
+                  <div className={style.opinioncontenido}>
+                    <h3>Adele</h3>
+                    <p>10/04/2022</p>
+                    <Rating />
+                    <p>When it comes down to it, Counter-Strike: Global Offensive may follow the same old formula of gameplay seen in previous versions of Counter-Strike, but it's still a well-rounded tactical shooter. It may not try anything drastically different or revolutionize the series by taking it in a new direction, but there's still enough there to appeal to newbies and hardcore fans alike.</p>
+                    </div>
+                  </div>
+                </div>
+                
+            
+            </div>
+
           </div>
       )}
     </div>
@@ -225,7 +253,4 @@ const Detail = (props) => {
 };
 
 export default Detail;
-
-
-
 
