@@ -162,7 +162,7 @@ export const addCart = (game) => {
 }
 
 export const removeCart = (id) => {
-    console.log(id);
+    //console.log(id);
     return {
         type: REMOVE_TO_CART,
         payload: id,
@@ -180,7 +180,7 @@ export const clearCart = ()  => {
 
 export const addWhishList = (game) => {
     return function (dispatch) {
-        console.log(game);
+        //console.log(game);
         dispatch({
             type: ADD_TO_WHISH_LIST,
             payload: game

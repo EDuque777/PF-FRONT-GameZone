@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
-import NavBar from "../../components/NavBar/NavBar";
 import styles from "./ShoppingCart.module.css"
 
 //* las cards que vengan del home...
@@ -33,7 +32,7 @@ const ShoppingCart = () => {
             if (result.isConfirmed) {
               Swal.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Your cart has been deleted.',
                 'success'
               )
               dispatch(act.clearCart())

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../components/NavBar/NavBar";
 import Carousel from "../../components/Carousel/Carousel";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,7 +49,7 @@ const Home = () => {
   // Verificar si el array de juegos tiene al menos 14 elementos
   const selectedGames = games.length >= 14 ? games.slice(0, 14) : games;
 
-  console.log(search)
+  //console.log(search)
   return (
     <div className={style.homeContainer}>
       <Carousel />
