@@ -27,7 +27,6 @@
   align-items: center;
   margin: 1rem auto;
   align-content: center;
-  gap: 1%;
   background: #232323;
 
 }
@@ -41,8 +40,8 @@
   /* outline: yellow solid 3px; */
   flex-direction: column;
   background: #070606;
-  margin: 3% 0;
-  margin-left: 3rem;
+  margin: 3% 1.5rem;
+  /* margin-left: 3% 1.5rem; */
 
 }
 
@@ -51,8 +50,8 @@
   /* outline: pink solid 3px; */
   width: 48%;
   height: 500px;
-  margin: 3% 0;
-  margin-right: 3rem;
+  margin: 3% 1.5rem;
+  /* margin-right: 33% 1.5rem; */
   flex-direction: column;
 
   

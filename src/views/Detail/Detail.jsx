@@ -259,7 +259,7 @@ const Detail = (props) => {
                   <div className={style.opinion}>
                   <div className={style.opinioncontenido}>
                     <h3>Adele</h3>
-                    <p>18/05/2022</p>
+                    <p>10/04/2022</p>
                     <Rating />
                     <p>When it comes down to it, Counter-Strike: Global Offensive may follow the same old formula of gameplay seen in previous versions of Counter-Strike, but it's still a well-rounded tactical shooter. It may not try anything drastically different or revolutionize the series by taking it in a new direction, but there's still enough there to appeal to newbies and hardcore fans alike.</p>
                     </div>
