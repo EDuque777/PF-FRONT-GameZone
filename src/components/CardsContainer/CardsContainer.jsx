@@ -4,12 +4,14 @@ import styles from "./CardsContainer.module.css";
 
 const CardsContainer = (props) => {
   const { gameComingSoon } = props;
+
   if (gameComingSoon === null) {
     return <p>Loading...</p>;
   } else if (!Array.isArray(gameComingSoon)) {
     return <p>Invalid data</p>;
   } else {
     const uniqueGames = gameComingSoon
+    
     return (
       <div className={styles.container}>
         {uniqueGames.map((game, index) => (
@@ -19,7 +21,7 @@ const CardsContainer = (props) => {
             appid={game.appid} 
             image={game.capsule_image || game.large_capsule_image} 
             name={game.name} 
-            price={( game.price_overview?.final || game.price_overview  || game.final_price )}
+            price={( game.price_overview?.final || game.price_overview * 100 || game.final_price )}
 
             />
           ))

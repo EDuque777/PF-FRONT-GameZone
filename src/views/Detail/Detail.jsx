@@ -12,11 +12,11 @@ const Detail = (props) => {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
-  const cart = useSelector(state => state.cart)
+  //const cart = useSelector(state => state.cart)
   // const categories = game && game[props.match.params.id]?.data.categories;
   const genres = game && game[props.match.params.id]?.data.genres;
   const [videoUrl, setVideoUrl] = useState("");
-  const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
+  const categoriesLimited = game && game[props.match.params.id]?.data?.categories?.slice(0, 3);
   
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
