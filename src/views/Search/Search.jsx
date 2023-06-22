@@ -6,6 +6,8 @@ import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { faSearchengin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pagination from "../../components/Pagination/Pagination";
+import Filters from "../../components/Filters/Filters";
+
 
 const Search = (props) => {
   const [name, setName] = useState("");
@@ -58,6 +60,7 @@ const Search = (props) => {
             icon={faSearchengin}
             size="xl"
           />
+          <Filters/>
         </div>
       </div>
       <div className={style.searchyfilters}>

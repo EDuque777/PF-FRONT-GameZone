@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import Carousel from "../../components/Carousel/Carousel";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
-import Filters from "../../components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Home.module.css";
 import * as act from "../../redux/actions";
@@ -55,7 +54,6 @@ const Home = () => {
   return (
     <div className={style.homeContainer}>
       <Carousel />
-      <Filters/>
       <div>
 
         <div className={style.searchcontainer}>
