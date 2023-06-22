@@ -14,6 +14,8 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
+    createAccount : [],
+    user : null
 };
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
@@ -155,6 +157,23 @@ const rootReducer=(state = initialState, action) => {
                 whishList: [],
                 counter: 0
             }
+// CASOS DEL USUARIO 
+        case act.CREATE_USER: 
+            return {
+                ...state,
+                createAccount : action.payload
+            }
+        case act.LOGIN_USER:
+            return {
+                ...state,
+                user : action.payload
+            }
+        case act.LOGOUT_USER:{
+            return{
+                ...state,
+                user : null
+            }
+        }
 
         default:
             return {...state};
