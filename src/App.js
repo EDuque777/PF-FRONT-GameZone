@@ -6,7 +6,7 @@ import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import AdminForm from './views/Adm/FormAdmin/formAdmin';
-
+import Search from './views/Search/Search';
 function App() {
 
     const location = useLocation()
@@ -26,9 +26,8 @@ return (
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/adminForm" render={() => <AdminForm />} />
-      {location.pathname !== "/dashboard" && <Footer/>}
       <Route path="/search" render={() => <Search />} />
-      <Footer/>
+      {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
 );
