@@ -3,17 +3,14 @@
 import React from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
-import NavBar from "../../components/NavBar/NavBar";
 import styles from "./ShoppingCart.module.css"
 
 //* las cards que vengan del home...
 const ShoppingCart = () => {
 
     const dispatch = useDispatch()
-    const history = useHistory()
     const cart = useSelector(state => state.cart)
     const totalPrice = useSelector(state => state.total)
     const wholePart = Math.floor(totalPrice / 100);
@@ -33,15 +30,21 @@ const ShoppingCart = () => {
             if (result.isConfirmed) {
               Swal.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Your cart has been deleted.',
                 'success'
               )
               dispatch(act.clearCart())
             }
           })
     }
-    const handleBuy = () => {
-        history.push("/buy")
+
+    const handleBuy = async () => {
+        try {
+            //! mandar tanto juegos como el precio total
+            dispatch(act.createOrder(formattedTotalPrice, cart))
+        } catch (error) {
+            console.error(error.message);
+        }
     }
 
     return (
@@ -64,7 +67,7 @@ const ShoppingCart = () => {
                     </div>
                     <div className={styles.botones}> 
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
-                        <button className={styles.botonComprar}>Buy</button>
+                        <button className={styles.botonComprar} onClick={() => {handleBuy()}}>Buy</button>
                     </div>
                 </div>
             </div>
@@ -89,7 +92,7 @@ const ShoppingCart = () => {
                 </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4 className={styles.titleCarrito}>TOTAL: ${formattedTotalPrice} </h4>
+                        <h4 className={styles.titleCarrito}>TOTAL: ${formattedTotalPrice}</h4>
                     </div>
                     <div className={styles.botones}>
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>

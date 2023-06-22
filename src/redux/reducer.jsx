@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import * as act from "./actions"
 
 const initialState = {
@@ -13,7 +14,16 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
+    orderCreated: false,
+    error: null
+    gamesPlatforms: [],
+    languagesGames: [],
+    categoriesGames: [],
+    developersGames: [],
+    publishersGames: [],
+    genresGames: [],
 };
+
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
 
@@ -41,6 +51,11 @@ const rootReducer=(state = initialState, action) => {
             return {
                 ...state,
                 gameDetail: null
+            }
+        case act.CLEAR_SEARCH:
+            return {
+                ...state,
+                search: []
             }
 
         case act.GET_GAMES_OFFER:
@@ -70,9 +85,26 @@ const rootReducer=(state = initialState, action) => {
 //?CASOS DEL CARRITO
         case act.ADD_TO_CART:
             const addGame = action.payload
+            const existingGame = state.cart.find(game => game.id === addGame.id)
+            if (existingGame) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'the game is already in the cart',
+                    showConfirmButton: false,
+                    timer: 2000
+                   })
+                return state; 
+            }
+                Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Game added successfully",
+                showConfirmButton: false,
+                timer: 2000
+            }) 
             const updateCart = [...state.cart, addGame]
             const updatePrice = state.total + addGame.price
-            
             return {
                 ...state,
                 cart: updateCart,
@@ -84,7 +116,6 @@ const rootReducer=(state = initialState, action) => {
             const updateGameRemoveCart = state.cart.filter((game) => game.id !== removeGameId)
             const gameRemoved = state.cart.find(game => game.id === removeGameId)
             const updateTotalPrice = state.total - gameRemoved.price;
-
             return {
                 ...state,
                 cart: updateGameRemoveCart,
@@ -97,12 +128,45 @@ const rootReducer=(state = initialState, action) => {
                 cart: [],
                 total: 0
             }
+
+        case act.CREATE_ORDER_SUCCESS:
+            return {
+                ...state,
+                orderCreated: true,
+                error: null
+            }
+
+        case act.CREATE_ORDER_FAILURE:
+            return {
+                ...state,
+                orderCreated: false,
+                error: action.payload
+            }
         
 //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
+            const addList = action.payload
+            const gameInWhishList = state.whishList.find(game => game.id === addList.id);
+            if (gameInWhishList) {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'the game is already in the list',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            return state;
+            }   
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Game added successfully",
+                showConfirmButton: false,
+                timer: 2000
+            })
             return {
                 ...state,
-                whishList: [...state.whishList, action.payload],
+                whishList: [...state.whishList, addList],
                 counter: ++ state.counter,
             }
 
@@ -118,6 +182,42 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 whishList: [],
                 counter: 0
+            }
+
+        case act.PLATFORMS:
+            return {
+                ...state,
+                gamesPlatforms: action.payload
+            }
+
+        case act.LANGUAGES:
+            return {
+                ...state,
+                languagesGames: action.payload
+            }
+
+        case act.CATEGORIES:
+            return {
+                ...state,
+                categoriesGames: action.payload
+            }
+
+        case act.DEVELOPERS:
+            return {
+                ...state,
+                developersGames: action.payload
+            }
+
+        case act.PUBLISHERS:
+            return {
+                ...state,
+                publishersGames: action.payload
+            }
+
+        case act.GENRES:
+            return {
+                ...state,
+                genresGames: action.payload
             }
 
         default:
