@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
@@ -16,8 +16,8 @@ const Detail = (props) => {
   // const categories = game && game[props.match.params.id]?.data.categories;
   const genres = game && game[props.match.params.id]?.data.genres;
   const [videoUrl, setVideoUrl] = useState("");
-  const categoriesLimited = game && game[props.match.params.id]?.data?.categories?.slice(0, 3);
-  
+  const categoriesLimited = game && game[props.match.params.id]?.data.categories?.slice(0, 3);
+  //const categoriesLimited = game && game[props.match.params.id]?.data.categories.slice(0, 3);
   useEffect(() => {
     if (props.match && props.match.params && props.match.params.id) {
       const id = props.match.params.id;
