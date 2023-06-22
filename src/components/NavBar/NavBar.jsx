@@ -30,7 +30,7 @@ const NavBar = () => {
             <Link to="/home">
                 <img className={style.img} src={logoImage} width="300px" alt="Logo" />
             </Link>
-            <ul>
+            <ul className={style.NaV}>
                 <li>
                     <Link to="/home">Home</Link>
                 </li>
