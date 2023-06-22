@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../components/NavBar/NavBar";
 import Carousel from "../../components/Carousel/Carousel";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,8 +6,10 @@ import style from "./Home.module.css";
 import * as act from "../../redux/actions";
 import { faSearchengin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const gameOffer = useSelector(state => state.gameOffer);
   const search = useSelector(state => state.search);
@@ -16,14 +17,16 @@ const Home = () => {
   const gamesTopSellers = useSelector(state => state.gamesTopSellers);
   const games = useSelector(state => state.games);
   const [name, setName] = useState("");
-
+  //console.log(games);
   useEffect(() => {
     dispatch(act.getGames());
     dispatch(act.getGamesOffer());
     dispatch(act.getGamesNewReleases());
     dispatch(act.getGamesComingSoon());
     dispatch(act.getGamesTopSellers());
+    dispatch(act.clearSearch());
   }, [dispatch]);
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -33,7 +36,7 @@ const Home = () => {
   const handleButton = (e) => {
     if (name.trim() !== "") {
       dispatch(act.getByName(name));
-      // console.log(name);
+      history.push(`/search?name=${encodeURIComponent(name)}`);
     }
   };
 
@@ -46,11 +49,13 @@ const Home = () => {
   // Verificar si el array de juegos tiene al menos 14 elementos
   const selectedGames = games.length >= 14 ? games.slice(0, 14) : games;
 
-  console.log(search)
+  //console.log(search)
   return (
     <div className={style.homeContainer}>
       <Carousel />
+
       <div>
+
         <div className={style.searchcontainer}>
           <input
             className={style.search}
@@ -66,7 +71,7 @@ const Home = () => {
             size="xl"
           />
         </div>
-        <CardsContainer gameComingSoon={search} />
+
         <h3 className={style.title}>All Games</h3>
         <CardsContainer gameComingSoon={selectedGames} />
       </div>

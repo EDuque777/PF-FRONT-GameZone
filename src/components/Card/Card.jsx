@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import Swal from 'sweetalert2';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import * as act from '../../redux/actions';
 import style from './Card.module.css';
@@ -11,8 +10,6 @@ const Card = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  const cart = useSelector(state => state.cart);
-  const whishList = useSelector(state => state.whishList);
   const isShoppCartRoute = location.pathname === "/cart";
   const isWhishListRoute = location.pathname === "/whishlist";
   const wholePart = Math.floor(price / 100);
@@ -20,47 +17,11 @@ const Card = (props) => {
   const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
 
   const handleAdd = () => {
-    const cartList = cart.find(game => game.id === id);
-    if (cartList) {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'el juego ya se encuentra en el carrito',
-        showConfirmButton: false,
-        timer: 2000
-      });
-    } else {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Juego agregado correctamente",
-        showConfirmButton: false,
-        timer: 2000
-      });
       dispatch(act.addCart({ id, price: price, name, image }));
-    }
   };
 
   const handleAddWhish = () => {
-    const gameInWhishList = whishList.find(game => game.id === id);
-    if (gameInWhishList) {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'el juego ya se encuentra en la lista',
-        showConfirmButton: false,
-        timer: 2000
-      });
-    } else {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Juego agregado correctamente",
-        showConfirmButton: false,
-        timer: 2000
-      });
       dispatch(act.addWhishList({ id, price: price, name, image }));
-    }
   };
 
   const handleRemove = () => {

@@ -2,6 +2,7 @@ import axios from "axios";
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_TO_CART = "REMOVE_TO_CART"
 export const CLEAR_CART = "CLEAR_CART"
+export const CLEAR_SEARCH = "CLEAR_SEARCH"
 export const GET_GAMES = "GET_GAMES"
 export const GET_DETAIL = "GET_DETAIL"
 export const CLEAR_DETAIL = "CLEAR_DETAIL"
@@ -13,6 +14,15 @@ export const GET_BY_NAME = "GET_BY_NAME"
 export const ADD_TO_WHISH_LIST = "ADD_TO_WHISH_LIST"
 export const REMOVE_TO_WHISH_LIST = "REMOVE_TO_WHISH_LIST"
 export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
+export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
+export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
+export const PLATFORMS = "PLATFORMS"
+export const LANGUAGES = "LANGUAGES"
+export const CATEGORIES = "CATEGORIES"
+export const DEVELOPERS = "DEVELOPERS"
+export const PUBLISHERS = "PUBLISHERS"
+export const GENRES = "GENRES"
+
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
@@ -68,6 +78,13 @@ export const clearDetail = () => {
     return function (dispatch){
         dispatch({
             type: CLEAR_DETAIL
+        })
+    }
+}
+export const clearSearch = () => {
+    return function (dispatch){
+        dispatch({
+            type: CLEAR_SEARCH
         })
     }
 }
@@ -154,7 +171,7 @@ export const addCart = (game) => {
 }
 
 export const removeCart = (id) => {
-    console.log(id);
+    //console.log(id);
     return {
         type: REMOVE_TO_CART,
         payload: id,
@@ -163,7 +180,36 @@ export const removeCart = (id) => {
 
 export const clearCart = ()  => {
     return  {
-            type:CLEAR_CART  
+            type: CLEAR_CART  
+    }
+}
+
+export const createOrder = (totalPrice, cartGames) => {
+    return async function (dispatch) {
+        try {
+            const response = await axios.post("/createOrder", {totalPrice, cartGames})
+            if (response.status === 200) {
+                dispatch({
+                    type: CREATE_ORDER_SUCCESS,
+                    payload: response.data
+                })
+                const data = response.data
+                const paymentLink = data.links[1].href
+                window.location.href = paymentLink
+            } else {
+                dispatch(createOrderFailure('Error creating order'));
+            }
+        } catch (error) {
+            dispatch(createOrderFailure('Error creating order'));
+            console.error('Error creating order:', error.message);
+        }
+    }
+}
+
+export const createOrderFailure = (errorMessage) => {
+    return {
+        type: CREATE_ORDER_FAILURE,
+        payload: errorMessage
     }
 }
 
@@ -172,7 +218,7 @@ export const clearCart = ()  => {
 
 export const addWhishList = (game) => {
     return function (dispatch) {
-        console.log(game);
+        //console.log(game);
         dispatch({
             type: ADD_TO_WHISH_LIST,
             payload: game
@@ -219,10 +265,76 @@ export const postLogin = (datos) =>{
 }
 
 export const clearWhishList = () => {
-     return function (dispatch) {
+    return function (dispatch) {
         dispatch({
             type: CLEAR_WHISH_LIST,
         })
-     }
-
     }
+}
+
+
+export const platformsAll = () => {
+    const endpoint = `platformGames`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: PLATFORMS,
+            payload: data
+        })
+    }
+}
+
+export const languagesGames = () => {
+    const endpoint = `languagesGames`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: LANGUAGES,
+            payload: data
+        })
+    }
+}
+
+export const categoriesGames = () => {
+    const endpoint = `categoriesGames`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: CATEGORIES,
+            payload: data
+        })
+    }
+}
+
+export const developersGames = () => {
+    const endpoint = `developersGames`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: DEVELOPERS,
+            payload: data
+        })
+    }
+}
+
+export const publishersGames = () => {
+    const endpoint = `publishersGames`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: PUBLISHERS,
+            payload: data
+        })
+    }
+}
+
+export const genresGames = () => {
+    const endpoint = `genresGames`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GENRES,
+            payload: data
+        })
+    }
+}
