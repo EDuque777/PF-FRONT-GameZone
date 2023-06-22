@@ -320,7 +320,8 @@
   background-color: #343434;
   flex-direction: column;
   align-items: flex-start;
-  margin: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 

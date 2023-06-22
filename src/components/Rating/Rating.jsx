@@ -8,7 +8,7 @@ const Rating = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < rating) {
-        stars.push(<FaStar key={i} color="gold" />);
+        stars.push(<FaStar key={i} color="white" />);
       } else {
         stars.push(<FaStar key={i} color="gray" />);
       }
