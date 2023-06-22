@@ -14,6 +14,14 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
+    gamesPlatforms: [],
+    languagesGames: [],
+    categoriesGames: [],
+    developersGames: [],
+    publishersGames: [],
+    genresGames: [],
+
+
 };
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
@@ -42,6 +50,11 @@ const rootReducer=(state = initialState, action) => {
             return {
                 ...state,
                 gameDetail: null
+            }
+        case act.CLEAR_SEARCH:
+            return {
+                ...state,
+                search: []
             }
 
         case act.GET_GAMES_OFFER:
@@ -154,6 +167,42 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 whishList: [],
                 counter: 0
+            }
+
+        case act.PLATFORMS:
+            return {
+                ...state,
+                gamesPlatforms: action.payload
+            }
+
+        case act.LANGUAGES:
+            return {
+                ...state,
+                languagesGames: action.payload
+            }
+
+        case act.CATEGORIES:
+            return {
+                ...state,
+                categoriesGames: action.payload
+            }
+
+        case act.DEVELOPERS:
+            return {
+                ...state,
+                developersGames: action.payload
+            }
+
+        case act.PUBLISHERS:
+            return {
+                ...state,
+                publishersGames: action.payload
+            }
+
+        case act.GENRES:
+            return {
+                ...state,
+                genresGames: action.payload
             }
 
         default:
