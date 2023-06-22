@@ -15,7 +15,7 @@ const initialState = {
     gamesNewReleases: null,
     gamesFiltered: null,
     orderCreated: false,
-    error: null
+    error: null,
     gamesPlatforms: [],
     languagesGames: [],
     categoriesGames: [],
