@@ -1,64 +1,112 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './formAdmin.module.css';
-const AdminForm = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Lógica para enviar los datos del formulario
+
+
+const FormAdmin = () => {
+  
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: ''
+  });
+
+  const { name, email, password, role } = form;
+
+  const handleFieldChange = (event) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    createUser()
+  };
+  const createUser = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          role,
+        }),
+      });
+  
+  
+      const data = await response.json();
+      console.log('Usuario creado:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
     <div className={styles.container}>
-      <div className="text-center">
-        <h1 className={styles.display_5}><strong>CRUD ADMIN</strong></h1>
-      </div>
-      <div className="main row justify-content-center">
-        <form action="" id="admin-form" className="row justify-content-center mb-4" autocomplete="off" onSubmit={handleSubmit}>
-          <div className="col-10 col-md-8 mb-3">
-            <label htmlFor="name">Name  </label>
-            <input className={styles.form_control} id="name" type="text" placeholder="Enter Name" />
-          </div>
-          <div className="col-10 col-md-8 mb-3">
-            <label htmlFor="email">Email  </label>
-            <input className={styles.form_control} id="email" type="text" placeholder="Enter email" />
-          </div>
-          <div className="col-10 col-md-8 mb-3">
-            <label htmlFor="password">Password  </label>
-            <input className={styles.form_control} id="password" type="text" placeholder="Enter password" />
-          </div>
-          <div className="col-10 col-md-8 mb-3">
-            <label htmlFor="role">Role  </label>
-            <input className={styles.form_control} id="role" type="text" placeholder="Enter role" />
-          </div>
-          <div className="col-10 col-md-8 ">
-            <input className={styles.add_btn} type="submit" value="Submit" />
-          </div>
-        </form>
-        <div className="col-12 col-md-10 mt-5">
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="admin-list">
-              <tr>
-                <td>admin1</td>
-                <td>admin1@gmail.com</td>
-                <td>Admin</td>
-                <td>
-                  <a href="#" className={styles.btn_sm}>Edit</a>
-                  <a href="#" className={styles.btn_sm}>Delete</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <h2 className={styles.display_5}>Form Admins and Users</h2>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.form_control}>
+          <label>Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={name}
+            onChange={handleFieldChange}
+          />
         </div>
-      </div>
+        <div className={styles.form_control}>
+          <label>Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleFieldChange}
+          />
+        </div>
+        <div className={styles.form_control}>
+          <label>Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleFieldChange}
+          />
+        </div>
+        <div className={styles.form_control}>
+          <label> Select a Role:</label>
+          <select
+            id="role"
+            name="role"
+            value={role}
+            onChange={handleFieldChange}
+          >
+            
+            <option value="admin">Admin</option>
+            <option value="users">User</option>
+          </select>
+        </div>
+        <div className={styles.form_control}>
+          <button className={styles.btn_sm} type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
 
-export default AdminForm;
+export default FormAdmin;
+
+
+
+
+
+
+

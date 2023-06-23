@@ -17,7 +17,7 @@ return (
       <script src="https://kit.fontawesome.com/5c35a66fab.js" crossorigin="anonymous"></script>
     </head>
     <>
-      {location.pathname !== "/" && location.pathname !== "/adminForm" &&  <NavBar/>}
+      {location.pathname !== "/" && location.pathname !== "/dashboard" &&  <NavBar/>}
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
@@ -27,7 +27,7 @@ return (
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/adminForm" render={() => <AdminForm />} />
       <Route path="/search" render={() => <Search />} />
-      {location.pathname !== "/dashboard" && <Footer/>}
+      {(location.pathname !== "/dashboard" && location.pathname !== "/adminForm") && <Footer />}
     </>
   </div>
 );
