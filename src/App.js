@@ -21,13 +21,12 @@ return (
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
-      <Route path="/form" render={() => <Form/>} /> 
+      <Route path="/login" render={() => <Form/>} /> 
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
-      <Route path="/adminForm" render={() => <AdminForm />} />
       <Route path="/search" render={() => <Search />} />
-      {(location.pathname !== "/dashboard" && location.pathname !== "/adminForm") && <Footer />}
+      {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
 );
@@ -39,4 +38,3 @@ return (
 }
 
 export default App;
-

@@ -96,36 +96,29 @@ const NavBar = () => {
                 <li>
                     <Link to="/cart">Shopping Cart</Link>
                 </li>
-
-                {
-                    conteo > 0 ? (
-                        <li>
-                            <div className={style.usuarioContainer}>
-                                <img
-                                    src={datosUser.profileImage}
-                                    className={style.usuario}
-                                    alt={datosUser.name}
-                                    title={datosUser.name}
-                                    onClick={handleSubMenuToggle}
-                                />
-                                {isSubMenuOpen && (
-                                    <ul className={style.submenu}>
-                                        <li>
-                                            <Link to="#" >{datosUser.user_name}</Link>
-                                            <Link to="">Perfil</Link>
-                                            <Link to="/whishlist">Wish List</Link>
-                                            <a onClick={removerDatos}>Log Out</a>
-                                        </li>
-                                    </ul>
-                                )}
-                            </div>
-                        </li>
-                    ) : (
-                        <Link to="/form"><button className={style.button} >login</button></Link>
-                    )
-                }
-
-
+                <li>
+                    <div className={style.usuarioContainer}>
+                        <img
+                            src={usuario}
+                            className={style.usuario}
+                            alt="user"
+                            onClick={handleSubMenuToggle}
+                        />
+                        {isSubMenuOpen && (
+                            <ul className={style.submenu}>
+                                <li className={style.modules}>
+                                    <Link to="">Perfil</Link>
+                                </li>
+                                <li>
+                                    <Link to="/whishlist">Wish List</Link>
+                                </li>
+                                <li>
+                                    <Link to="/login">Log Out</Link>
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+                </li>
             </ul>
         </div>
     );
