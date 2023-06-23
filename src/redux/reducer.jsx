@@ -14,14 +14,16 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
+    createAccount : [],
+    user : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
     languagesGames: [],
     categoriesGames: [],
     developersGames: [],
-    publishersGames: [],
     genresGames: [],
+
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -183,6 +185,23 @@ const rootReducer=(state = initialState, action) => {
                 whishList: [],
                 counter: 0
             }
+// CASOS DEL USUARIO 
+        case act.CREATE_USER: 
+            return {
+                ...state,
+                createAccount : action.payload
+            }
+        case act.LOGIN_USER:
+            return {
+                ...state,
+                user : action.payload
+            }
+        case act.LOGOUT_USER:{
+            return{
+                ...state,
+                user : null
+            }
+        }
 
         case act.PLATFORMS:
             return {
@@ -208,11 +227,6 @@ const rootReducer=(state = initialState, action) => {
                 developersGames: action.payload
             }
 
-        case act.PUBLISHERS:
-            return {
-                ...state,
-                publishersGames: action.payload
-            }
 
         case act.GENRES:
             return {
