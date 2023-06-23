@@ -14,18 +14,15 @@ export const GET_BY_NAME = "GET_BY_NAME"
 export const ADD_TO_WHISH_LIST = "ADD_TO_WHISH_LIST"
 export const REMOVE_TO_WHISH_LIST = "REMOVE_TO_WHISH_LIST"
 export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
-
 export const CREATE_USER = "CREATE_USER"
 export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
-
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
 export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
-export const PUBLISHERS = "PUBLISHERS"
 export const GENRES = "GENRES"
 
 
@@ -63,6 +60,17 @@ export const gameDetail = (id) => {
         
     }
 }
+
+export const preload = () => {
+    return async (dispatch) => {
+        try {
+            await axios.get('http://localhost:3001/preload');
+            console.log("base de datos cargada")
+        } catch (error) {
+        dispatch(console.log(error));
+        }
+    };
+};
 
 export const getByName = (name) => {
     return async function(dispatch) {
@@ -342,17 +350,6 @@ export const developersGames = () => {
         const {data} = await axios.get(endpoint);
         return dispatch({
             type: DEVELOPERS,
-            payload: data
-        })
-    }
-}
-
-export const publishersGames = () => {
-    const endpoint = `publishersGames`;
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
-        return dispatch({
-            type: PUBLISHERS,
             payload: data
         })
     }
