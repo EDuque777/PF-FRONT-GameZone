@@ -52,7 +52,7 @@ const NavBar = () => {
                                     <Link to="/whishlist">Wish List</Link>
                                 </li>
                                 <li>
-                                    <Link to="/form">Log Out</Link>
+                                    <Link to="/login">Log Out</Link>
                                 </li>
                             </ul>
                         )}
