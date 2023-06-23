@@ -36,6 +36,7 @@ function Dashboard() {
 
   const handleUserSubmit = (event) => {
     event.preventDefault();
+    createUser();
     // Lógica para enviar os dados do formulário de criação de usuário
     console.log('Dados do formulário de criação de usuário:', {
       userName,
@@ -51,6 +52,29 @@ function Dashboard() {
     setConfirmPassword('');
     setRole('user');
   };
+  const createUser = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name:userName,
+          email: email,
+          password,
+          role,
+        }),
+      });
+  
+  
+      const data = await response.json();
+      console.log('Usuario creado:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
 
   const handleCreateGameClick = () => {
     setShowForm(true);
