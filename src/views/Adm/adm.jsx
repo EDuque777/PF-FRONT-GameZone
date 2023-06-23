@@ -305,23 +305,19 @@ function Dashboard() {
                 <label>
                   Name:
                   <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
-                </label>
-                <br />
+                </label>   
                 <label>
                   Email:
                   <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </label>
-                <br />
+                </label>        
                 <label>
                   Password:
                   <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </label>
-                <br />
+                </label>              
                 <label>
                   Confirm Password:
                   <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                </label>
-                <br />
+                </label>           
                 <label>
                   Select a Role:
                   <select value={role} onChange={(e) => setRole(e.target.value)}>
@@ -329,7 +325,6 @@ function Dashboard() {
                     <option value="admin">Admin</option>
                   </select>
                 </label>
-                <br />
                 <input className={styles.button2} type="submit" value="Register" />
               </form>
             </div>
