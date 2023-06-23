@@ -317,16 +317,6 @@ export const developersGames = () => {
     }
 }
 
-export const publishersGames = () => {
-    const endpoint = `publishersGames`;
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
-        return dispatch({
-            type: PUBLISHERS,
-            payload: data
-        })
-    }
-}
 
 export const genresGames = () => {
     const endpoint = `genresGames`;

@@ -20,7 +20,6 @@ const initialState = {
     languagesGames: [],
     categoriesGames: [],
     developersGames: [],
-    publishersGames: [],
     genresGames: [],
 };
 
@@ -206,12 +205,6 @@ const rootReducer=(state = initialState, action) => {
             return {
                 ...state,
                 developersGames: action.payload
-            }
-
-        case act.PUBLISHERS:
-            return {
-                ...state,
-                publishersGames: action.payload
             }
 
         case act.GENRES:
