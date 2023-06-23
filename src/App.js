@@ -23,13 +23,12 @@ return (
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
-      <Route path="/form" render={() => <Form/>} /> 
+      <Route path="/login" render={() => <Form/>} /> 
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
-      {location.pathname !== "/dashboard" && <Footer/>}
       <Route path="/search" render={() => <Search />} />
-      <Footer/>
+      {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
 );
