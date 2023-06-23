@@ -141,8 +141,8 @@ const NavBar = () => {
                                 )}
                             </div>
                         </li>
-                    ) : (
-                        <Link to="/form"><button className={style.button} >login</button></Link>
+                    ) : (console.log("lol")
+                        // <Link to="/form"><button className={style.button} >login</button></Link>
                     )
                 }
 
