@@ -14,17 +14,14 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
-
     createAccount : [],
-    user : null
-
+    user : null,
     orderCreated: false,
-    error: null
+    error: null,
     gamesPlatforms: [],
     languagesGames: [],
     categoriesGames: [],
     developersGames: [],
-    publishersGames: [],
     genresGames: [],
 
 };
@@ -230,11 +227,6 @@ const rootReducer=(state = initialState, action) => {
                 developersGames: action.payload
             }
 
-        case act.PUBLISHERS:
-            return {
-                ...state,
-                publishersGames: action.payload
-            }
 
         case act.GENRES:
             return {
