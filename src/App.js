@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
+import Review from './views/Reviews/Reviews';
 
 
 
@@ -27,9 +28,9 @@ return (
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
-      {location.pathname !== "/dashboard" && <Footer/>}
       <Route path="/search" render={() => <Search />} />
-      <Footer/>
+      <Route path="/review" render={() => <Review />} />
+      {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
 );
