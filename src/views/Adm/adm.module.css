@@ -149,17 +149,16 @@ height: 100%;
 
 
 .cardContainer {
+  height: 1000px;
   margin-top: 40px;
   background-color: #e4e4e4;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-height: 800px;
-  max-width: 400px; /* Defina a largura máxima desejada */
+  max-height: 1000px; /* Altere o valor conforme necessário */
+  max-width: 400px;
   margin-left: 500px;
   font-family: 'Titillium Web', sans-serif;
-  
 }
-
 
 .button2 {
   display: inline-block;
