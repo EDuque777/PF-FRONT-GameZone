@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Search.module.css";
 import * as act from "../../redux/actions";
@@ -8,22 +8,36 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Pagination from "../../components/Pagination/Pagination";
 import Filters from "../../components/Filters/Filters";
 
-const Search = (props) => {
+const Search = () => {
   const [name, setName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage, setResultsPerPage] = useState(8);
   const search = useSelector((state) => state.search);
+
+  const filterProperties = search.reduce((properties, game) => {
+    Object.keys(game).forEach((property) => {
+      if (!properties.includes(property)) {
+        properties.push(property);
+      }
+    });
+    return properties;
+  }, []);
+
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const maxPageButtons = 3;
 
   const handleChange = (e) => {
-    e.preventDefault();
     setName(e.target.value);
   };
 
   const handleButton = () => {
     if (name.trim() !== "") {
-      dispatch(act.getByName(name));
-      setCurrentPage(1); // Restablecer la página actual al realizar una nueva búsqueda
+      setLoading(true);
+      dispatch(act.getByName(name)).then(() => {
+        setCurrentPage(1);
+        setLoading(false);
+      });
     }
   };
 
@@ -33,15 +47,15 @@ const Search = (props) => {
     }
   };
 
-  // Calcular los índices de los resultados a mostrar en la página actual
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-  const currentResults = search.slice(indexOfFirstResult, indexOfLastResult);
+  const currentResults = search ? search.slice(indexOfFirstResult, indexOfLastResult) : [];
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  console.log(search);
+  
   return (
     <div>
       <div className={style.searchbar}>
@@ -59,24 +73,32 @@ const Search = (props) => {
             icon={faSearchengin}
             size="xl"
           />
-          <Filters />
         </div>
       </div>
       <div className={style.searchyfilters}>
         <div className={style.results}>
-          <CardsContainer
-            className={style.CardsContainer}
-            gameComingSoon={currentResults}
-          />
+          {loading ? (
+            <div className={style.loadingContainer}>
+              <div className={style.loading}></div>
+            </div>
+          ) : search ? (
+            <CardsContainer
+              className={style.CardsContainer}
+              gameComingSoon={currentResults}
+            />
+          ) : (
+            <p>No se encontraron resultados</p>
+          )}
           <Pagination
             resultsPerPage={resultsPerPage}
-            totalResults={search.length}
+            totalResults={search ? search.length : 0}
             currentPage={currentPage}
             paginate={paginate}
+            maxPageButtons={maxPageButtons}
           />
         </div>
         <div className={style.filters}>
-          <h1>INSERTEFILTROS</h1>
+          <Filters filterProperties={filterProperties} search={search || []} />
         </div>
       </div>
     </div>
