@@ -1,0 +1,136 @@
+// import React from "react";
+// import { Link } from 'react-router-dom';
+// import styles from "./Profile.module.css"
+
+// const Profile = () => {
+//     return(
+//         <html>
+//       <head>
+
+//       </head>
+//       <body>
+//         <div className={styles.area}></div>
+//         <nav className={styles.main_menu}>
+//           <ul>
+//             <li>
+//               <a href="">
+//                 <i className={`fa fa-home ${styles["fa-2x"]}`}></i>
+//                 <span className={styles.nav_text}>
+//                   Profile
+//                 </span>
+//               </a>
+//             </li>
+//             <li className="has subnav">
+//               <a href="#">
+//                 <i className={`fa fa-shopping-cart ${styles["fa-2x"]}`}></i>
+//                 <span className={styles.nav_text}>
+//                   Shopping
+//                 </span>
+//               </a>
+//             </li>
+//             <li className="has-subnav">
+//               <a href="#">
+//                 <i className={`fa fa-star ${styles["fa-2x"]}`}></i>
+//                 <span className={styles.nav_text}>
+//                   Reviews
+//                 </span>
+//               </a>
+//             </li>
+            
+//             <li>
+//               <a href="#">
+//                 <i className={`fa fa-cogs ${styles["fa-2x"]}`}></i>
+//                 <span className={styles.nav_text}>
+//                   Tools & Resources
+//                 </span>
+//               </a>
+//             </li>
+            
+//           </ul>
+//           <ul className="logout">
+//             <li>
+//               <Link to="/form">
+//                 <i className={`fa fa-power-off ${styles["fa-2x"]}`}></i>
+//                 <span className={styles.nav_text}>
+//                   Logout
+//                 </span>
+//               </Link>
+//             </li>
+//           </ul>
+//         </nav>
+//       </body>
+//     </html>
+        
+//     );
+// }
+
+// export default Profile;
+
+
+
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import styles from "./Profile.module.css";
+import ProfileView from "./ProfileViews/ProfileView";
+import ShoppingView from "./ProfileViews/ShoppingView";
+import ReviewsView from "./ProfileViews/ReviewsView";
+
+const Profile = () => {
+  const [activeOption, setActiveOption] = useState("profile");
+
+  const renderView = () => {
+    switch (activeOption) {
+      case "profile":
+        return <ProfileView />;
+      case "shopping":
+        return <ShoppingView />;
+      case "reviews":
+        return <ReviewsView />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <html>
+      <head>{/* Head content */}</head>
+      <body>
+        <div className={styles.area}></div>
+        <nav className={styles.main_menu}>
+          <ul>
+            <li>
+              <a href="" onClick={() => setActiveOption("profile")}>
+                <i className={`fa fa-home ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>Profile</span>
+              </a>
+            </li>
+            <li className="has subnav">
+              <a href="#" onClick={() => setActiveOption("shopping")}>
+                <i className={`fa fa-shopping-cart ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>Shopping</span>
+              </a>
+            </li>
+            <li className="has-subnav">
+              <a href="#" onClick={() => setActiveOption("reviews")}>
+                <i className={`fa fa-star ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>Reviews</span>
+              </a>
+            </li>
+            {/* More menu options */}
+          </ul>
+          <ul className="logout">
+            <li>
+              <Link to="/form">
+                <i className={`fa fa-power-off ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>Logout</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        {renderView()}
+      </body>
+    </html>
+  );
+};
+
+export default Profile;

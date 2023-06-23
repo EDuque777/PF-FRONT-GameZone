@@ -14,6 +14,11 @@ export const GET_BY_NAME = "GET_BY_NAME"
 export const ADD_TO_WHISH_LIST = "ADD_TO_WHISH_LIST"
 export const REMOVE_TO_WHISH_LIST = "REMOVE_TO_WHISH_LIST"
 export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
+
+export const CREATE_USER = "CREATE_USER"
+export const LOGIN_USER = "LOGIN_USER"
+export const LOGOUT_USER = "LOGOUT_USER"
+
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
@@ -21,6 +26,7 @@ export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
+
 
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
@@ -240,9 +246,11 @@ export const postCreateUser = (data) => {
     return async function (dispatch) {
         try {
            const user = await axios.post("http://localhost:3001/crearCuenta",data)
-
            console.log(user.data)
-
+            return dispatch({
+                type : CREATE_USER,
+                payload : user.data
+            })
         } catch (error) {
             console.log(error)
         }
@@ -255,11 +263,31 @@ export const postLogin = (datos) =>{
     return async function (dispatch) {
         try {
             const userTwo = await axios.post("http://localhost:3001/iniciarSesion",datos)
-
-            console.log(userTwo.data)
+            console.log(userTwo.data, "estos son de las actions")
+            return dispatch({
+                type : LOGIN_USER,
+                payload : userTwo.data
+            })
         } catch (error) {
             console.log(error)
         }
+    }
+}
+
+// Action de Logout Usuario
+
+export const logoutUser = () => {
+    return function (dispatch) {
+        try {
+            const logout = axios.post("http://localhost:3001/cerrarSesion")
+            console.log(logout)
+            return dispatch({
+                type : LOGOUT_USER
+            })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 }
 
@@ -282,6 +310,8 @@ export const platformsAll = () => {
         })
     }
 }
+
+
 
 export const languagesGames = () => {
     const endpoint = `languagesGames`;
@@ -326,3 +356,4 @@ export const genresGames = () => {
         })
     }
 }
+

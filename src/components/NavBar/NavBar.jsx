@@ -46,13 +46,13 @@ const NavBar = () => {
                         {isSubMenuOpen && (
                             <ul className={style.submenu}>
                                 <li className={style.modules}>
-                                    <Link to="">Perfil</Link>
+                                    <Link to="/profile">Perfil</Link>
                                 </li>
                                 <li>
                                     <Link to="/whishlist">Wish List</Link>
                                 </li>
                                 <li>
-                                    <Link to="/form">Log Out</Link>
+                                    <Link to="/login">Log Out</Link>
                                 </li>
                             </ul>
                         )}
