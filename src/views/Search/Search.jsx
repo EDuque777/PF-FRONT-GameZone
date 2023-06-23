@@ -98,7 +98,7 @@ const Search = () => {
           />
         </div>
         <div className={style.filters}>
-          <Filters filterProperties={filterProperties} search={search || []} />
+          {/* <Filters filterProperties={filterProperties} search={search || []} /> */}
         </div>
       </div>
     </div>
