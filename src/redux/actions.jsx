@@ -20,7 +20,6 @@ export const PLATFORMS = "PLATFORMS"
 export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
-export const PUBLISHERS = "PUBLISHERS"
 export const GENRES = "GENRES"
 
 
@@ -317,16 +316,6 @@ export const developersGames = () => {
     }
 }
 
-export const publishersGames = () => {
-    const endpoint = `publishersGames`;
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
-        return dispatch({
-            type: PUBLISHERS,
-            payload: data
-        })
-    }
-}
 
 export const genresGames = () => {
     const endpoint = `genresGames`;
