@@ -16,7 +16,7 @@ const initialState = {
     gamesFiltered: null,
 
     createAccount : [],
-    user : null
+    user : null,
 
     orderCreated: false,
     error: null,
