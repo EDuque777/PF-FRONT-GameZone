@@ -17,6 +17,7 @@ import Rating from '../../components/Rating/Rating';
 //     </div>
 //   );
 // };
+//
 
 
 const Detail = (props) => {
@@ -72,7 +73,11 @@ const Detail = (props) => {
 
   const handleAdd = () => {
     dispatch(act.addCart({id: bkId, image: img, name:name , price: isNaN(price) ? 0 : price}));
-}
+  }
+
+  const handleAddWhish = () => {
+    dispatch(act.addWhishList({ id: bkId, price: isNaN(price) ? 0 : price, name:name, image: img }));
+  };
 
   const price = game && (game[props.match.params.id]?.data?.price_overview?.initial)
   //const gamePrice = game && (game[props.match.params.id]?.data?.price_overview?.final_formatted);
@@ -113,10 +118,17 @@ const Detail = (props) => {
                     "Free"
                   }`}
                 </p>
-                  <button onClick={() => handleAdd(game[props.match.params.id].data)} className={style.boton}>
+                <p className={style.texto_boton}>
+
+                  <button onClick={() => handleAdd(game[props.match.params.id].data)} className={style.buttonadd}>
                     Add to Cart
                   </button>
+                  <button onClick={() => handleAddWhish(game[props.match.params.id].data)} className={style.buttonWish}>
+                    Add to WhishList
+                  </button>
+                </p>
                 </div>
+                
               </div>
             </div>
             <div className={style.container_imagenes}>

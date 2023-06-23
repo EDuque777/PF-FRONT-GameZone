@@ -6,6 +6,8 @@ import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
+import Review from './views/Reviews/Reviews';
+import Profile from './views/Profile/Profile';
 
 
 
@@ -28,6 +30,8 @@ return (
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/search" render={() => <Search />} />
+      <Route path="/review" render={() => <Review />} />
+      <Route path="/profile" render={() => <Profile />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
