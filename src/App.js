@@ -31,7 +31,7 @@ return (
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/search" render={() => <Search />} />
       <Route path="/review" render={() => <Review />} />
-      <Route path="/profile" render={() => <Profile />} />
+      <Route path="/users/id/:id" render={(routeProps) => <Profile {...routeProps} />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>

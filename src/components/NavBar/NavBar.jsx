@@ -46,7 +46,7 @@ const NavBar = () => {
                         {isSubMenuOpen && (
                             <ul className={style.submenu}>
                                 <li className={style.modules}>
-                                    <Link to="/profile">Perfil</Link>
+                                    <Link to="/users/id/${id}">Perfil</Link>
                                 </li>
                                 <li>
                                     <Link to="/whishlist">Wish List</Link>

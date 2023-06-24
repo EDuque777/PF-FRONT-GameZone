@@ -26,6 +26,8 @@ const initialState = {
     developersGames: [],
     genresGames: [],
 
+    userProfile: [],
+
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -234,6 +236,13 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 genresGames: action.payload
             }
+
+        case act.USER_PROFILE:
+            return {
+                ...state,
+                userProfile: action.payload
+                }
+        
 
         default:
             return {...state};

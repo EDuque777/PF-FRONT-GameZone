@@ -27,6 +27,8 @@ export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
 
+export const USER_PROFILE = "USER_PROFILE"
+
 
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
@@ -242,14 +244,14 @@ export const removeWhishList = (id) => {
 
 // Action de Create User
 
-export const postCreateUser = (data) => {
+export const postCreateUser = (props) => {
     return async function (dispatch) {
         try {
-           const user = await axios.post("http://localhost:3001/crearCuenta",data)
-           console.log(user.data)
+           const user = await axios.post("http://localhost:3001/crearCuenta",props)
+           console.log(user.props)
             return dispatch({
                 type : CREATE_USER,
-                payload : user.data
+                payload : user.props
             })
         } catch (error) {
             console.log(error)
@@ -357,4 +359,29 @@ export const genresGames = () => {
         })
     }
 }
+
+export const userProfile = (id) => {
+    const endpoint = `users/id/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: USER_PROFILE,
+            payload: data
+        })
+    }
+}
+
+
+// export const userProfile = (id) => {
+//     return async function (dispatch) {
+//         const User = await axios.get(`users/id/${id}`);
+//         const UserInfo = User.data;
+//             dispatch({
+//                 type:USER_PROFILE, 
+//                 payload: UserInfo
+//             })
+//     };
+// }
+
+
 
