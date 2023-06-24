@@ -247,7 +247,7 @@ export const removeWhishList = (id) => {
 export const postCreateUser = (props) => {
     return async function (dispatch) {
         try {
-           const user = await axios.post("http://localhost:3001/crearCuenta",props)
+           const user = await axios.post("crearCuenta",props)
            console.log(user.props)
             return dispatch({
                 type : CREATE_USER,
@@ -264,7 +264,7 @@ export const postCreateUser = (props) => {
 export const postLogin = (datos) =>{
     return async function (dispatch) {
         try {
-            const userTwo = await axios.post("http://localhost:3001/iniciarSesion",datos)
+            const userTwo = await axios.post("iniciarSesion",datos)
             console.log(userTwo.data, "estos son de las actions")
             return dispatch({
                 type : LOGIN_USER,
@@ -281,7 +281,7 @@ export const postLogin = (datos) =>{
 export const logoutUser = () => {
     return function (dispatch) {
         try {
-            const logout = axios.post("http://localhost:3001/cerrarSesion")
+            const logout = axios.post("cerrarSesion")
             console.log(logout)
             return dispatch({
                 type : LOGOUT_USER
@@ -360,28 +360,9 @@ export const genresGames = () => {
     }
 }
 
-export const userProfile = (id) => {
-    const endpoint = `users/id/${id}`;
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
-        return dispatch({
-            type: USER_PROFILE,
-            payload: data
-        })
-    }
-}
 
 
-// export const userProfile = (id) => {
-//     return async function (dispatch) {
-//         const User = await axios.get(`users/id/${id}`);
-//         const UserInfo = User.data;
-//             dispatch({
-//                 type:USER_PROFILE, 
-//                 payload: UserInfo
-//             })
-//     };
-// }
+
 
 
 

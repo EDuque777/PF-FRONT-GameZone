@@ -4,6 +4,7 @@ import styles from "./Profile.module.css";
 import ProfileView from "./ProfileViews/ProfileView";
 import ShoppingView from "./ProfileViews/ShoppingView";
 import ReviewsView from "./ProfileViews/ReviewsView";
+import * as act from "../../redux/actions";
 
 const Profile = (props) => { // Agrega props como parámetro
   const [activeOption, setActiveOption] = useState("profile");
@@ -11,7 +12,7 @@ const Profile = (props) => { // Agrega props como parámetro
   const renderView = () => {
     switch (activeOption) {
       case "profile":
-        return <ProfileView match={props.match} />;
+        return <ProfileView  />;
       case "shopping":
         return <ShoppingView />;
       case "reviews":
@@ -64,3 +65,5 @@ const Profile = (props) => { // Agrega props como parámetro
 };
 
 export default Profile;
+
+

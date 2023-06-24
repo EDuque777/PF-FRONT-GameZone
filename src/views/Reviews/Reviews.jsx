@@ -15,7 +15,7 @@ const Review = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:3001/review", form)
+    axios.post("http://localhost:3001/user/review", form)
       .then(res => {
         setForm({
           review: "",
