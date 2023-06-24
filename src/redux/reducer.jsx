@@ -235,6 +235,31 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 genresGames: action.payload
             }
+
+
+        case act.CLEANDETAIL:
+            return {
+                ...state,
+                user: null,
+            };
+
+            case act.EDITNAME:
+                return {
+                  ...state,
+                  user: {
+                    ...state.user,
+                    name: action.payload.name,
+                  },
+                };
+
+            case act.EDITUSERNAME:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    user_name: action.payload.user_name,
+                      },
+                    };
             
             
         default:
