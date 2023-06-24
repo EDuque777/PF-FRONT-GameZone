@@ -236,6 +236,7 @@ const rootReducer=(state = initialState, action) => {
                 genresGames: action.payload
             }
             
+            
         default:
             return {...state};
     }

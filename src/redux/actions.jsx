@@ -31,6 +31,7 @@ export const USER_PROFILE = "USER_PROFILE"
 
 
 
+
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
 export const getGames = () => {
@@ -359,7 +360,6 @@ export const genresGames = () => {
         })
     }
 }
-
 
 
 
