@@ -36,6 +36,7 @@ function Dashboard() {
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
+    createGames();
     // Lógica para enviar os dados do formulário de criação de jogo
     console.log('Dados do formulário de criação de jogo:', {
       name,
@@ -85,6 +86,7 @@ function Dashboard() {
   const handleUserSubmit = (event) => {
     event.preventDefault();
     createUser();
+    
     // Lógica para enviar os dados do formulário de criação de usuário
     console.log('Dados do formulário de criação de usuário:', {
       userName,
@@ -114,8 +116,7 @@ function Dashboard() {
           role,
         }),
       });
-  
-  
+      
       const data = await response.json();
       console.log('Usuario creado:', data);
     } catch (error) {
@@ -123,6 +124,43 @@ function Dashboard() {
     }
   };
 
+  const createGames = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/games', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          type,
+          required_age: requiredAge,
+          is_free: isFree,
+          detailed_description: detailedDescription,
+          about_the_game: aboutTheGame,
+          short_description: shortDescription,
+          release_date: releaseDate,
+          coming_soon: comingSoon,
+          support_info: supportInfo,
+          metacritic,
+          price_overview: priceOverview,
+          header_image: headerImage,
+          capsule_image: capsuleImage,
+          developers,
+          genres,
+          publishers,
+          platform,
+          languages,
+          categories,
+        }),
+      });
+  
+      const data = await response.json();
+      console.log('Juego creado:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const handleCreateGameClick = () => {
     setShowForm(true);
