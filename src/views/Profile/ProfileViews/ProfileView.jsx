@@ -166,7 +166,7 @@ const ProfileView = (props) => {
   const dispatch = useDispatch();
 
   const IDUser = useSelector((state) => state.userStorage);
-  const datosUser =  JSON.parse(localStorage.getItem("user"));
+  const datosUser = JSON.parse(localStorage.getItem("user"));
 
   const [editingName, setEditingName] = useState(false);
   const [editingUserName, setEditingUserName] = useState(false);
@@ -178,6 +178,9 @@ const ProfileView = (props) => {
 
   useEffect(() => {
     dispatch(act.getUserStorage(datosUser?.id));
+    setNewName(datosUser?.name || "");
+    setNewUserName(datosUser?.user_name || "");
+    setNewCountry(datosUser?.country || "");
     return () => {
       dispatch(act.CleanDetail());
     };
@@ -211,14 +214,17 @@ const ProfileView = (props) => {
     if (editingName) {
       dispatch(act.editName(IDUser?.id, newName));
       setEditingName(false);
+      localStorage.setItem("user", JSON.stringify({ ...datosUser, name: newName }));
     }
     if (editingUserName) {
       dispatch(act.editUserName(IDUser?.id, newUserName));
       setEditingUserName(false);
+      localStorage.setItem("user", JSON.stringify({ ...datosUser, user_name: newUserName }));
     }
     if (editingCountry) {
       dispatch(act.editCountry(IDUser?.id, newCountry));
       setEditingCountry(false);
+      localStorage.setItem("user", JSON.stringify({ ...datosUser, country: newCountry }));
     }
   };
 
@@ -268,20 +274,20 @@ const ProfileView = (props) => {
           ) : null}
         </h3>
         <h3>
-        Country:{" "}
-        {editingCountry ? (
-          <select value={newCountry} onChange={handleCountryChange}>
-            <option value="">Select a country</option>
-            {countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        ) : (
-          IDUser?.country
-        )}
-      </h3>
+          Country:{" "}
+          {editingCountry ? (
+            <select value={newCountry} onChange={handleCountryChange}>
+              <option value="">Select a country</option>
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+          ) : (
+            IDUser?.country
+          )}
+        </h3>
         <button onClick={handleEditNameClick} className={style.button}>
           {editingName ? "Cancel" : "Edit Name"}
         </button>
