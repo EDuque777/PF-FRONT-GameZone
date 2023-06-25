@@ -154,16 +154,16 @@ export const gameDetail = (id) => {
     }
 }
 
-export const preload = () => {
-    return async (dispatch) => {
-        try {
-            await axios.get('http://localhost:3001/preload');
-            console.log("base de datos cargada")
-        } catch (error) {
-        dispatch(console.log(error));
-        }
-    };
-};
+// export const preload = () => {
+//     return async (dispatch) => {
+//         try {
+//             await axios.get('http://localhost:3001/preload');
+//             console.log("base de datos cargada")
+//         } catch (error) {
+//         dispatch(console.log(error));
+//         }
+//     };
+// };
 
 export const getByName = (name) => {
     return async function(dispatch) {

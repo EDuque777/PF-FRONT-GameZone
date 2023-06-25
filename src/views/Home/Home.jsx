@@ -25,7 +25,7 @@ const Home = () => {
     dispatch(act.getGamesComingSoon());
     dispatch(act.getGamesTopSellers());
     dispatch(act.clearSearch());
-    dispatch(act.preload());
+    // dispatch(act.preload());
   }, [dispatch]);
 
 
