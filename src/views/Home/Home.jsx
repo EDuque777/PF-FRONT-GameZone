@@ -60,7 +60,7 @@ const Home = () => {
         <div className={style.searchcontainer}>
           <input
             className={style.search}
-            placeholder="  search..."
+            placeholder="search..."
             type="text"
             onChange={e => handleChange(e)}
             onKeyDown={handleKeyDown}

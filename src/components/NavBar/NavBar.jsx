@@ -94,27 +94,6 @@ const NavBar = () => {
                     <Link to="/home">Home</Link>
                 </li>
                 <li>
-                    <div className={style.usuarioContainer}>
-                        <img
-                            src={usuario}
-                            className={style.usuario}
-                            alt="user"
-                            onClick={handleSubMenuToggle}
-                        />
-                        {isSubMenuOpen && (
-                            <ul className={style.submenu}>
-                                <li className={style.modules}>
-                                    <Link to="">Perfil</Link>
-                                </li>
-                                <li>
-                                    <Link to="/whishlist">Wish List</Link>
-                                </li>
-                                <li>
-                                    <Link to="/login">Log Out</Link>
-                                </li>
-                            </ul>
-                        )}
-                    </div>
                     <Link to="/cart">Shopping Cart</Link>
                 </li>
 
@@ -133,7 +112,7 @@ const NavBar = () => {
                                     <ul className={style.submenu}>
                                         <li>
                                             <Link to="#" >{datosUser.user_name}</Link>
-                                            <Link to="">Perfil</Link>
+                                            <Link to="/user">Perfil</Link>
                                             <Link to="/whishlist">Wish List</Link>
                                             <a onClick={removerDatos}>Log Out</a>
                                         </li>
@@ -141,8 +120,8 @@ const NavBar = () => {
                                 )}
                             </div>
                         </li>
-                    ) : (console.log("lol")
-                        // <Link to="/form"><button className={style.button} >login</button></Link>
+                    ) : (
+                        <Link to="/login"><button className={style.button} >login</button></Link>
                     )
                 }
 
@@ -153,5 +132,4 @@ const NavBar = () => {
 };
 
  export default NavBar; 
-
 

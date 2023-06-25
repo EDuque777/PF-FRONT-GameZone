@@ -25,12 +25,94 @@ export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
 
-
+export const ORDER_BY = "ORDER_BY"
+export const FILTER_TYPE = "FILTER_TYPE"
+export const FILTER_AGE = "FILTER_AGE"
+export const FILTER_FREE = "FILTER_FREE"
+export const RESET_FILTERS = "RESET_FILTERS"
+export const FILTER_PLATFORMS = "FILTER_PLATFORMS"
+export const FILTER_CATEGORIES = "FILTER_CATEGORIES"
+export const FILTER_LANGUAGES = "FILTER_LANGUAGES"
+export const FILTER_GENRES = "FILTER_GENRES"
+export const FILTER_CONTROLLER = "FILTER_CONTROLLER"
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
+export const resetfilters = () => {
+    return {
+            type: "RESET_FILTERS",
+        
+    }
+}
+export const filterplatforms = (payload) => {
+    return {
+            
+            type: "FILTER_PLATFORMS",
+            payload: payload
+        
+    }
+}
+export const filterlanguages = (payload) => {
+    return {
+            
+            type: "FILTER_LANGUAGES",
+            payload: payload
+        
+    }
+}
+export const filtercontroller = (payload) => {
+    return {
+            
+            type: "FILTER_CONTROLLER",
+            payload: payload
+        
+    }
+}
+export const filtergenres = (payload) => {
+    return {
+            type: "FILTER_GENRES",
+            payload: payload
+        
+    }
+}
+export const filtercategories = (payload) => {
+    return {
+            
+            type: "FILTER_CATEGORIES",
+            payload: payload
+        
+    }
+}
+export const filterage = (payload) => {
+    return {
+            
+            type: "FILTER_AGE",
+            payload: payload
+        
+    }
+}
+export const orderBy = (payload) => {
+    return {
+            
+            type: "ORDER_BY",
+            payload: payload
+        
+    }
+}
+export const filtertype = (payload) => {
+    return {
+            type: "FILTER_TYPE",
+            payload: payload
+    }
+}
+export const filterfree = (payload) => {
+    return {
+            type: "FILTER_FREE",
+            payload: payload
+    }
+}
 export const getGames = () => {
-
+    
     return async function (dispatch) {
         try {
             const response = await axios.get(`allGames`)
@@ -74,19 +156,33 @@ export const preload = () => {
 
 export const getByName = (name) => {
     return async function(dispatch) {
-        try {
-            //console.log(name)
-            const response = await axios.get(`nameGames?name=${name}`)
-            
-            dispatch({
-                type: GET_BY_NAME,
-                payload: response.data
-            })
+    try {
+        const response = await axios.get(`nameGames?name=${name}`);
+
+        const sortedResponse = response.data.sort((a, b) => {
+        const aHasRecommendations = a.hasOwnProperty('recommendations');
+        const bHasRecommendations = b.hasOwnProperty('recommendations');
+        if (!aHasRecommendations && !bHasRecommendations) {
+            return 0;
+        } else if (!aHasRecommendations) {
+            return 1;
+        } else if (!bHasRecommendations) {
+            return -1;
+        }
+
+        return b.recommendations.total - a.recommendations.total;
+        });
+
+        dispatch({
+            type: GET_BY_NAME,
+            payload: sortedResponse
+        });
         } catch (error) {
             console.log(error.message);
         }
-    }
-}
+    };
+};
+
 
 export const clearDetail = () => {
     return function (dispatch){
