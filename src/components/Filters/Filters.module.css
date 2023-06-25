@@ -21,6 +21,9 @@
 .option:hover {
   background-color: #555555;
 }
+.filtersContainer{
+  color: #cacaca;
+}
 
 /* Estilos para la barra de desplazamiento */
 ::-webkit-scrollbar {

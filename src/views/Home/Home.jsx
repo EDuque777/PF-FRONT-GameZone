@@ -25,6 +25,7 @@ const Home = () => {
     dispatch(act.getGamesComingSoon());
     dispatch(act.getGamesTopSellers());
     dispatch(act.clearSearch());
+    // dispatch(act.preload());
   }, [dispatch]);
 
 
@@ -59,7 +60,7 @@ const Home = () => {
         <div className={style.searchcontainer}>
           <input
             className={style.search}
-            placeholder="  search..."
+            placeholder="search..."
             type="text"
             onChange={e => handleChange(e)}
             onKeyDown={handleKeyDown}
