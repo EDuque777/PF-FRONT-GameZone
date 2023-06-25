@@ -8,6 +8,7 @@ import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
 import Review from './views/Reviews/Reviews';
 import Profile from './views/Profile/Profile';
+import MyGames from './views/MyGames/MyGames';
 
 function App() {
 
@@ -29,6 +30,7 @@ return (
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/search" render={() => <Search />} />
       <Route path="/review" render={() => <Review />} />
+      <Route path="/library" render={() => <MyGames />}/>
       <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
