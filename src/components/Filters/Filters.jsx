@@ -10,7 +10,6 @@ const Filters = () => {
   const gamesFilterLanguages = useSelector(state => state.languagesGames);
   const gamesFilterCategories = useSelector(state => state.categoriesGames);
   const gamesFilterDevelopers = useSelector(state => state.developersGames);
-  const gamesFilterPublishers = useSelector(state => state.publishersGames);
   const gamesFilterGenres = useSelector(state => state.genresGames);
 
   useEffect(() => {
@@ -18,7 +17,6 @@ const Filters = () => {
     dispatch(act.languagesGames());
     dispatch(act.categoriesGames());
     dispatch(act.developersGames());
-    dispatch(act.publishersGames());
     dispatch(act.genresGames());
   }, [dispatch]);
 
@@ -26,7 +24,6 @@ const Filters = () => {
   const languagesFilter = gamesFilterLanguages.filter(languages => languages);
   const categoriesFilter = gamesFilterCategories.filter(categories => categories);
   const developersFilter = gamesFilterDevelopers.filter(developers => developers);
-  const publishersFilter = gamesFilterPublishers.filter(publishers => publishers);
   const genresFilter = gamesFilterGenres.filter(genres => genres);
 
   return (
@@ -59,12 +56,6 @@ const Filters = () => {
         ))}
       </select>
 
-      <select className={style.select}>
-        <option hidden>Publishers</option>
-        {publishersFilter.map(({ publisher, id }) => (
-          <option key={id} value={publisher} className={style.option}>{publisher}</option>
-        ))}
-      </select>
 
       <select className={style.select}>
         <option hidden>Genres</option>

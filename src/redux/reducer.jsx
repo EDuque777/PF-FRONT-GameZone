@@ -14,14 +14,21 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
+
+    createAccount : [],
+    user : null,
+
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
     languagesGames: [],
     categoriesGames: [],
     developersGames: [],
-    publishersGames: [],
     genresGames: [],
+
+    userStorage: null,
+
+
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -183,6 +190,23 @@ const rootReducer=(state = initialState, action) => {
                 whishList: [],
                 counter: 0
             }
+// CASOS DEL USUARIO 
+        case act.CREATE_USER: 
+            return {
+                ...state,
+                createAccount : action.payload
+            }
+        case act.LOGIN_USER:
+            return {
+                ...state,
+                user : action.payload
+            }
+        case act.LOGOUT_USER:{
+            return{
+                ...state,
+                user : null
+            }
+        }
 
         case act.PLATFORMS:
             return {
@@ -208,18 +232,61 @@ const rootReducer=(state = initialState, action) => {
                 developersGames: action.payload
             }
 
-        case act.PUBLISHERS:
-            return {
-                ...state,
-                publishersGames: action.payload
-            }
-
         case act.GENRES:
             return {
                 ...state,
                 genresGames: action.payload
             }
 
+
+        case act.CLEANDETAIL:
+            return {
+                ...state,
+                user: null,
+            };
+
+            case act.EDITNAME:
+                return {
+                  ...state,
+                  user: {
+                    ...state.user,
+                    name: action.payload.name,
+                  },
+                };
+
+            case act.EDITUSERNAME:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    user_name: action.payload.user_name,
+                      },
+                    };
+
+            case act.EDITCOUNTRY:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    country: action.payload.country,
+                        },
+                    };
+            //  case act.EDITPROFILEIMAGE:
+            //     return {
+            //         ...state,
+            //         user: {
+            //         ...state.user,
+            //         profileImage: action.payload.profileImage,
+            //           },
+            //         };
+
+            case act.GETUSERSTORAGE:
+            return {
+                ...state,
+                userStorage: action.payload
+            }
+            
+            
         default:
             return {...state};
     }

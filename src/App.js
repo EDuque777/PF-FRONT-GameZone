@@ -6,6 +6,8 @@ import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
+import Review from './views/Reviews/Reviews';
+import Profile from './views/Profile/Profile';
 
 function App() {
 
@@ -21,15 +23,16 @@ return (
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
-      <Route path="/form" render={() => <Form/>} /> 
+      <Route path="/login" render={() => <Form/>} /> 
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
       <Route path="/search" render={() => <Search />} />
+      <Route path="/review" render={() => <Review />} />
+      <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
 );}
 
 export default App;
-
