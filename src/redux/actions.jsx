@@ -556,8 +556,8 @@ export const getUserStorage = (id) => {
 }
 
 
-export const getGameTeview = (id) => {
-    const endpoint = `/review/${id}`;
+export const getGameReview = (id) => {
+    const endpoint = `/reviewgame/${id}`;
     return async (dispatch) => {
         const {data} = await axios.get(endpoint);
         return dispatch({
