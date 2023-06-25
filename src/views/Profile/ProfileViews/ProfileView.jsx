@@ -459,9 +459,11 @@ const ProfileView = (props) => {
             datosUser?.country || ""
           )}
         </h3>
+        {!editingName && (
         <button onClick={handleEditNameClick} className={style.button}>
-          {editingName ? "Cancel" : "Edit Name"}
+          Edit Name
         </button>
+        )}
         {editingName && (
           <>
             <button onClick={handleSaveClick} className={style.saveButton}>
@@ -472,9 +474,11 @@ const ProfileView = (props) => {
             </button>
           </>
         )}
-        <button onClick={handleEditUserNameClick} className={style.button}>
-          {editingUserName ? "Cancel" : "Edit User Name"}
-        </button>
+        {!editingUserName && (
+          <button onClick={handleEditUserNameClick} className={style.button}>
+            Edit User Name
+          </button>
+        )}
         {editingUserName && (
           <>
             <button onClick={handleSaveClick} className={style.saveButton}>
@@ -485,9 +489,11 @@ const ProfileView = (props) => {
             </button>
           </>
         )}
-        <button onClick={handleEditCountryClick} className={style.button}>
-          {editingCountry ? "Cancel" : "Edit Country"}
-        </button>
+        {!editingCountry && (
+          <button onClick={handleEditCountryClick} className={style.button}>
+            Edit Country
+          </button>
+        )}
         {editingCountry && (
           <>
             <button onClick={handleSaveClick} className={style.saveButton}>
