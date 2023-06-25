@@ -5,6 +5,7 @@ import axios from 'axios';
 import style from "./Reviews.module.css"
 
 const Review = () => {
+
   const IDUser = useSelector((state) => state.user);
 console.log(IDUser);
   const [form, setForm] = useState({
@@ -19,7 +20,9 @@ console.log(IDUser);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     axios.post("http://localhost:3001/user/review", form, IDUser)
+
       .then(res => {
         setForm({
           review: "",

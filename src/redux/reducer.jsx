@@ -24,10 +24,7 @@ const initialState = {
     categoriesGames: [],
     developersGames: [],
     genresGames: [],
-
     userStorage: null,
-
-
 };
 
 const rootReducer=(state = initialState, action) => {

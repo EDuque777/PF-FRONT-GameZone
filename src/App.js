@@ -7,7 +7,9 @@ import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
 import Review from './views/Reviews/Reviews';
+
 import Profile from './views/Profile/Profile';
+
 
 function App() {
 
@@ -34,5 +36,6 @@ return (
     </>
   </div>
 );}
+
 
 export default App;
