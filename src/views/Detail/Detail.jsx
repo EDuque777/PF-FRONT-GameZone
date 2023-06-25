@@ -17,6 +17,7 @@ import Rating from '../../components/Rating/Rating';
 //     </div>
 //   );
 // };
+//
 
 
 const Detail = (props) => {

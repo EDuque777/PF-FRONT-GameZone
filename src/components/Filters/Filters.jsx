@@ -10,7 +10,6 @@ const Filters = () => {
   const gamesFilterLanguages = useSelector(state => state.languagesGames);
   const gamesFilterCategories = useSelector(state => state.categoriesGames);
   const gamesFilterDevelopers = useSelector(state => state.developersGames);
-
   const gamesFilterGenres = useSelector(state => state.genresGames);
 
   useEffect(() => {
@@ -18,7 +17,6 @@ const Filters = () => {
     dispatch(act.languagesGames());
     dispatch(act.categoriesGames());
     dispatch(act.developersGames());
-
     dispatch(act.genresGames());
   }, [dispatch]);
 
@@ -26,7 +24,6 @@ const Filters = () => {
   const languagesFilter = gamesFilterLanguages.filter(languages => languages);
   const categoriesFilter = gamesFilterCategories.filter(categories => categories);
   const developersFilter = gamesFilterDevelopers.filter(developers => developers);
-
   const genresFilter = gamesFilterGenres.filter(genres => genres);
 
   return (
