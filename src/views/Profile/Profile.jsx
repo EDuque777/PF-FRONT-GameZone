@@ -37,12 +37,12 @@ const Profile = (props) => { // Agrega props como parámetro
             </li>
             <li className="has subnav">
               <a href="#" onClick={() => setActiveOption("shopping")}>
-                <i className={`fa fa-shopping-cart ${styles["fa-2x"]}`}></i>
-                <span className={styles.nav_text}>Shopping</span>
+                <i className={`fa fa-gamepad ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>MyGames</span>
               </a>
             </li>
             <li className="has-subnav">
-              <a href="#" onClick={() => setActiveOption("reviews")}>
+              <a href="/review" onClick={() => setActiveOption("reviews")}>
                 <i className={`fa fa-star ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>Reviews</span>
               </a>

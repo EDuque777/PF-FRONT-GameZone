@@ -57,7 +57,7 @@ const Card = (props) => {
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}>{formattedNumber || price2}</h3>
+      <h3 className={style.price}>$ {formattedNumber || price2}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>
