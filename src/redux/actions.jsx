@@ -44,6 +44,10 @@ export const EDITCOUNTRY = "EDITCOUNTRY";
 export const EDITPROFILEIMAGE = "EDITPROFILEIMAGE";
 export const GETUSERSTORAGE = "GETUSERSTORAGE";
 
+export const GETGAMEREVIEW = "GETGAMEREVIEW";
+
+
+
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
@@ -546,6 +550,18 @@ export const getUserStorage = (id) => {
         const {data} = await axios.get(endpoint);
         return dispatch({
             type: GETUSERSTORAGE,
+            payload: data
+        })
+    }
+}
+
+
+export const getGameTeview = (id) => {
+    const endpoint = `/review/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GETGAMEREVIEW,
             payload: data
         })
     }
