@@ -26,6 +26,9 @@ const initialState = {
     developersGames: [],
     genresGames: [],
 
+    userStorage: null,
+
+
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -235,6 +238,55 @@ const rootReducer=(state = initialState, action) => {
                 genresGames: action.payload
             }
 
+
+        case act.CLEANDETAIL:
+            return {
+                ...state,
+                user: null,
+            };
+
+            case act.EDITNAME:
+                return {
+                  ...state,
+                  user: {
+                    ...state.user,
+                    name: action.payload.name,
+                  },
+                };
+
+            case act.EDITUSERNAME:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    user_name: action.payload.user_name,
+                      },
+                    };
+
+            case act.EDITCOUNTRY:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    country: action.payload.country,
+                        },
+                    };
+            //  case act.EDITPROFILEIMAGE:
+            //     return {
+            //         ...state,
+            //         user: {
+            //         ...state.user,
+            //         profileImage: action.payload.profileImage,
+            //           },
+            //         };
+
+            case act.GETUSERSTORAGE:
+            return {
+                ...state,
+                userStorage: action.payload
+            }
+            
+            
         default:
             return {...state};
     }
