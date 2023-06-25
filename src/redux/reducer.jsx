@@ -260,6 +260,23 @@ const rootReducer=(state = initialState, action) => {
                     user_name: action.payload.user_name,
                       },
                     };
+
+            case act.EDITCOUNTRY:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    country: action.payload.country,
+                        },
+                    };
+            //  case act.EDITPROFILEIMAGE:
+            //     return {
+            //         ...state,
+            //         user: {
+            //         ...state.user,
+            //         profileImage: action.payload.profileImage,
+            //           },
+            //         };
             
             
         default:
