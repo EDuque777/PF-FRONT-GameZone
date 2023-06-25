@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
   const { id, price, price2, name, image, appid } = props;
+  console.log(props);
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
