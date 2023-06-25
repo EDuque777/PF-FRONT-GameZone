@@ -171,6 +171,7 @@ function Dashboard() {
                   Name Game:
                   <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </label>
+
                 <label>
                   Type:
                   <input type="text" value={type} onChange={(e) => setType(e.target.value)} />
@@ -200,8 +201,6 @@ function Dashboard() {
                   Short Description:
                   <textarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} />
                 </label>
-
-              
                 
                 <label>
                   Release Date:
