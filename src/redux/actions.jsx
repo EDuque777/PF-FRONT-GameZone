@@ -23,7 +23,6 @@ export const DEVELOPERS = "DEVELOPERS"
 export const PUBLISHERS = "PUBLISHERS"
 export const GENRES = "GENRES"
 
-
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
 export const getGames = () => {

@@ -7,11 +7,9 @@ import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
 
-
-
 function App() {
 
-    const location = useLocation()
+  const location = useLocation()
 
 return (
   <div className="App">
@@ -31,13 +29,7 @@ return (
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
-);
-
-      
-
-
-  
-}
+);}
 
 export default App;
 

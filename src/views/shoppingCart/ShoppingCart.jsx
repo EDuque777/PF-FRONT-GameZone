@@ -1,5 +1,3 @@
-//* Rellenar cuando se este realizando el redux e importar los componentes necesarios...
-//!APLICAR EL PERSIST
 import React from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
