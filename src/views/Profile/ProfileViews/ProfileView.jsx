@@ -2,6 +2,7 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import style from "./ProfileView.module.css";
 // import * as act from "../../../redux/actions";
+// import countries from "./countries";
 
 // const ProfileView = (props) => {
 //   const dispatch = useDispatch();
@@ -108,18 +109,20 @@
 //           ) : null}
 //         </h3>
 //         <h3>
-//           Country:{" "}
-//           {editingCountry ? (
-//             <input
-//               type="text"
-//               value={newCountry}
-//               onChange={handleCountryChange}
-//               placeholder={IDUser?.country}
-//             />
-//           ) : (
-//             IDUser?.country
-//           )}
-//         </h3>
+//         Country:{" "}
+//         {editingCountry ? (
+//           <select value={newCountry} onChange={handleCountryChange}>
+//             <option value="">Select a country</option>
+//             {countries.map((country) => (
+//               <option key={country} value={country}>
+//                 {country}
+//               </option>
+//             ))}
+//           </select>
+//         ) : (
+//           IDUser?.country
+//         )}
+//       </h3>
 //         <button onClick={handleEditNameClick} className={style.button}>
 //           {editingName ? "Cancel" : "Edit Name"}
 //         </button>
@@ -162,7 +165,8 @@ import countries from "./countries";
 const ProfileView = (props) => {
   const dispatch = useDispatch();
 
-  const IDUser = useSelector((state) => state.user);
+  const IDUser = useSelector((state) => state.userStorage);
+  const datosUser =  JSON.parse(localStorage.getItem("user"));
 
   const [editingName, setEditingName] = useState(false);
   const [editingUserName, setEditingUserName] = useState(false);
@@ -173,7 +177,7 @@ const ProfileView = (props) => {
   const [newCountry, setNewCountry] = useState("");
 
   useEffect(() => {
-    dispatch(act.postLogin());
+    dispatch(act.getUserStorage(datosUser?.id));
     return () => {
       dispatch(act.CleanDetail());
     };

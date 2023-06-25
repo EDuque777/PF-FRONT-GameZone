@@ -14,11 +14,9 @@ export const GET_BY_NAME = "GET_BY_NAME"
 export const ADD_TO_WHISH_LIST = "ADD_TO_WHISH_LIST"
 export const REMOVE_TO_WHISH_LIST = "REMOVE_TO_WHISH_LIST"
 export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
-
 export const CREATE_USER = "CREATE_USER"
 export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
-
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
@@ -26,20 +24,13 @@ export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
-
 export const USER_PROFILE = "USER_PROFILE"
-
-
 export const CLEANDETAIL = "CLEANDETAIL";
-
 export const EDITNAME = "EDITNAME";
 export const EDITUSERNAME = "EDITUSERNAME";
 export const EDITCOUNTRY = "EDITCOUNTRY";
 export const EDITPROFILEIMAGE = "EDITPROFILEIMAGE";
-
-
-
-
+export const GETUSERSTORAGE = "GETUSERSTORAGE";
 
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
@@ -99,6 +90,7 @@ export const clearDetail = () => {
         })
     }
 }
+
 export const clearSearch = () => {
     return function (dispatch){
         dispatch({
@@ -202,10 +194,10 @@ export const clearCart = ()  => {
     }
 }
 
-export const createOrder = (totalPrice, cartGames) => {
+export const createOrder = (totalPrice, cartGames, dataUser) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post("/createOrder", {totalPrice, cartGames})
+            const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,
@@ -437,3 +429,14 @@ export const editName = (id, newName) => {
 //       }
 //     };
 //   };
+
+export const getUserStorage = (id) => {
+    const endpoint = `/profile/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GETUSERSTORAGE,
+            payload: data
+        })
+    }
+}
