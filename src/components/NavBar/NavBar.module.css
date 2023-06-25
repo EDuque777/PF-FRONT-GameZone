@@ -1,18 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis:300,400,500');
 
-
-.fixedNavbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #141414;
-    height: px;
-    z-index: 998!important;
-    transition: background-color 0.3s ease-in;
-}
-
-
 .img {
     position: absolute;
     top: -20px;
@@ -69,9 +56,7 @@
 .usuarioContainer {
     position: relative;
 }
-.NaV{
-    list-style-type: none;
-}
+
 .submenu {
     text-decoration: none;
     position: absolute;
@@ -80,16 +65,11 @@
     background-color: rgba(56, 55, 55, 0.479);
     padding: 0 30px;
     border-radius: 15px;
-
-    box-shadow: 0 2px 4px rgba(253, 3, 3, 0.39);
-    list-style-type: none;
-
-    /*box-shadow: 0 2px 4px #7117928e;
+    box-shadow: 0 2px 4px #7117928e;
     font-family: 'Dosis', sans-serif;
     font-weight: 500;
     font-size: 17px;
-    white-space: nowrap;*/
-
+    white-space: nowrap;
 }
 .submenu:hover {
     box-shadow: 0 2px 4px #fffeff;
@@ -109,14 +89,11 @@
 }
 
 
-.submenu li a:hover {
-    color: #ff002b;
-}
-
-
 .submenu li a {
     text-decoration: none;
     color: white;
 }
 
-
+.submenu li a:hover {
+    color: #711792;
+} 
