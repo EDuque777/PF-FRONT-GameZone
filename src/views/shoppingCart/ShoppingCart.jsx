@@ -1,5 +1,3 @@
-//* Rellenar cuando se este realizando el redux e importar los componentes necesarios...
-//!APLICAR EL PERSIST
 import React from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +14,8 @@ const ShoppingCart = () => {
     const wholePart = Math.floor(totalPrice / 100);
     const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
     const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
+    const dataUser =  JSON.parse(localStorage.getItem("user"));
+    console.log(dataUser);
 
     const handleRemove = () => {
         Swal.fire({
@@ -41,7 +41,7 @@ const ShoppingCart = () => {
     const handleBuy = async () => {
         try {
             //! mandar tanto juegos como el precio total
-            dispatch(act.createOrder(formattedTotalPrice, cart))
+            dispatch(act.createOrder(formattedTotalPrice, cart, dataUser))
         } catch (error) {
             console.error(error.message);
         }

@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import style from "./Reviews.module.css"
 
 const Review = () => {
+
+  const IDUser = useSelector((state) => state.user);
+console.log(IDUser);
   const [form, setForm] = useState({
     review: "",
     rating: 0,
+    id: IDUser?.id
   });
 
   const handleStarClick = (rating) => {
@@ -15,7 +20,9 @@ const Review = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:3001/review", form)
+
+    axios.post("http://localhost:3001/user/review", form, IDUser)
+
       .then(res => {
         setForm({
           review: "",

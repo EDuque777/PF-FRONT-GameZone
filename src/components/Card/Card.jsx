@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
   const { id, price, price2, name, image, appid } = props;
+  console.log(props);
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
@@ -57,7 +58,7 @@ const Card = (props) => {
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}>{formattedNumber || price2}</h3>
+      <h3 className={style.price}>$ {formattedNumber || price2}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>
@@ -78,4 +79,3 @@ const Card = (props) => {
 };
 
 export default Card;
-

@@ -4,6 +4,7 @@ import * as act from "./actions"
 const initialState = {
     games: [],
     search: [],
+    searchcopy: [],
     total: 0,
     counter: 0,
     cart: [],
@@ -14,10 +15,8 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
-
     createAccount : [],
     user : null,
-
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -25,25 +24,186 @@ const initialState = {
     categoriesGames: [],
     developersGames: [],
     genresGames: [],
-
+    userStorage: null,
 };
 
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
+        //filtros combinadosconst combtype = "COMBTYPE"
+        
+        
+        
+        //filtros de busqueda
+
+        case act.FILTER_LANGUAGES:
+            const language = action.payload.toLowerCase();
+            const filteredSearchsssssssss = state.search.filter(game =>
+                game.supported_languages && game.supported_languages.toLowerCase().includes(language))
+            return{
+                ...state,
+              search: filteredSearchsssssssss
+            }
+
+        case act.FILTER_GENRES:
+            const genre = action.payload;
+          
+            const filteredSearchsssssss = state.search.filter(game =>
+              game.genres && game.genres.some(categor => categor.description === genre)
+            );
+          
+            return {
+              ...state,
+              search: filteredSearchsssssss
+            };
+          
+        case act.FILTER_CATEGORIES:
+            const category = action.payload;
+          
+            const filteredSearchssssss = state.search.filter(game =>
+              game.categories && game.categories.some(categor => categor.description === category)
+            );
+          
+            return {
+              ...state,
+              search: filteredSearchssssss
+            };
+          
+
+
+        case act.FILTER_PLATFORMS:
+            let filteredSearchssss;
+            const platform = action.payload
+            console.log(platform)
+            if (platform === "windows") {
+              filteredSearchssss = state.search.filter(game => game.platforms.windows === true);
+            } else if(platform === "linux"){
+              filteredSearchssss = state.search.filter(game => game.platforms.linux === true);
+            } else if(platform === "mac"){
+                filteredSearchssss = state.search.filter(game => game.platforms.mac === true);
+            }
+            return {
+              ...state,
+              search: filteredSearchssss
+            };
+
+
+
+            case act.FILTER_FREE:
+                let filteredSearchsssss;
+                if (action.payload === "false") {
+                  filteredSearchsssss = state.search.filter(game => game.is_free === true && game.release_date.coming_soon !== true);
+                } else {
+                  filteredSearchsssss = state.search.filter(game => game.is_free === false && game.release_date.coming_soon !== true);
+                }
+                return {
+                  ...state,
+                  search: filteredSearchsssss
+                };
+              
+
+        case act.FILTER_TYPE:
+            const typess = action.payload;
+            const typesearchss = state.search.filter(game => game.type === typess);
+
+            return {
+                ...state,
+                search: typesearchss
+            };
+
+            case act.FILTER_AGE:
+                const types = action.payload;
+                const typesearchs = state.search.filter(game => game.required_age === types);
+    
+                return {
+                    ...state,
+                    search: typesearchs
+                };
+
+            case act.FILTER_CONTROLLER:
+                const CONTROLLER = action.payload;
+                const typesearc = state.search.filter(game => game.controller_support === CONTROLLER);
+    
+                return {
+                    ...state,
+                    search: typesearc
+                };
+            
+
+        case act.ORDER_BY:
+            const orderBy = action.payload;
+            let sortedSearch = [...state.search];
+          
+            if (orderBy === "des") {
+              sortedSearch.sort((a, b) => {
+                if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
+                  if (a.is_free && b.is_free) {
+                    return a.price_overview?.final - b.price_overview?.final;
+                  } else if (a.is_free && !b.is_free) {
+                    return -1;
+                  } else if (!a.is_free && b.is_free) {
+                    return 1;
+                  } else {
+                    return a.price_overview?.final - b.price_overview?.final;
+                  }
+                } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
+                  return -1;
+                } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              });
+            } else if (orderBy === "asc") {
+              sortedSearch.sort((a, b) => {
+                if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
+                  if (a.is_free && b.is_free) {
+                    return a.price_overview?.final - b.price_overview?.final;
+                  } else if (a.is_free && !b.is_free) {
+                    return 1;
+                  } else if (!a.is_free && b.is_free) {
+                    return -1;
+                  } else {
+                    return b.price_overview?.final - a.price_overview?.final;
+                  }
+                } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
+                  return -1;
+                } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              });
+            }
+          
+            const filteredSearch = sortedSearch.filter(game => !game.release_date.coming_soon);
+          
+            return {
+              ...state,
+              search: filteredSearch
+            };
+          
+            case act.RESET_FILTERS:
+                return {
+                    ...state,
+                    search: state.searchcopy
+                    
+                }
+            
+            case act.GET_BY_NAME:
+                return {
+                    ...state,
+                    search: action.payload,
+                    searchcopy: action.payload
+                }
 
 //? CASOS DE PETICIONES
+
         case act.GET_GAMES:
             return {
                 ...state,
                 games: action.payload
             }
         
-        case act.GET_BY_NAME:
-            //console.log(action.payload)
-            return {
-                ...state,
-                search: action.payload
-            }
 
         case act.GET_DETAIL:
             return {
@@ -97,7 +257,7 @@ const rootReducer=(state = initialState, action) => {
                     title: 'the game is already in the cart',
                     showConfirmButton: false,
                     timer: 2000
-                   })
+                })
                 return state; 
             }
                 Swal.fire({
@@ -235,6 +395,55 @@ const rootReducer=(state = initialState, action) => {
                 genresGames: action.payload
             }
 
+
+        case act.CLEANDETAIL:
+            return {
+                ...state,
+                user: null,
+            };
+
+            case act.EDITNAME:
+                return {
+                  ...state,
+                  user: {
+                    ...state.user,
+                    name: action.payload.name,
+                  },
+                };
+
+            case act.EDITUSERNAME:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    user_name: action.payload.user_name,
+                      },
+                    };
+
+            case act.EDITCOUNTRY:
+                return {
+                    ...state,
+                    user: {
+                    ...state.user,
+                    country: action.payload.country,
+                        },
+                    };
+            //  case act.EDITPROFILEIMAGE:
+            //     return {
+            //         ...state,
+            //         user: {
+            //         ...state.user,
+            //         profileImage: action.payload.profileImage,
+            //           },
+            //         };
+
+            case act.GETUSERSTORAGE:
+            return {
+                ...state,
+                userStorage: action.payload
+            }
+            
+            
         default:
             return {...state};
     }
