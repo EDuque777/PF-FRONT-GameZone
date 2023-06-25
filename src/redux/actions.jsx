@@ -38,6 +38,8 @@ export const EDITCOUNTRY = "EDITCOUNTRY";
 export const EDITPROFILEIMAGE = "EDITPROFILEIMAGE";
 
 
+export const GETUSERSTORAGE = "GETUSERSTORAGE";
+
 
 
 
@@ -437,3 +439,14 @@ export const editName = (id, newName) => {
 //       }
 //     };
 //   };
+
+export const getUserStorage = (id) => {
+    const endpoint = `/profile/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GETUSERSTORAGE,
+            payload: data
+        })
+    }
+}

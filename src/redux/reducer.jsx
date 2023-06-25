@@ -26,6 +26,8 @@ const initialState = {
     developersGames: [],
     genresGames: [],
 
+    userStorage: null,
+
 
 };
 
@@ -277,6 +279,12 @@ const rootReducer=(state = initialState, action) => {
             //         profileImage: action.payload.profileImage,
             //           },
             //         };
+
+            case act.GETUSERSTORAGE:
+            return {
+                ...state,
+                userStorage: action.payload
+            }
             
             
         default:
