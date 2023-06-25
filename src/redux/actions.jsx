@@ -27,6 +27,19 @@ export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
 
+export const USER_PROFILE = "USER_PROFILE"
+
+
+export const CLEANDETAIL = "CLEANDETAIL";
+
+export const EDITNAME = "EDITNAME";
+export const EDITUSERNAME = "EDITUSERNAME";
+export const EDITCOUNTRY = "EDITCOUNTRY";
+export const EDITPROFILEIMAGE = "EDITPROFILEIMAGE";
+
+
+
+
 
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
@@ -242,14 +255,14 @@ export const removeWhishList = (id) => {
 
 // Action de Create User
 
-export const postCreateUser = (data) => {
+export const postCreateUser = (props) => {
     return async function (dispatch) {
         try {
-           const user = await axios.post("http://localhost:3001/crearCuenta",data)
-           console.log(user.data)
+           const user = await axios.post("crearCuenta",props)
+           console.log(user.props)
             return dispatch({
                 type : CREATE_USER,
-                payload : user.data
+                payload : user.props
             })
         } catch (error) {
             console.log(error)
@@ -262,7 +275,7 @@ export const postCreateUser = (data) => {
 export const postLogin = (datos) =>{
     return async function (dispatch) {
         try {
-            const userTwo = await axios.post("http://localhost:3001/iniciarSesion",datos)
+            const userTwo = await axios.post("iniciarSesion",datos)
             console.log(userTwo.data, "estos son de las actions")
             return dispatch({
                 type : LOGIN_USER,
@@ -279,7 +292,7 @@ export const postLogin = (datos) =>{
 export const logoutUser = () => {
     return function (dispatch) {
         try {
-            const logout = axios.post("http://localhost:3001/cerrarSesion")
+            const logout = axios.post("cerrarSesion")
             console.log(logout)
             return dispatch({
                 type : LOGOUT_USER
@@ -357,3 +370,70 @@ export const genresGames = () => {
     }
 }
 
+
+
+export const CleanDetail = () => {
+    return function(dispatch){
+        dispatch({ type: CLEANDETAIL })
+    }   
+};
+
+export const editName = (id, newName) => {
+    const endpoint = `/users/${id}`;
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(endpoint, { name: newName });
+        dispatch({
+          type: EDITNAME,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const editUserName = (id, newUserName) => {
+    const endpoint = `/users/${id}`;
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(endpoint, { user_name: newUserName });
+        dispatch({
+          type: EDITUSERNAME,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const editCountry = (id, newCountry) => {
+    const endpoint = `/users/${id}`;
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(endpoint, { country: newCountry });
+        dispatch({
+          type: EDITCOUNTRY,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+//   export const editProfileImage = (id, newProfileImage) => {
+//     const endpoint = `/users/${id}`;
+//     return async (dispatch) => {
+//       try {
+//         const response = await axios.put(endpoint, { profileImage: newProfileImage });
+//         dispatch({
+//           type: EDITPROFILEIMAGE,
+//           payload: response.data,
+//         });
+//       } catch (error) {
+//         console.log(error.message);
+//       }
+//     };
+//   };
