@@ -12,7 +12,6 @@ const Landing = () => {
         </Link>
         <h1 className={styles.subHeading}>Discover the excitement in GAME ZONE. Get the best games in our online store. Dive into unforgettable adventures and challenge your skills!</h1>
         </div>
-        
     );
 }
 
