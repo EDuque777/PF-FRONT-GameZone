@@ -8,7 +8,7 @@ const MyGames = () => {
 
     //!revisar ruta al detail
     const games = useSelector(state => state.library)
-    console.log(games);
+    //console.log(games);
     const dataUser = JSON.parse(localStorage.getItem("user"));
     const id = dataUser.id
     const dispatch = useDispatch()
@@ -16,6 +16,10 @@ const MyGames = () => {
     useEffect(() => {
         dispatch(act.getMyGames(id))
     }, [id])
+
+    const handleSend = (game) => {
+        dispatch(act.mandarAReview(game))
+    }
 
     return (
         <div className='Container'>
@@ -25,7 +29,7 @@ const MyGames = () => {
                     <div key={game.id}>
                         <img src={game.header_image} alt={game.name}></img>
                         <h4 className={style.title} >{game.name}</h4>
-                        <Link to={"/review"}><button className={style.button}>Go to new Review</button></Link>
+                        <Link to={"/review"}><button className={style.button} onClick={() => handleSend(game)}>Go to new Review</button></Link>
                     </div>
                 ))}
             </div>
