@@ -190,6 +190,13 @@
 	color: #000000;
 }
 
+.btnTwo {
+	color: #ffffff;
+	font-size: 20px;
+	margin: 5px;
+	cursor: pointer;
+}
+
 .form {
 	background-color: var(--white);
 	display: flex;

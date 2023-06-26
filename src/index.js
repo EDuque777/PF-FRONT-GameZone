@@ -8,17 +8,18 @@ import store from './redux/store'
 import { Provider } from 'react-redux'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
-axios.defaults.baseURL = "http://localhost:3001/";
+// axios.defaults.baseURL = "http://localhost:3001/";
 //axios.defaults.baseURL = "https://pf-back-gamezone-production.up.railway.app/"
+axios.defaults.baseURL = "https://servidor-gamezone.onrender.com/"
 
 ReactDOM.render(
 
 <React.StrictMode>
   <PayPalScriptProvider options={{"clientId" : "id del cliente"}}>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
     </Provider>
   </PayPalScriptProvider>
 </React.StrictMode>,
