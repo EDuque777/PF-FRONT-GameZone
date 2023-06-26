@@ -423,7 +423,7 @@ export const loginGoogle = () => {
     return function (dispatch) {
         try {
             const login = window.open("http://localhost:3001/auth/google", "_self")
-            //console.log(login)
+            console.log(login)
         } catch (error) {
             console.log(error)
         }
@@ -442,7 +442,7 @@ export const getDataGoogle = () => {
                 }
             })
             if (dataGoogle.status === 200) {
-                //console.log(dataGoogle.data, "datos desde la action")
+                console.log(dataGoogle.data, "datos desde la action")
                 return dispatch({
                     type : DATA_GOOGLE,
                     payload : dataGoogle.data
@@ -461,7 +461,7 @@ export const logoutGoogle = () => {
     return async (dispatch) => {
         try {
             const logoutTwo = await window.open("http://localhost:3001/auth/logout", "_self")
-            //console.log(logoutTwo)
+            console.log(logoutTwo)
             return dispatch({
                 type : LOGOUT_USERGOOGLE
             })

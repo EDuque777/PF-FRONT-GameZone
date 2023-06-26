@@ -179,19 +179,25 @@ const NavBar = () => {
                                     <img
                                         src={datosUserTwo.user.profileImage}
                                         className={style.usuario}
-                                        alt=""
+                                        alt={datosUser.name}
                                         title={datosUserTwo.user.name}
                                         onClick={handleSubMenuToggle}
                                     />
                                     {isSubMenuOpen && (
-                                        <ul className={style.submenu}>
-                                            <li>
-                                                <Link to="#" >{datosUserTwo.user.name}</Link>
-                                                <Link to="">Perfil</Link>
-                                                <Link to="/whishlist">Wish List</Link>
-                                                <a onClick={removerDatosTres}>Log Out</a>
-                                            </li>
-                                        </ul>
+                                         <ul className={style.submenu}>
+                                         <li className={style["submenu_item"]}>
+                                             <Link to="#">{datosUserTwo.user.name}</Link>
+                                         </li>
+                                         <li className={style["submenu_item"]}>
+                                             <Link to="/user">Perfil</Link>
+                                         </li>
+                                         <li className={style["submenu_item"]}>
+                                             <Link to="/whishlist">Wish List</Link>
+                                         </li>
+                                         <li className={style["submenu_item"]}>
+                                             <a onClick={removerDatos}>Log Out</a>
+                                         </li>
+                                     </ul>
                                     )}
                                 </div>
                             </li>
@@ -211,18 +217,24 @@ const NavBar = () => {
                                     />
                                     {isSubMenuOpen && (
                                         <ul className={style.submenu}>
-                                            <li>
-                                                <Link to="#" >{datosUser.user_name}</Link>
-                                                <Link to="">Perfil</Link>
-                                                <Link to="/whishlist">Wish List</Link>
-                                                <a onClick={removerDatos}>Log Out</a>
-                                            </li>
-                                        </ul>
+                                        <li className={style["submenu_item"]}>
+                                            <Link to="#">{datosUser.user_name}</Link>
+                                        </li>
+                                        <li className={style["submenu_item"]}>
+                                            <Link to="/user">Perfil</Link>
+                                        </li>
+                                        <li className={style["submenu_item"]}>
+                                            <Link to="/whishlist">Wish List</Link>
+                                        </li>
+                                        <li className={style["submenu_item"]}>
+                                            <a onClick={removerDatos}>Log Out</a>
+                                        </li>
+                                    </ul>
                                     )}
                                 </div>
                             </li>
                         ) : (
-                            <Link to="/form"><button className={style.button} >login</button></Link>
+                            <Link to="/login"><button className={style.login_button} >login</button></Link>
                         )
                     )
                 }
