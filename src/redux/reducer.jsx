@@ -27,6 +27,7 @@ const initialState = {
     userStorage: null,
     gameReview: [],
     library: []
+    
 };
 
 const rootReducer=(state = initialState, action) => {
