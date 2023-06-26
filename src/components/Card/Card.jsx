@@ -6,8 +6,9 @@ import style from './Card.module.css';
 import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
-  const { id, price, price2, name, image, appid } = props;
-  //console.log(price);
+  let { id ,price, name, image, appid } = props;
+  price = price ?? 0;
+
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
@@ -17,13 +18,12 @@ const Card = (props) => {
   const partDecimal = (price % 100).toString().padStart(2, '0');
   const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
 
-  const formattedPrice = Number.isFinite(formattedNumber) ? formattedNumber : 0;
   const handleAdd = () => {
-      dispatch(act.addCart({ id, price: formattedPrice, name, image }));
+      dispatch(act.addCart({ id, price: price, name, image }));
   };
 
   const handleAddWhish = () => {
-      dispatch(act.addWhishList({ id, price: formattedPrice, name, image }));
+      dispatch(act.addWhishList({ id, price: price, name, image }));
   };
 
   const handleRemove = () => {
@@ -59,7 +59,7 @@ const Card = (props) => {
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}>$ {formattedPrice}</h3>
+      <h3 className={style.price}>{price !== undefined && price !== 0 ? `$ ${formattedNumber}` : 'Free'}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>
