@@ -226,7 +226,7 @@ const Detail = (props) => {
             <div className={style.reviews_container}>
                 
                 <div className={style.promedio}>
-                  <h1>Promedio</h1>
+                 
                 </div>
                 <div className={style.opiniones}>
                   <div className={style.opinion}>
