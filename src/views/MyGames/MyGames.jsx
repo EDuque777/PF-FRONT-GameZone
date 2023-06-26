@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom';
 
 const MyGames = () => {
 
+    //!revisar ruta al detail
     const games = useSelector(state => state.library)
     const dataUser = JSON.parse(localStorage.getItem("user"));
     const id = dataUser.id
     const dispatch = useDispatch()
     
-    console.log(games);
-
     useEffect(() => {
         dispatch(act.getMyGames(id))
     }, [id])

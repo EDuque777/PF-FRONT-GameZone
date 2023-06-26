@@ -161,6 +161,7 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./ProfileView.module.css";
 import * as act from "../../../redux/actions";
 import countries from "./countries";
+import ShoppingView from "./ShoppingView";
 
 const ProfileView = (props) => {
   const dispatch = useDispatch();
@@ -240,6 +241,7 @@ const ProfileView = (props) => {
       <h1>Profile</h1>
       <div>
         <img className={style.image} src={IDUser && IDUser.profileImage} alt="Profile" />
+        <ShoppingView />
         <h2>
           Name:{" "}
           {editingName ? (

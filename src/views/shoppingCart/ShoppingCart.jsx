@@ -6,6 +6,7 @@ import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
 
 //* las cards que vengan del home...
+//! revisar la convergencia
 const ShoppingCart = () => {
 
     const dispatch = useDispatch()
