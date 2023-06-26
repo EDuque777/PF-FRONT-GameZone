@@ -48,9 +48,15 @@ export const GETUSERSTORAGE = "GETUSERSTORAGE";
 export const GET_MYGAMES = "GET_MYGAMES";
 
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
+export const MANDARREVIEW = "MANDARREVIEW";
 
-
-
+export const mandarAReview = (game) => {
+    console.log(game);
+    return {
+        type: MANDARREVIEW,
+        payload: game
+    }
+}
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES

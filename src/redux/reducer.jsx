@@ -26,15 +26,24 @@ const initialState = {
     developersGames: [],
     genresGames: [],
     userStorage: null,
-    gameReview: [],
-    library: []
+    review: [],
+    gamesReviews: [],
+    library: [],
 };
 
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
         //filtros combinadosconst combtype = "COMBTYPE"
         
-        
+        case act.MANDARREVIEW:
+            const {name } = action.payload
+            console.log(name);
+            // const biblio = action.payload;
+            // const juegoReview = biblio.filter(game => game.name !== game.name)
+            return {
+                ...state,
+                review: name
+            }
         
         //filtros de busqueda
 
@@ -271,7 +280,7 @@ const rootReducer=(state = initialState, action) => {
                 timer: 2000
             }) 
             const updateCart = [...state.cart, addGame]
-            const updatePrice = state.total + addGame.price
+            const updatePrice = state.total + (addGame.price === 'free' ? 0 : addGame.price);
             return {
                 ...state,
                 cart: updateCart,
@@ -479,4 +488,6 @@ const rootReducer=(state = initialState, action) => {
     }
 };
 
+
 export default rootReducer;
+

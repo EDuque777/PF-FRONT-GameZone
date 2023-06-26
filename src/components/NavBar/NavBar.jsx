@@ -48,7 +48,7 @@ const NavBar = () => {
         }
     }, [google])
 
-    console.log(conteoTwo, "esto es de google")
+    //console.log(conteoTwo, "esto es de google")
 
     //console.log(conteo)
 
@@ -67,7 +67,7 @@ const NavBar = () => {
 
     const datosUserTwo = JSON.parse(localStorage.getItem("userTwo"));
 
-    console.log(datosUserTwo, "estos datos son del local")
+    //console.log(datosUserTwo, "estos datos son del local")
 
     const validationUserGoogle = () => {
         //const datosUserTwo = JSON.parse(localStorage.getItem("userTwo"));

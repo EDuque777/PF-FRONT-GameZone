@@ -5,13 +5,15 @@ import axios from 'axios';
 import style from "./Reviews.module.css"
 
 const Review = () => {
-
+  const gameRe = useSelector(state => state.gameReview)
+  //console.log(gameRe);
   const IDUser = useSelector((state) => state.user);
-console.log(IDUser);
+//console.log(IDUser);
   const [form, setForm] = useState({
     review: "",
     rating: 0,
-    id: IDUser?.id
+    id: IDUser?.id,
+    name: gameRe
   });
 
   const handleStarClick = (rating) => {
@@ -21,7 +23,7 @@ console.log(IDUser);
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post("http://localhost:3001/user/review", form, IDUser)
+    axios.post("http://localhost:3001/user/review", form, IDUser, gameRe)
 
       .then(res => {
         setForm({
