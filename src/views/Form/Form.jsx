@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postCreateUser, postLogin } from "../../redux/actions";
+import { postCreateUser, postLogin, loginGoogle } from "../../redux/actions";
 import countries from "./countries";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -16,6 +16,7 @@ const Form = () => {
   const dispatch = useDispatch()
 
   const usuario = useSelector((state) => state.user)
+  const usuarioTwo = useSelector((state) => state.userGoogle )
 
   const verificacion = async () => {
     if (usuario === null) {
@@ -25,9 +26,21 @@ const Form = () => {
     }
   }
 
+  //const verificacionTwo = async () => {
+  //  if (usuarioTwo === null) {
+  //    return console.log(true)
+  //  }else{
+  //    await localStorage.setItem("userTwo", JSON.stringify(usuarioTwo));
+  //  }
+  //}
+
   useEffect(() => {
     verificacion()
   }, [usuario])
+
+  //useEffect(() => {
+  //  verificacionTwo()
+  //}, [usuarioTwo])
 
   const [ name, setName ] = useState("")
   const [ user_name, setUser_name ] = useState("")
@@ -59,40 +72,6 @@ const Form = () => {
   const userNamePattern = RegExp(/^[a-zA-Z0-9_]{3,16}$/)
   const emailPattern = RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
   const passwordPattern = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)//--
-
-  //const [ datos, setDatos ] = useState({
-  //  name : "",
-  //  //user_name : "",
-  //  email : "",
-  //  password : "",
-  //  //country : ""
-  //})
-
-  //const [ datosTwo, setDatosTwo ] = useState({
-  //  email : "",
-  //  password : ""
-  //})
-
-  //const [ error, setError ] = useState({
-  //  name : "",
-  //  //user_name : "",
-  //  email : "",
-  //  password : "",
-  //  //country : ""
-  //})
-
-  //const [ errorTwo, setErrorTwo ] = useState({
-  //  email : "",
-  //  password : ""
-  //})
-
-  //const [ isFormModified, setIsFormModified ] = useState(false)
-//
-  //const [ isValid, setIsValid ] = useState(false)
-//
-  //const [ isFormModifiedTwo, setIsFormModifiedTwo ] = useState(false)
-//
-  //const [ isValidTwo, setIsValidTwo ] = useState(false)
 
   const handleNameChange = (e) => {
     setName(e.target.value)
@@ -166,7 +145,6 @@ const Form = () => {
     return '';
   }
 
-
   // validacion de email y password de Inicio de Sesion
 
   const validateEmailLogin = () => {
@@ -198,6 +176,46 @@ const Form = () => {
     const container = document.querySelector(`.${styles.container}`);
     container.classList.add(styles["right-panel-active"]);
   };
+
+  const submitValidation = async (datosTwo) => {
+
+    const validacion = JSON.parse(localStorage.getItem("user"));
+
+    if ( validacion && validacion.user && validacion.user.message) {
+      Swal.fire(
+        `${validacion.user.messsage}`,
+        'Congratulations you are part of GameZone',
+        'error'
+      )
+
+      console.log("deberia de aparecer el message")
+
+    }else{
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-start',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+      })
+
+      await dispatch(postLogin(datosTwo))
+
+      await history.push("/home")
+    }
+    
+    //console.log("validaciones")
+  }
 
   const handleForm1Submit = async (e) => {
     e.preventDefault();
@@ -233,7 +251,7 @@ const Form = () => {
       name, 
       user_name, 
       email, 
-      password, 
+      password,
       country, 
       confirmPassword
     }
@@ -286,35 +304,35 @@ const Form = () => {
       //alert("los campos estan vacios")
     }else{
 
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-start',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Signed in successfully'
-      })
-      await dispatch(postLogin(datosTwo))
-
-      history.push("/home")
+      await submitValidation(datosTwo)
     }
-
-  
-
-
-
-    //alert("sesion Iniciada")
-
-    //console.log(datosTwo) //se envian los datos al backend
   };
+
+  // inicio sesion con google
+
+  const continueGoogle = async () => {
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-start',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Signed in successfully'
+    })
+
+    await dispatch(loginGoogle())
+
+    console.log("iniciado sesion con google")
+  }
 
   return (
     
@@ -401,6 +419,12 @@ const Form = () => {
               onChange={(e) => handlePasswordLoginChange(e)}
             />
             {errorPasswordLogin && <span className={styles.errorMessage}>{errorPasswordLogin}</span>}
+            <p className={styles.form__title} > OR </p>
+            <li>
+              <a onClick={continueGoogle}>
+                <i className={`fa fa-google-plus-square ${styles["btnTwo"]}`} aria-hidden="true" > Continue with Google</i>
+              </a>
+            </li>
             <a href="#" className={styles.link}>Forgot your password?</a>
             <button className={styles.btn}>Sign In</button>
           </form>
@@ -423,7 +447,6 @@ const Form = () => {
 };
 
 export default Form;
-
 
 //<Select
 //placeholder="Select a country"

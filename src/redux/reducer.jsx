@@ -17,6 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
+    userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -361,12 +362,25 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 user : action.payload
             }
+        case act.DATA_GOOGLE:
+            //console.log(userGoogle)
+            return {
+                ...state,
+                userGoogle : action.payload
+            }
+
         case act.LOGOUT_USER:{
             return{
                 ...state,
                 user : null
             }
         }
+
+        case act.LOGOUT_USERGOOGLE:
+            return {
+                ...state,
+                userGoogle : null
+            }
 
         case act.PLATFORMS:
             return {

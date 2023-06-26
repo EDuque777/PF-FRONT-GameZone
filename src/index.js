@@ -16,9 +16,9 @@ ReactDOM.render(
 <React.StrictMode>
   <PayPalScriptProvider options={{"clientId" : "id del cliente"}}>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
     </Provider>
   </PayPalScriptProvider>
 </React.StrictMode>,
