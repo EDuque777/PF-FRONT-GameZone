@@ -6,6 +6,7 @@ import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
 
 //* las cards que vengan del home...
+//! revisar la convergencia
 const ShoppingCart = () => {
 
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const ShoppingCart = () => {
     const wholePart = Math.floor(totalPrice / 100);
     const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
     const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
-    const dataUser =  JSON.parse(localStorage.getItem("user"));
+    const dataUser = JSON.parse(localStorage.getItem("user"));
     console.log(dataUser);
 
     const handleRemove = () => {

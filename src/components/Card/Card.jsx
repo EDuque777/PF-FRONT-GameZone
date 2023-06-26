@@ -13,9 +13,9 @@ const Card = (props) => {
   const history = useHistory();
   const isShoppCartRoute = location.pathname === "/cart";
   const isWhishListRoute = location.pathname === "/whishlist";
-  const wholePart = Math.floor(price / 100);
-  const partDecimal = (price % 100).toString().padStart(2, '0');
-  const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
+  // const wholePart = Math.floor(price / 100);
+  // const partDecimal = (price % 100).toString().padStart(2, '0');
+  // const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
 
   const handleAdd = () => {
       dispatch(act.addCart({ id, price: price, name, image }));
@@ -58,7 +58,7 @@ const Card = (props) => {
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}>$ {formattedNumber || price2}</h3>
+      <h3 className={style.price}>$ { price2 || price}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>

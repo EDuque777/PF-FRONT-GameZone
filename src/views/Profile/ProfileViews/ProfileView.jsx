@@ -326,6 +326,7 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./ProfileView.module.css";
 import * as act from "../../../redux/actions";
 import countries from "./countries";
+import ShoppingView from "./ShoppingView";
 
 const ProfileView = (props) => {
   const dispatch = useDispatch();
@@ -504,6 +505,7 @@ const ProfileView = (props) => {
             </button>
           </>
         )}
+        <ShoppingView/>
       </div>
     </div>
   );

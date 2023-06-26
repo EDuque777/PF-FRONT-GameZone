@@ -25,7 +25,6 @@ export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
 
-
 export const ORDER_BY = "ORDER_BY"
 export const FILTER_TYPE = "FILTER_TYPE"
 export const FILTER_AGE = "FILTER_AGE"
@@ -41,8 +40,9 @@ export const CLEANDETAIL = "CLEANDETAIL";
 export const EDITNAME = "EDITNAME";
 export const EDITUSERNAME = "EDITUSERNAME";
 export const EDITCOUNTRY = "EDITCOUNTRY";
-export const EDITPROFILEIMAGE = "EDITPROFILEIMAGE";
+export const EDIT_PROFILE_IMAGE = "EDIT_PROFILE_IMAGE";
 export const GETUSERSTORAGE = "GETUSERSTORAGE";
+export const GET_MYGAMES = "GET_MYGAMES";
 
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 
@@ -359,7 +359,7 @@ export const removeWhishList = (id) => {
     }
 }
 
-// Action de Create User
+//? Action de Create User
 
 export const postCreateUser = (props) => {
     return async function (dispatch) {
@@ -376,7 +376,7 @@ export const postCreateUser = (props) => {
     }
 }
 
-//Accion de Loguear Usuario
+//? Accion de Loguear Usuario
 
 export const postLogin = (datos) =>{
     return async function (dispatch) {
@@ -393,7 +393,7 @@ export const postLogin = (datos) =>{
     }
 }
 
-// Action de Logout Usuario
+//? Action de Logout Usuario
 
 export const logoutUser = () => {
     return function (dispatch) {
@@ -476,8 +476,6 @@ export const genresGames = () => {
     }
 }
 
-
-
 export const CleanDetail = () => {
     return function(dispatch){
         dispatch({ type: CLEANDETAIL })
@@ -529,20 +527,28 @@ export const editName = (id, newName) => {
     };
   };
 
-//   export const editProfileImage = (id, newProfileImage) => {
-//     const endpoint = `/users/${id}`;
-//     return async (dispatch) => {
-//       try {
-//         const response = await axios.put(endpoint, { profileImage: newProfileImage });
-//         dispatch({
-//           type: EDITPROFILEIMAGE,
-//           payload: response.data,
-//         });
-//       } catch (error) {
-//         console.log(error.message);
-//       }
-//     };
-//   };
+//   export const editProfileImage = () => {
+//     return async function () {
+//         try {
+//             const formData = new FormData();
+//             formData.append('file', selectedImage);
+//             const response = await axios.post('http://localhost:3001/upload', formData, {
+//               headers: {
+//                 'Content-Type': 'multipart/form-data',
+//                 datosUser: JSON.stringify(datosUser.id),
+//               },
+//             });
+      
+//             if (response.status === 200) {
+//               console.log(response.data); // URL de la imagen en Cloudinary
+//             } else {
+//               console.log(response.data); // Mensaje de error
+//             }
+//           } catch (error) {
+//             console.log(error.message);
+//           }
+//     }
+// };
 
 export const getUserStorage = (id) => {
     const endpoint = `/profile/${id}`;
@@ -564,5 +570,23 @@ export const getGameReview = (id) => {
             type: GETGAMEREVIEW,
             payload: data
         })
+    }
+}
+//? ACCIONES DE MI BIBLIOTECA
+
+export const getMyGames = (id) => {
+    return async function (dispatch) {
+        try {
+            const response = await axios.get(`/user/games?id=${id}`);
+        console.log(response);
+        const games = response.data
+        dispatch({
+            type: GET_MYGAMES,
+            payload: games.Games
+        })
+        console.log(games.Games);
+        } catch (error) {
+            console.error(error.message);    
+        }
     }
 }
