@@ -584,7 +584,7 @@ export const getMyGames = (id) => {
             type: GET_MYGAMES,
             payload: games.Games
         })
-        console.log(games.Games);
+        //console.log(games.Games);
         } catch (error) {
             console.error(error.message);    
         }

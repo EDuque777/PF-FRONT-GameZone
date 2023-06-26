@@ -8,6 +8,7 @@ const MyGames = () => {
 
     //!revisar ruta al detail
     const games = useSelector(state => state.library)
+    console.log(games);
     const dataUser = JSON.parse(localStorage.getItem("user"));
     const id = dataUser.id
     const dispatch = useDispatch()

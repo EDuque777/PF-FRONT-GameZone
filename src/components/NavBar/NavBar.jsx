@@ -34,7 +34,7 @@ const NavBar = () => {
 
     const [conteo, setConteo] = useState(0)
 
-    console.log(conteo)
+    //console.log(conteo)
 
     //console.log(Cookies.getJSON("token"))
 
@@ -49,7 +49,7 @@ const NavBar = () => {
         }
     }
 
-    console.log(datosUser)
+    //console.log(datosUser)
 
     useEffect(() => {
         validationUser()
