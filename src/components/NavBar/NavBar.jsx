@@ -32,18 +32,18 @@ const NavBar = () => {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const [ conteo, setConteo ] = useState(0)
+    const [conteo, setConteo] = useState(0)
 
     console.log(conteo)
 
     //console.log(Cookies.getJSON("token"))
 
-    const datosUser =  JSON.parse(localStorage.getItem("user"));
+    const datosUser = JSON.parse(localStorage.getItem("user"));
 
     const validationUser = () => {
         if (!datosUser) {
             setConteo(0)
-        }else if (datosUser){
+        } else if (datosUser) {
             setConteo(1)
             return datosUser
         }
@@ -64,11 +64,11 @@ const NavBar = () => {
             timer: 3000,
             timerProgressBar: true,
             didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-          
+
         Toast.fire({
             icon: 'success',
             title: 'Closed session'
@@ -93,8 +93,10 @@ const NavBar = () => {
                 <li>
                     <Link to="/home">Home</Link>
                 </li>
-                <li>
-                    <Link to="/cart">Shopping Cart</Link>
+                <li className={style["submenu-item"]}>
+                    <Link to="/cart" className={style["submenu-link"]}>
+                        <i className={`fa fa-shopping-cart ${style["cart_icon"]}`}></i>
+                    </Link>
                 </li>
 
                 {
@@ -110,10 +112,16 @@ const NavBar = () => {
                                 />
                                 {isSubMenuOpen && (
                                     <ul className={style.submenu}>
-                                        <li>
-                                            <Link to="#" >{datosUser.user_name}</Link>
+                                        <li className={style["submenu_item"]}>
+                                            <Link to="#">{datosUser.user_name}</Link>
+                                        </li>
+                                        <li className={style["submenu_item"]}>
                                             <Link to="/user">Perfil</Link>
+                                        </li>
+                                        <li className={style["submenu_item"]}>
                                             <Link to="/whishlist">Wish List</Link>
+                                        </li>
+                                        <li className={style["submenu_item"]}>
                                             <a onClick={removerDatos}>Log Out</a>
                                         </li>
                                     </ul>
@@ -121,7 +129,7 @@ const NavBar = () => {
                             </div>
                         </li>
                     ) : (
-                        <Link to="/login"><button className={style.button} >login</button></Link>
+                        <Link to="/login"><button className={style.login_button} >login</button></Link>
                     )
                 }
 
@@ -131,5 +139,5 @@ const NavBar = () => {
     );
 };
 
- export default NavBar; 
+export default NavBar;
 
