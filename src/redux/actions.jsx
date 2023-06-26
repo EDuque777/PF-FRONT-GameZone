@@ -17,6 +17,9 @@ export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
 export const CREATE_USER = "CREATE_USER"
 export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
+export const DATA_GOOGLE = "DATA_GOOGLE"
+export const LOGOUT_USERGOOGLE = "LOGOUT_USERGOOGLE"
+
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
@@ -388,7 +391,11 @@ export const postLogin = (datos) =>{
                 payload : userTwo.data
             })
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
+            //return dispatch({
+            //    type : LOGIN_USER,
+            //    payload : error.response.data
+            //})
         }
     }
 }
@@ -396,7 +403,7 @@ export const postLogin = (datos) =>{
 //? Action de Logout Usuario
 
 export const logoutUser = () => {
-    return function (dispatch) {
+    return async function (dispatch) {
         try {
             const logout = axios.post("cerrarSesion")
             console.log(logout)
@@ -407,6 +414,60 @@ export const logoutUser = () => {
             console.log(error)
         }
 
+    }
+}
+
+//Action de login with Google
+
+export const loginGoogle = () => {
+    return function (dispatch) {
+        try {
+            const login = window.open("http://localhost:3001/auth/google", "_self")
+            //console.log(login)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const getDataGoogle = () => {
+    return async (dispatch) => {
+        try {
+            const dataGoogle = await axios.get("/auth/user", {
+                withCredentials : true,
+                headers : {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Credential' : true
+                }
+            })
+            if (dataGoogle.status === 200) {
+                //console.log(dataGoogle.data, "datos desde la action")
+                return dispatch({
+                    type : DATA_GOOGLE,
+                    payload : dataGoogle.data
+                })
+                //setUser(dato.data.user);
+            }else {
+                throw new Error("Authentication has failed!")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const logoutGoogle = () => {
+    return async (dispatch) => {
+        try {
+            const logoutTwo = await window.open("http://localhost:3001/auth/logout", "_self")
+            //console.log(logoutTwo)
+            return dispatch({
+                type : LOGOUT_USERGOOGLE
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

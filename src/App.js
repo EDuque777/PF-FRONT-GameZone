@@ -13,7 +13,6 @@ import MyGames from './views/MyGames/MyGames';
 
 import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
 
-
 function App() {
 
   const location = useLocation()
