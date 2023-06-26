@@ -280,7 +280,7 @@ const rootReducer=(state = initialState, action) => {
                 timer: 2000
             }) 
             const updateCart = [...state.cart, addGame]
-            const updatePrice = state.total + addGame.price
+            const updatePrice = state.total + (addGame.price === 'free' ? 0 : addGame.price);
             return {
                 ...state,
                 cart: updateCart,
@@ -488,4 +488,6 @@ const rootReducer=(state = initialState, action) => {
     }
 };
 
+
 export default rootReducer;
+
