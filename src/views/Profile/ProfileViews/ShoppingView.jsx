@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import style from "./ProfileView.module.css";
 
 const ShoppingView = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -36,9 +37,13 @@ const ShoppingView = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" accept="image/*" name="file" onChange={handleImageChange} />
-      <button type="submit">Subir imagen</button>
+    <form onSubmit={handleSubmit} >
+      <div>
+      <input type="file" accept="image/*" name="file" onChange={handleImageChange} className={style.fileInput}/>
+      </div>
+      <div>
+      <button type="submit" className={style.imagebuton} >Subir imagen</button>
+      </div>
     </form>
   );
 };
