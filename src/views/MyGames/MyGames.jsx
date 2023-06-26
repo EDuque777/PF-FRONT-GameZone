@@ -24,7 +24,7 @@ const MyGames = () => {
                 {games && games.map((game) => (
                     <div key={game.id}>
                         <img src={game.header_image} alt={game.name}></img>
-                        <Link to={`/detail/${id}`}><h4 className={style.title} >{game.name}</h4></Link>
+                        <h4 className={style.title} >{game.name}</h4>
                         <Link to={"/review"}><button className={style.button}>Go to new Review</button></Link>
                     </div>
                 ))}
