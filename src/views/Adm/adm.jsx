@@ -20,13 +20,13 @@ function Dashboard() {
   const [priceOverview, setPriceOverview] = useState('');
   const [headerImage, setHeaderImage] = useState('');
   const [capsuleImage, setCapsuleImage] = useState('');
-  const [developers, setDevelopers] = useState('');
-  const [genres, setGenres] = useState('');
-  const [publishers, setPublishers] = useState('');
-  const [platform, setPlatform] = useState('');
-  const [languages, setLanguages] = useState('');
-  const [categories, setCategories] = useState('');
-
+  const [developers, setDevelopers] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [publishers, setPublishers] = useState([]);
+  const [platform, setPlatform] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [categories, setCategories] = useState([]);
+console.log("UUUUUUUUUUUUU", developers);
   // Form User
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
@@ -61,26 +61,26 @@ function Dashboard() {
       categories
     });
     // Limpar os campos do formulário após o envio
-    setName('');
-    setType('');
-    setRequiredAge('');
-    setIsFree('');
-    setDetailedDescription('');
-    setAboutTheGame('');
-    setShortDescription('');
-    setReleaseDate('');
-    setComingSoon('');
-    setSupportInfo('');
-    setMetacritic('');
-    setPriceOverview('');
-    setHeaderImage('');
-    setCapsuleImage('');
-    setDevelopers('');
-    setGenres('');
-    setPublishers('');
-    setPlatform('');
-    setLanguages('');
-    setCategories('');
+  //   setName('');
+  //   setType('');
+  //   setRequiredAge('');
+  //   setIsFree('');
+  //   setDetailedDescription('');
+  //   setAboutTheGame('');
+  //   setShortDescription('');
+  //   setReleaseDate('');
+  //   setComingSoon('');
+  //   setSupportInfo('');
+  //   setMetacritic('');
+  //   setPriceOverview('');
+  //   setHeaderImage('');
+  //   setCapsuleImage('');
+  //   setDevelopers('');
+  //   setGenres('');
+  //   setPublishers('');
+  //   setPlatform('');
+  //   setLanguages('');
+  //   setCategories('');
   };
 
   const handleUserSubmit = (event) => {
@@ -146,17 +146,17 @@ function Dashboard() {
           price_overview: priceOverview,
           header_image: headerImage,
           capsule_image: capsuleImage,
-          developers,
-          genres,
-          publishers,
-          platform,
-          languages,
-          categories,
+          developers: developers,
+          genres: genres,
+          publishers: publishers,
+          platform: platform,
+          languages: languages,
+          categories: categories,
         }),
       });
   
       const data = await response.json();
-      console.log('Juego creado:', data);
+      // console.log('Juego creado:', data);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -302,32 +302,32 @@ function Dashboard() {
                 
                 <label>
                   Developers:
-                  <input type="text" value={developers} onChange={(e) => setDevelopers(e.target.value)} />
+                  <input type="text" value={developers} onChange={(e) => setDevelopers(e.target.value.split(','))} />
                 </label>
                 
                 <label>
                   Genres:
-                  <input type="text" value={genres} onChange={(e) => setGenres(e.target.value)} />
+                  <input type="text" value={genres} onChange={(e) => setGenres(e.target.value.split(','))} />
                 </label>
                 
                 <label>
                   Publishers:
-                  <input type="text" value={publishers} onChange={(e) => setPublishers(e.target.value)} />
+                  <input type="text" value={publishers} onChange={(e) => setPublishers(e.target.value.split(','))} />
                 </label>
                 
                 <label>
                   Platform:
-                  <input type="text" value={platform} onChange={(e) => setPlatform(e.target.value)} />
+                  <input type="text" value={platform} onChange={(e) => setPlatform(e.target.value.split(','))} />
                 </label>
                 
                 <label>
                   Languages:
-                  <input type="text" value={languages} onChange={(e) => setLanguages(e.target.value)} />
+                  <input type="text" value={languages} onChange={(e) => setLanguages(e.target.value.split(','))} />
                 </label>
                 
                 <label>
                   Categories:
-                  <input type="text" value={categories} onChange={(e) => setCategories(e.target.value)} />
+                  <input type="text" value={categories} onChange={(e) => setCategories(e.target.value.split(','))} />
                 </label>
                 
                 <input className={styles.button2} type="submit" value="Create Game" />
