@@ -25,6 +25,7 @@ const initialState = {
     developersGames: [],
     genresGames: [],
     userStorage: null,
+    library: []
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -443,6 +444,14 @@ const rootReducer=(state = initialState, action) => {
                 userStorage: action.payload
             }
             
+//? CASOS DE LA BIBLIOTECA
+
+            case act.GET_MYGAMES:
+                return {
+                    ...state,
+                    library: action.payload
+                }
+
             
         default:
             return {...state};

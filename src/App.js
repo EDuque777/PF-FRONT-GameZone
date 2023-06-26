@@ -11,6 +11,8 @@ import Review from './views/Reviews/Reviews';
 import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
 
+import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
+
 
 function App() {
 
@@ -33,6 +35,7 @@ return (
       <Route path="/search" render={() => <Search />} />
       <Route path="/review" render={() => <Review />} />
       <Route path="/library" render={() => <MyGames />}/>
+      <Route path="/pruebas" render={() => <ShoppingView />}/>
       <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>

@@ -167,6 +167,7 @@ const ProfileView = (props) => {
 
   const IDUser = useSelector((state) => state.userStorage);
   const datosUser =  JSON.parse(localStorage.getItem("user"));
+  console.log(datosUser);
 
   const [editingName, setEditingName] = useState(false);
   const [editingUserName, setEditingUserName] = useState(false);
@@ -238,7 +239,7 @@ const ProfileView = (props) => {
     <div className={style.container}>
       <h1>Profile</h1>
       <div>
-        <img className={style.image} src={IDUser?.profileImage} alt="Profile" />
+        <img className={style.image} src={IDUser && IDUser.profileImage} alt="Profile" />
         <h2>
           Name:{" "}
           {editingName ? (
