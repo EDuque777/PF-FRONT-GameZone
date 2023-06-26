@@ -18,11 +18,11 @@ const Card = (props) => {
   // const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
 
   const handleAdd = () => {
-      dispatch(act.addCart({ id, price: price, name, image }));
+      dispatch(act.addCart({ id, price:isNaN(price) ? 0 : price, name, image }));
   };
 
   const handleAddWhish = () => {
-      dispatch(act.addWhishList({ id, price: price, name, image }));
+      dispatch(act.addWhishList({ id, price:isNaN(price) ? 0 : price, name, image }));
   };
 
   const handleRemove = () => {
