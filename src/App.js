@@ -8,7 +8,6 @@ import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
 
 
-
 function App() {
 
     const location = useLocation()
@@ -27,9 +26,8 @@ return (
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
-      {location.pathname !== "/dashboard" && <Footer/>}
       <Route path="/search" render={() => <Search />} />
-      <Footer/>
+      {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
 );
