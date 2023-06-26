@@ -25,6 +25,7 @@ const initialState = {
     developersGames: [],
     genresGames: [],
     userStorage: null,
+    gameReview: [],
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -438,10 +439,16 @@ const rootReducer=(state = initialState, action) => {
             //         };
 
             case act.GETUSERSTORAGE:
-            return {
-                ...state,
-                userStorage: action.payload
+                return {
+                    ...state,
+                    userStorage: action.payload
             }
+
+            case act.GETGAMEREVIEW:
+                return {
+                    ...state,
+                    gameReview: action.payload
+                }
             
             
         default:
