@@ -54,12 +54,12 @@ const NavBar = () => {
 
     //console.log(Cookies.getJSON("token"))
 
-    const datosUser =  JSON.parse(localStorage.getItem("user"));
+    const datosUser = JSON.parse(localStorage.getItem("user"));
 
     const validationUser = () => {
         if (!datosUser) {
             setConteo(0)
-        }else if (datosUser){
+        } else if (datosUser) {
             setConteo(1)
             return datosUser
         }
@@ -98,11 +98,11 @@ const NavBar = () => {
             timer: 3000,
             timerProgressBar: true,
             didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-          
+
         Toast.fire({
             icon: 'success',
             title: 'Closed session'
@@ -165,8 +165,10 @@ const NavBar = () => {
                 <li>
                     <Link to="/home">Home</Link>
                 </li>
-                <li>
-                    <Link to="/cart">Shopping Cart</Link>
+                <li className={style["submenu-item"]}>
+                    <Link to="/cart" className={style["submenu-link"]}>
+                        <i className={`fa fa-shopping-cart ${style["cart_icon"]}`}></i>
+                    </Link>
                 </li>
 
                 {
@@ -229,6 +231,5 @@ const NavBar = () => {
     );
 };
 
- export default NavBar; 
-
+export default NavBar;
 
