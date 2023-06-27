@@ -17,7 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
-    userGoogle : null,
+    //userGoogle : null,
 
     orderCreated: false,
     error: null,
@@ -366,7 +366,7 @@ const rootReducer=(state = initialState, action) => {
             //console.log(userGoogle)
             return {
                 ...state,
-                userGoogle : action.payload
+                user : action.payload
             }
 
         case act.LOGOUT_USER:{
@@ -379,7 +379,7 @@ const rootReducer=(state = initialState, action) => {
         case act.LOGOUT_USERGOOGLE:
             return {
                 ...state,
-                userGoogle : null
+                user : null
             }
 
         case act.PLATFORMS:

@@ -405,7 +405,7 @@ export const postLogin = (datos) =>{
 export const logoutUser = () => {
     return async function (dispatch) {
         try {
-            const logout = axios.post("cerrarSesion")
+            const logout = await axios.post("cerrarSesion")
             console.log(logout)
             return dispatch({
                 type : LOGOUT_USER
