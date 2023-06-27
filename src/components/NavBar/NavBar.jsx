@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logoImage from "../../assets/LOGOGAMEZONE2.png";
 import usuario from "../../assets/usuario.png";
-import { logoutUser } from "../../redux/actions";
+import { logoutUser, getDataGoogle, logoutGoogle } from "../../redux/actions";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 
@@ -32,8 +32,30 @@ const NavBar = () => {
         };
     }, []);
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    const google = useSelector((state) => state.userGoogle)
+
+    const [ conteo, setConteo ] = useState(0)
+    const [ conteoTwo, setConteoTwo ] = useState(0)
+
+    useEffect(() => {
+        if (google) {
+            console.log(google, "estos datos son del Navbar")
+            localStorage.setItem("userTwo", JSON.stringify(google));
+            setConteoTwo(1)
+        }else{
+            setConteoTwo(0)
+            console.log("no hay datos")
+        }
+    }, [google])
+
+    console.log(conteoTwo, "esto es de google")
+
+    //console.log(conteo)
+
 
     const [conteo, setConteo] = useState(0);
 
@@ -46,11 +68,35 @@ const NavBar = () => {
             setConteo(1);
             return datosUser;
         }
-    };
+
+    }
+
+    const datosUserTwo = JSON.parse(localStorage.getItem("userTwo"));
+
+    console.log(datosUserTwo, "estos datos son del local")
+
+    const validationUserGoogle = () => {
+        //const datosUserTwo = JSON.parse(localStorage.getItem("userTwo"));
+        if (!datosUserTwo) {
+            setConteoTwo(0)
+        }else if (datosUserTwo) {
+            setConteoTwo(1)
+            return datosUserTwo
+        }
+    }
+
+    //console.log(datosUser)
 
     useEffect(() => {
-        validationUser();
-    }, [datosUser]);
+        validationUser()
+    }, [datosUser])
+
+    useEffect(() => {
+        validationUserGoogle()
+    }, [datosUserTwo])
+
+    const removerDatos = async () => {
+
 
     const removerDados = async () => {
         const Toast = Swal.mixin({
@@ -82,6 +128,44 @@ const NavBar = () => {
     }, [cart]);
 
 
+    const removerDatosTres = async () => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+          
+        Toast.fire({
+            icon: 'success',
+            title: 'Closed session'
+        })
+
+        await localStorage.removeItem("userTwo");
+        await dispatch(logoutGoogle())
+
+        console.log("datos removidos de google")
+    }
+
+    function peticionData() {
+        dispatch(getDataGoogle())
+        console.log("peticones de datos")
+    }
+
+    useEffect(() => {
+        if (datosUserTwo) {
+            console.log("hay datos")
+        }else{
+            peticionData()
+        }
+
+    }, [])
+
     return (
         <div className={`custom-navbar ${isNavbarFixed ? style.fixedNavbar : ""}`}>
             <Link to="/home">
@@ -99,6 +183,75 @@ const NavBar = () => {
                         <i className={`fa fa-shopping-cart ${style["cart_icon"]}`}></i>
                     </Link>
                 </li>
+
+
+//                 {
+//                     conteoTwo > conteo ? (
+//                         conteoTwo > 0 ? (
+//                             <li>
+//                                 <div className={style.usuarioContainer}>
+//                                     <img
+//                                         src={datosUserTwo.user.profileImage}
+//                                         className={style.usuario}
+//                                         alt=""
+//                                         title={datosUserTwo.user.name}
+//                                         onClick={handleSubMenuToggle}
+//                                     />
+//                                     {isSubMenuOpen && (
+//                                          <ul className={style.submenu}>
+//                                          <li className={style["submenu_item"]}>
+//                                              <Link to="#">{datosUserTwo.user.name}</Link>
+//                                          </li>
+//                                          <li className={style["submenu_item"]}>
+//                                              <Link to="/user">Perfil</Link>
+//                                          </li>
+//                                          <li className={style["submenu_item"]}>
+//                                              <Link to="/whishlist">Wish List</Link>
+//                                          </li>
+//                                          <li className={style["submenu_item"]}>
+//                                              <a onClick={removerDatosTres}>Log Out</a>
+//                                          </li>
+//                                      </ul>
+//                                     )}
+//                                 </div>
+//                             </li>
+//                         ) : (
+//                             <Link to="/form"><button className={style.button} >login</button></Link>
+//                         )
+//                     ) : (
+//                         conteo > 0 ? (
+//                             <li>
+//                                 <div className={style.usuarioContainer}>
+//                                     <img
+//                                         src={datosUser.profileImage}
+//                                         className={style.usuario}
+//                                         alt={datosUser.name}
+//                                         title={datosUser.name}
+//                                         onClick={handleSubMenuToggle}
+//                                     />
+//                                     {isSubMenuOpen && (
+//                                         <ul className={style.submenu}>
+//                                         <li className={style["submenu_item"]}>
+//                                             <Link to="#">{datosUser.user_name}</Link>
+//                                         </li>
+//                                         <li className={style["submenu_item"]}>
+//                                             <Link to="/user">Perfil</Link>
+//                                         </li>
+//                                         <li className={style["submenu_item"]}>
+//                                             <Link to="/whishlist">Wish List</Link>
+//                                         </li>
+//                                         <li className={style["submenu_item"]}>
+//                                             <a onClick={removerDatos}>Log Out</a>
+//                                         </li>
+//                                     </ul>
+//                                     )}
+//                                 </div>
+//                             </li>
+//                         ) : (
+//                             <Link to="/login"><button className={style.login_button} >login</button></Link>
+//                         )
+//                     )
+//                 }
 
                 {conteo > 0 ? (
                     <li>
@@ -133,6 +286,7 @@ const NavBar = () => {
                         <button className={style.login_button}>Login</button>
                     </Link>
                 )}
+
             </ul>
         </div>
     );

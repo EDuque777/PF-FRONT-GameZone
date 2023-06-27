@@ -56,7 +56,6 @@ const Filters = () => {
         ))}
       </select>
 
-
       <select className={style.select}>
         <option hidden>Genres</option>
         {genresFilter.map(({ genre, id }) => (
