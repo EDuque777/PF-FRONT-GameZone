@@ -5,6 +5,7 @@ import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
 
+
 //* las cards que vengan del home...
 const ShoppingCart = () => {
 
@@ -46,7 +47,7 @@ const ShoppingCart = () => {
             console.error(error.message);
         }
     }
-
+    
     return (
         <div >
             <br />
