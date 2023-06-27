@@ -27,7 +27,6 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     review: [],
-    gamesReviews: [],
     library: [],
 };
 
@@ -36,13 +35,11 @@ const rootReducer=(state = initialState, action) => {
         //filtros combinadosconst combtype = "COMBTYPE"
         
         case act.MANDARREVIEW:
-            const {name } = action.payload
-            console.log(name);
-            // const biblio = action.payload;
-            // const juegoReview = biblio.filter(game => game.name !== game.name)
+            const game = action.payload
+            console.log(game);
             return {
                 ...state,
-                review: name
+                review: game
             }
         
         //filtros de busqueda

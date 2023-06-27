@@ -4,16 +4,19 @@ import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import style from "./Reviews.module.css"
 
+//! agregar alerta de swift
 const Review = () => {
-  const gameRe = useSelector(state => state.gameReview)
-  //console.log(gameRe);
-  const IDUser = useSelector((state) => state.user);
-//console.log(IDUser);
+  const gameRe = useSelector(state => state.review)
+  const { id, name } = gameRe
+  console.log(gameRe);
+  const IDUser = JSON.parse(localStorage.getItem("user"));
+  console.log(IDUser.id);
   const [form, setForm] = useState({
     review: "",
     rating: 0,
     id: IDUser?.id,
-    name: gameRe
+    name: gameRe.name,
+    idGame: gameRe.id,
   });
 
   const handleStarClick = (rating) => {
@@ -23,7 +26,7 @@ const Review = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post("http://localhost:3001/user/review", form, IDUser, gameRe)
+    axios.post("http://localhost:3001/user/review", form, IDUser, name, id)
 
       .then(res => {
         setForm({
