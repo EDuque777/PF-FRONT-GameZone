@@ -645,7 +645,7 @@ export const getMyGames = (id) => {
         try {
             const response = await axios.get(`/user/games?id=${id}`);
         console.log(response);
-        const games = response.data
+        const games = response.data;
         dispatch({
             type: GET_MYGAMES,
             payload: games.Games

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import style from "./Reviews.module.css"
+import Swal from "sweetalert2";
 
 //! agregar alerta de swift
 const Review = () => {
@@ -27,7 +28,6 @@ const Review = () => {
     event.preventDefault();
 
     axios.post("http://localhost:3001/user/review", form, IDUser, name, id)
-
       .then(res => {
         setForm({
           review: "",
@@ -37,6 +37,13 @@ const Review = () => {
       .catch(error => {
         console.error("Error submitting review:", error);
       });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Review added successfully",
+        showConfirmButton: false,
+        timer: 2000
+      })
   };
 
   const renderStars = () => {
