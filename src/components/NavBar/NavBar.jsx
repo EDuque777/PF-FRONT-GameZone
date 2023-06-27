@@ -179,7 +179,7 @@ const NavBar = () => {
                                     <img
                                         src={datosUserTwo.user.profileImage}
                                         className={style.usuario}
-                                        alt={datosUser.name}
+                                        alt=""
                                         title={datosUserTwo.user.name}
                                         onClick={handleSubMenuToggle}
                                     />
@@ -195,7 +195,7 @@ const NavBar = () => {
                                              <Link to="/whishlist">Wish List</Link>
                                          </li>
                                          <li className={style["submenu_item"]}>
-                                             <a onClick={removerDatos}>Log Out</a>
+                                             <a onClick={removerDatosTres}>Log Out</a>
                                          </li>
                                      </ul>
                                     )}
