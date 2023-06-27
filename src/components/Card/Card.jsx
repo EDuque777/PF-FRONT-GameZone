@@ -90,7 +90,9 @@ import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
   let { id ,price, name, image, appid } = props;
+
   price = parseFloat(isNaN(price) ? 0 : price) ?? 0;
+
 
   const dispatch = useDispatch();
   const location = useLocation();

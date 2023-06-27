@@ -51,6 +51,10 @@ export const GETGAMEREVIEW = "GETGAMEREVIEW";
 
 
 
+export const GETGAMEREVIEW = "GETGAMEREVIEW";
+
+
+
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
@@ -624,7 +628,9 @@ export const getUserStorage = (id) => {
 
 
 export const getGameReview = (id) => {
+
     const endpoint = `/reviewsDemo/${id}`;
+
     return async (dispatch) => {
         const {data} = await axios.get(endpoint);
         return dispatch({
@@ -632,6 +638,7 @@ export const getGameReview = (id) => {
             payload: data
         })
     }
+
 }
 //? ACCIONES DE MI BIBLIOTECA
 
@@ -650,4 +657,5 @@ export const getMyGames = (id) => {
             console.error(error.message);    
         }
     }
+
 }
