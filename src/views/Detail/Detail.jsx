@@ -9,22 +9,13 @@ import * as act from "../../redux/actions";
 
 import Rating from '../../components/Rating/Rating';
 
-// const Opinion = ({ rating }) => {
-//   return (
-//     <div className={style.opinion1}>
-//       <h1>opinion</h1>
-//       <Rating rating={4} /> 
-//     </div>
-//   );
-// };
-//
-
 
 const Detail = (props) => {
   
   const history = useHistory();
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
+
   const isLoading = game === undefined || game === null;
   //const cart = useSelector(state => state.cart)
   // const categories = game && game[props.match.params.id]?.data.categories;

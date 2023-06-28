@@ -27,10 +27,12 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     gameReview: [],
+    review: [],
     library: [],
     Users: []
     
 };
+console.log(initialState.gameDetail)
 
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
@@ -136,58 +138,66 @@ const rootReducer=(state = initialState, action) => {
                 };
             
 
-        case act.ORDER_BY:
-            const orderBy = action.payload;
-            let sortedSearch = [...state.search];
-        
-            if (orderBy === "des") {
-                sortedSearch.sort((a, b) => {
-                if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
-                    if (a.is_free && b.is_free) {
-                    return a.price_overview?.final - b.price_overview?.final;
-                    } else if (a.is_free && !b.is_free) {
-                    return -1;
-                    } else if (!a.is_free && b.is_free) {
-                    return 1;
-                    } else {
-                    return a.price_overview?.final - b.price_overview?.final;
+                case act.ORDER_BY:
+                    const orderBy = action.payload;
+                    let sortedSearch = [...state.search];
+            
+                    if (orderBy === "des") {
+                        sortedSearch.sort((a, b) => {
+                        const isComingSoonA = a.coming_soon || false;
+                        const isComingSoonB = b.coming_soon || false;
+                        if (!isComingSoonA && !isComingSoonB) {
+                            const priceA = parseFloat(a.price_overview || "0");
+                            const priceB = parseFloat(b.price_overview || "0");
+                  
+                            if (a.is_free && b.is_free) {
+                                return priceA - priceB;
+                            } else if (a.is_free && !b.is_free) {
+                                return -1;
+                            } else if (!a.is_free && b.is_free) {
+                            return 1;
+                            } else {
+                            return priceA - priceB;
+                            }
+                        } else if (!isComingSoonA && isComingSoonB) {
+                            return -1;
+                        } else if (isComingSoonA && !isComingSoonB) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
+                    } else if (orderBy === "asc") {
+                        sortedSearch.sort((a, b) => {
+                            const isComingSoonA = a.coming_soon || false;
+                            const isComingSoonB = b.coming_soon || false;
+                        if (!isComingSoonA && !isComingSoonB) {
+                            const priceA = parseFloat(a.price_overview || "0");
+                            const priceB = parseFloat(b.price_overview || "0");
+
+                        if (a.is_free && b.is_free) {
+                            return priceA - priceB;
+                        } else if (a.is_free && !b.is_free) {
+                            return 1;
+                        } else if (!a.is_free && b.is_free) {
+                            return -1;
+                        } else {
+                            return priceB - priceA;
+                        }
+                        } else if (!isComingSoonA && isComingSoonB) {
+                            return -1;
+                        } else if (isComingSoonA && !isComingSoonB) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
                     }
-                } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
-                    return -1;
-                } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-                });
-            } else if (orderBy === "asc") {
-                sortedSearch.sort((a, b) => {
-                if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
-                    if (a.is_free && b.is_free) {
-                    return a.price_overview?.final - b.price_overview?.final;
-                    } else if (a.is_free && !b.is_free) {
-                    return 1;
-                    } else if (!a.is_free && b.is_free) {
-                    return -1;
-                    } else {
-                    return b.price_overview?.final - a.price_overview?.final;
-                    }
-                } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
-                    return -1;
-                } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-                });
-            }
-        
-            const filteredSearch = sortedSearch.filter(game => !game.release_date.coming_soon);
-        
-            return {
-                ...state,
-                search: filteredSearch
-            };
+                    const filteredSearch = sortedSearch.filter(game => !game.coming_soon);
+                    return {
+                        ...state,
+                        search: filteredSearch
+                    };
         
             case act.RESET_FILTERS:
                 return {
@@ -448,14 +458,6 @@ const rootReducer=(state = initialState, action) => {
                     country: action.payload.country,
                         },
                     };
-            //  case act.EDITPROFILEIMAGE:
-            //     return {
-            //         ...state,
-            //         user: {
-            //         ...state.user,
-            //         profileImage: action.payload.profileImage,
-            //           },
-            //         };
 
             case act.GETUSERSTORAGE:
                 return {
@@ -468,7 +470,14 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     gameReview: action.payload
                 }
-            
+                case act.MANDARREVIEW:
+                    const game = action.payload
+                    console.log(game);
+                    return {
+                        ...state,
+                        review: game
+                    }
+        
 //? CASOS DE LA BIBLIOTECA
 
             case act.GET_MYGAMES:
