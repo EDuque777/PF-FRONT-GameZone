@@ -27,7 +27,69 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     gameReview: [],
-    library: []
+    library: [],
+    Users: [
+        {
+            "ban": true,
+            "id": "ccb553ab-c05b-45bd-8327-23d58e67b7f0",
+            "name": "user1",
+            "role": "users",
+            "email": "user1",
+            "password": "$2a$12$R.mZ3xxSt2AmhrPhyAWML.UMMuMpRihUkUGUgYpAABB2aOOrr62ia",
+            "confirmPassword": null,
+            "user_name": null,
+            "country": null,
+            "profileImage": "https://res.cloudinary.com/dcebtiiih/image/upload/v1686950493/images/1686950487877.webp"
+          },
+          {
+            "ban": true,
+            "id": "cccb01dd-20dc-479d-b01a-c723f07229a8",
+            "name": "user2",
+            "role": "users",
+            "email": "user2@gmail.com",
+            "password": "$2a$12$JJeM4F0fsR.hiwbbSnBO7OmdZEDxB0osh/.VqsqgcvQaYHWHKULrW",
+            "confirmPassword": null,
+            "user_name": null,
+            "country": null,
+            "profileImage": "https://res.cloudinary.com/dcebtiiih/image/upload/v1686950493/images/1686950487877.webp"
+          },
+          {
+            "ban": false,
+            "id": "f8571282-97d4-43a9-b726-696d9760e746",
+            "name": "user3",
+            "role": "users",
+            "email": "user2@gamil.com",
+            "password": "$2a$12$2Pz77aqHKU9zWePzkHZaOuNA43IvaiXb8T2AH8ZOSeqbAZ/iQ4Xgm",
+            "confirmPassword": null,
+            "user_name": null,
+            "country": null,
+            "profileImage": "https://res.cloudinary.com/dcebtiiih/image/upload/v1686950493/images/1686950487877.webp"
+          },
+          {
+            "ban": false,
+            "id": "082050f7-1870-4e11-9cbe-0c51ddc5a699",
+            "name": "user3",
+            "role": "users",
+            "email": "user2gmail.com",
+            "password": "$2a$12$NHIJZbD739qo9LXG9g3nZu2Tt695FrVCgd9BMphvp5kfhDvrYGkL2",
+            "confirmPassword": null,
+            "user_name": null,
+            "country": null,
+            "profileImage": "https://res.cloudinary.com/dcebtiiih/image/upload/v1686950493/images/1686950487877.webp"
+          },
+          {
+            "ban": false,
+            "id": "2f31636c-cba5-4c6c-8e44-ffe5df2d0bf0",
+            "name": "user3",
+            "role": "users",
+            "email": "user2@gmailcom",
+            "password": "$2a$12$MNileMjoJoVGfT4kvuodEekGFkGmdD.lmNa5NQz.7y9vdvUwi/Qsa",
+            "confirmPassword": null,
+            "user_name": null,
+            "country": null,
+            "profileImage": "https://res.cloudinary.com/dcebtiiih/image/upload/v1686950493/images/1686950487877.webp"
+          }
+        ]
     
 };
 
@@ -39,56 +101,56 @@ const rootReducer=(state = initialState, action) => {
         
         //filtros de busqueda
 
-        case act.FILTER_LANGUAGES:
-            const language = action.payload.toLowerCase();
-            const filteredSearchsssssssss = state.search.filter(game =>
-                game.supported_languages && game.supported_languages.toLowerCase().includes(language))
-            return{
-                ...state,
-              search: filteredSearchsssssssss
-            }
+
+            case act.FILTER_LANGUAGES:
+                const language = action.payload.toLowerCase();
+                console.log(action.payload)
+                const filteredSearchsssssssss = state.search.filter(game =>
+                    game.Languages && game.Languages.some(item =>
+                    item.language.toLowerCase() === language
+                    )
+                );
+                return {
+                    ...state,
+                    search: filteredSearchsssssssss
+                };
 
         case act.FILTER_GENRES:
             const genre = action.payload;
-          
+        
             const filteredSearchsssssss = state.search.filter(game =>
-              game.genres && game.genres.some(categor => categor.description === genre)
+                game.Genres && game.Genres.some(categor => categor.genre === genre)
             );
-          
+        
             return {
-              ...state,
-              search: filteredSearchsssssss
+                ...state,
+                search: filteredSearchsssssss
             };
-          
+        
         case act.FILTER_CATEGORIES:
-            const category = action.payload;
-          
+            const categorys = action.payload;
+        
             const filteredSearchssssss = state.search.filter(game =>
-              game.categories && game.categories.some(categor => categor.description === category)
+                game.Categories && game.Categories.some(categor => categor.category === categorys)
             );
-          
+        
             return {
-              ...state,
-              search: filteredSearchssssss
+                ...state,
+                search: filteredSearchssssss
             };
-          
+        
 
 
-        case act.FILTER_PLATFORMS:
-            let filteredSearchssss;
-            const platform = action.payload
-            console.log(platform)
-            if (platform === "windows") {
-              filteredSearchssss = state.search.filter(game => game.platforms.windows === true);
-            } else if(platform === "linux"){
-              filteredSearchssss = state.search.filter(game => game.platforms.linux === true);
-            } else if(platform === "mac"){
-                filteredSearchssss = state.search.filter(game => game.platforms.mac === true);
-            }
-            return {
-              ...state,
-              search: filteredSearchssss
-            };
+            case act.FILTER_PLATFORMS:
+                const platform = action.payload;
+                const filteredSearchssss = state.search.filter(game =>
+                    game.Platforms.some(item => item.platform === platform)
+                );
+                return {
+                    ...state,
+                    search: filteredSearchssss
+                };
+            
 
 
 
@@ -114,6 +176,7 @@ const rootReducer=(state = initialState, action) => {
                 search: typesearchss
             };
 
+
             case act.FILTER_AGE:
                 const types = action.payload;
                 const typesearchs = state.search.filter(game => game.required_age === types);
@@ -122,6 +185,7 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     search: typesearchs
                 };
+
 
             case act.FILTER_CONTROLLER:
                 const CONTROLLER = action.payload;

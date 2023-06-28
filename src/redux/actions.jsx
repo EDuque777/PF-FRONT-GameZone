@@ -48,12 +48,20 @@ export const GETUSERSTORAGE = "GETUSERSTORAGE";
 export const GET_MYGAMES = "GET_MYGAMES";
 
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
+export const ALL_USERS = "ALL_USERS";
+
 
 
 
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
+export const allusers = () => {
+    return {
+            type: "ALL_USERS",
+        
+    }
+}
 export const resetfilters = () => {
     return {
             type: "RESET_FILTERS",
