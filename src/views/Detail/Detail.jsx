@@ -692,7 +692,3 @@ const Detail = (props) => {
 export default Detail;
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e7713f53ea71e04248e00839f614a63d45e88603

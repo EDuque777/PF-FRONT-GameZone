@@ -62,7 +62,6 @@ export const mandarAReview = (game) => {
 
 
 
-export const GETGAMEREVIEW = "GETGAMEREVIEW";
 
 
 
