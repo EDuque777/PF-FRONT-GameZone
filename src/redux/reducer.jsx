@@ -27,7 +27,8 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     gameReview: [],
-    library: []
+    library: [],
+    review: [],
     
 };
 
@@ -473,6 +474,14 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     library: action.payload
                 }
+
+                case act.MANDARREVIEW:
+            const game = action.payload
+            console.log(game);
+            return {
+                ...state,
+                review: game
+            }
 
             
         default:

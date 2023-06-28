@@ -49,6 +49,17 @@ export const GET_MYGAMES = "GET_MYGAMES";
 
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 
+export const MANDARREVIEW = "MANDARREVIEW";
+
+export const mandarAReview = (game) => {
+    console.log(game);
+    return {
+        type: MANDARREVIEW,
+        payload: game
+    }
+}
+
+
 
 
 
@@ -148,6 +159,7 @@ export const gameDetail = (id) => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`search/${id}`)
+            console.log(response);
             dispatch({
                 type: GET_DETAIL,
                 payload: response.data
@@ -633,6 +645,7 @@ export const getGameReview = (id) => {
         })
     }
 }
+
 //? ACCIONES DE MI BIBLIOTECA
 
 export const getMyGames = (id) => {
