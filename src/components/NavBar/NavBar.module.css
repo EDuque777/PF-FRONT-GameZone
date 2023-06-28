@@ -17,8 +17,6 @@
     font-family: 'Dosis', sans-serif;
 }
 
-
-
 .NaV>li>a {
     display: block;
     color: white;
@@ -27,12 +25,14 @@
     letter-spacing: 2px;
     font-size: 18px;
     margin: auto;
+
     padding-right: 27px;
     letter-spacing: 1px;
     font-weight: 500;
 }
 .cart_icon{
     font-size: 30px; 
+
 }
 .cart_count {
     position: absolute;
@@ -49,6 +49,7 @@
     font-size: 12px;
     border-radius: 50%;
 }
+
 .NaV>li>a:hover {
     color: #5b5a5c;
 }
@@ -60,6 +61,7 @@
     width: 100%;
     background-color: #141414;
     height: 72px;
+
     z-index: 900 !important;
     transition: 2.0s ease all;
 }

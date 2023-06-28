@@ -1,11 +1,20 @@
 import styles from './adm.module.css';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as act from '../../redux/actions';
+import { useSelector } from 'react-redux';
 
 function Dashboard() {
+
+  const dispatch = useDispatch()
+
   //Form Game
   const [showForm, setShowForm] = useState(false);
   const [showUserForm, setShowUserForm] = useState(false);
+  const [showUsers, setShowUsers] = useState(false);
+
+
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [requiredAge, setRequiredAge] = useState('');
@@ -103,11 +112,32 @@ function Dashboard() {
   const handleCreateGameClick = () => {
     setShowForm(true);
     setShowUserForm(false);
+    setShowUsers(false);
   };
+  const handleUsers = () => {
+    setShowForm(false);
+    setShowUserForm(false);
+    setShowUsers(true);
+    dispatch(act.allusers)
+  };
+  const Users = useSelector((state) => state.Users);
+console.log(Users)
+const handleBanUser = (userId) => {
+  dispatch(banUser(userId));
+};
+
+const handleUnbanUser = (userId) => {
+  dispatch(unbanUser(userId));
+};
+const [searchUser, setsearchUser] = useState('');
+console.log(searchUser)
+const filteredUsers = Users.filter(user => user.email.includes(searchUser));
+
 
   const handleCreateUserClick = () => {
-    setShowUserForm(true);
     setShowForm(false);
+    setShowUserForm(true);
+    setShowUsers(false);
   };
 
   return (
@@ -142,10 +172,10 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="#" onClick={handleUsers}>
                 <i className={`fa fa-shopping-cart ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
-                  Sales
+                  Users
                 </span>
               </a>
             </li>
@@ -308,6 +338,47 @@ function Dashboard() {
             </div>
           </div>
         )}
+{showUsers && (
+  <div className={styles.cardContainer3}>
+    <div>
+      <button className={styles.close1} onClick={() => setShowUsers(!showUsers)}>
+        X
+      </button>
+    </div>
+    <div className={styles.form1}>
+      <h2 className={styles.namedeuser}>Users</h2>
+      <input onChange={(e) => setsearchUser(e.target.value)} className={styles.searchUsers}></input>
+      <table className={styles.users}>
+        <thead>
+          <tr>
+            <th>Profile Image</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>id</th>
+            <th>ban</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {filteredUsers.map((user) => (
+            <tr key={user.id}>
+              <td>
+                <img src={user.profileImage} alt="userIamge" className={styles.imguser} />
+              </td>
+              <td>{user.name}</td>
+              <td>{user.role}</td>
+              <td>{user.email}</td>
+              <td>{user.id}</td>
+              <td><button className={user.ban ? styles.true : styles.false}>{user.ban ? "true" : "false"}</button></td>
+
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logoImage from "../../assets/LOGOGAMEZONE2.png";
 import usuario from "../../assets/usuario.png";
-import { logoutUser } from "../../redux/actions";
+import { logoutUser, getDataGoogle, logoutGoogle } from "../../redux/actions";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 
@@ -32,15 +32,18 @@ const NavBar = () => {
         };
     }, []);
 
+
     const history = useHistory();
     const dispatch = useDispatch();
 
     const [conteo, setConteo] = useState(0);
 
+
     const datosUser = JSON.parse(localStorage.getItem("user"));
 
     const validationUser = () => {
         if (!datosUser) {
+
             setConteo(0);
         } else if (datosUser) {
             setConteo(1);
@@ -52,6 +55,7 @@ const NavBar = () => {
         validationUser();
     }, [datosUser]);
 
+
     const removerDados = async () => {
         const Toast = Swal.mixin({
             toast: true,
@@ -60,10 +64,12 @@ const NavBar = () => {
             timer: 3000,
             timerProgressBar: true,
             didOpen: (toast) => {
+
                 toast.addEventListener("mouseenter", Swal.stopTimer);
                 toast.addEventListener("mouseleave", Swal.resumeTimer);
             },
         });
+
 
         Toast.fire({
             icon: "success",
@@ -82,6 +88,44 @@ const NavBar = () => {
     }, [cart]);
 
 
+    const removerDatosTres = async () => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+          
+        Toast.fire({
+            icon: 'success',
+            title: 'Closed session'
+        })
+
+        await localStorage.removeItem("userTwo");
+        await dispatch(logoutGoogle())
+
+        console.log("datos removidos de google")
+    }
+
+    function peticionData() {
+        dispatch(getDataGoogle())
+        console.log("peticones de datos")
+    }
+
+    useEffect(() => {
+        if (datosUserTwo) {
+            console.log("hay datos")
+        }else{
+            peticionData()
+        }
+
+    }, [])
+
     return (
         <div className={`custom-navbar ${isNavbarFixed ? style.fixedNavbar : ""}`}>
             <Link to="/home">
@@ -93,9 +137,10 @@ const NavBar = () => {
                         <i className={`fa fa-home ${style["cart_icon"]}`}></i>
                     </Link>
                 </li>
+
                 <li className={style["submenu__item"]}>
                     <Link to="/cart" className={style["submenu_link"]}>
-                        {carItem > 0 && <div className={style["cart_count"]}>{carItem}</div>}
+        {carItem > 0 && <div className={style["cart_count"]}>{carItem}</div>}
                         <i className={`fa fa-shopping-cart ${style["cart_icon"]}`}></i>
                     </Link>
                 </li>
@@ -133,6 +178,7 @@ const NavBar = () => {
                         <button className={style.login_button}>Login</button>
                     </Link>
                 )}
+
             </ul>
         </div>
     );

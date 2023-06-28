@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Search.module.css";
@@ -22,88 +20,76 @@ const Search = () => {
   const searchcopy = useSelector((state) => state.searchcopy);
   const gamesFilterLanguages = useSelector(state => state.languagesGames);
 
+  const types = search ? [...new Set(search.map((game) => game.type))] : [];
+  const age = search ? [...new Set(search.map((game) => game.required_age))] : [];
 
-
-  const types =  search 
-  ? [...new Set(search.map((game) => game.type))]
-  : [];
-
-  const age = search
-  ? [...new Set(search.map((game) => game.required_age))]
-  : [];
 
   const categories = search
-  ? search.map((game) => game.categories?.map((category) => category.description))
-      .flat()
-  : [];
-
+    ? search.map((game) => game.Categories?.map((category) => category.category)).flat()
+    : [];
   const filteredcategories = categories
-  ? [...new Set(categories.filter((description) => description))]
-  : [];
-
-  const Genres = search
-  ? search.map((game) => game.genres?.map((category) => category.description))
-      .flat()
-  : [];
-  const filteredgenres = Genres
-  ? [...new Set(Genres.filter((description) => description))]
-  : [];
-
-  const resetfilters = ()=>{
+    ? [...new Set(categories.filter((description) => description))]
+    : [];
+  const GENRES = search
+    ? search.map((game) => game.Genres?.map((category) => category.genre)).flat()
+    : [];
+    const filteredgenres = GENRES
+    ? [...new Set(GENRES.filter((description) => description))]
+    : [];
+    console.log(filteredcategories)
+    
+  const resetfilters = () => {
     setCurrentPage(1);
     handleclean();
     dispatch(act.resetfilters());
-  }
+  };
 
-  const filterprice = (e)=>{
+  const filterprice = (e) => {
     setCurrentPage(1);
     dispatch(act.orderBy(e.target.value));
-  }
-  
-  const filterage = (e)=>{
+  };
+
+  const filterage = (e) => {
     setCurrentPage(1);
     dispatch(act.filterage(e.target.value));
-  }
-const filtertype = (e)=>{
-  setCurrentPage(1);
-  dispatch(act.filtertype(e.target.value));
-}
+  };
 
+  const filtertype = (e) => {
+    setCurrentPage(1);
+    dispatch(act.filtertype(e.target.value));
+  };
 
-  const filterfree = (e)=>{
+  const filterfree = (e) => {
     setCurrentPage(1);
     dispatch(act.filterfree(e.target.value));
-  }
+  };
 
-
-  const filterplatforms = (e)=>{
+  const filterplatforms = (e) => {
     setCurrentPage(1);
     dispatch(act.filterplatforms(e.target.value));
-  }
+  };
 
-  const filtercategories = (e)=>{
+  const filtercategories = (e) => {
     setCurrentPage(1);
     dispatch(act.filtercategories(e.target.value));
-  }
+  };
 
-  const filtergenres = (e)=>{
+  const filtergenres = (e) => {
     setCurrentPage(1);
     dispatch(act.filtergenres(e.target.value));
-  }
-  const filterlanguages = (e)=>{
+  };
+
+  const filterlanguages = (e) => {
     setCurrentPage(1);
     dispatch(act.filterlanguages(e.target.value));
-  }
+  };
 
-  const filtercontroller = (e)=>{
+  const filtercontroller = (e) => {
     setCurrentPage(1);
     dispatch(act.filtercontroller(e.target.value));
-  } 
+  };
 
-
-
-
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const maxPageButtons = 3;
 
   const handleChange = (e) => {
@@ -120,7 +106,6 @@ const filtertype = (e)=>{
       });
     }
   };
-  
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -128,21 +113,25 @@ const filtertype = (e)=>{
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
   const currentResults = search ? search.slice(indexOfFirstResult, indexOfLastResult) : [];
-  
+
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  
-  
 
+  console.log(search);
 
-  
-  console.log(search)
-
-  const handleclean = () =>{
+  const handleclean = () => {
     document.getElementById("Type").value = "none";
     document.getElementById("Required age").value = "none";
     document.getElementById("Is free").value = "none";
@@ -152,7 +141,7 @@ const filtertype = (e)=>{
     document.getElementById("Genres").value = "none";
     document.getElementById("Controller").value = "none";
     document.getElementById("Languages").value = "none";
-}
+  };
 
   return (
     <div>
@@ -164,7 +153,6 @@ const filtertype = (e)=>{
             type="text"
             onChange={(e) => handleChange(e)}
             onKeyDown={handleKeyDown}
-
           />
           <FontAwesomeIcon
             className={style.buttonsearch}
@@ -184,7 +172,10 @@ const filtertype = (e)=>{
             <>
               {currentResults.length > 0 ? (
                 <>
-                  <CardsContainer className={style.CardsContainer} gameComingSoon={currentResults} />
+                  <CardsContainer
+                    className={style.CardsContainer}
+                    gameComingSoon={currentResults}
+                  />
                   <Pagination
                     resultsPerPage={resultsPerPage}
                     totalResults={search ? search.length : 0}
@@ -194,104 +185,120 @@ const filtertype = (e)=>{
                   />
                 </>
               ) : (
-                
-                  <div className={style.loadingContainer}>
-                    <p className={style.notfound}>Game not found.</p>
-                  </div>
-                
+                <div className={style.loadingContainer}>
+                  <p className={style.notfound}>Game not found.</p>
+                </div>
               )}
             </>
           )}
         </div>
         <div className={style.filters}>
           <div>
-            <button className={style.reset}onClick={()=>resetfilters()}>Reset Filters</button>
+            <button className={style.reset} onClick={() => resetfilters()}>
+              Reset Filters
+            </button>
           </div>
           <div className={style.option}>
-                  <h3>Price:</h3>
-                  <select id="Price"  defaultValue="none" onChange={e => filterprice(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                      <option value="asc" >ascendant</option>
-                      <option value="des" >descendant</option>
-                  </select>
+            <h3>Price:</h3>
+            <select id="Price" defaultValue="none" onChange={(e) => filterprice(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              <option value="asc">ascendant</option>
+              <option value="des">descendant</option>
+            </select>
           </div>
           <div className={style.option}>
-                  <h3>Type:</h3>
-                  <select id="Type" defaultValue="none" onChange={e => filtertype(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                              {types ? types.map((type, key)=>{
-                                return(
-                                  <option value={type} key={key}>{type}</option>
-                                )
-                              }): "lool"}
-                          )
-                  </select>
-              </div>
-              <div className={style.option}>
-                  <h3>Required age:</h3>
-                  <select id="Required age" defaultValue="none"  onChange={e => filterage(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                              <option value="18" >+18</option>
-                          
-                  </select>
-              </div>
-              <div className={style.option}>
-                  <h3>Is free:</h3>
-                  <select id="Is free" defaultValue="none"  onChange={e => filterfree(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                      <option value="false" >true</option>
-                      <option value="true" >false</option>
-                  </select>
-              </div>
-              <div className={style.option}>
-                  <h3>Platforms:</h3>
-                  <select id="Platforms" defaultValue="none"  onChange={e => filterplatforms(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                      <option value="windows" >windows</option>
-                      <option value="mac" >mac</option>
-                      <option value="linux" >linux</option>
-                  </select>
-              </div>
-              <div className={style.option}>
-                  <h3>Categories:</h3>
-                  <select id="Categories" defaultValue="none"  onChange={e => filtercategories(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                      {filteredcategories.map((temp, key) =>{
-                          return (
-                              <option value={temp} key={key}>{temp}</option>
-                          )
-                      })}
-                  </select>
-              </div>
-              <div className={style.option}>
-                  <h3>Genres:</h3>
-                  <select id="Genres" defaultValue="none"  onChange={e => filtergenres(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                      {filteredgenres.map((temp, key) =>{
-                          return (
-                              <option value={temp} key={key}>{temp}</option>
-                          )
-                      })}
-                  </select>
-              </div>
-              <div className={style.option}>
-                  <h3>Languages:</h3>
-                  <select id="Languages" defaultValue="none"  onChange={e => filterlanguages(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                      {gamesFilterLanguages.map((temp, key) =>{
-                          return (
-                              <option value={temp.language} key={key}>{temp.language}</option>
-                          )
-                      })}
-                  </select>
-              </div>
-              <div className={style.option}>
-                  <h3>Controller support:</h3>
-                  <select id="Controller" defaultValue="none"  onChange={e => filtercontroller(e)}>
-                  <option disabled={true} value="none" >select an option</option>
-                  <option value="full" >full</option>
-                  </select>
-            </div>
+            <h3>Type:</h3>
+            <select id="Type" defaultValue="none" onChange={(e) => filtertype(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              {types ? (
+                types.map((type, key) => {
+                  return <option value={type} key={key}>{type}</option>;
+                })
+              ) : (
+                "lool"
+              )}
+            </select>
+          </div>
+          <div className={style.option}>
+            <h3>Required age:</h3>
+            <select id="Required age" defaultValue="none" onChange={(e) => filterage(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              <option value="18">+18</option>
+            </select>
+          </div>
+          <div className={style.option}>
+            <h3>Is free:</h3>
+            <select id="Is free" defaultValue="none" onChange={(e) => filterfree(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              <option value="false">true</option>
+              <option value="true">false</option>
+            </select>
+          </div>
+          <div className={style.option}>
+            <h3>Platforms:</h3>
+            <select id="Platforms" defaultValue="none" onChange={(e) => filterplatforms(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              <option value="windows">windows</option>
+              <option value="mac">mac</option>
+              <option value="linux">linux</option>
+            </select>
+          </div>
+          <div className={style.option}>
+            <h3>Categories:</h3>
+            <select id="Categories" defaultValue="none" onChange={(e) => filtercategories(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              {filteredcategories.map((temp, key) => {
+                return <option value={temp} key={key}>{temp}</option>;
+              })}
+            </select>
+          </div>
+          <div className={style.option}>
+            <h3>Genres:</h3>
+            <select id="Genres" defaultValue="none" onChange={(e) => filtergenres(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              {filteredgenres.map((temp, key) => {
+                return <option value={temp} key={key}>{temp}</option>;
+              })}
+            </select>
+          </div>
+          <div className={style.option}>
+            <h3>Languages:</h3>
+            <select id="Languages" defaultValue="none" onChange={(e) => filterlanguages(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              {gamesFilterLanguages.map((temp, key) => {
+                return (
+                  <option value={temp.language} key={key}>
+                    {temp.language}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className={style.option}>
+            <h3>Controller support:</h3>
+            <select id="Controller" defaultValue="none" onChange={(e) => filtercontroller(e)}>
+              <option disabled={true} value="none">
+                select an option
+              </option>
+              <option value="full">full</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -299,9 +306,4 @@ const filtertype = (e)=>{
 };
 
 export default Search;
-
-
-
-
-
 
