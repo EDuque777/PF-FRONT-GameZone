@@ -638,19 +638,19 @@ export const getUserStorage = (id) => {
 }
 
 
-export const getGameReview = (id) => {
+// export const getGameReview = (id) => {
 
-    const endpoint = `/reviewsDemo/${id}`;
+//     const endpoint = `/reviewsDemo/${id}`;
 
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
-        return dispatch({
-            type: GETGAMEREVIEW,
-            payload: data
-        })
-    }
+//     return async (dispatch) => {
+//         const {data} = await axios.get(endpoint);
+//         return dispatch({
+//             type: GETGAMEREVIEW,
+//             payload: data
+//         })
+//     }
 
-}
+// }
 
 //? ACCIONES DE MI BIBLIOTECA
 
@@ -668,6 +668,18 @@ export const getMyGames = (id) => {
         } catch (error) {
             console.error(error.message);    
         }
+    }
+
+}
+
+
+export const getGameReview = (game) => {
+
+    return (dispatch) => {
+        return dispatch({
+            type: GETGAMEREVIEW,
+            payload: game
+        })
     }
 
 }

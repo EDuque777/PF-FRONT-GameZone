@@ -10,6 +10,7 @@ import Review from './views/Reviews/Reviews';
 
 import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
+import ReviewsModif from './views/Reviews/ReviewsModif';
 
 import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
 
@@ -36,6 +37,7 @@ return (
       <Route path="/library" render={() => <MyGames />}/>
       <Route path="/pruebas" render={() => <ShoppingView />}/>
       <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
+      <Route path="/detail/reviews/:id" render={() => <ReviewsModif />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>

@@ -462,9 +462,10 @@ const rootReducer=(state = initialState, action) => {
             }
 
             case act.GETGAMEREVIEW:
+                console.log("ACTIOOOOOOOOOOOON",action.payload);
                 return {
                     ...state,
-                    gameReview: action.payload
+                    review: action.payload
                 }
             
 //? CASOS DE LA BIBLIOTECA

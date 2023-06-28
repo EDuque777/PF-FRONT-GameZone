@@ -364,8 +364,10 @@
 }
 
 .bar {
+  outline: green solid 3px;
   flex-grow: 1;
   height: 10px;
+  
   background-color: lightgray;
   margin-left: 5px;
 }
@@ -423,6 +425,11 @@
   margin-bottom: 3px;
 }
 
+
+.profileImage{
+  height: 50px;
+  width: 50px;
+}
 
 
 
