@@ -12,6 +12,7 @@ const ShoppingCart = () => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const totalPrice = useSelector(state => state.total)
+    const totalPrices = totalPrice.toFixed(2)
     //console.log(cart);
     // const wholePart = Math.floor(totalPrice / 100);
     // const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
@@ -43,7 +44,7 @@ const ShoppingCart = () => {
     const handleBuy = async () => {
         try {
             //! mandar tanto juegos como el precio total
-            dispatch(act.createOrder(totalPrice, cart, dataUser))
+            dispatch(act.createOrder(totalPrices, cart, dataUser))
         } catch (error) {
             console.error(error.message);
         }
@@ -65,7 +66,7 @@ const ShoppingCart = () => {
                     </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4 className={styles.titleCarrito}>TOTAL: $ {totalPrice} </h4>
+                        <h4 className={styles.titleCarrito}>TOTAL: $ {totalPrices} </h4>
                     </div>
                     <div className={styles.botones}> 
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
@@ -94,7 +95,7 @@ const ShoppingCart = () => {
                 </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4 className={styles.titleCarrito}>TOTAL: ${totalPrice}</h4>
+                        <h4 className={styles.titleCarrito}>TOTAL: ${totalPrices}</h4>
                     </div>
                     <div className={styles.botones}>
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>

@@ -203,3 +203,136 @@ height: 100%;
 }
 
 
+.users {
+  color: rgb(224, 224, 224);
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users th,
+.users td {
+  text-align: center;
+  border: 1px solid #292929;
+}
+
+.users th {
+  background-color: #2e2e2e;
+  color: #e4e4e4;
+}
+
+.users td img {
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  .divdeuser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e4e4e4;
+    background-color: #2e2e2e;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+
+  .cardContainer3 {
+    margin-top: 50px;
+    background-color: #4a4a4a;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
+    max-width: 900px; /* Defina a largura máxima desejada */
+    margin-left: 300px;
+    font-family: 'Titillium Web', sans-serif;
+    overflow: auto;
+  }
+
+  .close1{
+    margin-left: 810px;
+    margin-top: 10px;
+    background-color: #ff1100;
+    color: #000000;
+    border: none;
+    padding: 7px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 7px;
+  }
+  .close1:hover{
+    background-color: #fd2d2d;
+  }
+
+  .namedeuser{
+    color: #ccc;
+    padding: 10px;
+  }
+
+
+
+  .switchbutton {
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .switchbutton:before {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: #fff;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
+  }
+  
+  .switchbutton.active:before {
+    transform: translateX(30px);
+  }
+  
+  .switchlabel {
+    display: none;
+  }
+  
+
+  .true{
+    color: #ccc;
+    background-color: green;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  .false{
+    background-color: red;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    color: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .searchUsers{
+    border-radius: 10px;
+    margin: 10px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
