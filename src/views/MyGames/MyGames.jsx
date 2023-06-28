@@ -3,6 +3,7 @@ import style from "./MyGames.module.css"
 import * as act from "../../redux/actions"
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Detail from "../Detail/Detail";
 
 const MyGames = () => {
 
@@ -28,13 +29,14 @@ const MyGames = () => {
                 <div className={style.card} key={game.id}>
                     <img className={style.image} src={game.header_image} alt={game.name} />
                     <h4 className={style.titleName}>{game.name}</h4>
+                    <p className={style.titleName}>{game.release_date}</p>
                     <Link to={"/review"}>
                         <button className={style.button} onClick={() => handleSend(game)}>Create Review</button>
                     </Link>
                 </div>
           ))}
         </div>
-        <div className={style.cardPreview}>
+        <div className={style}>
             
         </div>
       </div>

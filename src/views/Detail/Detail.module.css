@@ -304,15 +304,82 @@
 
 .promedio{
   /* outline: blue solid 3px; */
-  display: flex;
-  height: 300px;
+  /* display: flex; */
+  height: 380px;
   width: 300px;
   color: white;
   flex-direction: column;
   background-color: #343434;
   margin-left:  100px; 
   margin-top: 100px; 
+  /* background: url("../../assets/promedio.png"); */
+	/* background-repeat: no-repeat; */
+	
 }
+
+
+.promedioInfo{
+  /* outline: yellow solid 3px; */
+  margin: 8%;
+
+  
+}
+
+.promedioNumber {
+  /* outline: white solid 3px; */
+  height: fit-content;
+  margin: 0;
+  margin-left: 0;
+  text-align: left;
+  font-size: 30px;
+}
+
+
+
+.cantidadReviews{
+  /* outline: red solid 3px; */
+  display: flex;
+  font-size: 20px;
+}
+
+.ratingCount {
+  /* outline: pink solid 3px; */
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.starRating {
+  display: flex;
+  align-items: center;
+}
+
+.ratingNumber {
+  margin-right: 5px;
+}
+
+.star {
+  color: white;
+}
+
+.bar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: lightgray;
+  margin-left: 5px;
+}
+
+.fill {
+  height: 100%;
+  background-color: rgb(93, 93, 93);
+}
+
+.ratingPercentage {
+  margin-left: 5px;
+}
+
+
 
 .opiniones{
   /* outline: green solid 3px; */
@@ -355,11 +422,3 @@
 .opinion p:first-of-type {
   margin-bottom: 3px;
 }
-
-
-
-
-
-
-
-

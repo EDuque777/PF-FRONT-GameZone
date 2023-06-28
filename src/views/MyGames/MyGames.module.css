@@ -1,24 +1,26 @@
 .container {
   display: flex;
   align-items: flex-start;
-  outline: 1px solid red;
+  justify-content: center;
+  /* outline: 1px solid red; */
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  /* padding-left: 10%; */
 }
 
 .cardContainer {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  outline: 1px solid rgb(152, 6, 210);
-  width: 20%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  outline: 1px solid rgb(0, 0, 0);
+  background-color: black;
 }
 
 .cardPreview {
   outline: 6px solid rgb(41, 20, 178);
   color: white;
   flex: 1; /* Ocupar el espacio restante */
-
 }
 
 .title {
@@ -27,10 +29,10 @@
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: calc(25% - 10px); /* Calcular el ancho con margen entre las tarjetas */
   margin-bottom: 10px;
+  outline: rgb(0, 0, 0) solid 1px;
+  background-color: rgb(10, 1, 21);
 }
 
 .titleName {

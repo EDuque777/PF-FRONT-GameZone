@@ -17,7 +17,7 @@ const ShoppingCart = () => {
     // const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
     // const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
     const dataUser = JSON.parse(localStorage.getItem("user"));
-    //console.log(dataUser);
+    console.log(dataUser);
 
     const handleRemove = () => {
         Swal.fire({
