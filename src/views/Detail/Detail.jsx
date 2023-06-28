@@ -589,31 +589,25 @@ const Detail = (props) => {
   </div>
 </div>
 </div>
-
-
-                <div className={style.opiniones}>
-
-                {game?.Reviews &&
-                game?.Reviews.map((review, index) => (
-                  <div className={style.opinion} key={index}>
-                    <div className={style.opinioncontenido}>
-                      <h3>{review?.author}</h3>
-                      <Rating rating={review?.rating} />
-                      <p>{review?.reviews}</p>
-                      <p>{review?.date}</p>
-                    </div>
-                  </div>
-                ))}
-
-                </div>
-                
-            
-            </div>
-
-          </div>
-      )}
-    </div>
-  );
+  <div className={style.opiniones}>
+    {game?.Reviews &&
+    game?.Reviews.map((review, index) => (
+      <div className={style.opinion} key={index}>
+        <div className={style.opinioncontenido}>
+          <h3>{review?.author}</h3>
+          <Rating rating={review?.rating} />
+          <p>{review?.reviews}</p>
+          <p>{review?.date}</p>
+          <button>editar review</button>
+        </div>
+      </div>
+    ))}
+  </div>            
+</div>
+</div>
+)}
+</div>
+);
 };
 
 export default Detail;

@@ -77,9 +77,9 @@ const ShoppingCart = () => {
             <div className={styles.container}>
                 <div className={styles.juegosContainer}>
                     <div className={styles.cajitaItems}>
-                        {cart.map(game => {
+                        {cart.map((game, i) => {
                             return (
-                                <li className={styles.li} >  
+                                <li className={styles.li} key={`${game.id} - ${i}`}>  
                                 <Card
                                 key={game.id} 
                                 id={game.id}

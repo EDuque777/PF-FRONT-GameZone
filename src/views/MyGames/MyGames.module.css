@@ -5,7 +5,6 @@
   /* outline: 1px solid red; */
   width: 100%;
   min-height: 100vh;
-  /* padding-left: 10%; */
 }
 
 .cardContainer {
@@ -15,6 +14,10 @@
   align-items: stretch;
   outline: 1px solid rgb(0, 0, 0);
   background-color: black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .cardPreview {
@@ -31,7 +34,7 @@
 .card {
   width: calc(25% - 10px); /* Calcular el ancho con margen entre las tarjetas */
   margin-bottom: 10px;
-  outline: rgb(0, 0, 0) solid 1px;
+  outline: rgb(255, 4, 4) solid 1px;
   background-color: rgb(10, 1, 21);
 }
 

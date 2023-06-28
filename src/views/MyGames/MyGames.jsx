@@ -12,6 +12,7 @@ const MyGames = () => {
     console.log(games);
     const dataUser = JSON.parse(localStorage.getItem("user"));
     const id = dataUser.id;
+    console.log(dataUser);
     const dispatch = useDispatch()
     
     useEffect(() => {
@@ -22,17 +23,27 @@ const MyGames = () => {
         dispatch(act.mandarAReview(game))
     }
 
+    //! agregar la ruta al detail
     return (
         <div className={style.container}>
         <div className={style.cardContainer}>
           {games && games.map((game) => (
                 <div className={style.card} key={game.id}>
-                    <img className={style.image} src={game.header_image} alt={game.name} />
-                    <h4 className={style.titleName}>{game.name}</h4>
-                    <p className={style.titleName}>{game.release_date}</p>
-                    <Link to={"/review"}>
-                        <button className={style.button} onClick={() => handleSend(game)}>Create Review</button>
-                    </Link>
+                  <Link to={`detail/${game.id}`}>
+                  <img className={style.image} src={game.header_image} alt={game.name} />
+                  </Link>
+                  <h4 className={style.titleName}>{game.name}</h4>
+                  <p className={style.titleName}>{game.release_date}</p>
+                  <div>
+                  <Link to={"/review"}>
+                      <button className={style.button} onClick={() => handleSend(game)}>Create Review</button>
+                  </Link>
+                  <Link to={"/reviews"}>
+                      <button className={style.button} onClick={() => handleSend(game)}>Edit Review</button>
+                  </Link>
+                  </div>
+                   
+
                 </div>
           ))}
         </div>
