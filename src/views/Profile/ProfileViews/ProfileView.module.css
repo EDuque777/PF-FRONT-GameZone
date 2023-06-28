@@ -6,14 +6,12 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	display: grid;
-    height: 1000px;
+    height: 700px;
 }
 
 .image{
     border-radius: 500px;
-    height: 500px;
-	width: 500px;
-	object-fit: cover;
+    height: 200px;
 }
 
 .button{
