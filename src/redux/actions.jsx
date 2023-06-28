@@ -49,8 +49,9 @@ export const GET_MYGAMES = "GET_MYGAMES";
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 
+
 export const mandarAReview = (game) => {
-    console.log(game);
+    //console.log(game);
     return {
         type: MANDARREVIEW,
         payload: game

@@ -41,7 +41,7 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 review: game
             }
-        
+                
         //filtros de busqueda
 
         case act.FILTER_LANGUAGES:
