@@ -17,6 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
+    userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -26,6 +27,9 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     gameReview: [],
+    library: [],
+    Users: []
+    
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -36,71 +40,71 @@ const rootReducer=(state = initialState, action) => {
         
         //filtros de busqueda
 
-        case act.FILTER_LANGUAGES:
-            const language = action.payload.toLowerCase();
-            const filteredSearchsssssssss = state.search.filter(game =>
-                game.supported_languages && game.supported_languages.toLowerCase().includes(language))
-            return{
-                ...state,
-              search: filteredSearchsssssssss
-            }
+
+            case act.FILTER_LANGUAGES:
+                const language = action.payload.toLowerCase();
+                console.log(action.payload)
+                const filteredSearchsssssssss = state.search.filter(game =>
+                    game.Languages && game.Languages.some(item =>
+                    item.language.toLowerCase() === language
+                    )
+                );
+                return {
+                    ...state,
+                    search: filteredSearchsssssssss
+                };
 
         case act.FILTER_GENRES:
             const genre = action.payload;
-          
+        
             const filteredSearchsssssss = state.search.filter(game =>
-              game.genres && game.genres.some(categor => categor.description === genre)
+                game.Genres && game.Genres.some(categor => categor.genre === genre)
             );
-          
+        
             return {
-              ...state,
-              search: filteredSearchsssssss
+                ...state,
+                search: filteredSearchsssssss
             };
-          
+        
         case act.FILTER_CATEGORIES:
-            const category = action.payload;
-          
+            const categorys = action.payload;
+        
             const filteredSearchssssss = state.search.filter(game =>
-              game.categories && game.categories.some(categor => categor.description === category)
+                game.Categories && game.Categories.some(categor => categor.category === categorys)
             );
-          
+        
             return {
-              ...state,
-              search: filteredSearchssssss
+                ...state,
+                search: filteredSearchssssss
             };
-          
+        
 
 
-        case act.FILTER_PLATFORMS:
-            let filteredSearchssss;
-            const platform = action.payload
-            console.log(platform)
-            if (platform === "windows") {
-              filteredSearchssss = state.search.filter(game => game.platforms.windows === true);
-            } else if(platform === "linux"){
-              filteredSearchssss = state.search.filter(game => game.platforms.linux === true);
-            } else if(platform === "mac"){
-                filteredSearchssss = state.search.filter(game => game.platforms.mac === true);
-            }
-            return {
-              ...state,
-              search: filteredSearchssss
-            };
+            case act.FILTER_PLATFORMS:
+                const platform = action.payload;
+                const filteredSearchssss = state.search.filter(game =>
+                    game.Platforms.some(item => item.platform === platform)
+                );
+                return {
+                    ...state,
+                    search: filteredSearchssss
+                };
+            
 
 
 
             case act.FILTER_FREE:
                 let filteredSearchsssss;
                 if (action.payload === "false") {
-                  filteredSearchsssss = state.search.filter(game => game.is_free === true && game.release_date.coming_soon !== true);
+                    filteredSearchsssss = state.search.filter(game => game.is_free === true && game.release_date.coming_soon !== true);
                 } else {
-                  filteredSearchsssss = state.search.filter(game => game.is_free === false && game.release_date.coming_soon !== true);
+                    filteredSearchsssss = state.search.filter(game => game.is_free === false && game.release_date.coming_soon !== true);
                 }
                 return {
-                  ...state,
-                  search: filteredSearchsssss
+                    ...state,
+                    search: filteredSearchsssss
                 };
-              
+            
 
         case act.FILTER_TYPE:
             const typess = action.payload;
@@ -111,6 +115,7 @@ const rootReducer=(state = initialState, action) => {
                 search: typesearchss
             };
 
+
             case act.FILTER_AGE:
                 const types = action.payload;
                 const typesearchs = state.search.filter(game => game.required_age === types);
@@ -119,6 +124,7 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     search: typesearchs
                 };
+
 
             case act.FILTER_CONTROLLER:
                 const CONTROLLER = action.payload;
@@ -133,56 +139,56 @@ const rootReducer=(state = initialState, action) => {
         case act.ORDER_BY:
             const orderBy = action.payload;
             let sortedSearch = [...state.search];
-          
+        
             if (orderBy === "des") {
-              sortedSearch.sort((a, b) => {
+                sortedSearch.sort((a, b) => {
                 if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  if (a.is_free && b.is_free) {
+                    if (a.is_free && b.is_free) {
                     return a.price_overview?.final - b.price_overview?.final;
-                  } else if (a.is_free && !b.is_free) {
+                    } else if (a.is_free && !b.is_free) {
                     return -1;
-                  } else if (!a.is_free && b.is_free) {
+                    } else if (!a.is_free && b.is_free) {
                     return 1;
-                  } else {
+                    } else {
                     return a.price_overview?.final - b.price_overview?.final;
-                  }
+                    }
                 } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
-                  return -1;
+                    return -1;
                 } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  return 1;
+                    return 1;
                 } else {
-                  return 0;
+                    return 0;
                 }
-              });
+                });
             } else if (orderBy === "asc") {
-              sortedSearch.sort((a, b) => {
+                sortedSearch.sort((a, b) => {
                 if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  if (a.is_free && b.is_free) {
+                    if (a.is_free && b.is_free) {
                     return a.price_overview?.final - b.price_overview?.final;
-                  } else if (a.is_free && !b.is_free) {
+                    } else if (a.is_free && !b.is_free) {
                     return 1;
-                  } else if (!a.is_free && b.is_free) {
+                    } else if (!a.is_free && b.is_free) {
                     return -1;
-                  } else {
+                    } else {
                     return b.price_overview?.final - a.price_overview?.final;
-                  }
+                    }
                 } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
-                  return -1;
+                    return -1;
                 } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  return 1;
+                    return 1;
                 } else {
-                  return 0;
+                    return 0;
                 }
-              });
+                });
             }
-          
+        
             const filteredSearch = sortedSearch.filter(game => !game.release_date.coming_soon);
-          
+        
             return {
-              ...state,
-              search: filteredSearch
+                ...state,
+                search: filteredSearch
             };
-          
+        
             case act.RESET_FILTERS:
                 return {
                     ...state,
@@ -359,12 +365,25 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 user : action.payload
             }
+        case act.DATA_GOOGLE:
+            //console.log(userGoogle)
+            return {
+                ...state,
+                userGoogle : action.payload
+            }
+
         case act.LOGOUT_USER:{
             return{
                 ...state,
                 user : null
             }
         }
+
+        case act.LOGOUT_USERGOOGLE:
+            return {
+                ...state,
+                userGoogle : null
+            }
 
         case act.PLATFORMS:
             return {
@@ -450,10 +469,20 @@ const rootReducer=(state = initialState, action) => {
                     gameReview: action.payload
                 }
             
+//? CASOS DE LA BIBLIOTECA
+
+            case act.GET_MYGAMES:
+                return {
+                    ...state,
+                    library: action.payload
+                }
+
             
         default:
             return {...state};
     }
 };
 
+
 export default rootReducer;
+
