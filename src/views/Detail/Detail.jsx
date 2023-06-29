@@ -18,6 +18,9 @@ const Detail = (props) => {
   // const categoriesLimited = game && game?.categories?.slice(0, 3);
   const id = props.match.params.id
   let idReview
+  
+  const datosUser = JSON.parse(localStorage.getItem("user"));
+  console.log("asdfghjhgfds",datosUser?.name)
 
 
   
@@ -306,13 +309,13 @@ const Detail = (props) => {
             <div className={style.promedio}>
               
               <div className={style.promedioInfo}>
-              <div className={style.promedioNumber}>
               <h1 className={style.promedioNumber2}>{averageRating.toFixed(1)}</h1>
-              </div> 
+             
               <div className={style.cantidadReviews}>
-              <h7>{reviews.length}</h7>
+              <h7 className={style.numeroReviews}>{reviews.length}</h7>
               <h7> total reviews</h7>
               </div>
+    
                 <div className={style.ratingCounts}>
                    {[5, 4, 3, 2, 1].map((rating) => (
                 <div key={rating} className={style.ratingCount}>
@@ -341,21 +344,38 @@ const Detail = (props) => {
                 {game?.Reviews &&
                 game?.Reviews.map((review, index) => (
                   <div className={style.opinion} key={index}>
-                    <div className={style.opinioncontenido}>
-                      <h3>{review?.author}</h3>
-                      <p>{review?.Users[0].name}</p>
-                      <Rating rating={review?.rating} />
-                      <p>{review?.date}</p>
-                      <p>{review?.reviews}</p>
-                      <img className={style.profileImage} src={review?.Users[0].profileImage} alt={`Screenshot`} />
 
+                    <div className={style.opiniontop} >
+
+                      <div className={style.opiniontopleft} >
+                        <img className={style.profileImage} src={review?.Users[0].profileImage} alt={`Screenshot`} />
+                       </div>
+                       
+                       <div className={style.opiniontopright} >
+                        <h3>{review?.author}</h3>
+                        <p>{review?.Users[0].name}</p>
+                        <p>{review?.date}</p>
+                        <Rating rating={review?.rating} />
+                       </div> 
+
+                      </div>
+
+
+                    <div className={style.opinionback} >
+                      <p>{review?.reviews}</p>
                       <p hidden>{idReview = review?.id}</p>
+                      {review?.Users[0].name  === datosUser.name &&
+                      <div className={style.opinionbuton} >
                       <Link to={`reviews/${review?.id}` }>
                       <button onClick={() => handleEditReview(review?.id)}>Edit Review</button>
                       </Link>
                       <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button>
-                      
+                      </div>
+                      }
                     </div>
+
+                      
+                    
                   </div>
                 ))}
 

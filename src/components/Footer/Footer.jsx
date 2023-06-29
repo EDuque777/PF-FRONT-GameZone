@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
         <div className={styles["footer-section"]}>
                 <div className={styles["footer-column"]}>
-                    <p>follow us</p>
+                    <p>Follow us</p>
                     <div className={styles["social-media-icons"]}>
                         <FontAwesomeIcon className="w-6 h-6" icon={faLinkedin} size="xl"/>
                         <FontAwesomeIcon className="w-6 h-6" icon={faGithub} size="xl"/>

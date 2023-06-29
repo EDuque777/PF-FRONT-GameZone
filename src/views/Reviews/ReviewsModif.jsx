@@ -12,6 +12,7 @@ const ReviewsModif = ({ match }) => {
   const gameRe = useSelector(state => state.review)
  
   console.log("IIIIIIIIIIIDDDDDDDDDDD",id);
+  console.log("REEEEEEEEE",gameRe);
 
   const IDUser = JSON.parse(localStorage.getItem("user"));
 

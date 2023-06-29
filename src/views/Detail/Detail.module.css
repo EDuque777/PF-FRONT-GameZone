@@ -306,7 +306,7 @@
 .promedio{
   /* outline: blue solid 3px; */
   display: flex;
-  height: 390px;
+  height: 380px;
   width: 300px;
   color: white;
   flex-direction: column;
@@ -319,28 +319,21 @@
 
 .promedioInfo{
   /* outline: yellow solid 3px; */
-  margin: 8%;
-  display: flex;
+  margin-left: 8%;
+  margin-right: 8%;
   flex-direction: column;
 
   
 }
 
-.promedioNumber {
-  /* outline: white solid 3px; */
-  height: fit-content;
-  margin: 0;
-  margin-left: 0;
-  text-align: left;
-  font-size: 30px;
-  /* position: absolute; */
-  top: 0;
-}
+
 
 .promedioNumber2{
-   /* outline: pink solid 3px; */
+  /* outline: pink solid 3px; */
   display: flex;
- 
+  font-size: 100px;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 
@@ -349,6 +342,11 @@
   /* outline: red solid 3px; */
   display: flex;
   font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.numeroReviews {
+  margin-right: 7px;
 }
 
 .ratingCount {
@@ -402,31 +400,65 @@
   max-height: fit-content;
   box-sizing: content-box;
   margin:  100px;
-  overflow: scroll;
+  overflow-y: scroll;
+  
 }
 
 
 
 .opinion{
-  /* outline: white solid 3px; */
+  /* outline: yellow solid 3px; */
   display: flex;
-  height: 500px;
+  min-height: 200px;
   width: 100%;
   color: white;
   background-color: #343434; 
-}
-
-.opinioncontenido{
-  display: flex;
-  height: 33%;
-  width: 100%;
-  color: white;
-  background-color: #343434;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 20px;
   margin-right: 20px;
+  /* overflow: hidden; */
 }
+
+.opiniontop{
+  /* outline: white solid 3px; */
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 10px;
+}
+
+.opinionback{
+  /* outline: red solid 3px; */
+  height: 70%;
+  width: 100%;
+  margin: 10px;
+}
+.opiniontopleft{
+  /* outline: blue solid 3px; */
+  height: 100%;
+  width: 10%;
+  align-items: center;
+
+  
+}
+
+.opiniontopright{
+  /* outline: pink solid 3px; */
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.opiniontopright h3,
+.opiniontopright p {
+  margin: 0;
+}
+
 
 
 .opinion h3,
@@ -436,9 +468,11 @@
 
 
 .profileImage{
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
 }
+
 
 
 
