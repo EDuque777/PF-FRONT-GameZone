@@ -41,12 +41,12 @@ const Profile = (props) => { // Agrega props como parámetro
                 <span className={styles.nav_text}>MyGames</span>
               </a>
             </li>
-            <li className="has-subnav">
+            {/* <li className="has-subnav">
               <a href="/review" onClick={() => setActiveOption("reviews")}>
                 <i className={`fa fa-star ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>Reviews</span>
               </a>
-            </li>
+            </li> */}
             {/* More menu options */}
           </ul>
           <ul className="logout">

@@ -17,7 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
-    userGoogle : null,
+    // userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -29,8 +29,8 @@ const initialState = {
     gameReview: [],
     library: [],
     review: [],
-
     deleteReview: null,
+
     
 };
 
@@ -369,7 +369,7 @@ const rootReducer=(state = initialState, action) => {
             //console.log(userGoogle)
             return {
                 ...state,
-                userGoogle : action.payload
+                user : action.payload
             }
 
         case act.LOGOUT_USER:{
@@ -382,7 +382,7 @@ const rootReducer=(state = initialState, action) => {
         case act.LOGOUT_USERGOOGLE:
             return {
                 ...state,
-                userGoogle : null
+                user : null
             }
 
         case act.PLATFORMS:
@@ -464,11 +464,11 @@ const rootReducer=(state = initialState, action) => {
             }
 
             case act.GETGAMEREVIEW:
-                console.log("ACTIOOOOOOOOOOOON",action.payload);
-                return {
-                    ...state,
-                    review: action.payload
-                }
+            
+            return {
+                ...state,
+                review: action.payload
+            }
             
 //? CASOS DE LA BIBLIOTECA
 
@@ -479,6 +479,7 @@ const rootReducer=(state = initialState, action) => {
                 }
 
                 case act.MANDARREVIEW:
+
             const game = action.payload
             console.log(game);
             return {
@@ -486,12 +487,19 @@ const rootReducer=(state = initialState, action) => {
                 review: game
             }
 
-            case act.DELETEREVIEW:
-                
-                return {
-                    ...state,
-                    deleteReview: action.payload
-                }
+        case act.DELETEREVIEW:
+            //console.log(action.payload);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Review removed successfuly",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            return {
+                ...state,
+                deleteReview: action.payload
+            }
 
             
         default:

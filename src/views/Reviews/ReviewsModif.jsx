@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import style from "./Reviews.module.css"
 import { withRouter } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 //! agregar alerta de swift
 const ReviewsModif = ({ match }) => {
@@ -34,6 +35,13 @@ const ReviewsModif = ({ match }) => {
     event.preventDefault();
     
     axios.put("http://localhost:3001/user/review", form, id)
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "editado",
+      showConfirmButton: false,
+      timer: 2000
+  })
     
     .then(res => {
       setForm({

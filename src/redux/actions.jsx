@@ -54,7 +54,7 @@ export const MANDARREVIEW = "MANDARREVIEW";
 export const DELETEREVIEW = "DELETEREVIEW";
 
 export const mandarAReview = (game) => {
-    console.log(game);
+    //console.log(game);
     return {
         type: MANDARREVIEW,
         payload: game
@@ -676,23 +676,22 @@ export const getMyGames = (id) => {
 
 
 export const getGameReview = (game) => {
-
+    console.log(game);
     return (dispatch) => {
         return dispatch({
             type: GETGAMEREVIEW,
             payload: game
         })
     }
-
 }
 
-export const getDeleteReview = (idReview) => {
+export const getDeleteReview = (idRev) => {
 
     return async function (dispatch) {
         try {
-            const response = await axios.delete(`/user/deleteReview/${idReview}`)
-            // console.log("RESPONSEEEE",response);
-            // console.log("IIIIIID",idReview);
+            const response = await axios.delete(`/user/deleteReview/${idRev}`)
+            //console.log("RESPONSEEEE",response);
+            //console.log("IIIIIID",ids);
             const game = response.data
             dispatch({
                 type: DELETEREVIEW,
