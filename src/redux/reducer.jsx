@@ -17,6 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
+    userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -26,6 +27,11 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     gameReview: [],
+    library: [],
+    review: [],
+
+    deleteReview: null,
+    
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -359,12 +365,25 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 user : action.payload
             }
+        case act.DATA_GOOGLE:
+            //console.log(userGoogle)
+            return {
+                ...state,
+                userGoogle : action.payload
+            }
+
         case act.LOGOUT_USER:{
             return{
                 ...state,
                 user : null
             }
         }
+
+        case act.LOGOUT_USERGOOGLE:
+            return {
+                ...state,
+                userGoogle : null
+            }
 
         case act.PLATFORMS:
             return {
@@ -445,11 +464,35 @@ const rootReducer=(state = initialState, action) => {
             }
 
             case act.GETGAMEREVIEW:
+                console.log("ACTIOOOOOOOOOOOON",action.payload);
                 return {
                     ...state,
-                    gameReview: action.payload
+                    review: action.payload
                 }
             
+//? CASOS DE LA BIBLIOTECA
+
+            case act.GET_MYGAMES:
+                return {
+                    ...state,
+                    library: action.payload
+                }
+
+                case act.MANDARREVIEW:
+            const game = action.payload
+            console.log(game);
+            return {
+                ...state,
+                review: game
+            }
+
+            case act.DELETEREVIEW:
+                
+                return {
+                    ...state,
+                    deleteReview: action.payload
+                }
+
             
         default:
             return {...state};
