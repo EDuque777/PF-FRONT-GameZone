@@ -19,7 +19,6 @@ export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const DATA_GOOGLE = "DATA_GOOGLE"
 export const LOGOUT_USERGOOGLE = "LOGOUT_USERGOOGLE"
-
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
@@ -27,7 +26,6 @@ export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
-
 export const ORDER_BY = "ORDER_BY"
 export const FILTER_TYPE = "FILTER_TYPE"
 export const FILTER_AGE = "FILTER_AGE"
@@ -49,6 +47,7 @@ export const GET_MYGAMES = "GET_MYGAMES";
 export const DELETEREVIEW= "DELETEREVIEW"
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
+export const ALLGAMESADMIN = "ALLGAMESADMIN";
 
 export const mandarAReview = (game) => {
     console.log(game);
@@ -674,6 +673,18 @@ export const getGameReview = (game) => {
         })
     }
 
+}
+
+
+export const allGamesAdmin = () => {
+    const endpoint = allGamesAdmin;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: ALLGAMESADMIN,
+            payload: data
+        })
+    }
 }
 
 export const getDeleteReview = (idReview) => {

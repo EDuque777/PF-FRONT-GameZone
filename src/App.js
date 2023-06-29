@@ -7,7 +7,7 @@ import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
 import Review from './views/Reviews/Reviews';
-
+import {TableDb} from './views/Adm/Tablas/TableGames';
 import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
 import ReviewsModif from './views/Reviews/ReviewsModif';
@@ -24,7 +24,7 @@ return (
       <script src="https://kit.fontawesome.com/5c35a66fab.js" crossorigin="anonymous"></script>
     </head>
     <>
-      {location.pathname !== "/" && location.pathname !== "/dashboard" && <NavBar/>}
+      {location.pathname !== "/" && location.pathname !== "/dashboard" && location.pathname !== "/TABLA" && <NavBar />}
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
@@ -36,6 +36,7 @@ return (
       <Route path="/review" render={() => <Review />} />
       <Route path="/library" render={() => <MyGames />}/>
       <Route path="/pruebas" render={() => <ShoppingView />}/>
+      <Route path="/TABLA" render={() => <TableDb />}/>
       <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       <Route path="/detail/reviews/:id" render={() => <ReviewsModif />} />
       {location.pathname !== "/dashboard" && <Footer/>}
