@@ -49,7 +49,7 @@ const Home = () => {
   };
 
   // Verificar si el array de juegos tiene al menos 14 elementos
-  const selectedGames = games.length >= 5 ? games.slice(0, 5) : games;
+  const selectedGames = games.length >= 10 ? games.slice(0, 10) : games;
 
   //console.log(search)
   return (

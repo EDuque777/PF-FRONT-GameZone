@@ -77,7 +77,7 @@ export const getDeleteReview = (idRev) => {
 }
 
 export const getGameReview = (game) => {
-    console.log(game);
+    //console.log(game);
     return (dispatch) => {
         return dispatch({
             type: GETGAMEREVIEW,

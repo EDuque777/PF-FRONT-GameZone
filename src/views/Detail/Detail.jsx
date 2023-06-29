@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
@@ -17,7 +17,7 @@ const Detail = (props) => {
   const [videoUrl, setVideoUrl] = useState("");
   // const categoriesLimited = game && game?.categories?.slice(0, 3);
   const id = props.match.params.id
-  let idReview
+  //let idReview
   
   const datosUser = JSON.parse(localStorage.getItem("user"));
   console.log("asdfghjhgfds",datosUser?.name)
@@ -132,14 +132,14 @@ const Detail = (props) => {
     return ratingPercentages;
   };
 
-  const handleEditReview = () => {
-    dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
-  };
+  // const handleEditReview = () => {
+  //   dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
+  // };
 
-  const handleDeleteReview = () => {
-    dispatch(act.getDeleteReview(idReview))
-    // console.log("IIIIDDDD HANDLER",idReview);
-  };
+  // const handleDeleteReview = () => {
+  //   dispatch(act.getDeleteReview(idReview))
+  //   // console.log("IIIIDDDD HANDLER",idReview);
+  // };
   
   
   const reviews = game?.Reviews || [];
@@ -337,53 +337,37 @@ const Detail = (props) => {
   </div>
 </div>
 </div>
-
-
                 <div className={style.opiniones}>
-
                 {game?.Reviews &&
                 game?.Reviews.map((review, index) => (
                   <div className={style.opinion} key={index}>
-
                     <div className={style.opiniontop} >
-
                       <div className={style.opiniontopleft} >
                         <img className={style.profileImage} src={review?.Users[0].profileImage} alt={`Screenshot`} />
                        </div>
-                       
                        <div className={style.opiniontopright} >
                         <h3>{review?.author}</h3>
                         <p>{review?.Users[0].name}</p>
                         <p>{review?.date}</p>
                         <Rating rating={review?.rating} />
                        </div> 
-
                       </div>
-
-
                     <div className={style.opinionback} >
                       <p>{review?.reviews}</p>
                       <p hidden>{idReview = review?.id}</p>
                       {review?.Users[0].name  === datosUser.name &&
                       <div className={style.opinionbuton} >
-                      <Link to={`reviews/${review?.id}` }>
+                      {/* <Link to={`reviews/${review?.id}` }>
                       <button onClick={() => handleEditReview(review?.id)}>Edit Review</button>
                       </Link>
-                      <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button>
+                      <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button> */}
                       </div>
                       }
-                    </div>
-
-                      
-                    
+                    </div>              
                   </div>
                 ))}
-
                 </div>
-                
-            
             </div>
-
           </div>
       )}
     </div>

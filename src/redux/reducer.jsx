@@ -17,7 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
-    userGoogle : null,
+    // userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -37,7 +37,7 @@ const rootReducer=(state = initialState, action) => {
         
         case act.MANDARREVIEW:
             const game = action.payload
-            console.log(game);
+            //console.log(game);
             return {
                 ...state,
                 review: game
@@ -58,6 +58,7 @@ const rootReducer=(state = initialState, action) => {
             }
 
         case act.GETGAMEREVIEW:
+            //console.log(action.payload);
             return {
                 ...state,
                 review: action.payload
@@ -391,7 +392,7 @@ const rootReducer=(state = initialState, action) => {
             //console.log(userGoogle)
             return {
                 ...state,
-                userGoogle : action.payload
+                user : action.payload
             }
 
         case act.LOGOUT_USER:{
@@ -404,7 +405,7 @@ const rootReducer=(state = initialState, action) => {
         case act.LOGOUT_USERGOOGLE:
             return {
                 ...state,
-                userGoogle : null
+                user : null
             }
 
         case act.PLATFORMS:

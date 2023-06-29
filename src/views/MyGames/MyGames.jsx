@@ -9,7 +9,7 @@ const MyGames = () => {
     //!revisar ruta al detail
     const games = useSelector(state => state.library);
     const allGames = useSelector(state => state.games);
-    console.log(allGames);
+    //console.log(allGames);
     console.log(games);
     const dataUser = JSON.parse(localStorage.getItem("user"));
     const ids = dataUser.id;
@@ -28,10 +28,11 @@ const MyGames = () => {
     const handleEdit = (id) => {
       const gameFilter = allGames.find(game => game.id === id)
       if (gameFilter) {
+        console.log(gameFilter);
         const review = gameFilter.Reviews[0]?.reviews
         const rating = gameFilter.Reviews[0]?.rating
         const id = gameFilter.Reviews[0]?.id
-        console.log(gameFilter);
+        console.log({review, rating, id});
         dispatch(act.getGameReview({review, rating, id}))
       }
     }
@@ -39,20 +40,19 @@ const MyGames = () => {
     const handleDelete = (id) => {
       const gameFilter = allGames.find(game => game.id === id)
       if (gameFilter) {
-        // const review = gameFilter.Reviews[0]?.reviews
-        // const rating = gameFilter.Reviews[0]?.rating
         const idRev = gameFilter.Reviews[0]?.id
         console.log(idRev);
         dispatch(act.getDeleteReview(idRev))
       }
-      // dispatch(act.getDeleteReview())
     }
     
     //! agregar la ruta al detail
     return (
         <div className={style.container}>
         <div className={style.cardContainer}>
-          {games && games.map((game) => (
+          
+          {games && games.map((game) => 
+          (
             <div className={style.card} key={game.id}>
               <Link to={`detail/${game.id}`}>
               <img className={style.image} src={game.header_image} alt={game.name} />
@@ -66,7 +66,7 @@ const MyGames = () => {
                 <Link to={`/detail/reviews/${game.id}`}>
                     <button className={style.button} onClick={() => {handleEdit(game.id, game.name)}}>Edit Review</button>
                 </Link>
-                <button className={style.button} onClick={() => handleDelete(game.id)}>x</button>
+                <button className={style.buttonBorrar} onClick={() => handleDelete(game.id)}>x</button>
               </div>
             </div>
           ))}
