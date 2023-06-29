@@ -65,13 +65,13 @@ export const allGamesAdmin = () => {
 }
 
 
-export const getDeleteReview = (idReview) => {
+export const getDeleteReview = (idRev) => {
 
     return async function (dispatch) {
         try {
-            const response = await axios.delete(`/user/deleteReview/${idReview}`)
-            // console.log("RESPONSEEEE",response);
-            // console.log("IIIIIID",idReview);
+            const response = await axios.delete(`/user/deleteReview/${idRev}`)
+            //console.log("RESPONSEEEE",response);
+            //console.log("IIIIIID",ids);
             const game = response.data
             dispatch({
                 type: DELETEREVIEW,
@@ -84,7 +84,7 @@ export const getDeleteReview = (idReview) => {
 }
 
 export const mandarAReview = (game) => {
-    console.log(game);
+    //console.log(game);
     return {
         type: MANDARREVIEW,
         payload: game
@@ -184,6 +184,7 @@ export const getGames = () => {
 
 export const gameDetail = (id) => {
     return async function (dispatch) {
+        console.log(id)
         try {
             const response = await axios.get(`search/${id}`)
             console.log(response);
@@ -663,18 +664,14 @@ export const getUserStorage = (id) => {
 }
 
 
-export const getGameReview = (id) => {
-
-    const endpoint = `/reviewsDemo/${id}`;
-
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
+export const getGameReview = (game) => {
+    console.log(game);
+    return (dispatch) => {
         return dispatch({
             type: GETGAMEREVIEW,
-            payload: data
+            payload: game
         })
     }
-
 }
 
 //? ACCIONES DE MI BIBLIOTECA

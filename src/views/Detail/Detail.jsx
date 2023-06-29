@@ -132,15 +132,15 @@ const Detail = (props) => {
     return ratingPercentages;
   };
 
-  const handleEditReview = () => {
-    dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
-  };
+  // const handleEditReview = () => {
+  //   dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
+  // };
 
-  const handleDeleteReview = () => {
-    dispatch(act.getDeleteReview(idReview))
-    window.location.reload()
-    // console.log("IIIIDDDD HANDLER",idReview);
-  };
+  // const handleDeleteReview = () => {
+  //   dispatch(act.getDeleteReview(idReview))
+  //   window.location.reload()
+  //   // console.log("IIIIDDDD HANDLER",idReview);
+  // };
   
   
   const reviews = game?.Reviews || [];
@@ -365,14 +365,14 @@ const Detail = (props) => {
                     <div className={style.opinionback} >
                       <p>{review?.reviews}</p>
                       <p hidden>{idReview = review?.id}</p>
-                      {review?.Users[0].name  === datosUser.name &&
+                      {/* {review?.Users[0].name  === datosUser.name &&
                       <div className={style.opinionbuton} >
                       <Link to={`reviews/${review?.id}` }>
                       <button onClick={() => handleEditReview(review?.id)}>Edit Review</button>
                       </Link>
                       <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button>
                       </div>
-                      }
+                      } */}
                     </div>
 
                       
