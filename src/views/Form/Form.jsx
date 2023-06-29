@@ -263,12 +263,6 @@ const Form = () => {
         'error'
       )
       //alert("ups hay datos en form")
-    }else if(nameError || userNameError || emailError || passwordError || errorConfirmPassword){
-      Swal.fire(
-        'Ups!',
-        'There are some errors in your registry',
-        'error'
-      )
     }else{
 
       Swal.fire(

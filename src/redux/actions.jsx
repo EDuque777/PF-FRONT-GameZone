@@ -46,7 +46,42 @@ export const GETUSERSTORAGE = "GETUSERSTORAGE";
 export const GET_MYGAMES = "GET_MYGAMES";
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
+export const DELETEREVIEW = "DELETEREVIEW";
+export const ALLGAMESADMIN = "ALLGAMESADMIN";
 
+
+
+
+
+export const allGamesAdmin = () => {
+    const endpoint = allGamesAdmin;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: ALLGAMESADMIN,
+            payload: data
+        })
+    }
+}
+
+
+export const getDeleteReview = (idReview) => {
+
+    return async function (dispatch) {
+        try {
+            const response = await axios.delete(`/user/deleteReview/${idReview}`)
+            // console.log("RESPONSEEEE",response);
+            // console.log("IIIIIID",idReview);
+            const game = response.data
+            dispatch({
+                type: DELETEREVIEW,
+                payload: game
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
 
 export const mandarAReview = (game) => {
     console.log(game);
@@ -647,6 +682,7 @@ export const getGameReview = (id) => {
 export const getMyGames = (id) => {
     return async function (dispatch) {
         try {
+            console.log(id)
             const response = await axios.get(`/user/games?id=${id}`);
         console.log(response);
         const games = response.data

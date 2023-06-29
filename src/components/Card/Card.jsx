@@ -6,8 +6,12 @@ import style from './Card.module.css';
 import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
-  let { id ,price, name, image, appid } = props;
-
+  let { id ,price, name, image, appid, coming_soon } = props;
+  if (coming_soon) {
+    console.log(true);
+  } else {
+    console.log(false);
+  }
   price = parseFloat(isNaN(price) ? 0 : price) ?? 0;
 
 
@@ -61,7 +65,9 @@ const Card = (props) => {
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}>{price !== undefined && price !== 0 ? `$ ${price}` : 'Free'}</h3>
+      <h3 className={style.price}>
+  {coming_soon ? "Coming soon" : (price !== undefined && price !== 0 ? `$ ${price}` : 'Free')}
+</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>

@@ -18,6 +18,7 @@ const CardsContainer = (props) => {
           <Card
             key={`${game.appid}-${index}`}
             id={game.id}
+            coming_soon={game.coming_soon}
             appid={game.appid} 
             image={game.capsule_image || game.large_capsule_image} 
             name={game.name} 
