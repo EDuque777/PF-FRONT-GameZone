@@ -379,6 +379,8 @@ const Detail = (props) => {
   const [videoUrl, setVideoUrl] = useState("");
   // const categoriesLimited = game && game?.categories?.slice(0, 3);
   const id = props.match.params.id
+  let idReview
+
 
   
   useEffect(() => {
@@ -442,7 +444,7 @@ const Detail = (props) => {
     return <div style={{ display: "flex" }}>{renderStars()}</div>;
   };
 
-  
+  // promedio puntuacion
   const calculateAverageRating = (reviews) => {
     if (!reviews || reviews.length === 0) {
       return 0;
@@ -492,6 +494,11 @@ const Detail = (props) => {
   const handleEditReview = () => {
     dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
   };
+
+  const handleDeleteReview = () => {
+    dispatch(act.getDeleteReview(idReview))
+    console.log("IIIIDDDD HANDLER",idReview);
+  };
   
   
   const reviews = game?.Reviews || [];
@@ -523,7 +530,7 @@ const Detail = (props) => {
     <div className={style.info}>
       {isLoading ? (
         <div className={style.loading}>
-          <PacmanLoader color="#123abc" size={80} speedMultiplier={1} />
+          <PacmanLoader color="red" size={80} speedMultiplier={1} />
         </div>
       ) : (
         <div className={style.container}>
@@ -662,7 +669,7 @@ const Detail = (props) => {
               
               <div className={style.promedioInfo}>
               <div className={style.promedioNumber}>
-              <h1>{averageRating.toFixed(1)}</h1>
+              <h1 className={style.promedioNumber2}>{averageRating.toFixed(1)}</h1>
               </div> 
               <div className={style.cantidadReviews}>
               <h7>{reviews.length}</h7>
@@ -678,7 +685,7 @@ const Detail = (props) => {
             <div className={style.bar}>
             <div
             className={style.fill}
-            style={{ width: `${ratingPercentages[rating]}%`}}
+            style={{ width: `${ratingPercentages[rating]}%`, backgroundColor: 'white'}}
             ></div>
             </div>
             <div className={style.ratingPercentage}>
@@ -702,15 +709,13 @@ const Detail = (props) => {
                       <Rating rating={review?.rating} />
                       <p>{review?.date}</p>
                       <p>{review?.reviews}</p>
-                      <img
-                  className={style.profileImage}
-                  src={review?.Users[0].profileImage}
-                  alt={`Screenshot`}
-                />
-                      
-                      <Link to={`reviews/${review?.id}`}>
+                      <img className={style.profileImage} src={review?.Users[0].profileImage} alt={`Screenshot`} />
+
+                      <p hidden>{idReview = review?.id}</p>
+                      <Link to={`reviews/${review?.id}` }>
                       <button onClick={() => handleEditReview(review?.id)}>Edit Review</button>
                       </Link>
+                      <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button>
                       
                     </div>
                   </div>

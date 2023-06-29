@@ -29,6 +29,8 @@ const initialState = {
     gameReview: [],
     library: [],
     review: [],
+
+    deleteReview: null,
     
 };
 
@@ -483,6 +485,13 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 review: game
             }
+
+            case act.DELETEREVIEW:
+                
+                return {
+                    ...state,
+                    deleteReview: action.payload
+                }
 
             
         default:
