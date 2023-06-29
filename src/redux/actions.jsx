@@ -48,10 +48,7 @@ export const GETUSERSTORAGE = "GETUSERSTORAGE";
 export const GET_MYGAMES = "GET_MYGAMES";
 
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
-
 export const MANDARREVIEW = "MANDARREVIEW";
-
-export const DELETEREVIEW = "DELETEREVIEW";
 
 export const mandarAReview = (game) => {
     console.log(game);
@@ -60,13 +57,6 @@ export const mandarAReview = (game) => {
         payload: game
     }
 }
-
-
-
-
-
-
-
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
@@ -331,7 +321,7 @@ export const clearCart = ()  => {
 export const createOrder = (totalPrice, cartGames, dataUser) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
+            const response = await axios.post("createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,
@@ -422,7 +412,7 @@ export const postLogin = (datos) =>{
 export const logoutUser = () => {
     return async function (dispatch) {
         try {
-            const logout = axios.post("cerrarSesion")
+            const logout = await axios.post("cerrarSesion")
             console.log(logout)
             return dispatch({
                 type : LOGOUT_USER

@@ -17,7 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
-    userGoogle : null,
+    //userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -26,19 +26,24 @@ const initialState = {
     developersGames: [],
     genresGames: [],
     userStorage: null,
-    gameReview: [],
-    library: [],
     review: [],
-
-    deleteReview: null,
-    
+    gamesReviews: [],
+    library: [],
 };
 
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
         //filtros combinadosconst combtype = "COMBTYPE"
         
-        
+        case act.MANDARREVIEW:
+            const {name } = action.payload
+            console.log(name);
+            // const biblio = action.payload;
+            // const juegoReview = biblio.filter(game => game.name !== game.name)
+            return {
+                ...state,
+                review: name
+            }
         
         //filtros de busqueda
 
@@ -369,7 +374,7 @@ const rootReducer=(state = initialState, action) => {
             //console.log(userGoogle)
             return {
                 ...state,
-                userGoogle : action.payload
+                user : action.payload
             }
 
         case act.LOGOUT_USER:{
@@ -382,7 +387,7 @@ const rootReducer=(state = initialState, action) => {
         case act.LOGOUT_USERGOOGLE:
             return {
                 ...state,
-                userGoogle : null
+                user : null
             }
 
         case act.PLATFORMS:
@@ -499,4 +504,6 @@ const rootReducer=(state = initialState, action) => {
     }
 };
 
+
 export default rootReducer;
+

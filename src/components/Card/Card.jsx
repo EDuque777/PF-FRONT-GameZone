@@ -7,9 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
   let { id ,price, name, image, appid } = props;
-
-  price = parseFloat(isNaN(price) ? 0 : price) ?? 0;
-
+  price = price ?? 0;
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -61,7 +59,7 @@ const Card = (props) => {
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
       </div>
-      <h3 className={style.price}>{price !== undefined && price !== 0 ? `$ ${price}` : 'Free'}</h3>
+      <h3 className={style.price}>{price !== undefined && price !== 0 ? `$ ${formattedNumber}` : 'Free'}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>
