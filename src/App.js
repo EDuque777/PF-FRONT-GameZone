@@ -9,7 +9,8 @@ import Search from "./views/Search/Search"
 import Review from './views/Reviews/Reviews';
 import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
-import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
+// import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
+import ReviewsModif from './views/Reviews/ReviewsModif';
 
 function App() {
 
@@ -33,6 +34,7 @@ return (
       <Route path="/review" render={() => <Review />} />
       <Route path="/library" render={() => <MyGames />}/>
       {/* <Route path="/pruebas" render={() => <ShoppingView />}/> */}
+      <Route path="/detail/reviews/:id" render={() => <ReviewsModif />} />
       <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>

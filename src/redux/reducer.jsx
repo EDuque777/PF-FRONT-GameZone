@@ -28,6 +28,7 @@ const initialState = {
     userStorage: null,
     review: [],
     library: [],
+    deleteReview: null
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -42,6 +43,25 @@ const rootReducer=(state = initialState, action) => {
                 review: game
             }
                 
+        case act.DELETEREVIEW:
+            //console.log(action.payload);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Review removed successfuly",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            return {
+                ...state,
+                deleteReview: action.payload
+            }
+
+        case act.GETGAMEREVIEW:
+            return {
+                ...state,
+                review: action.payload
+            } 
         //filtros de busqueda
 
         case act.FILTER_LANGUAGES:
@@ -464,12 +484,6 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     userStorage: action.payload
             }
-
-            case act.GETGAMEREVIEW:
-                return {
-                    ...state,
-                    gameReview: action.payload
-                }
             
 //? CASOS DE LA BIBLIOTECA
 
