@@ -1,6 +1,7 @@
 import styles from './adm.module.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Dashboard() {
   //Form Game
@@ -36,6 +37,66 @@ console.log("UUUUUUUUUUUUU", developers);
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
+    if (!name || !type || !requiredAge || !isFree || !detailedDescription || !aboutTheGame || !shortDescription || !releaseDate || !comingSoon|| !supportInfo || !metacritic || !priceOverview || !headerImage || !capsuleImage ) {
+      Swal.fire('Error', 'Please fill in all the required fields', 'error');
+      return;
+    }
+    if (!Number.isInteger(parseInt(requiredAge))) {
+      Swal.fire('Error', 'Please enter a valid integer for Required Age', 'error');
+      return;
+    }
+    if (!Number.isInteger(parseInt(metacritic))) {
+      Swal.fire('Error', 'Please enter a valid integer for Metacritic', 'error');
+      return;
+    }
+    if (comingSoon !== 'yes' && comingSoon !== 'no') {
+      Swal.fire('Error', 'Please enter either "yes" or "no" for Coming Soon', 'error');
+      return;
+    }
+    if (isFree !== 'yes' && isFree !== 'no') {
+      Swal.fire('Error', 'Please enter either "yes" or "no" for Is Free', 'error');
+      return;
+    }
+    // if (typeof developers !== 'string') {
+    //   Swal.fire('Error', 'Please enter developers as a string', 'error');
+    //   return;
+    // }
+    // Validación de Developers
+  if (!Array.isArray(developers) || developers.length === 0) {
+    Swal.fire('Error', 'Please enter at least one developer separated by commas', 'error');
+    return;
+  }
+
+  // Validación de Géneros
+  if (!Array.isArray(genres) || genres.length === 0) {
+    Swal.fire('Error', 'Please enter at least one genre separated by commas', 'error');
+    return;
+  }
+
+  // Validación de Publishers
+  if (!Array.isArray(publishers) || publishers.length === 0) {
+    Swal.fire('Error', 'Please enter at least one publisher separated by commas', 'error');
+    return;
+  }
+
+  // Validación de Platform
+  if (!Array.isArray(platform) || platform.length === 0) {
+    Swal.fire('Error', 'Please enter at least one platform separated by commas', 'error');
+    return;
+  }
+
+  // Validación de Languages
+  if (!Array.isArray(languages) || languages.length === 0) {
+    Swal.fire('Error', 'Please enter at least one language separated by commas', 'error');
+    return;
+  }
+
+  // Validación de Categories
+  if (!Array.isArray(categories) || categories.length === 0) {
+    Swal.fire('Error', 'Please enter at least one category separated by commas', 'error');
+    return;
+  }
+  
     createGames();
     // Lógica para enviar os dados do formulário de criação de jogo
     console.log('Dados do formulário de criação de jogo:', {
@@ -54,11 +115,11 @@ console.log("UUUUUUUUUUUUU", developers);
       headerImage,
       capsuleImage,
       developers,
-      genres,
-      publishers,
-      platform,
-      languages,
-      categories
+    genres,
+    publishers,
+    platform,
+    languages,
+    categories,
     });
     // Limpar os campos do formulário após o envio
   //   setName('');
@@ -85,8 +146,26 @@ console.log("UUUUUUUUUUUUU", developers);
 
   const handleUserSubmit = (event) => {
     event.preventDefault();
-    createUser();
-    
+  
+    if (!userName || !email || !password || !confirmPassword) {
+      Swal.fire('Error', 'Please fill in all the fields', 'error');
+      return;
+    }
+  
+    if (password !== confirmPassword) {
+      Swal.fire('Error', 'Passwords do not match', 'error');
+      return;
+    }
+    if (!validateEmail(email)) {
+      Swal.fire('Error', 'Please enter a valid email', 'error');
+      return;
+    }
+  
+    if (role !== "users" && role !== "admin") {
+      Swal.fire("Por favor, selecciona un rol válido (User o Admin).");
+      return false;
+    }
+  
     // Lógica para enviar os dados do formulário de criação de usuário
     console.log('Dados do formulário de criação de usuário:', {
       userName,
@@ -96,14 +175,80 @@ console.log("UUUUUUUUUUUUU", developers);
       role
     });
     // Limpar os campos do formulário após o envio
-    setUserName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-    setRole('user');
+    // setUserName('');
+    // setEmail('');
+    // setPassword('');
+    // setConfirmPassword('');
+    // setRole('user');
+  
+    createUser();
+    Swal.fire("¡Usuario creado!", "El usuario ha sido registrado exitosamente", "success");
   };
-  const createUser = async () => {
+  
+  const validateEmail = async (email) => {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
+    if (!emailRegex.test(email)) {
+      Swal.fire('Error', 'Por favor, ingresa un correo electrónico válido', 'error');
+      return false;
+    }
+  
     try {
+      const response = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      });
+  
+      if (response.status !== 200) {
+        Swal.fire('Error', 'Ocurrió un error al verificar el correo electrónico', 'error');
+        return false;
+      }
+  
+      const data = await response.json();
+  
+      if (data.error) {
+        Swal.fire('Error', 'Ocurrió un error al verificar el correo electrónico', 'error');
+        return false;
+      }
+  
+      if (data.exists) {
+        Swal.fire('Error', 'El correo electrónico ya está registrado', 'error');
+        return false;
+      }
+  
+      const createUserResponse = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      });
+  
+      if (createUserResponse.status !== 200) {
+        Swal.fire('Error', 'Ocurrió un error al crear el usuario', 'error');
+        return false;
+      }
+  
+      Swal.fire('Éxito', 'Usuario creado', 'success');
+      return true;
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire('Error', 'Ocurrió un error al verificar el correo electrónico', 'error');
+      return false;
+    }
+  };
+  
+
+  const createUser = async () => {
+      try {
+        
       const response = await fetch('http://localhost:3001/users', {
         method: 'POST',
         headers: {
@@ -116,7 +261,7 @@ console.log("UUUUUUUUUUUUU", developers);
           role,
         }),
       });
-      
+
       const data = await response.json();
       console.log('Usuario creado:', data);
     } catch (error) {
@@ -146,19 +291,20 @@ console.log("UUUUUUUUUUUUU", developers);
           price_overview: priceOverview,
           header_image: headerImage,
           capsule_image: capsuleImage,
-          developers: developers,
-          genres: genres,
-          publishers: publishers,
-          platform: platform,
-          languages: languages,
-          categories: categories,
+          developers: developers.join(','),
+          genres: genres.join(','),
+          publishers: publishers.join(','),
+          platform: platform.join(','),
+          languages: languages.join(','),
+          categories: categories.join(','),
         }),
       });
   
       const data = await response.json();
-      // console.log('Juego creado:', data);
+      Swal.fire('Success', 'Game created successfully!', 'success');
     } catch (error) {
       console.error('Error:', error);
+      Swal.fire('Error', 'An error occurred while creating the game.', 'error');
     }
   };
 
@@ -168,6 +314,11 @@ console.log("UUUUUUUUUUUUU", developers);
   };
 
   const handleCreateUserClick = () => {
+    setShowUserForm(true);
+    setShowForm(false);
+  };
+
+  const handleUserListClick = () => {
     setShowUserForm(true);
     setShowForm(false);
   };
@@ -197,6 +348,14 @@ console.log("UUUUUUUUUUUUU", developers);
             </li>
             <li>
               <a href="#" onClick={handleCreateUserClick}>
+                <i className={`fa fa-user ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>
+                User List
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={handleUserListClick}>
                 <i className={`fa fa-user ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Create User
@@ -360,7 +519,8 @@ console.log("UUUUUUUUUUUUU", developers);
                 <label>
                   Select a Role:
                   <select value={role} onChange={(e) => setRole(e.target.value)}>
-                    <option value="user">User</option>
+                  <option value="">Select role</option>
+                    <option value="users">User</option>
                     <option value="admin">Admin</option>
                   </select>
                 </label>
@@ -373,5 +533,4 @@ console.log("UUUUUUUUUUUUU", developers);
     </html>
   );
 }
-
 export default Dashboard;

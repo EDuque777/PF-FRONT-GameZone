@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from './views/Search/Search';
+import userList from './views/Adm/FormAdmin/userList';
 function App() {
 
     const location = useLocation()
@@ -24,6 +25,7 @@ return (
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
+      <Route path="/userlist" render={() => <userList />} />
       <Route path="/search" render={() => <Search />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
