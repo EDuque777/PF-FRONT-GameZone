@@ -38,7 +38,7 @@ const MyGames = () => {
                   </Link>
                   <h4 className={style.titleName}>{game.name}</h4>
                   <p className={style.titleName}>{game.release_date}</p>
-                  <div>
+                  <div className={style.buttons}>
                   <Link to={"/review"}>
                       <button className={style.button} onClick={() => handleSend(game)}>Create Review</button>
                   </Link>

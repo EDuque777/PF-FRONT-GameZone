@@ -2,17 +2,19 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* outline: 1px solid red; */
+  outline: 1px solid red;
   width: 100%;
   min-height: 100vh;
 }
 
 .cardContainer {
+  gap: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: stretch;
-  outline: 1px solid rgb(0, 0, 0);
+  outline: 1px solid rgb(255, 255, 255);
+  width: 80%;
   background-color: black;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -32,7 +34,7 @@
 }
 
 .card {
-  width: calc(25% - 10px); /* Calcular el ancho con margen entre las tarjetas */
+  width: calc(30% - 10px); /* Calcular el ancho con margen entre las tarjetas */
   margin-bottom: 10px;
   outline: rgb(255, 4, 4) solid 1px;
   background-color: rgb(10, 1, 21);
@@ -46,6 +48,13 @@
 .image {
   width: 100%;
   height: auto;
+}
+
+.buttons {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {
