@@ -145,7 +145,7 @@ function Dashboard() {
               <a href="#">
                 <i className={`fa fa-shopping-cart ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
-                  Sales
+                  Search User
                 </span>
               </a>
             </li>
@@ -260,7 +260,7 @@ function Dashboard() {
                   Categories:
                   <input type="text" value={categories} onChange={(e) => setCategories(e.target.value)} />
                 </label>
-                
+
                 <label>
                   URL Image:
                   <input type="text" value={headerImage} onChange={(e) => setHeaderImage(e.target.value)} />
@@ -275,7 +275,7 @@ function Dashboard() {
         {showUserForm && (
           <div className={styles.cardContainer}>
             <div>
-            <button className={styles.close} onClick={() => setShowUserForm(!showUserForm)}>X</button>
+              <button className={styles.close} onClick={() => setShowUserForm(!showUserForm)}>X</button>
             </div>
             <div className={styles.form1}>
               <h2>Create User</h2>
