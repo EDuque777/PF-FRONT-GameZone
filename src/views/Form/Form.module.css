@@ -57,6 +57,7 @@
 }
 
 .container__form {
+	
 	height: 100%;
 	position: absolute;
 	top: 0;
@@ -64,6 +65,7 @@
 }
 
 .container--signin {
+	
 	left: 0;
 	width: 50%;
 	z-index: 2;
@@ -71,6 +73,7 @@
 
 .container.right-panel-active .container--signin {
 	transform: translateX(100%);
+	
 }
 
 .container--signup {
@@ -78,6 +81,7 @@
 	opacity: 0;
 	width: 50%;
 	z-index: 1;
+	
 }
 
 .container.right-panel-active .container--signup {
@@ -85,6 +89,7 @@
 	opacity: 1;
 	transform: translateX(100%);
 	z-index: 5;
+	
 }
 
 .container__overlay {
@@ -95,6 +100,7 @@
 	top: 0;
 	transition: transform 0.6s ease-in-out;
 	width: 50%;
+	
 	z-index: 100;
 }
 
@@ -114,10 +120,12 @@
 	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
 	width: 200%;
+	
 }
 
 .container.right-panel-active .overlay {
 	transform: translateX(50%);
+	
 }
 
 .overlay__panel {
@@ -132,14 +140,17 @@
 	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
 	width: 50%;
+	
 }
 
 .overlay--left {
 	transform: translateX(-20%);
+	
 }
 
 .container.right-panel-active .overlay--left {
 	transform: translateX(0);
+	
 }
 
 .overlay--right {
@@ -163,6 +174,7 @@
 	padding: 0.9rem 4rem;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+	
 }
 
 .form .btn {
@@ -178,6 +190,13 @@
 	color: #000000;
 }
 
+.btnTwo {
+	color: #ffffff;
+	font-size: 20px;
+	margin: 5px;
+	cursor: pointer;
+}
+
 .form {
 	background-color: var(--white);
 	display: flex;
@@ -187,6 +206,7 @@
 	padding: 0 3rem;
 	height: 100%;
 	text-align: center;
+
 }
 
 .input {

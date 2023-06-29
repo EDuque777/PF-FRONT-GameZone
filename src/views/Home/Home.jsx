@@ -17,7 +17,8 @@ const Home = () => {
   const gamesTopSellers = useSelector(state => state.gamesTopSellers);
   const games = useSelector(state => state.games);
   const [name, setName] = useState("");
-  //console.log(games);
+  console.log(games);
+  
   useEffect(() => {
     dispatch(act.getGames());
     dispatch(act.getGamesOffer());
@@ -25,6 +26,7 @@ const Home = () => {
     dispatch(act.getGamesComingSoon());
     dispatch(act.getGamesTopSellers());
     dispatch(act.clearSearch());
+    // dispatch(act.preload());
   }, [dispatch]);
 
 
@@ -53,13 +55,12 @@ const Home = () => {
   return (
     <div className={style.homeContainer}>
       <Carousel />
-
       <div>
 
         <div className={style.searchcontainer}>
           <input
             className={style.search}
-            placeholder="  search..."
+            placeholder="search..."
             type="text"
             onChange={e => handleChange(e)}
             onKeyDown={handleKeyDown}

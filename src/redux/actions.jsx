@@ -14,10 +14,11 @@ export const GET_BY_NAME = "GET_BY_NAME"
 export const ADD_TO_WHISH_LIST = "ADD_TO_WHISH_LIST"
 export const REMOVE_TO_WHISH_LIST = "REMOVE_TO_WHISH_LIST"
 export const CLEAR_WHISH_LIST = "CLEAR_WHISH_LIST"
-
 export const CREATE_USER = "CREATE_USER"
 export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
+export const DATA_GOOGLE = "DATA_GOOGLE"
+export const LOGOUT_USERGOOGLE = "LOGOUT_USERGOOGLE"
 
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
@@ -27,12 +28,113 @@ export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
 
+export const ORDER_BY = "ORDER_BY"
+export const FILTER_TYPE = "FILTER_TYPE"
+export const FILTER_AGE = "FILTER_AGE"
+export const FILTER_FREE = "FILTER_FREE"
+export const RESET_FILTERS = "RESET_FILTERS"
+export const FILTER_PLATFORMS = "FILTER_PLATFORMS"
+export const FILTER_CATEGORIES = "FILTER_CATEGORIES"
+export const FILTER_LANGUAGES = "FILTER_LANGUAGES"
+export const FILTER_GENRES = "FILTER_GENRES"
+export const FILTER_CONTROLLER = "FILTER_CONTROLLER"
+export const USER_PROFILE = "USER_PROFILE"
+export const CLEANDETAIL = "CLEANDETAIL";
+export const EDITNAME = "EDITNAME";
+export const EDITUSERNAME = "EDITUSERNAME";
+export const EDITCOUNTRY = "EDITCOUNTRY";
+export const EDIT_PROFILE_IMAGE = "EDIT_PROFILE_IMAGE";
+export const GETUSERSTORAGE = "GETUSERSTORAGE";
+export const GET_MYGAMES = "GET_MYGAMES";
 
+export const GETGAMEREVIEW = "GETGAMEREVIEW";
+export const MANDARREVIEW = "MANDARREVIEW";
+
+export const mandarAReview = (game) => {
+    console.log(game);
+    return {
+        type: MANDARREVIEW,
+        payload: game
+    }
+}
 
 //! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
 //? FUNCIONES DE PETICIONES
+export const resetfilters = () => {
+    return {
+            type: "RESET_FILTERS",
+        
+    }
+}
+export const filterplatforms = (payload) => {
+    return {
+            
+            type: "FILTER_PLATFORMS",
+            payload: payload
+        
+    }
+}
+export const filterlanguages = (payload) => {
+    return {
+            
+            type: "FILTER_LANGUAGES",
+            payload: payload
+        
+    }
+}
+export const filtercontroller = (payload) => {
+    return {
+            
+            type: "FILTER_CONTROLLER",
+            payload: payload
+        
+    }
+}
+export const filtergenres = (payload) => {
+    return {
+            type: "FILTER_GENRES",
+            payload: payload
+        
+    }
+}
+export const filtercategories = (payload) => {
+    return {
+            
+            type: "FILTER_CATEGORIES",
+            payload: payload
+        
+    }
+}
+export const filterage = (payload) => {
+    return {
+            
+            type: "FILTER_AGE",
+            payload: payload
+        
+    }
+}
+export const orderBy = (payload) => {
+    return {
+            
+            type: "ORDER_BY",
+            payload: payload
+        
+    }
+}
+export const filtertype = (payload) => {
+    return {
+            type: "FILTER_TYPE",
+            payload: payload
+    }
+}
+export const filterfree = (payload) => {
+    return {
+            type: "FILTER_FREE",
+            payload: payload
+    }
+}
 export const getGames = () => {
-
+    
     return async function (dispatch) {
         try {
             const response = await axios.get(`allGames`)
@@ -63,21 +165,46 @@ export const gameDetail = (id) => {
     }
 }
 
+// export const preload = () => {
+//     return async (dispatch) => {
+//         try {
+//             await axios.get('http://localhost:3001/preload');
+//             console.log("base de datos cargada")
+//         } catch (error) {
+//         dispatch(console.log(error));
+//         }
+//     };
+// };
+
 export const getByName = (name) => {
     return async function(dispatch) {
-        try {
-            //console.log(name)
-            const response = await axios.get(`nameGames?name=${name}`)
-            
-            dispatch({
-                type: GET_BY_NAME,
-                payload: response.data
-            })
+    try {
+        const response = await axios.get(`nameGames?name=${name}`);
+
+        const sortedResponse = response.data.sort((a, b) => {
+        const aHasRecommendations = a.hasOwnProperty('recommendations');
+        const bHasRecommendations = b.hasOwnProperty('recommendations');
+        if (!aHasRecommendations && !bHasRecommendations) {
+            return 0;
+        } else if (!aHasRecommendations) {
+            return 1;
+        } else if (!bHasRecommendations) {
+            return -1;
+        }
+
+        return b.recommendations.total - a.recommendations.total;
+        });
+
+        dispatch({
+            type: GET_BY_NAME,
+            payload: sortedResponse
+        });
         } catch (error) {
             console.log(error.message);
         }
-    }
-}
+    };
+};
+
 
 export const clearDetail = () => {
     return function (dispatch){
@@ -86,6 +213,7 @@ export const clearDetail = () => {
         })
     }
 }
+
 export const clearSearch = () => {
     return function (dispatch){
         dispatch({
@@ -189,10 +317,10 @@ export const clearCart = ()  => {
     }
 }
 
-export const createOrder = (totalPrice, cartGames) => {
+export const createOrder = (totalPrice, cartGames, dataUser) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post("/createOrder", {totalPrice, cartGames})
+            const response = await axios.post("createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,
@@ -240,16 +368,16 @@ export const removeWhishList = (id) => {
     }
 }
 
-// Action de Create User
+//? Action de Create User
 
-export const postCreateUser = (data) => {
+export const postCreateUser = (props) => {
     return async function (dispatch) {
         try {
-           const user = await axios.post("http://localhost:3001/crearCuenta",data)
-           console.log(user.data)
+           const user = await axios.post("crearCuenta",props)
+           console.log(user.props)
             return dispatch({
                 type : CREATE_USER,
-                payload : user.data
+                payload : user.props
             })
         } catch (error) {
             console.log(error)
@@ -257,29 +385,33 @@ export const postCreateUser = (data) => {
     }
 }
 
-//Accion de Loguear Usuario
+//? Accion de Loguear Usuario
 
 export const postLogin = (datos) =>{
     return async function (dispatch) {
         try {
-            const userTwo = await axios.post("http://localhost:3001/iniciarSesion",datos)
+            const userTwo = await axios.post("iniciarSesion",datos)
             console.log(userTwo.data, "estos son de las actions")
             return dispatch({
                 type : LOGIN_USER,
                 payload : userTwo.data
             })
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
+            //return dispatch({
+            //    type : LOGIN_USER,
+            //    payload : error.response.data
+            //})
         }
     }
 }
 
-// Action de Logout Usuario
+//? Action de Logout Usuario
 
 export const logoutUser = () => {
-    return function (dispatch) {
+    return async function (dispatch) {
         try {
-            const logout = axios.post("http://localhost:3001/cerrarSesion")
+            const logout = await axios.post("cerrarSesion")
             console.log(logout)
             return dispatch({
                 type : LOGOUT_USER
@@ -288,6 +420,60 @@ export const logoutUser = () => {
             console.log(error)
         }
 
+    }
+}
+
+//Action de login with Google
+
+export const loginGoogle = () => {
+    return function (dispatch) {
+        try {
+            const login = window.open("http://localhost:3001/auth/google", "_self")
+            console.log(login)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const getDataGoogle = () => {
+    return async (dispatch) => {
+        try {
+            const dataGoogle = await axios.get("/auth/user", {
+                withCredentials : true,
+                headers : {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Credential' : true
+                }
+            })
+            if (dataGoogle.status === 200) {
+                console.log(dataGoogle.data, "datos desde la action")
+                return dispatch({
+                    type : DATA_GOOGLE,
+                    payload : dataGoogle.data
+                })
+                //setUser(dato.data.user);
+            }else {
+                throw new Error("Authentication has failed!")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const logoutGoogle = () => {
+    return async (dispatch) => {
+        try {
+            const logoutTwo = await window.open("http://localhost:3001/auth/logout", "_self")
+            console.log(logoutTwo)
+            return dispatch({
+                type : LOGOUT_USERGOOGLE
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
@@ -346,7 +532,6 @@ export const developersGames = () => {
     }
 }
 
-
 export const genresGames = () => {
     const endpoint = `genresGames`;
     return async (dispatch) => {
@@ -358,3 +543,117 @@ export const genresGames = () => {
     }
 }
 
+export const CleanDetail = () => {
+    return function(dispatch){
+        dispatch({ type: CLEANDETAIL })
+    }   
+};
+
+export const editName = (id, newName) => {
+    const endpoint = `/users/${id}`;
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(endpoint, { name: newName });
+        dispatch({
+          type: EDITNAME,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const editUserName = (id, newUserName) => {
+    const endpoint = `/users/${id}`;
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(endpoint, { user_name: newUserName });
+        dispatch({
+          type: EDITUSERNAME,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const editCountry = (id, newCountry) => {
+    const endpoint = `/users/${id}`;
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(endpoint, { country: newCountry });
+        dispatch({
+          type: EDITCOUNTRY,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+//   export const editProfileImage = () => {
+//     return async function () {
+//         try {
+//             const formData = new FormData();
+//             formData.append('file', selectedImage);
+//             const response = await axios.post('http://localhost:3001/upload', formData, {
+//               headers: {
+//                 'Content-Type': 'multipart/form-data',
+//                 datosUser: JSON.stringify(datosUser.id),
+//               },
+//             });
+      
+//             if (response.status === 200) {
+//               console.log(response.data); // URL de la imagen en Cloudinary
+//             } else {
+//               console.log(response.data); // Mensaje de error
+//             }
+//           } catch (error) {
+//             console.log(error.message);
+//           }
+//     }
+// };
+
+export const getUserStorage = (id) => {
+    const endpoint = `/profile/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GETUSERSTORAGE,
+            payload: data
+        })
+    }
+}
+
+
+export const getGameReview = (id) => {
+    const endpoint = `/reviewsDemo/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GETGAMEREVIEW,
+            payload: data
+        })
+    }
+}
+//? ACCIONES DE MI BIBLIOTECA
+
+export const getMyGames = (id) => {
+    return async function (dispatch) {
+        try {
+            const response = await axios.get(`/user/games?id=${id}`);
+        console.log(response);
+        const games = response.data
+        dispatch({
+            type: GET_MYGAMES,
+            payload: games.Games
+        })
+        //console.log(games.Games);
+        } catch (error) {
+            console.error(error.message);    
+        }
+    }
+}

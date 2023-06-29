@@ -1,5 +1,3 @@
-//* Rellenar cuando se este realizando el redux e importar los componentes necesarios...
-//!APLICAR EL PERSIST
 import React from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,14 +6,18 @@ import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
 
 //* las cards que vengan del home...
+//! revisar la convergencia
 const ShoppingCart = () => {
 
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const totalPrice = useSelector(state => state.total)
-    const wholePart = Math.floor(totalPrice / 100);
-    const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
-    const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
+    const totalPrices = totalPrice.toFixed(2) 
+    // const wholePart = Math.floor(totalPrice / 100);
+    // const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
+    // const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
+    const dataUser = JSON.parse(localStorage.getItem("user"));
+    //console.log(dataUser);
 
     const handleRemove = () => {
         Swal.fire({
@@ -41,7 +43,7 @@ const ShoppingCart = () => {
     const handleBuy = async () => {
         try {
             //! mandar tanto juegos como el precio total
-            dispatch(act.createOrder(formattedTotalPrice, cart))
+            dispatch(act.createOrder(totalPrices, cart, dataUser))
         } catch (error) {
             console.error(error.message);
         }
@@ -63,7 +65,7 @@ const ShoppingCart = () => {
                     </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4 className={styles.titleCarrito}>TOTAL: $ {formattedTotalPrice} </h4>
+                        <h4 className={styles.titleCarrito}>TOTAL: $ {totalPrices} </h4>
                     </div>
                     <div className={styles.botones}> 
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
@@ -83,7 +85,7 @@ const ShoppingCart = () => {
                                 id={game.id}
                                 name={game.name} 
                                 image={game.image || game.capsule_image}
-                                price={game.price_overview?.final || game.price || game.final_price }
+                                price={game.price_overview?.final || game.price * 100 || game.final_price}
                                 />
                                 </li>
                             )})
@@ -92,7 +94,7 @@ const ShoppingCart = () => {
                 </div>
                 <div className={styles.cajitaResumen}>
                     <div className={styles.cajitaTotal}>
-                        <h4 className={styles.titleCarrito}>TOTAL: ${formattedTotalPrice}</h4>
+                        <h4 className={styles.titleCarrito}>TOTAL: ${totalPrices}</h4>
                     </div>
                     <div className={styles.botones}>
                         <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
