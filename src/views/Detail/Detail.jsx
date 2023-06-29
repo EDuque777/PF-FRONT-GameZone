@@ -135,7 +135,7 @@ const Detail = (props) => {
 
   const handleDeleteReview = () => {
     dispatch(act.getDeleteReview(idReview))
-    console.log("IIIIDDDD HANDLER",idReview);
+    // console.log("IIIIDDDD HANDLER",idReview);
   };
   
   
@@ -156,10 +156,10 @@ const Detail = (props) => {
 
 
 
-  console.log(game);
+  console.log("GAMEEEEEEEEEEEEEEE",game);
   // console.log(game && game.Reviews);
-  console.log("REVIEEEEEEEEEEEEW", game?.Reviews[0].id);
-  console.log(game?.Reviews[0].Users[0].profileImage);
+  // console.log("REVIEEEEEEEEEEEEW", game?.Reviews[0].id);
+  // console.log(game?.Reviews[0].Users[0].profileImage);
 
 
 
@@ -168,7 +168,7 @@ const Detail = (props) => {
     <div className={style.info}>
       {isLoading ? (
         <div className={style.loading}>
-          <PacmanLoader color="red" size={80} speedMultiplier={1} />
+          <PacmanLoader color="blue" size={80} speedMultiplier={1} />
         </div>
       ) : (
         <div className={style.container}>
@@ -216,13 +216,13 @@ const Detail = (props) => {
             </div>
             
             <div className={style.container_screenshots}>
-  {videoUrl && (
+  {game?.Videos && (
     <video className={style.video} controls>
-      <source src={videoUrl} type="video/mp4" />
+      <source src={game?.Videos[0]?.video}  />
     </video>
   )}
   
-  {!videoUrl && game &&
+  {!game?.Videos &&
   
     game?.Images.slice(0, 4).map((image, index) => (
       <div key={index} className={style[`container_screenshots${index + 1}`]}>
@@ -233,7 +233,7 @@ const Detail = (props) => {
         />
       </div>
     ))}
-          {videoUrl && game &&
+          {game?.Videos &&
             game?.Images.slice(0, 3).map((image, index) => (
               <div key={index} className={style[`container_screenshots${index + 1}`]}>
                 <img
