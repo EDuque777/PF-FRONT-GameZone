@@ -45,10 +45,9 @@ export const EDIT_PROFILE_IMAGE = "EDIT_PROFILE_IMAGE";
 export const GETUSERSTORAGE = "GETUSERSTORAGE";
 export const GET_MYGAMES = "GET_MYGAMES";
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
-export const ALL_USERS = "ALL_USERS";
 export const MANDARREVIEW = "MANDARREVIEW";
-//! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
-//? FUNCIONES DE PETICIONES
+
+
 export const mandarAReview = (game) => {
     console.log(game);
     return {
@@ -56,13 +55,8 @@ export const mandarAReview = (game) => {
         payload: game
     }
 }
-
-export const allusers = () => {
-    return {
-            type: "ALL_USERS",
-        
-    }
-}
+//! ARREGLAR TODAS LAS RUTAS Y REDUCER DEL RAILWAY
+//? FUNCIONES DE PETICIONES
 export const resetfilters = () => {
     return {
             type: "RESET_FILTERS",
@@ -157,6 +151,7 @@ export const gameDetail = (id) => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`search/${id}`)
+            console.log(response);
             dispatch({
                 type: GET_DETAIL,
                 payload: response.data
@@ -323,7 +318,7 @@ export const clearCart = ()  => {
 export const createOrder = (totalPrice, cartGames, dataUser) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post("createOrder", {totalPrice, cartGames, dataUser})
+            const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,
@@ -376,8 +371,9 @@ export const removeWhishList = (id) => {
 export const postCreateUser = (props) => {
     return async function (dispatch) {
         try {
+            console.log("intento de peticion al server para crear usuario")
            const user = await axios.post("crearCuenta",props)
-           console.log(user.props)
+           console.log(user)
             return dispatch({
                 type : CREATE_USER,
                 payload : user.props
@@ -633,7 +629,9 @@ export const getUserStorage = (id) => {
 
 
 export const getGameReview = (id) => {
+
     const endpoint = `/reviewsDemo/${id}`;
+
     return async (dispatch) => {
         const {data} = await axios.get(endpoint);
         return dispatch({
@@ -641,7 +639,9 @@ export const getGameReview = (id) => {
             payload: data
         })
     }
+
 }
+
 //? ACCIONES DE MI BIBLIOTECA
 
 export const getMyGames = (id) => {
@@ -659,4 +659,5 @@ export const getMyGames = (id) => {
             console.error(error.message);    
         }
     }
+
 }

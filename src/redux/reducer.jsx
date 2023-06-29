@@ -17,7 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount : [],
     user : null,
-    userGoogle : null,
+    // userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -27,12 +27,11 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     gameReview: [],
-    review: [],
     library: [],
-    Users: []
+    Users: [],
+    review: [],
     
 };
-console.log(initialState.gameDetail)
 
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
@@ -42,8 +41,7 @@ const rootReducer=(state = initialState, action) => {
         
         //filtros de busqueda
 
-
-            case act.FILTER_LANGUAGES:
+        case act.FILTER_LANGUAGES:
                 const language = action.payload.toLowerCase();
                 console.log(action.payload)
                 const filteredSearchsssssssss = state.search.filter(game =>
@@ -98,15 +96,15 @@ const rootReducer=(state = initialState, action) => {
             case act.FILTER_FREE:
                 let filteredSearchsssss;
                 if (action.payload === "false") {
-                    filteredSearchsssss = state.search.filter(game => game.is_free === true && game.release_date.coming_soon !== true);
+                  filteredSearchsssss = state.search.filter(game => game.is_free === true && game.release_date.coming_soon !== true);
                 } else {
-                    filteredSearchsssss = state.search.filter(game => game.is_free === false && game.release_date.coming_soon !== true);
+                  filteredSearchsssss = state.search.filter(game => game.is_free === false && game.release_date.coming_soon !== true);
                 }
                 return {
-                    ...state,
-                    search: filteredSearchsssss
+                  ...state,
+                  search: filteredSearchsssss
                 };
-            
+              
 
         case act.FILTER_TYPE:
             const typess = action.payload;
@@ -141,64 +139,69 @@ const rootReducer=(state = initialState, action) => {
                 case act.ORDER_BY:
                     const orderBy = action.payload;
                     let sortedSearch = [...state.search];
-            
+                  
                     if (orderBy === "des") {
-                        sortedSearch.sort((a, b) => {
+                      sortedSearch.sort((a, b) => {
                         const isComingSoonA = a.coming_soon || false;
                         const isComingSoonB = b.coming_soon || false;
-                        if (!isComingSoonA && !isComingSoonB) {
-                            const priceA = parseFloat(a.price_overview || "0");
-                            const priceB = parseFloat(b.price_overview || "0");
                   
-                            if (a.is_free && b.is_free) {
-                                return priceA - priceB;
-                            } else if (a.is_free && !b.is_free) {
-                                return -1;
-                            } else if (!a.is_free && b.is_free) {
-                            return 1;
-                            } else {
-                            return priceA - priceB;
-                            }
-                        } else if (!isComingSoonA && isComingSoonB) {
-                            return -1;
-                        } else if (isComingSoonA && !isComingSoonB) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    });
-                    } else if (orderBy === "asc") {
-                        sortedSearch.sort((a, b) => {
-                            const isComingSoonA = a.coming_soon || false;
-                            const isComingSoonB = b.coming_soon || false;
                         if (!isComingSoonA && !isComingSoonB) {
-                            const priceA = parseFloat(a.price_overview || "0");
-                            const priceB = parseFloat(b.price_overview || "0");
-
-                        if (a.is_free && b.is_free) {
+                          const priceA = parseFloat(a.price_overview || "0");
+                          const priceB = parseFloat(b.price_overview || "0");
+                  
+                          if (a.is_free && b.is_free) {
                             return priceA - priceB;
-                        } else if (a.is_free && !b.is_free) {
-                            return 1;
-                        } else if (!a.is_free && b.is_free) {
+                          } else if (a.is_free && !b.is_free) {
                             return -1;
-                        } else {
-                            return priceB - priceA;
-                        }
+                          } else if (!a.is_free && b.is_free) {
+                            return 1;
+                          } else {
+                            return priceA - priceB;
+                          }
                         } else if (!isComingSoonA && isComingSoonB) {
-                            return -1;
+                          return -1;
                         } else if (isComingSoonA && !isComingSoonB) {
-                            return 1;
+                          return 1;
                         } else {
-                            return 0;
+                          return 0;
                         }
-                    });
+                      });
+                    } else if (orderBy === "asc") {
+                      sortedSearch.sort((a, b) => {
+                        const isComingSoonA = a.coming_soon || false;
+                        const isComingSoonB = b.coming_soon || false;
+                  
+                        if (!isComingSoonA && !isComingSoonB) {
+                          const priceA = parseFloat(a.price_overview || "0");
+                          const priceB = parseFloat(b.price_overview || "0");
+                  
+                          if (a.is_free && b.is_free) {
+                            return priceA - priceB;
+                          } else if (a.is_free && !b.is_free) {
+                            return 1;
+                          } else if (!a.is_free && b.is_free) {
+                            return -1;
+                          } else {
+                            return priceB - priceA;
+                          }
+                        } else if (!isComingSoonA && isComingSoonB) {
+                          return -1;
+                        } else if (isComingSoonA && !isComingSoonB) {
+                          return 1;
+                        } else {
+                          return 0;
+                        }
+                      });
                     }
+                  
                     const filteredSearch = sortedSearch.filter(game => !game.coming_soon);
+                  
                     return {
-                        ...state,
-                        search: filteredSearch
+                      ...state,
+                      search: filteredSearch
                     };
-        
+                  
+          
             case act.RESET_FILTERS:
                 return {
                     ...state,
@@ -379,7 +382,7 @@ const rootReducer=(state = initialState, action) => {
             //console.log(userGoogle)
             return {
                 ...state,
-                userGoogle : action.payload
+                user : action.payload
             }
 
         case act.LOGOUT_USER:{
@@ -392,7 +395,7 @@ const rootReducer=(state = initialState, action) => {
         case act.LOGOUT_USERGOOGLE:
             return {
                 ...state,
-                userGoogle : null
+                user : null
             }
 
         case act.PLATFORMS:
@@ -458,6 +461,14 @@ const rootReducer=(state = initialState, action) => {
                     country: action.payload.country,
                         },
                     };
+            //  case act.EDITPROFILEIMAGE:
+            //     return {
+            //         ...state,
+            //         user: {
+            //         ...state.user,
+            //         profileImage: action.payload.profileImage,
+            //           },
+            //         };
 
             case act.GETUSERSTORAGE:
                 return {
@@ -470,14 +481,7 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     gameReview: action.payload
                 }
-                case act.MANDARREVIEW:
-                    const game = action.payload
-                    console.log(game);
-                    return {
-                        ...state,
-                        review: game
-                    }
-        
+            
 //? CASOS DE LA BIBLIOTECA
 
             case act.GET_MYGAMES:
@@ -486,12 +490,18 @@ const rootReducer=(state = initialState, action) => {
                     library: action.payload
                 }
 
+                case act.MANDARREVIEW:
+            const game = action.payload
+            console.log(game);
+            return {
+                ...state,
+                review: game
+            }
+
             
         default:
             return {...state};
     }
 };
 
-
 export default rootReducer;
-

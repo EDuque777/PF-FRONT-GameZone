@@ -11,7 +11,6 @@ import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
 import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
 
-
 function App() {
 
   const location = useLocation()
@@ -22,7 +21,7 @@ return (
       <script src="https://kit.fontawesome.com/5c35a66fab.js" crossorigin="anonymous"></script>
     </head>
     <>
-    {location.pathname !== "/" && location.pathname !== "/dashboard" && <NavBar/>}
+      {location.pathname !== "/" && location.pathname !== "/dashboard" && <NavBar/>}
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 

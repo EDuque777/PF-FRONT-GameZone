@@ -4,16 +4,16 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logoImage from "../../assets/LOGOGAMEZONE2.png";
 import usuario from "../../assets/usuario.png";
-import { logoutUser } from "../../redux/actions";
+import { logoutUser, getDataGoogle, logoutGoogle } from "../../redux/actions";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 
-
 const NavBar = () => {
+
     const cart = useSelector(state => state.cart)
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
     const [isNavbarFixed, setIsNavbarFixed] = useState(false);
-    const [carItem, setCarItem] = useState(0);
+    const [carItem, setCarItem] = useState(0);
 
     const handleSubMenuToggle = () => {
         setIsSubMenuOpen(!isSubMenuOpen);
@@ -32,55 +32,91 @@ const NavBar = () => {
         };
     }, []);
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+    const history = useHistory()
+    const dispatch = useDispatch()
 
-    const [conteo, setConteo] = useState(0);
+    const usuario = useSelector((state) => state.user)
+
+    const [ conteo, setConteo ] = useState(0)
+    const [ conteoTwo, setConteoTwo ] = useState(0)
+
+
+    console.log(conteoTwo, "esto es de google")
+
+    console.log(conteo)
+
+    useEffect(() => {
+        //validateData()
+
+        if (usuario) {
+            localStorage.setItem("user", JSON.stringify(usuario));
+            setConteo(1)
+        }else{
+            setConteo(0)
+        }
+
+    }, [usuario])
 
     const datosUser = JSON.parse(localStorage.getItem("user"));
 
-    const validationUser = () => {
-        if (!datosUser) {
-            setConteo(0);
-        } else if (datosUser) {
-            setConteo(1);
-            return datosUser;
-        }
-    };
+    console.log(datosUser, "datos del local")
 
     useEffect(() => {
-        validationUser();
-    }, [datosUser]);
 
-    const removerDados = async () => {
+        if (datosUser) {
+            setConteo(1)
+        }else{
+            setConteo(0)
+        }
+        
+    }, [datosUser])
+
+    const removerDatos = async () => {
+
         const Toast = Swal.mixin({
             toast: true,
-            position: "top-end",
+            position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
             didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-            },
-        });
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
 
         Toast.fire({
-            icon: "success",
-            title: "Sessão encerrada",
-        });
+            icon: 'success',
+            title: 'Closed session'
+        })
 
         await localStorage.removeItem("user");
-        await Cookies.remove("token");
-        await dispatch(logoutUser());
+        //await Cookies.remove("token")
+        await dispatch(logoutUser())
+        await dispatch(logoutGoogle())
 
-        history.push("/");
-    };
+        history.push("/")
+
+        console.log("datos removidos")
+    }
+
+    function peticionData() {
+        dispatch(getDataGoogle())
+        console.log("peticones de datos")
+    }
+
+    useEffect(() => {
+        if (datosUser) {
+            console.log("hay datos")
+        }else{
+            peticionData()
+        }
+
+    }, [])
 
     useEffect(() => {
         setCarItem(cart.length);
-    }, [cart]);
-
+    }, [cart]);
 
     return (
         <div className={`custom-navbar ${isNavbarFixed ? style.fixedNavbar : ""}`}>
@@ -122,7 +158,7 @@ const NavBar = () => {
                                         <Link to="/whishlist">Wish List</Link>
                                     </li>
                                     <li className={style["submenu_item"]}>
-                                        <a onClick={removerDados}>Logout</a>
+                                        <a onClick={removerDatos}>Logout</a>
                                     </li>
                                 </ul>
                             )}
@@ -138,4 +174,4 @@ const NavBar = () => {
     );
 };
 
-export default NavBar;
+export default NavBar;
