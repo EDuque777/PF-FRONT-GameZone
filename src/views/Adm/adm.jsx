@@ -143,7 +143,7 @@ function Dashboard() {
             </li>
             <li>
               <a href="#">
-                <i className={`fa fa-shopping-cart ${styles["fa-2x"]}`}></i>
+                <i className={`fa fa-users ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Search User
                 </span>
