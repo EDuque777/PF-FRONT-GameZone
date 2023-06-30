@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
 
 //* las cards que vengan del home...
 //! revisar la convergencia
@@ -19,7 +19,7 @@ const ShoppingCart = () => {
     // const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
     // const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
     const dataUser = JSON.parse(localStorage.getItem("user"));
-    //console.log(dataUser);
+    console.log(dataUser);
 
     const handleRemove = () => {
         Swal.fire({
@@ -44,6 +44,17 @@ const ShoppingCart = () => {
 
     const handleBuy = async () => {
         try {
+
+          if (dataUser === null) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: 'Please register or log in to make a purchase',
+              showConfirmButton: false,
+              timer: 2000
+            })
+            return 
+          }
           if (cart.length === 0) {
             Swal.fire({
               position: 'center',
