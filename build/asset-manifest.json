@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27b94fb4.css",
+    "main.js": "/static/js/main.67566ded.js",
+    "static/media/Container.png": "/static/media/Container.1aed8e7b0bbac3255daf.png",
+    "static/media/Imagen1.png": "/static/media/Imagen1.aca9ebfc10a3a6f3262c.png",
+    "static/media/GameZone Wp.png": "/static/media/GameZone Wp.18ff39b1c777cdadd29a.png",
+    "static/media/arrow.png": "/static/media/arrow.ff5a4777443c564098c0.png",
+    "static/media/LOGOGAMEZONE.png": "/static/media/LOGOGAMEZONE.2bedcb5701b902591205.png",
+    "static/media/LOGOGAMEZONE2.png": "/static/media/LOGOGAMEZONE2.faa9e893e0dd6cc8b164.png",
+    "static/media/usuario.png": "/static/media/usuario.885e755359d361490bd1.png",
+    "static/media/punto.png": "/static/media/punto.741363e3dd27e83fc73a.png",
+    "static/media/Higher.woff": "/static/media/Higher.99bd747bbf456cc42435.woff",
+    "index.html": "/index.html",
+    "main.27b94fb4.css.map": "/static/css/main.27b94fb4.css.map",
+    "main.67566ded.js.map": "/static/js/main.67566ded.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.27b94fb4.css",
+    "static/js/main.67566ded.js"
+  ]
+}

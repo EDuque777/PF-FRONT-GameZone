@@ -2,12 +2,12 @@
     /* display: flex; */
     height: auto;
     /* width: 100vw; */
-    /* background: url("../../../assets/Imagen1.png");
+    background: url("../../../assets/Imagen1.png");
     backdrop-filter: blur(10px);
     background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover; */
+	background-size: cover;
     background-color:#070707;
 }
 
@@ -21,40 +21,44 @@
 }
 
 .container2{
-    outline: white solid 3px;
+    /* outline: white solid 3px; */
     height: 1100px;
     
 }
 
 .containerleft{
-    outline: red solid 3px;
+    /* outline: red solid 3px; */
     height: 1100px;
     width: 50%;
     float: left;
+    
 }
 
 .containerright{
-    outline: pink solid 3px;
+    /* outline: pink solid 3px; */
     height: 1100px;
     width: 50%;
     float: right;
 }
 
 .containerEmployee{
-    outline: grey solid 3px;
+    /* outline: grey solid 3px; */
     height: 200px;
     width: 70%;
-    margin: auto;
+    /* margin: auto; */
+    margin-top: 30px;
+    margin-left: 15%;
     background-color: #343434;
     border-radius: 10px;
+    text-align: left;
 }
 
 .end{
-    color: white;
+    color:  rgb(206, 206, 206);
 }
 
 .containerImage{
-outline: yellow solid 3px;
+/* outline: yellow solid 3px; */
 float: left;
 height: 150px;
 width: 150px;
@@ -65,10 +69,20 @@ margin-top: 25px
 
 }
 .containerText{
-outline: green solid 3px;
+/* outline: green solid 3px; */
 float: right;
 height: 150px;
 width: 65%;
 margin-right: 20px;
-margin-top: 25px
+margin-top: 25px;
+color:  white;
+
 }
+
+.containerEmployee::after {
+    content: "";
+    display: table;
+    clear: both;
+    margin: 30px;
+  }
+  

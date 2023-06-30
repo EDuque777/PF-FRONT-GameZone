@@ -20,7 +20,8 @@ const AboutUs = () => {
                         
                     </div> 
                     <div className={style.containerText}>
-                        
+                        <h1>Jeronimo Blanco</h1>
+                        <h2>Estudiante Henry</h2>
                     </div>   
                   
                     </div> 
@@ -43,7 +44,13 @@ const AboutUs = () => {
                   
                     </div> 
                     <div className={style.containerEmployee}>
-                     
+                    <div className={style.containerImage}>
+                        
+                    </div> 
+                    <div className={style.containerText}>
+                        
+                    </div>   
+                  
                     </div> 
                 </div>  
                 <div className={style.containerright}>
@@ -52,24 +59,40 @@ const AboutUs = () => {
                         <h3>BACK END</h3>
                     </div>
                 <div className={style.containerEmployee}>
-                        <h1>empleado
-
-                        </h1>
+                    <div className={style.containerImage}>
+                        
+                    </div> 
+                    <div className={style.containerText}>
+                        
+                    </div>   
+                  
                     </div> 
                     <div className={style.containerEmployee}>
-                        <h1>empleado
-                            
-                        </h1>
+                    <div className={style.containerImage}>
+                        
+                    </div> 
+                    <div className={style.containerText}>
+                        
+                    </div>   
+                  
+                    </div>  
+                    <div className={style.containerEmployee}>
+                    <div className={style.containerImage}>
+                        
+                    </div> 
+                    <div className={style.containerText}>
+                        
+                    </div>   
+                  
                     </div> 
                     <div className={style.containerEmployee}>
-                        <h1>empleado
-                            
-                        </h1>
+                    <div className={style.containerImage}>
+                        
                     </div> 
-                    <div className={style.containerEmployee}>
-                        <h1>empleado
-                            
-                        </h1>
+                    <div className={style.containerText}>
+                        
+                    </div>   
+                  
                     </div> 
                 </div>
             </div>

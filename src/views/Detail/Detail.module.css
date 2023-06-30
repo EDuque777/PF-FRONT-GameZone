@@ -10,7 +10,7 @@
   /* outline: red solid 3px; */
   display: flex;
   height: auto;
-  width: 100vw;
+  width: auto;
   flex-direction: column;
   background: url("../../assets/Imagen1.png");
   backdrop-filter: blur(10px);
@@ -410,13 +410,13 @@
   /* outline: yellow solid 3px; */
   display: flex;
   min-height: 200px;
-  width: 100%;
+  width: 99.1%;
   color: white;
   background-color: #343434; 
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px;
-  margin-right: 20px;
+  /* margin-left: 20px;
+  margin-right: 20px; */
   /* overflow: hidden; */
 }
 
@@ -432,7 +432,7 @@
 .opinionback{
   /* outline: red solid 3px; */
   height: 70%;
-  width: 100%;
+  width: 98%;
   margin: 10px;
 }
 .opiniontopleft{
