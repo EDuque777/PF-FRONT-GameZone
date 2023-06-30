@@ -1,71 +1,79 @@
-import { useState } from "react";
+import React, {useState} from 'react';
 import { useSelector } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import style from "./Reviews.module.css"
+import { withRouter } from 'react-router-dom';
 import Swal from "sweetalert2";
 
 //! agregar alerta de swift
-const Review = () => {
+const ReviewsModif = ({ match }) => {
+  const { id } = match.params;
+
   const gameRe = useSelector(state => state.review)
-  const { id, name } = gameRe
-  console.log(gameRe);
-  console.log(name);
-  console.log(gameRe.name);
+ 
+  console.log("IIIIIIIIIIIDDDDDDDDDDD",id);
+  console.log("REEEEEEEEE",gameRe);
+
   const IDUser = JSON.parse(localStorage.getItem("user"));
-  console.log(IDUser.id);
+
   const [form, setForm] = useState({
     review: "",
     rating: 0,
-    id: IDUser?.id,
+    id: id,
     name: gameRe.name,
     idGame: gameRe.id,
   });
 
+ 
+  
   const handleStarClick = (rating) => {
     setForm({ ...form, rating });
   };
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    axios.post("http://localhost:3001/user/review", form, IDUser, name, id)
-
+    
+    axios.put("http://localhost:3001/user/review", form, id)
     Swal.fire({
       position: "center",
       icon: "success",
-      title: "Review added successfully",
+      title: "editado",
       showConfirmButton: false,
       timer: 2000
-    })
-
-      .then(res => {
-        setForm({
-          review: "",
-          rating: 0,
-        });
-      })
-      .catch(error => {
-        console.error("Error submitting review:", error);
+  })
+    
+    .then(res => {
+      setForm({
+        review: "",
+        rating: 0,
+        
+    
       });
+    })
+    .catch(error => {
+      console.error("Error submitting review:", error);
+    });
   };
-
+  
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <FaStar
-          key={i}
-          className={i <= form.rating ? style.starFilled : style.star}
-          onClick={() => handleStarClick(i)}
+        key={i}
+        className={i <= form.rating ? style.starFilled : style.star}
+        onClick={() => handleStarClick(i)}
         />
-      );
-    }
-    return stars;
-  };
+        );
+      }
+      return stars;
+    };
+    
+    console.log("gamereeeeeeeeeeee", gameRe);
 
-  return (
-    <div className={style.body_form}>
+    return (
+      <div className={style.body_form}>
     <form onSubmit={handleSubmit}>
       <div className={style.total_container}>
         <label className={style.review}>Review:</label>
@@ -82,7 +90,7 @@ const Review = () => {
           {renderStars()}
         </div>
       </div>
-      <button className={style.button} type="submit">Crear Review</button>
+      <button className={style.button} type="submit">Editar Review</button>
       </div>
     </form>
     </div>
@@ -90,7 +98,4 @@ const Review = () => {
   );
 };
 
-export default Review;
-
-
-
+export default withRouter(ReviewsModif);

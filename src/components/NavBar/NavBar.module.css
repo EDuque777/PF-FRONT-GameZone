@@ -17,6 +17,8 @@
     font-family: 'Dosis', sans-serif;
 }
 
+
+
 .NaV>li>a {
     display: block;
     color: white;
@@ -25,14 +27,28 @@
     letter-spacing: 2px;
     font-size: 18px;
     margin: auto;
-    padding-left: 0px;
-    padding-right: 30px;
+    padding-right: 27px;
     letter-spacing: 1px;
     font-weight: 500;
 }
 .cart_icon{
     font-size: 30px; 
-  }
+}
+.cart_count {
+    position: absolute;
+    font-weight: bold;
+    top: 47px;
+    right: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: #fd7200;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+}
 .NaV>li>a:hover {
     color: #5b5a5c;
 }
@@ -44,7 +60,7 @@
     width: 100%;
     background-color: #141414;
     height: 72px;
-    z-index: 998 !important;
+    z-index: 900 !important;
     transition: 2.0s ease all;
 }
   
@@ -54,7 +70,8 @@
     width: 40px;
     margin-top: 10px;
     cursor: pointer;
-    margin-right: 50px;
+    margin-right: 40px;
+    border-radius: 50px;
 }
 
 .usuarioContainer {
@@ -136,7 +153,7 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
-    margin-right: 50px;
+    margin-right: 2px;
 }
 
 

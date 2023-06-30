@@ -49,6 +49,22 @@ export const GET_MYGAMES = "GET_MYGAMES";
 
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 
+export const MANDARREVIEW = "MANDARREVIEW";
+
+export const DELETEREVIEW = "DELETEREVIEW";
+
+export const mandarAReview = (game) => {
+    //console.log(game);
+    return {
+        type: MANDARREVIEW,
+        payload: game
+    }
+}
+
+
+
+
+
 
 
 
@@ -148,6 +164,7 @@ export const gameDetail = (id) => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`search/${id}`)
+            console.log(response);
             dispatch({
                 type: GET_DETAIL,
                 payload: response.data
@@ -623,16 +640,20 @@ export const getUserStorage = (id) => {
 }
 
 
-export const getGameReview = (id) => {
-    const endpoint = `/reviewsDemo/${id}`;
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
-        return dispatch({
-            type: GETGAMEREVIEW,
-            payload: data
-        })
-    }
-}
+// export const getGameReview = (id) => {
+
+//     const endpoint = `/reviewsDemo/${id}`;
+
+//     return async (dispatch) => {
+//         const {data} = await axios.get(endpoint);
+//         return dispatch({
+//             type: GETGAMEREVIEW,
+//             payload: data
+//         })
+//     }
+
+// }
+
 //? ACCIONES DE MI BIBLIOTECA
 
 export const getMyGames = (id) => {
@@ -650,4 +671,39 @@ export const getMyGames = (id) => {
             console.error(error.message);    
         }
     }
+
 }
+
+
+export const getGameReview = (game) => {
+    console.log(game);
+    return (dispatch) => {
+        return dispatch({
+            type: GETGAMEREVIEW,
+            payload: game
+        })
+    }
+}
+
+export const getDeleteReview = (idRev) => {
+
+    return async function (dispatch) {
+        try {
+            const response = await axios.delete(`/user/deleteReview/${idRev}`)
+            //console.log("RESPONSEEEE",response);
+            //console.log("IIIIIID",ids);
+            const game = response.data
+            dispatch({
+                type: DELETEREVIEW,
+                payload: game
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+
+
+
+
+

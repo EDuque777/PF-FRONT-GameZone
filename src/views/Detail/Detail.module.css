@@ -294,30 +294,105 @@
   /* outline: yellow solid 3px; */
   display: flex;
   width: 90%;
-  height: 800px;
+  height: 1000px;
   margin: 1rem auto;
   background-color: #232323;
   max-height: fit-content;
   box-sizing: content-box;
+  /* overflow: scroll; */
   
 }
 
 .promedio{
   /* outline: blue solid 3px; */
   display: flex;
-  height: 300px;
+  height: 380px;
   width: 300px;
   color: white;
   flex-direction: column;
   background-color: #343434;
   margin-left:  100px; 
   margin-top: 100px; 
+
 }
+
+
+.promedioInfo{
+  /* outline: yellow solid 3px; */
+  margin-left: 8%;
+  margin-right: 8%;
+  flex-direction: column;
+
+  
+}
+
+
+
+.promedioNumber2{
+  /* outline: pink solid 3px; */
+  display: flex;
+  font-size: 100px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+
+
+.cantidadReviews{
+  /* outline: red solid 3px; */
+  display: flex;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.numeroReviews {
+  margin-right: 7px;
+}
+
+.ratingCount {
+  /* outline: pink solid 3px; */
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.starRating {
+  display: flex;
+  align-items: center;
+}
+
+.ratingNumber {
+  margin-right: 5px;
+}
+
+.star {
+  color: white;
+}
+
+.bar {
+  /* outline: green solid 3px; */
+  flex-grow: 1;
+  height: 10px;
+  background-color: #232323;
+  margin-left: 5px;
+}
+
+.fill {
+  height: 100%;
+  background-color: rgb(93, 93, 93);
+}
+
+.ratingPercentage {
+  margin-left: 5px;
+}
+
+
 
 .opiniones{
   /* outline: green solid 3px; */
   display: flex;
-  height: 600px;
+  height: auto;
   width: 70%;
   color: white;
   flex-direction: column;
@@ -325,35 +400,77 @@
   max-height: fit-content;
   box-sizing: content-box;
   margin:  100px;
+  overflow-y: scroll;
+  
 }
 
 
 
 .opinion{
-  /* outline: white solid 3px; */
+  /* outline: yellow solid 3px; */
   display: flex;
-  height: 33%;
+  min-height: 200px;
   width: 100%;
   color: white;
   background-color: #343434; 
-}
-
-.opinioncontenido{
-  display: flex;
-  height: 33%;
-  width: 100%;
-  color: white;
-  background-color: #343434;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 20px;
   margin-right: 20px;
+  /* overflow: hidden; */
 }
+
+.opiniontop{
+  /* outline: white solid 3px; */
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 10px;
+}
+
+.opinionback{
+  /* outline: red solid 3px; */
+  height: 70%;
+  width: 100%;
+  margin: 10px;
+}
+.opiniontopleft{
+  /* outline: blue solid 3px; */
+  height: 100%;
+  width: 10%;
+  align-items: center;
+
+  
+}
+
+.opiniontopright{
+  /* outline: pink solid 3px; */
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.opiniontopright h3,
+.opiniontopright p {
+  margin: 0;
+}
+
 
 
 .opinion h3,
 .opinion p:first-of-type {
   margin-bottom: 3px;
+}
+
+
+.profileImage{
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
 }
 
 
