@@ -33,8 +33,9 @@ const MyGames = () => {
       const review = gameFilter.Reviews[0]?.reviews
       const rating = gameFilter.Reviews[0]?.rating
       const id = gameFilter.Reviews[0]?.id
+      const idGame = gameFilter?.id
       console.log({review, rating, id});
-      dispatch(act.getGameReview({review, rating, id}))
+      dispatch(act.getGameReview({review, rating, id, idGame}))
     }
   }
 

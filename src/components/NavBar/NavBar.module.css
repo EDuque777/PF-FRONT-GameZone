@@ -120,8 +120,8 @@
     justify-content: center;
     width: 20px;
     height: 20px;
-    background-color: #fd7200;
-    color: white;
+    background-color: #c8a74b;
+    color: rgb(255, 255, 255);
     font-size: 12px;
     border-radius: 50%;
 }
@@ -231,7 +231,7 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
-    margin-right: 2px;
+    margin-right: 6px;
 }
 
 

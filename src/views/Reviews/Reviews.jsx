@@ -4,12 +4,15 @@ import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import style from "./Reviews.module.css"
 import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 //! agregar alerta de swift
 const Review = () => {
+
+  const history = useHistory()
   const gameRe = useSelector(state => state.review)
   const { id, name } = gameRe
-  console.log(gameRe);
+  //console.log(gameRe);
   const IDUser = JSON.parse(localStorage.getItem("user"));
 
   const [form, setForm] = useState({
@@ -26,7 +29,19 @@ const Review = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    if (!form.review || !form.rating)  {
+      console.log("no lo hicisteeeeeee");
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Please, complete the form',
+        showCancelButton: false,
+        timer: 2000
+      })
+      return
+    } 
+    event.preventDefault();
+    history.push(`/detail/${gameRe.id}`)
     axios.post("http://localhost:3001/user/review", form, IDUser, name, id)
       Swal.fire({
         position: "center",
