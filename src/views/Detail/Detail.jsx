@@ -68,7 +68,7 @@ const Detail = (props) => {
   function sanitizeText(text) {
     if (typeof text === "string") {
       text = text.replace(/<\/?[^>]+(>|$)/g, "");
-      text = text.replace(/\*\*/g, "");
+      text = text.replace(/\\/g, "");
       return text;
     }
     return text;
@@ -190,8 +190,8 @@ const Detail = (props) => {
       ) : (
         <div className={style.container}>
           <div className={style.container_juego}>
+          <button className={`fa fa-arrow-circle-left ${style["backButton"]}`} onClick={() => handleBack()}></button>
             <div className={style.container_texto}>
-          <button className={style.backButton} onClick={() => handleBack()}>BACK</button>
               <div className={style.name_margen}>
                 <h1 className={style.name} translate="no">
                   {sanitizeText(game.name)}
@@ -261,7 +261,10 @@ const Detail = (props) => {
     </div>
   ))
 )}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0c28683f7b1d4697023fd65d85ec0aae54a11eed
         </div>
 
           </div>
@@ -360,23 +363,17 @@ const Detail = (props) => {
                 {game?.Reviews &&
                 game?.Reviews.map((review, index) => (
                   <div className={style.opinion} key={index}>
-
                     <div className={style.opiniontop} >
-
                       <div className={style.opiniontopleft} >
                         <img className={style.profileImage} src={review?.Users[0].profileImage} alt={`Screenshot`} />
                        </div>
-                       
                        <div className={style.opiniontopright} >
                         <h3>{review?.author}</h3>
                         <p>{review?.Users[0].name}</p>
                         <p>{review?.date}</p>
                         <Rating rating={review?.rating} />
                        </div> 
-
                       </div>
-
-
                     <div className={style.opinionback} >
                       <p>{review?.reviews}</p>
                       <p hidden>{idReview = review?.id}</p>
@@ -389,17 +386,10 @@ const Detail = (props) => {
                       </div>
                       } */}
                     </div>
-
-                      
-                    
                   </div>
                 ))}
-
-                </div>
-                
-            
+                </div>    
             </div>
-
           </div>
       )}
     </div>
@@ -407,4 +397,3 @@ const Detail = (props) => {
 };
 
 export default Detail;
-

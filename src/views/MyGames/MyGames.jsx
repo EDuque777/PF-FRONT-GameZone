@@ -6,45 +6,47 @@ import { Link } from 'react-router-dom';
 
 const MyGames = () => {
 
-    //!revisar ruta al detail
-    const games = useSelector(state => state.library);
-    const allGames = useSelector(state => state.games);
-    //console.log(allGames);
-    console.log(games);
-    const dataUser = JSON.parse(localStorage.getItem("user"));
-    const ids = dataUser.id;
+  //!revisar ruta al detail
+  const games = useSelector(state => state.library);
+  const allGames = useSelector(state => state.games);
+  //console.log(allGames);
+  //console.log(games);
+  const dataUser = JSON.parse(localStorage.getItem("user"));
+  const ids = dataUser.id;
+  //console.log(ids);
 
-    const dispatch = useDispatch()
-    
-    useEffect(() => {
-        dispatch(act.getGames())
-        dispatch(act.getMyGames(ids))
-    }, [ids])
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+      dispatch(act.getGames())
+      dispatch(act.getMyGames(ids))
+  }, [ids])
 
-    const handleSend = (game) => {
-        dispatch(act.mandarAReview(game))
+  const handleSend = (game) => {
+      dispatch(act.mandarAReview(game))
+  }
+
+  const handleEdit = (id) => {
+    const gameFilter = allGames.find(game => game.id === id)
+    if (gameFilter) {
+      console.log(gameFilter);
+      const review = gameFilter.Reviews[0]?.reviews
+      const rating = gameFilter.Reviews[0]?.rating
+      const id = gameFilter.Reviews[0]?.id
+      const idGame = gameFilter?.id
+      console.log({review, rating, id});
+      dispatch(act.getGameReview({review, rating, id, idGame}))
     }
+  }
 
-    const handleEdit = (id) => {
-      const gameFilter = allGames.find(game => game.id === id)
-      if (gameFilter) {
-        console.log(gameFilter);
-        const review = gameFilter.Reviews[0]?.reviews
-        const rating = gameFilter.Reviews[0]?.rating
-        const id = gameFilter.Reviews[0]?.id
-        console.log({review, rating, id});
-        dispatch(act.getGameReview({review, rating, id}))
-      }
+  const handleDelete = (id) => {
+    const gameFilter = allGames.find(game => game.id === id)
+    if (gameFilter) {
+      const idRev = gameFilter.Reviews[0]?.id
+      console.log(idRev);
+      dispatch(act.getDeleteReview(idRev))
     }
-
-    const handleDelete = (id) => {
-      const gameFilter = allGames.find(game => game.id === id)
-      if (gameFilter) {
-        const idRev = gameFilter.Reviews[0]?.id
-        console.log(idRev);
-        dispatch(act.getDeleteReview(idRev))
-      }
-    }
+  }
     
     //! agregar la ruta al detail
     return (

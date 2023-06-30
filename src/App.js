@@ -36,10 +36,9 @@ return (
       <Route path="/search" render={() => <Search />} />
       <Route path="/review" render={() => <Review />} />
       <Route path="/library" render={() => <MyGames />}/>
-      <Route path="/pruebas" render={() => <ShoppingView />}/>
-      <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
+      {/* <Route path="/pruebas" render={() => <ShoppingView />}/> */}
       <Route path="/detail/reviews/:id" render={() => <ReviewsModif />} />
-
+      <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       <Route path="/terms" render={() => <Terms />} />
       <Route path="/aboutus" render={() => <AboutUs />} />
       <Route path="/contact" render={() => <Contact />} />

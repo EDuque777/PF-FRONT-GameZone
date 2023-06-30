@@ -196,7 +196,7 @@ const Form = () => {
         toast: true,
         position: 'top-start',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 1500,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -316,7 +316,7 @@ const Form = () => {
       toast: true,
       position: 'top-start',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)

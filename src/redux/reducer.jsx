@@ -30,18 +30,40 @@ const initialState = {
     library: [],
     review: [],
     deleteReview: null,
-
-    
 };
 
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
-        //filtros combinadosconst combtype = "COMBTYPE"
-        
-        
-        
-        //filtros de busqueda
+        //?filtros combinadosconst combtype = "COMBTYPE"
+        case act.MANDARREVIEW:
+            const game = action.payload
+            //console.log(game);
+            return {
+                ...state,
+                review: game
+            }
+                
+        case act.DELETEREVIEW:
+            //console.log(action.payload);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Review removed successfuly",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            return {
+                ...state,
+                deleteReview: action.payload
+            }
 
+        case act.GETGAMEREVIEW:
+            //console.log(action.payload);
+            return {
+                ...state,
+                review: action.payload
+            } 
+        //?filtros de busqueda
         case act.FILTER_LANGUAGES:
             const language = action.payload.toLowerCase();
             const filteredSearchsssssssss = state.search.filter(game =>
@@ -313,6 +335,21 @@ const rootReducer=(state = initialState, action) => {
                 orderCreated: false,
                 error: action.payload
             }
+
+        case act.FREE_ORDER:
+            console.log(action.payload);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Thanks for your purchase",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            return {
+                ...state,
+                orderCreated: true,
+                error: null
+            }
         
 //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
@@ -448,26 +485,11 @@ const rootReducer=(state = initialState, action) => {
                     country: action.payload.country,
                         },
                     };
-            //  case act.EDITPROFILEIMAGE:
-            //     return {
-            //         ...state,
-            //         user: {
-            //         ...state.user,
-            //         profileImage: action.payload.profileImage,
-            //           },
-            //         };
 
             case act.GETUSERSTORAGE:
                 return {
                     ...state,
                     userStorage: action.payload
-            }
-
-            case act.GETGAMEREVIEW:
-            
-            return {
-                ...state,
-                review: action.payload
             }
             
 //? CASOS DE LA BIBLIOTECA
@@ -476,35 +498,13 @@ const rootReducer=(state = initialState, action) => {
                 return {
                     ...state,
                     library: action.payload
-                }
-
-                case act.MANDARREVIEW:
-
-            const game = action.payload
-            console.log(game);
-            return {
-                ...state,
-                review: game
-            }
-
-        case act.DELETEREVIEW:
-            //console.log(action.payload);
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Review removed successfuly",
-                showConfirmButton: false,
-                timer: 2000
-            })
-            return {
-                ...state,
-                deleteReview: action.payload
-            }
-
+                }  
             
         default:
             return {...state};
     }
 };
 
+
 export default rootReducer;
+
