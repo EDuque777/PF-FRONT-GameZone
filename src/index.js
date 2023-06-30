@@ -9,8 +9,8 @@ import { Provider } from 'react-redux'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 // axios.defaults.baseURL = "http://localhost:3001/";
-// axios.defaults.baseURL = "https://pf-back-gamezone-production.up.railway.app/"
-axios.defaults.baseURL = "https://back-gamezone01.onrender.com/"
+axios.defaults.baseURL = "https://pf-back-gamezone-production-f9d0.up.railway.app/"
+// axios.defaults.baseURL = "https://back-gamezone01.onrender.com/"
 
 ReactDOM.render(
 
