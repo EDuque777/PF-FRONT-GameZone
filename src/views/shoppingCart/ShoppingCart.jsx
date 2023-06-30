@@ -19,27 +19,28 @@ const ShoppingCart = () => {
     // const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
     // const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
     const dataUser = JSON.parse(localStorage.getItem("user"));
-    console.log(dataUser);
+    //console.log(dataUser);
 
+    //! no deberia borrar si no hay nada, METER EL CAMBIO
     const handleRemove = () => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your cart has been deleted.',
-                'success'
-              )
-              dispatch(act.clearCart())
-            }
-          })
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Deleted!',
+              'Your cart has been deleted.',
+              'success'
+            )
+            dispatch(act.clearCart())
+          }
+        })
     }
 
     const handleBuy = async () => {
@@ -63,9 +64,9 @@ const ShoppingCart = () => {
               showConfirmButton: false,
               timer: 2000
             });
-            console.log(totalPrices == 0.00);
+            //console.log(totalPrices == 0.00);
           } else if (totalPrices == 0.00) {
-            console.log("SIRVIOOO AAAAAA", totalPrices, cart, dataUser);
+            //console.log("SIRVIOOO AAAAAA", totalPrices, cart, dataUser);
             dispatch(act.freeOrder(totalPrices, cart, dataUser));
             dispatch(act.clearCart())
             history.push("/library")
@@ -98,7 +99,7 @@ const ShoppingCart = () => {
                         <h4 className={styles.titleCarrito}>TOTAL: $ {totalPrices} </h4>
                     </div>
                     <div className={styles.botones}> 
-                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
+                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}} disabled={cart.length === 0}>{/* poner icono para borrar todo del carrito */}Delete</button>
                         <button className={styles.botonComprar} onClick={() => {handleBuy()}}>Buy</button>
                     </div>
                 </div>
@@ -127,7 +128,7 @@ const ShoppingCart = () => {
                         <h4 className={styles.titleCarrito}>TOTAL: ${totalPrices}</h4>
                     </div>
                     <div className={styles.botones}>
-                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}}>{/* poner icono para borrar todo del carrito */}Delete</button>
+                        <button className={styles.botonBorrar} onClick={() => {handleRemove()}} disabled={cart.length === 0}>{/* poner icono para borrar todo del carrito */}Delete</button>
                         <button className={styles.botonComprar} onClick={() => {handleBuy()}}>Buy</button>
                     </div>
                 </div>

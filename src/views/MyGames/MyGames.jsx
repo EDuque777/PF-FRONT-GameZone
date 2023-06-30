@@ -13,6 +13,7 @@ const MyGames = () => {
   //console.log(games);
   const dataUser = JSON.parse(localStorage.getItem("user"));
   const ids = dataUser.id;
+  //console.log(ids);
 
   const dispatch = useDispatch()
   

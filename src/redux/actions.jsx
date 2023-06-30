@@ -1,6 +1,4 @@
 import axios from "axios";
-import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_TO_CART = "REMOVE_TO_CART"
 export const CLEAR_CART = "CLEAR_CART"
@@ -436,7 +434,6 @@ export const postCreateUser = (props) => {
 }
 
 //? Accion de Loguear Usuario
-
 export const postLogin = (datos) =>{
     return async function (dispatch) {
         try {
@@ -457,7 +454,6 @@ export const postLogin = (datos) =>{
 }
 
 //? Action de Logout Usuario
-
 export const logoutUser = () => {
     return async function (dispatch) {
         try {
@@ -474,7 +470,6 @@ export const logoutUser = () => {
 }
 
 //Action de login with Google
-
 export const loginGoogle = () => {
     return function (dispatch) {
         try {
