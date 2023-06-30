@@ -7,68 +7,31 @@ import { postCreateUser, postLogin, loginGoogle } from "../../redux/actions";
 import countries from "./countries";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-//import NavBar from '../../components/NavBar/NavBar'
+
 
 
 const Form = () => {
 
   const history = useHistory()
   const dispatch = useDispatch()
-
-  //const usuario = useSelector((state) => state.user)
-  //const usuarioTwo = useSelector((state) => state.userGoogle )
-
-  //const verificacion = async () => {
-  //  if (usuario === null) {
-  //    return console.log(true)
-  //  }else{
-  //    await localStorage.setItem("user", JSON.stringify(usuario));
-  //  }
-  //}
-
-  //const verificacionTwo = async () => {
-  //  if (usuarioTwo === null) {
-  //    return console.log(true)
-  //  }else{
-  //    await localStorage.setItem("userTwo", JSON.stringify(usuarioTwo));
-  //  }
-  //}
-
-  //useEffect(() => {
-  //  verificacion()
-  //}, [usuario])
-
-  //useEffect(() => {
-  //  verificacionTwo()
-  //}, [usuarioTwo])
-
   const [ name, setName ] = useState("")
   const [ user_name, setUser_name ] = useState("")
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
   const [ confirmPassword, setConfirmPassword ] = useState("")
   const [ country, setCountry ] = useState(null)
-
-  //const [selectedCountry, setSelectedCountry] = React.useState(null);
-  //const [password, setPassword] = React.useState("");
-  //const [confirmPassword, setConfirmPassword] = React.useState("");
-  //const [passwordError, setPasswordError] = React.useState("");
-
   const [ errorName, setErrorName ] = useState("")
   const [ errorUser_name, setErrorUser_name ] = useState("")
   const [ errorEmail, setErrorEmail ] = useState("")
   const [ errorPassword, setErrorPassword ] = useState("")
   const [ errorConfirmPassword, setErrorConfirmPassword ] = useState("")
   const [ errorCountry, setErrorCountry ] = useState("")
-
   // Captura de datos login
   const [ emailLogin, setEmailLogin ] = useState("")
   const [ passwordLogin, setPasswordLogin ] = useState("")
   const [ errorEmailLogin, setErrorEmailLogin ] = useState("")
   const [ errorPasswordLogin, setErrorPasswordLogin ] = useState("")
-
   const namePattern = RegExp(/^[A-Za-z\s]+$/)//--
-  //const lastPattern = RegExp(/^[A-Za-z\s]+$/)
   const userNamePattern = RegExp(/^[a-zA-Z0-9_]{3,16}$/)
   const emailPattern = RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
   const passwordPattern = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)//--
@@ -196,7 +159,7 @@ const Form = () => {
         toast: true,
         position: 'top-start',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 1500,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -316,7 +279,7 @@ const Form = () => {
       toast: true,
       position: 'top-start',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
