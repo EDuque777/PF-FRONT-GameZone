@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
@@ -21,6 +21,21 @@ const Detail = (props) => {
   
   const datosUser = JSON.parse(localStorage.getItem("user"));
   console.log("asdfghjhgfds",datosUser?.name)
+
+  // const leftRef = useRef(null);
+  // const rightRef = useRef(null);
+
+  // useEffect(() => {
+  //   const leftHeight = leftRef.current;
+  //   const rightHeight = rightRef.current;
+  //   const minHeight = Math.max(leftHeight, rightHeight);
+
+  //   leftRef.current.style.height = `${minHeight}px`;
+  //   rightRef.current.style.height = `${minHeight}px`;
+    
+  // }, []);
+
+
   
   useEffect(() => {
     if (id) {
@@ -79,6 +94,7 @@ const Detail = (props) => {
       }
       return stars;
     };
+  
     return <div style={{ display: "flex" }}>{renderStars()}</div>;
   };
 
@@ -90,6 +106,7 @@ const Detail = (props) => {
     
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = totalRating / reviews.length;
+    
     return averageRating;
   };
 
@@ -105,6 +122,7 @@ const Detail = (props) => {
     if (!reviews || reviews.length === 0) {
       return ratingCounts;
     }
+
     reviews.forEach((review) => {
       ratingCounts[review.rating]++;
     });
@@ -126,14 +144,18 @@ const Detail = (props) => {
   
     return ratingPercentages;
   };
+
   // const handleEditReview = () => {
   //   dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
   // };
 
   // const handleDeleteReview = () => {
   //   dispatch(act.getDeleteReview(idReview))
+  //   window.location.reload()
   //   // console.log("IIIIDDDD HANDLER",idReview);
   // };
+  
+  
   const reviews = game?.Reviews || [];
   const averageRating = calculateAverageRating(game?.Reviews);
   const ratingCounts = calculateRatingCounts(game?.Reviews);
@@ -149,10 +171,14 @@ const Detail = (props) => {
     history.push("/home");
   };
 
+
+
   console.log("GAMEEEEEEEEEEEEEEE",game);
   // console.log(game && game.Reviews);
   // console.log("REVIEEEEEEEEEEEEW", game?.Reviews[0].id);
   // console.log(game?.Reviews[0].Users[0].profileImage);
+
+
 
   return (
     
@@ -165,6 +191,7 @@ const Detail = (props) => {
         <div className={style.container}>
           <div className={style.container_juego}>
             <div className={style.container_texto}>
+          <button className={style.backButton} onClick={() => handleBack()}>BACK</button>
               <div className={style.name_margen}>
                 <h1 className={style.name} translate="no">
                   {sanitizeText(game.name)}
@@ -238,13 +265,18 @@ const Detail = (props) => {
 
           </div>
           </div>
-          <div className={style.detail_container}>       
-            <div className={style.detail_left}>
+
+
+
+          <div className={style.detail_container}>
+
+            
+            <div className={style.detail_left } >
               <h2>
                 <strong>Requirements </strong>
               </h2>
               <p>{sanitizeText(game?.pc_requirements.minimum)}</p>
-              <p>{sanitizeText(game.pc_requirements.recommended)}</p>
+              <p>{sanitizeText(game?.pc_requirements.recommended)}</p>
               <h2>
                 <strong>Languages </strong>
               </h2>
@@ -259,7 +291,11 @@ const Detail = (props) => {
               </h2>
               <p>{sanitizeText(game?.Developers.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
             </div>
-            <div className={style.detail_rigth}>
+
+
+
+
+            <div className={style.detail_rigth } >
               <h2>
                 <strong>Categories</strong>
               </h2>
@@ -278,16 +314,23 @@ const Detail = (props) => {
                 <strong>ID :</strong>
               </h2>
               <p>{game?.id}</p>
-            </div>   
             </div>
-            <div className={style.reviews_container}>    
-            <div className={style.promedio}> 
+              
+            </div>
+
+
+            <div className={style.reviews_container}>
+                
+            <div className={style.promedio}>
+              
               <div className={style.promedioInfo}>
               <h1 className={style.promedioNumber2}>{averageRating.toFixed(1)}</h1>
+             
               <div className={style.cantidadReviews}>
               <h7 className={style.numeroReviews}>{reviews.length}</h7>
               <h7> total reviews</h7>
               </div>
+    
                 <div className={style.ratingCounts}>
                    {[5, 4, 3, 2, 1].map((rating) => (
                 <div key={rating} className={style.ratingCount}>
@@ -309,7 +352,10 @@ const Detail = (props) => {
   </div>
 </div>
 </div>
+
+
                 <div className={style.opiniones}>
+
                 {game?.Reviews &&
                 game?.Reviews.map((review, index) => (
                   <div className={style.opinion} key={index}>
@@ -326,19 +372,19 @@ const Detail = (props) => {
                       </div>
                     <div className={style.opinionback} >
                       <p>{review?.reviews}</p>
-                      {/* <p hidden>{idReview = review?.id}</p> */}
-                      {review?.Users[0].name  === datosUser.name &&
+                      <p hidden>{idReview = review?.id}</p>
+                      {/* {review?.Users[0].name  === datosUser.name &&
                       <div className={style.opinionbuton} >
-                      {/* <Link to={`reviews/${review?.id}` }>
+                      <Link to={`reviews/${review?.id}` }>
                       <button onClick={() => handleEditReview(review?.id)}>Edit Review</button>
                       </Link>
-                      <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button> */}
+                      <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button>
                       </div>
-                      }
-                    </div>              
+                      } */}
+                    </div>
                   </div>
                 ))}
-                </div>
+                </div>    
             </div>
           </div>
       )}

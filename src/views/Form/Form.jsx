@@ -15,16 +15,16 @@ const Form = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const usuario = useSelector((state) => state.user)
-  const usuarioTwo = useSelector((state) => state.userGoogle )
+  // const usuario = useSelector((state) => state.user)
+  // const usuarioTwo = useSelector((state) => state.userGoogle )
 
-  const verificacion = async () => {
-    if (usuario === null) {
-      return console.log(true)
-    }else{
-      await localStorage.setItem("user", JSON.stringify(usuario));
-    }
-  }
+  // const verificacion = async () => {
+  //   if (usuario === null) {
+  //     return console.log(true)
+  //   }else{
+  //     await localStorage.setItem("user", JSON.stringify(usuario));
+  //   }
+  // }
 
   //const verificacionTwo = async () => {
   //  if (usuarioTwo === null) {
@@ -34,9 +34,9 @@ const Form = () => {
   //  }
   //}
 
-  useEffect(() => {
-    verificacion()
-  }, [usuario])
+  // useEffect(() => {
+  //   verificacion()
+  // }, [usuario])
 
   //useEffect(() => {
   //  verificacionTwo()

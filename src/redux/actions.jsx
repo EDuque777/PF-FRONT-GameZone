@@ -181,6 +181,7 @@ export const gameDetail = (id) => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`search/${id}`)
+            console.log(response);
             dispatch({
                 type: GET_DETAIL,
                 payload: response.data
@@ -191,17 +192,6 @@ export const gameDetail = (id) => {
         
     }
 }
-
-// export const preload = () => {
-//     return async (dispatch) => {
-//         try {
-//             await axios.get('http://localhost:3001/preload');
-//             console.log("base de datos cargada")
-//         } catch (error) {
-//         dispatch(console.log(error));
-//         }
-//     };
-// };
 
 export const getByName = (name) => {
     return async function(dispatch) {
@@ -639,29 +629,6 @@ export const editName = (id, newName) => {
     };
   };
 
-//   export const editProfileImage = () => {
-//     return async function () {
-//         try {
-//             const formData = new FormData();
-//             formData.append('file', selectedImage);
-//             const response = await axios.post('http://localhost:3001/upload', formData, {
-//               headers: {
-//                 'Content-Type': 'multipart/form-data',
-//                 datosUser: JSON.stringify(datosUser.id),
-//               },
-//             });
-      
-//             if (response.status === 200) {
-//               console.log(response.data); // URL de la imagen en Cloudinary
-//             } else {
-//               console.log(response.data); // Mensaje de error
-//             }
-//           } catch (error) {
-//             console.log(error.message);
-//           }
-//     }
-// };
-
 export const getUserStorage = (id) => {
     const endpoint = `/profile/${id}`;
     return async (dispatch) => {
@@ -690,4 +657,5 @@ export const getMyGames = (id) => {
             console.error(error.message);    
         }
     }
+
 }

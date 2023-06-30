@@ -26,15 +26,15 @@ const initialState = {
     developersGames: [],
     genresGames: [],
     userStorage: null,
-    review: [],
+    gameReview: [],
     library: [],
-    deleteReview: null
+    review: [],
+    deleteReview: null,
 };
 
 const rootReducer=(state = initialState, action) => {
     switch(action.type) {
-        //filtros combinadosconst combtype = "COMBTYPE"
-        
+        //?filtros combinadosconst combtype = "COMBTYPE"
         case act.MANDARREVIEW:
             const game = action.payload
             //console.log(game);
@@ -63,8 +63,7 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 review: action.payload
             } 
-        //filtros de busqueda
-
+        //?filtros de busqueda
         case act.FILTER_LANGUAGES:
             const language = action.payload.toLowerCase();
             const filteredSearchsssssssss = state.search.filter(game =>
@@ -486,14 +485,6 @@ const rootReducer=(state = initialState, action) => {
                     country: action.payload.country,
                         },
                     };
-            //  case act.EDITPROFILEIMAGE:
-            //     return {
-            //         ...state,
-            //         user: {
-            //         ...state.user,
-            //         profileImage: action.payload.profileImage,
-            //           },
-            //         };
 
             case act.GETUSERSTORAGE:
                 return {
@@ -507,8 +498,7 @@ const rootReducer=(state = initialState, action) => {
                 return {
                     ...state,
                     library: action.payload
-                }
-
+                }  
             
         default:
             return {...state};

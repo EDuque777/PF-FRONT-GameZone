@@ -49,7 +49,7 @@ const Home = () => {
   };
 
   // Verificar si el array de juegos tiene al menos 14 elementos
-  const selectedGames = games.length >= 15 ? games.slice(0, 15) : games;
+  const selectedGames = games.length >= 12 ? games.slice(0, 12) : games;
 
   //console.log(search)
   return (
@@ -76,11 +76,11 @@ const Home = () => {
         <h3 className={style.title}>All Games</h3>
         <CardsContainer gameComingSoon={selectedGames} />
       </div>
-      <h3 className={style.title}>Top sells</h3>
+      <h3 className={style.title}>Top Sells</h3>
       <CardsContainer gameComingSoon={gamesTopSellers} />
-      <h3 className={style.title}>Game offers</h3>
+      <h3 className={style.title}>Game Offers</h3>
       <CardsContainer gameComingSoon={gameOffer} />
-      <h3 className={style.title}>New releases</h3>
+      <h3 className={style.title}>New Releases</h3>
       <CardsContainer gameComingSoon={gamesNewReleases} />
     </div>
   );

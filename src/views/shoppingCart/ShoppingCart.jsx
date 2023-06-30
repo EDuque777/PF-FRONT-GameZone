@@ -6,6 +6,7 @@ import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
 import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
 
+
 //* las cards que vengan del home...
 //! revisar la convergencia
 const ShoppingCart = () => {

@@ -77,7 +77,6 @@ const ReviewsModif = () => {
           onChange={(event) => setForm({ ...form, review: event.target.value })}
           className={style.texto_review}
         />
-      
       <div>
         <label className={style.rating}>Rating:</label>
         <div className={style.starContainer}>
@@ -88,7 +87,6 @@ const ReviewsModif = () => {
       </div>
     </form>
     </div>
-
   );
 };
 
