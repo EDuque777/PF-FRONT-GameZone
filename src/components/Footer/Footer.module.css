@@ -59,6 +59,7 @@
   }
   
   .socialMediaIcons {
+    /* outline: red solid 3px; */
     display: flex;
     align-items: center;
     gap: 20px;

@@ -28,7 +28,9 @@ const Footer = () => {
                     <div className={style.socialMediaIcons}>
                         <p>Follow us</p>
                         <FontAwesomeIcon icon={faTwitter} size="xl" />
-                        <FontAwesomeIcon icon={faFacebook} size="xl"/>
+                        <a href="https://www.facebook.com/profile.php?id=100094378233290" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faFacebook} size="xl" />
+                        </a>
                         <FontAwesomeIcon icon={faInstagram} size="xl"/>
 
                     </div>
