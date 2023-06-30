@@ -6,7 +6,7 @@ const Terms = () => {
         
         <div className={style.container}>
             <div className={style.title}>
-            <p>Terms and Conditions</p>
+            <p>TERMS AND CONDITIONS</p>
             </div>
             
             <div className={style.containerText}>
