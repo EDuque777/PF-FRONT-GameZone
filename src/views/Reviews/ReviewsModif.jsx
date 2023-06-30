@@ -15,7 +15,7 @@ const ReviewsModif = ({ match }) => {
   console.log("IIIIIIIIIIIDDDDDDDDDDD",id);
   console.log("REEEEEEEEE",gameRe);
 
-  const IDUser = JSON.parse(localStorage.getItem("user"));
+  // const IDUser = JSON.parse(localStorage.getItem("user"));
 
   const [form, setForm] = useState({
     review: "",

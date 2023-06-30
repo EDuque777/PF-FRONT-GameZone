@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./WhishList.module.css"
-import NavBar from '../../components/NavBar/NavBar'
+// import NavBar from '../../components/NavBar/NavBar'
 import { useSelector } from 'react-redux'
 import Card from '../../components/Card/Card'
 

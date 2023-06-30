@@ -65,7 +65,7 @@ const MyGames = () => {
     useEffect(() => {
         dispatch(act.getGames())
         dispatch(act.getMyGames(ids))
-    }, [ids])
+    }, [dispatch, ids])
 
     const handleSend = (game) => {
         dispatch(act.mandarAReview(game))

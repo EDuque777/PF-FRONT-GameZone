@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 
-import {faLinkedin,faGithub,faTwitter,faInstagram,faFacebook, faSearchengin } from "@fortawesome/free-brands-svg-icons";
+import {faLinkedin,faGithub,faTwitter,faInstagram,faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 

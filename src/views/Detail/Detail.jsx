@@ -394,7 +394,7 @@
 
 
 import { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearDetail, gameDetail } from "../../redux/actions";
 import style from "./Detail.module.css";
@@ -404,15 +404,17 @@ import { FaStar } from "react-icons/fa";
 
 
 const Detail = (props) => {
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
   const isLoading = game === undefined || game === null;
-  const genres = game && game?.genres;
+  // const genres = game && game?.genres;
   const [videoUrl, setVideoUrl] = useState("");
+  console.log(videoUrl)
   // const categoriesLimited = game && game?.categories?.slice(0, 3);
   const id = props.match.params.id
   let idReview
+  console.log(idReview)
   
   const datosUser = JSON.parse(localStorage.getItem("user"));
   console.log("asdfghjhgfds",datosUser?.name)
@@ -540,18 +542,18 @@ const Detail = (props) => {
   
   const reviews = game?.Reviews || [];
   const averageRating = calculateAverageRating(game?.Reviews);
-  const ratingCounts = calculateRatingCounts(game?.Reviews);
+  // const ratingCounts = calculateRatingCounts(game?.Reviews);
   const ratingPercentages = calculateRatingPercentages(reviews);
 
   const price = game && (game?.price_overview)
-  const gamePrice = game && (game?.price_overview);
+  // const gamePrice = game && (game?.price_overview);
   const img = game && game?.header_image;
   const bkId = game && game?.id;
   const name = game && game?.name
 
-  const handleBack = () => {
-    history.push("/home");
-  };
+  // const handleBack = () => {
+  //   history.push("/home");
+  // };
 
 
 

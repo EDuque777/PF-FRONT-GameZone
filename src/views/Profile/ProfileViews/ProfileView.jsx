@@ -322,7 +322,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import style from "./ProfileView.module.css";
 import * as act from "../../../redux/actions";
 import countries from "./countries";

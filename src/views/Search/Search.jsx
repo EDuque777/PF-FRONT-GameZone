@@ -17,6 +17,7 @@ const Search = () => {
   const [name, setName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage, setResultsPerPage] = useState(8);
+  console.log(setResultsPerPage)
   const search = useSelector((state) => state.search);
   const gamesFilterLanguages = useSelector(state => state.languagesGames);
 

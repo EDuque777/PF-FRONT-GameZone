@@ -255,9 +255,9 @@ import style from "./NavBar.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logoImage from "../../assets/LOGOGAMEZONE2.png";
-import usuario from "../../assets/usuario.png";
+// import usuario from "../../assets/usuario.png";
 import { logoutUser, getDataGoogle, logoutGoogle } from "../../redux/actions";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 
 const NavBar = () => {
@@ -291,7 +291,7 @@ const NavBar = () => {
 
     const [ conteo, setConteo ] = useState(0)
     const [ conteoTwo, setConteoTwo ] = useState(0)
-
+console.log(setConteoTwo)
 
     console.log(conteoTwo, "esto es de google")
 
@@ -364,7 +364,7 @@ const NavBar = () => {
             peticionData()
         }
 
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         setCarItem(cart.length);

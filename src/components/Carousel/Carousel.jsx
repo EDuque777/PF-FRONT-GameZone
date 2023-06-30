@@ -16,6 +16,7 @@ useEffect(() => {
 
 const [currentCard, setCurrentCard] = useState(1);
 const [charactersPerPage, setCharacterPerPage] = useState(1);
+console.log(setCharacterPerPage)
 
 const totalCards = gameComingSoon && Math.ceil(gameComingSoon.length / charactersPerPage);
 

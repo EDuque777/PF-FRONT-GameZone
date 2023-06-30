@@ -1,8 +1,8 @@
 import React from "react";
 //import Select from "react-select";
 import styles from "./Form.module.css";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { postCreateUser, postLogin, loginGoogle } from "../../redux/actions";
 import countries from "./countries";
 import { useHistory } from "react-router-dom";

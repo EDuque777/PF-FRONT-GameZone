@@ -4,7 +4,7 @@ import styles from "./Profile.module.css";
 import ProfileView from "./ProfileViews/ProfileView";
 import ShoppingView from "./ProfileViews/ShoppingView";
 import ReviewsView from "./ProfileViews/ReviewsView";
-import * as act from "../../redux/actions";
+// import * as act from "../../redux/actions";
 
 const Profile = (props) => { // Agrega props como parámetro
   const [activeOption, setActiveOption] = useState("profile");

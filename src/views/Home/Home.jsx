@@ -12,7 +12,7 @@ const Home = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const gameOffer = useSelector(state => state.gameOffer);
-  const search = useSelector(state => state.search);
+  // const search = useSelector(state => state.search);
   const gamesNewReleases = useSelector(state => state.gamesNewReleases);
   const gamesTopSellers = useSelector(state => state.gamesTopSellers);
   const games = useSelector(state => state.games);
