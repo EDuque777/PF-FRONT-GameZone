@@ -11,9 +11,9 @@ import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
 import ReviewsModif from './views/Reviews/ReviewsModif';
 import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
-import Terms from './views/Footer/Terms and conditions/Terms';
-import AboutUs from './views/Footer/About us/AboutUs';
-import Contact from './views/Footer/Contact/Contact';
+import Terms from './views/FooterViews/Terms and conditions/Terms';
+import AboutUs from './views/FooterViews/About us/AboutUs';
+import Contact from './views/FooterViews/Contact/Contact';
 
 function App() {
 
