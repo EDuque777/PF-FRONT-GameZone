@@ -8,7 +8,6 @@ import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { faSearchengin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Pagination from "../../components/Pagination/Pagination";
-import Filters from "../../components/Filters/Filters";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -19,17 +18,12 @@ const Search = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage, setResultsPerPage] = useState(8);
   const search = useSelector((state) => state.search);
-  const searchcopy = useSelector((state) => state.searchcopy);
   const gamesFilterLanguages = useSelector(state => state.languagesGames);
 
 
 
   const types =  search 
   ? [...new Set(search.map((game) => game.type))]
-  : [];
-
-  const age = search
-  ? [...new Set(search.map((game) => game.required_age))]
   : [];
 
   const categories = search
