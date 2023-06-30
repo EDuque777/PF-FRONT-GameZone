@@ -7,7 +7,7 @@ import NavBar from './components/NavBar/NavBar';
 import Dashboard from './views/Adm/adm';
 import Search from "./views/Search/Search"
 import Review from './views/Reviews/Reviews';
-
+import UserList from './views/Adm/FormAdmin/userList';
 import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
 
@@ -31,11 +31,11 @@ return (
       <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
       <Route path="/whishlist" render={() => <Whishlist />} />
       <Route path="/dashboard" render={() => <Dashboard />} />
-      <Route path="/userlist" render={() => <userList />} />
       <Route path="/search" render={() => <Search />} />
       <Route path="/review" render={() => <Review />} />
       <Route path="/library" render={() => <MyGames />}/>
       <Route path="/pruebas" render={() => <ShoppingView />}/>
+      <Route path="/allusers" render={() => <UserList />}/>
       <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>

@@ -190,6 +190,7 @@ console.log("UUUUUUUUUUUUU", developers);
   
     if (!emailRegex.test(email)) {
       Swal.fire('Error', 'Por favor, ingresa un correo electrónico válido', 'error');
+      console.log("YYYYYYYY", email);
       return false;
     }
   
@@ -247,6 +248,7 @@ console.log("UUUUUUUUUUUUU", developers);
   
 
   const createUser = async () => {
+    validateEmail();
       try {
         
       const response = await fetch('http://localhost:3001/users', {

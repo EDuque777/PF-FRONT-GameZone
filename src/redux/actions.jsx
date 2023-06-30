@@ -46,9 +46,10 @@ export const EDITCOUNTRY = "EDITCOUNTRY";
 export const EDIT_PROFILE_IMAGE = "EDIT_PROFILE_IMAGE";
 export const GETUSERSTORAGE = "GETUSERSTORAGE";
 export const GET_MYGAMES = "GET_MYGAMES";
-
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
+export const GETALLUSERS = "GETALLUSERS";
+
 
 export const mandarAReview = (game) => {
     console.log(game);
@@ -655,5 +656,16 @@ export const getMyGames = (id) => {
         } catch (error) {
             console.error(error.message);    
         }
+    }
+}
+
+export const getUsers = () => {
+    const endpoint = `http://localhost:3001/users`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: GETALLUSERS,
+            payload: data
+        })
     }
 }

@@ -29,6 +29,7 @@ const initialState = {
     review: [],
     gamesReviews: [],
     library: [],
+    allusers: [],
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -481,7 +482,12 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     library: action.payload
                 }
-
+// ADMIN
+case act.GETALLUSERS:
+                return {
+                    ...state,
+                    allusers: action.payload
+                }
             
         default:
             return {...state};
