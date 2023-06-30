@@ -288,9 +288,9 @@ const NavBar = () => {
     const [ conteoTwo, setConteoTwo ] = useState(0)
 
 
-    console.log(conteoTwo, "esto es de google")
+    //console.log(conteoTwo, "esto es de google")
 
-    console.log(conteo)
+    //console.log(conteo)
 
     useEffect(() => {
         //validateData()
@@ -306,7 +306,7 @@ const NavBar = () => {
 
     const datosUser = JSON.parse(localStorage.getItem("user"));
 
-    console.log(datosUser, "datos del local")
+    //console.log(datosUser, "datos del local")
 
     useEffect(() => {
 

@@ -1,4 +1,6 @@
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_TO_CART = "REMOVE_TO_CART"
 export const CLEAR_CART = "CLEAR_CART"
@@ -19,7 +21,6 @@ export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const DATA_GOOGLE = "DATA_GOOGLE"
 export const LOGOUT_USERGOOGLE = "LOGOUT_USERGOOGLE"
-
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
@@ -27,7 +28,6 @@ export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
-
 export const ORDER_BY = "ORDER_BY"
 export const FILTER_TYPE = "FILTER_TYPE"
 export const FILTER_AGE = "FILTER_AGE"
@@ -49,6 +49,7 @@ export const GET_MYGAMES = "GET_MYGAMES";
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 export const DELETEREVIEW = "DELETEREVIEW";
+export const FREE_ORDER = "FREE_ORDER";
 
 export const mandarAReview = (game) => {
     //console.log(game);
@@ -346,6 +347,7 @@ export const clearCart = ()  => {
 }
 
 export const createOrder = (totalPrice, cartGames, dataUser) => {
+    console.log(totalPrice, cartGames, dataUser);
     return async function (dispatch) {
         try {
             const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
@@ -374,6 +376,26 @@ export const createOrderFailure = (errorMessage) => {
     }
 }
 
+export const freeOrder = (totalPrice, cartGames, dataUser) => {
+    console.log(totalPrice, cartGames, dataUser);
+    return async function (dispatch) {
+      try {
+        const response = await axios.post('/freeOrder', {totalPrice, cartGames, dataUser});
+        
+        if (response.status === 200) {
+          dispatch({
+            type: FREE_ORDER,
+            payload: response.data
+          });
+        } else {
+          dispatch(createOrderFailure('Error creating order'));
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+  };
+  
 
 //? FUNCIONES DE LA LISTA DE DESEADOS
 

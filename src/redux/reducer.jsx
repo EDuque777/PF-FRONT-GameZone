@@ -336,6 +336,21 @@ const rootReducer=(state = initialState, action) => {
                 orderCreated: false,
                 error: action.payload
             }
+
+        case act.FREE_ORDER:
+            console.log(action.payload);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Thanks for your purchase",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            return {
+                ...state,
+                orderCreated: true,
+                error: null
+            }
         
 //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:

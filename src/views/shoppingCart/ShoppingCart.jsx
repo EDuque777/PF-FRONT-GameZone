@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 //* las cards que vengan del home...
 //! revisar la convergencia
@@ -13,11 +14,12 @@ const ShoppingCart = () => {
     const cart = useSelector(state => state.cart)
     const totalPrice = useSelector(state => state.total)
     const totalPrices = totalPrice.toFixed(2) 
+    const history = useHistory()
     // const wholePart = Math.floor(totalPrice / 100);
     // const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
     // const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
     const dataUser = JSON.parse(localStorage.getItem("user"));
-    console.log(dataUser);
+    //console.log(dataUser);
 
     const handleRemove = () => {
         Swal.fire({
@@ -42,12 +44,29 @@ const ShoppingCart = () => {
 
     const handleBuy = async () => {
         try {
-            //! mandar tanto juegos como el precio total
+          if (cart.length === 0) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: 'The cart is empty',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            console.log(totalPrices == 0.00);
+          } else if (totalPrices == 0.00) {
+            console.log("SIRVIOOO AAAAAA", totalPrices, cart, dataUser);
+            dispatch(act.freeOrder(totalPrices, cart, dataUser));
+            dispatch(act.clearCart())
+            history.push("/library")
+            //console.log("Free order dispatched");
+          } else if (totalPrice > 0.00) {
+            //console.log("NOOOOOOOOOO AAAAAAAA");
             dispatch(act.createOrder(totalPrices, cart, dataUser))
+          }
         } catch (error) {
-            console.error(error.message);
+          console.error(error.message);
         }
-    }
+      };
 
     return (
         <div >

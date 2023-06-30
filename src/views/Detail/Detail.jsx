@@ -17,12 +17,10 @@ const Detail = (props) => {
   const [videoUrl, setVideoUrl] = useState("");
   // const categoriesLimited = game && game?.categories?.slice(0, 3);
   const id = props.match.params.id
-  //let idReview
+  let idReview
   
   const datosUser = JSON.parse(localStorage.getItem("user"));
   console.log("asdfghjhgfds",datosUser?.name)
-
-
   
   useEffect(() => {
     if (id) {
@@ -81,7 +79,6 @@ const Detail = (props) => {
       }
       return stars;
     };
-  
     return <div style={{ display: "flex" }}>{renderStars()}</div>;
   };
 
@@ -93,7 +90,6 @@ const Detail = (props) => {
     
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = totalRating / reviews.length;
-    
     return averageRating;
   };
 
@@ -109,7 +105,6 @@ const Detail = (props) => {
     if (!reviews || reviews.length === 0) {
       return ratingCounts;
     }
-
     reviews.forEach((review) => {
       ratingCounts[review.rating]++;
     });
@@ -131,7 +126,6 @@ const Detail = (props) => {
   
     return ratingPercentages;
   };
-
   // const handleEditReview = () => {
   //   dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
   // };
@@ -140,8 +134,6 @@ const Detail = (props) => {
   //   dispatch(act.getDeleteReview(idReview))
   //   // console.log("IIIIDDDD HANDLER",idReview);
   // };
-  
-  
   const reviews = game?.Reviews || [];
   const averageRating = calculateAverageRating(game?.Reviews);
   const ratingCounts = calculateRatingCounts(game?.Reviews);
@@ -157,14 +149,10 @@ const Detail = (props) => {
     history.push("/home");
   };
 
-
-
   console.log("GAMEEEEEEEEEEEEEEE",game);
   // console.log(game && game.Reviews);
   // console.log("REVIEEEEEEEEEEEEW", game?.Reviews[0].id);
   // console.log(game?.Reviews[0].Users[0].profileImage);
-
-
 
   return (
     
@@ -250,12 +238,7 @@ const Detail = (props) => {
 
           </div>
           </div>
-
-
-
-          <div className={style.detail_container}>
-
-            
+          <div className={style.detail_container}>       
             <div className={style.detail_left}>
               <h2>
                 <strong>Requirements </strong>
@@ -276,10 +259,6 @@ const Detail = (props) => {
               </h2>
               <p>{sanitizeText(game?.Developers.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
             </div>
-
-
-
-
             <div className={style.detail_rigth}>
               <h2>
                 <strong>Categories</strong>
@@ -299,23 +278,16 @@ const Detail = (props) => {
                 <strong>ID :</strong>
               </h2>
               <p>{game?.id}</p>
+            </div>   
             </div>
-              
-            </div>
-
-
-            <div className={style.reviews_container}>
-                
-            <div className={style.promedio}>
-              
+            <div className={style.reviews_container}>    
+            <div className={style.promedio}> 
               <div className={style.promedioInfo}>
               <h1 className={style.promedioNumber2}>{averageRating.toFixed(1)}</h1>
-             
               <div className={style.cantidadReviews}>
               <h7 className={style.numeroReviews}>{reviews.length}</h7>
               <h7> total reviews</h7>
               </div>
-    
                 <div className={style.ratingCounts}>
                    {[5, 4, 3, 2, 1].map((rating) => (
                 <div key={rating} className={style.ratingCount}>
@@ -354,7 +326,7 @@ const Detail = (props) => {
                       </div>
                     <div className={style.opinionback} >
                       <p>{review?.reviews}</p>
-                      <p hidden>{idReview = review?.id}</p>
+                      {/* <p hidden>{idReview = review?.id}</p> */}
                       {review?.Users[0].name  === datosUser.name &&
                       <div className={style.opinionbuton} >
                       {/* <Link to={`reviews/${review?.id}` }>

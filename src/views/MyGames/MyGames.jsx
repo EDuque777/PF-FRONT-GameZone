@@ -10,7 +10,7 @@ const MyGames = () => {
     const games = useSelector(state => state.library);
     const allGames = useSelector(state => state.games);
     //console.log(allGames);
-    console.log(games);
+    //console.log(games);
     const dataUser = JSON.parse(localStorage.getItem("user"));
     const ids = dataUser.id;
 
