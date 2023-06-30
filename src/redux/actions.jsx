@@ -48,6 +48,7 @@ export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 export const DELETEREVIEW = "DELETEREVIEW";
 export const FREE_ORDER = "FREE_ORDER";
+export const ALLGAMESADMIN = "ALLGAMESADMIN";
 
 export const mandarAReview = (game) => {
     //console.log(game);
@@ -658,4 +659,15 @@ export const getMyGames = (id) => {
         }
     }
 
+}
+
+export const allGamesAdmin = () => {
+    const endpoint = allGamesAdmin;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: ALLGAMESADMIN,
+            payload: data
+        })
+    }
 }

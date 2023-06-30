@@ -261,10 +261,6 @@ const Detail = (props) => {
     </div>
   ))
 )}
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c28683f7b1d4697023fd65d85ec0aae54a11eed
         </div>
 
           </div>

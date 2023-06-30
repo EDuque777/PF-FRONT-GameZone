@@ -14,6 +14,7 @@ import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
 import Terms from './views/FooterViews/Terms and conditions/Terms';
 import AboutUs from './views/FooterViews/About us/AboutUs';
 import Contact from './views/FooterViews/Contact/Contact';
+import {TableDb} from './views/Adm/Tablas/TableGames';
 
 function App() {
 
@@ -25,7 +26,7 @@ return (
       <script src="https://kit.fontawesome.com/5c35a66fab.js" crossorigin="anonymous"></script>
     </head>
     <>
-      {location.pathname !== "/" && location.pathname !== "/dashboard" && <NavBar/>}
+    {location.pathname !== "/" && location.pathname !== "/dashboard" && location.pathname !== "/TABLA" && <NavBar />}
       <Route exact path="/" render={() => <Landing/>} />
       <Route path="/home" render={() => <Home/>}/>
       <Route path="/cart" render={() => <ShoppingCart/>} /> 
@@ -42,6 +43,8 @@ return (
       <Route path="/terms" render={() => <Terms />} />
       <Route path="/aboutus" render={() => <AboutUs />} />
       <Route path="/contact" render={() => <Contact />} />
+      <Route path="/TABLA" render={() => <TableDb />}/>
+
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>

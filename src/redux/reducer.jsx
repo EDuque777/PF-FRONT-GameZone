@@ -30,6 +30,7 @@ const initialState = {
     library: [],
     review: [],
     deleteReview: null,
+    gamesAdmin: [],
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -499,6 +500,12 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     library: action.payload
                 }  
+
+                case act.ALLGAMESADMIN:
+                    return {
+                        ...state,
+                        gamesAdmin: action.payload
+                    }
             
         default:
             return {...state};
