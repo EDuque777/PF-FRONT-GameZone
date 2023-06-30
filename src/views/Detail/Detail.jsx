@@ -234,33 +234,34 @@ const Detail = (props) => {
             </div>
             
             <div className={style.container_screenshots}>
-  {game?.Videos && (
-    <video className={style.video} controls>
-      <source src={game?.Videos[0]?.video}  />
-    </video>
-  )}
-  
-  {!game?.Videos &&
-  
-    game?.Images.slice(0, 4).map((image, index) => (
-      <div key={index} className={style[`container_screenshots${index + 1}`]}>
-        <img
-          className={style.img}
-          src={image.image}
-          alt={`Screenshot ${index + 1}`}
-        />
-      </div>
-    ))}
-          {game?.Videos &&
-            game?.Images.slice(0, 3).map((image, index) => (
-              <div key={index} className={style[`container_screenshots${index + 1}`]}>
-                <img
-                  className={style.img}
-                  src={image.image}
-                  alt={`Screenshot ${index + 1}`}
-                />
-              </div>
-            ))}
+            {game?.Videos && game?.Videos.length > 0 ? (
+  <video className={style.video} controls>
+    <source src={game.Videos[0].video} />
+  </video>
+) : (
+  game.Images.slice(0, 4).map((image, index) => (
+    <div key={index} className={style[`container_screenshots${index + 1}`]}>
+      <img
+        className={style.img}
+        src={image.image}
+        alt={`Screenshot ${index + 1}`}
+      />
+    </div>
+  ))
+)}
+
+{game?.Videos && game?.Videos.length > 0 && (
+  game.Images.slice(0, 3).map((image, index) => (
+    <div key={index} className={style[`container_screenshots${index + 1}`]}>
+      <img
+        className={style.img}
+        src={image.image}
+        alt={`Screenshot ${index + 1}`}
+      />
+    </div>
+  ))
+)}
+
         </div>
 
           </div>

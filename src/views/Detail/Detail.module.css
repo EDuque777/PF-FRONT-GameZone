@@ -55,7 +55,7 @@
 
 
 .container_texto{
-  /* outline: yellow solid 3px; */
+  outline: yellow solid 3px;
   display: flex;
   width: 48%;
   height: 500px;
@@ -106,7 +106,7 @@
 }
 
 .descripcion{
-  /* outline: green solid 3px; */
+  outline: green solid 3px;
   display: flex;
   height: 400px;
   width: 100%;
