@@ -19,7 +19,6 @@ export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const DATA_GOOGLE = "DATA_GOOGLE"
 export const LOGOUT_USERGOOGLE = "LOGOUT_USERGOOGLE"
-
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
@@ -27,7 +26,6 @@ export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
-
 export const ORDER_BY = "ORDER_BY"
 export const FILTER_TYPE = "FILTER_TYPE"
 export const FILTER_AGE = "FILTER_AGE"
@@ -331,7 +329,7 @@ export const clearCart = ()  => {
 export const createOrder = (totalPrice, cartGames, dataUser) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
+            const response = await axios.post("createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,
@@ -439,7 +437,7 @@ export const logoutUser = () => {
 export const loginGoogle = () => {
     return function (dispatch) {
         try {
-            const login = window.open("http://localhost:3001/auth/google", "_self")
+            const login = window.open("auth/google", "_self")
             console.log(login)
         } catch (error) {
             console.log(error)
@@ -450,7 +448,7 @@ export const loginGoogle = () => {
 export const getDataGoogle = () => {
     return async (dispatch) => {
         try {
-            const dataGoogle = await axios.get("/auth/user", {
+            const dataGoogle = await axios.get("auth/user", {
                 withCredentials : true,
                 headers : {
                     Accept: "application/json",
@@ -477,7 +475,7 @@ export const getDataGoogle = () => {
 export const logoutGoogle = () => {
     return async (dispatch) => {
         try {
-            const logoutTwo = await window.open("http://localhost:3001/auth/logout", "_self")
+            const logoutTwo = await window.open("auth/logout", "_self")
             console.log(logoutTwo)
             return dispatch({
                 type : LOGOUT_USERGOOGLE
@@ -561,7 +559,7 @@ export const CleanDetail = () => {
 };
 
 export const editName = (id, newName) => {
-    const endpoint = `/users/${id}`;
+    const endpoint = `users/${id}`;
     return async (dispatch) => {
       try {
         const response = await axios.put(endpoint, { name: newName });
@@ -576,7 +574,7 @@ export const editName = (id, newName) => {
   };
 
   export const editUserName = (id, newUserName) => {
-    const endpoint = `/users/${id}`;
+    const endpoint = `users/${id}`;
     return async (dispatch) => {
       try {
         const response = await axios.put(endpoint, { user_name: newUserName });
@@ -591,7 +589,7 @@ export const editName = (id, newName) => {
   };
 
   export const editCountry = (id, newCountry) => {
-    const endpoint = `/users/${id}`;
+    const endpoint = `users/${id}`;
     return async (dispatch) => {
       try {
         const response = await axios.put(endpoint, { country: newCountry });
@@ -629,7 +627,7 @@ export const editName = (id, newName) => {
 // };
 
 export const getUserStorage = (id) => {
-    const endpoint = `/profile/${id}`;
+    const endpoint = `profile/${id}`;
     return async (dispatch) => {
         const {data} = await axios.get(endpoint);
         return dispatch({
@@ -659,7 +657,7 @@ export const getUserStorage = (id) => {
 export const getMyGames = (id) => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`/user/games?id=${id}`);
+            const response = await axios.get(`user/games?id=${id}`);
         console.log(response);
         const games = response.data
         dispatch({
@@ -689,7 +687,7 @@ export const getDeleteReview = (idRev) => {
 
     return async function (dispatch) {
         try {
-            const response = await axios.delete(`/user/deleteReview/${idRev}`)
+            const response = await axios.delete(`user/deleteReview/${idRev}`)
             //console.log("RESPONSEEEE",response);
             //console.log("IIIIIID",ids);
             const game = response.data
