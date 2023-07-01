@@ -64,7 +64,7 @@ export const getDeleteReview = (idRev) => {
         try {
             const response = await axios.delete(`/user/deleteReview/${idRev}`)
             //console.log("RESPONSEEEE",response);
-            //console.log("IIIIIID",ids);
+            console.log("IIIIIID",idRev);
             const game = response.data
             dispatch({
                 type: DELETEREVIEW,

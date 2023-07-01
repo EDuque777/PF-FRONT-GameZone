@@ -21,23 +21,7 @@ const Detail = (props) => {
   const datosUser = JSON.parse(localStorage.getItem("user"));
   console.log("asdfghjhgfds",datosUser?.name)
 
-  // const leftRef = useRef(null);
-  // const rightRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (leftRef.current && rightRef.current) {
-  //     const leftHeight = leftRef.current.offsetHeight;
-  //     const rightHeight = rightRef.current.offsetHeight;
-  //     const minHeight = Math.max(leftHeight, rightHeight);
-  
-  //     leftRef.current.style.height = `${minHeight}px`;
-  //     rightRef.current.style.height = `${minHeight}px`;
-  //   }
-  // }, []);
-  
-
-
-  
   useEffect(() => {
     if (id) {
       dispatch(gameDetail(id))
@@ -191,7 +175,7 @@ const Detail = (props) => {
                 </p>
                 <div className={style.div_comprar}>
                 <p className={style.texto_precio}>
-                  {`Price: ${
+                  {`Price: $${
                     sanitizeText(game.price_overview) ||
                     "Free"
                   }`}
@@ -255,8 +239,9 @@ const Detail = (props) => {
               <h2>
                 <strong>Requirements </strong>
               </h2>
-              <p>{sanitizeText(game?.pc_requirements.minimum)}</p>
-              <p>{sanitizeText(game?.pc_requirements.recommended)}</p>
+              <p>{sanitizeText(game?.pc_requirements.minimum.replace(/:/g, ': '))}</p>
+              <p>{sanitizeText(game?.pc_requirements.recommended.replace(/:/g, ': '))}</p>
+
               <h2>
                 <strong>Languages </strong>
               </h2>
@@ -272,7 +257,7 @@ const Detail = (props) => {
               <p>{sanitizeText(game?.Developers.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
             </div>
 
-            <div className={style.detail_rigth }>
+            <div className={style.detail_rigth} >
               <h2>
                 <strong>Categories</strong>
               </h2>

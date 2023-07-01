@@ -42,7 +42,7 @@ const MyGames = () => {
   const handleDelete = (id) => {
     const gameFilter = allGames.find(game => game.id === id)
     if (gameFilter) {
-      const idRev = gameFilter.Reviews[0]?.id
+      const idRev = gameFilter?.Reviews[0]?.id
       console.log(idRev);
       dispatch(act.getDeleteReview(idRev))
     }

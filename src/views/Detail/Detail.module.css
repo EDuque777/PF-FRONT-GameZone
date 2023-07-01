@@ -248,6 +248,7 @@
   max-height: fit-content;
   box-sizing: content-box;
   margin:  3% 1.5rem;
+  overflow-y: scroll;
 }
 .detail_rigth{
   /* outline: red solid 3px; */
