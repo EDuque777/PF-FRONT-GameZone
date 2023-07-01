@@ -651,3 +651,19 @@ export const getMyGames = (id) => {
         }
     }
 }
+// ACTION DE ACTUALIZAR CONTRASEÑA 
+
+export const updatePassword = (id, currentPassword, newPassword, confirmNewPassword) => {
+    return async function (dispatch) {
+        try {
+            const update = await axios.put(`/updatePassword/${id}`, {currentPassword, newPassword, confirmNewPassword})
+            console.log(update.data)
+            //dispatch({
+            //    type: EDITPASSWORD,
+            //    payload: update.data,
+            //});
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}

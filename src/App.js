@@ -12,6 +12,8 @@ import Profile from './views/Profile/Profile';
 import MyGames from './views/MyGames/MyGames';
 
 import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
+import ChangePassword from './views/Profile/ProfileViews/changePassword';
+import ForgotPassword from './views/Form/ForgotPassword/fotgotPassword';
 
 function App() {
 
@@ -35,6 +37,8 @@ return (
       <Route path="/review" render={() => <Review />} />
       <Route path="/library" render={() => <MyGames />}/>
       <Route path="/pruebas" render={() => <ShoppingView />}/>
+      <Route path="/segurity" render={() => <ChangePassword/>} />
+      <Route path="/forgotPassword" render={() => <ForgotPassword/>} />
       <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
       {location.pathname !== "/dashboard" && <Footer/>}
     </>

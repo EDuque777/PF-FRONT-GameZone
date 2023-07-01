@@ -263,6 +263,12 @@ const Form = () => {
         'error'
       )
       //alert("ups hay datos en form")
+    }else if(nameError || userNameError || emailError || passwordError || errorConfirmPassword){
+      Swal.fire(
+        'Ups!',
+        'There are some errors in your registry',
+        'error'
+      )
     }else{
 
       Swal.fire(
@@ -425,7 +431,7 @@ const Form = () => {
                 <i className={`fa fa-google-plus-square ${styles["btnTwo"]}`} aria-hidden="true" > Continue with Google</i>
               </a>
             </li>
-            <a href="#" className={styles.link}>Forgot your password?</a>
+            <a href="/forgotPassword" className={styles.link}>Forgot your password?</a>
             <button className={styles.btn}>Sign In</button>
           </form>
         </div>

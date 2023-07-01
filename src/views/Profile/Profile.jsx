@@ -4,6 +4,7 @@ import styles from "./Profile.module.css";
 import ProfileView from "./ProfileViews/ProfileView";
 import ShoppingView from "./ProfileViews/ShoppingView";
 import ReviewsView from "./ProfileViews/ReviewsView";
+import ChangePassword from "./ProfileViews/changePassword";
 import * as act from "../../redux/actions";
 
 const Profile = (props) => { // Agrega props como parámetro
@@ -17,6 +18,8 @@ const Profile = (props) => { // Agrega props como parámetro
         return <ShoppingView />;
       case "reviews":
         return <ReviewsView />;
+      case "segurity":
+        return <ChangePassword />
       default:
         return null;
     }
@@ -45,6 +48,12 @@ const Profile = (props) => { // Agrega props como parámetro
               <a href="/review" onClick={() => setActiveOption("reviews")}>
                 <i className={`fa fa-star ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>Reviews</span>
+              </a>
+            </li>
+            <li className="has-subnav">
+              <a href="/segurity" onClick={() => setActiveOption("segurity")}>
+                <i className={`fa fa-lock ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>Security and Password</span>
               </a>
             </li>
             {/* More menu options */}

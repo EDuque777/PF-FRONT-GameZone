@@ -35,104 +35,15 @@ const NavBar = () => {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    //const google = useSelector((state) => state.userGoogle)
     const usuario = useSelector((state) => state.user)
 
     const [ conteo, setConteo ] = useState(0)
     const [ conteoTwo, setConteoTwo ] = useState(0)
-    //const [ userData, setUserData ] = useState(null);
 
-    //console.log(userData)
-
-    //useEffect(() => {
-    //    if (google) {
-    //        console.log(google, "estos datos son del Navbar")
-    //        localStorage.setItem("userTwo", JSON.stringify(google));
-    //        setConteoTwo(1)
-    //    }else{
-    //        setConteoTwo(0)
-    //        console.log("no hay datos")
-    //    }
-    //}, [google])
 
     console.log(conteoTwo, "esto es de google")
 
     console.log(conteo)
-
-
-    //const validateData = async () => {
-    //    if (usuario) {
-    //        setConteo(1)
-    //        await localStorage.setItem("user", JSON.stringify(usuario));
-    //    }else if (!usuario) {
-    //        setConteo(0)
-    //        console.log("No hay datos que mostrar")
-    //    }
-    //    
-    //}
-
-    //const validateDataTwo = async () => {
-    //    if (google) {
-    //        setConteo(1)
-    //        await localStorage.setItem("user", JSON.stringify(google));
-    //    }else if (!google) {
-    //        setConteo(0)
-    //    }
-    //}
-
-    //console.log(Cookies.getJSON("token"))
-
-    //const datosUser = JSON.parse(localStorage.getItem("user"));
-
-    //console.log(datosUser)
-
-    //const validateLocal = () => {
-    //    if (datosUser) {
-    //        setConteo(1)
-    //        setConteoTwo(1)
-    //        console.log("los datos persisten")
-    //    }else if (!datosUser) {
-    //        setConteo(0)
-    //        setConteoTwo(0)
-    //        console.log("los datos no persisten")
-    //    }
-    //}
-
-    //console.log(datosUser, "estos datos son del localStorage")
-
-    //const validationUser = () => {
-    //    if (!datosUser) {
-    //        setConteo(0)
-    //    } else if (datosUser) {
-    //        setConteo(1)
-    //        return datosUser
-    //    }
-    //}
-
-    //const datosUserTwo = JSON.parse(localStorage.getItem("userTwo"));
-
-    //console.log(datosUserTwo, "estos datos son del local")
-
-    //const validationUserGoogle = () => {
-    //    //const datosUserTwo = JSON.parse(localStorage.getItem("userTwo"));
-    //    if (!datosUserTwo) {
-    //        setConteoTwo(0)
-    //    }else if (datosUserTwo) {
-    //        setConteoTwo(1)
-    //        return datosUserTwo
-    //    }
-    //}
-
-    //console.log(datosUser)
-
-    //useEffect(() => {
-    //    validationUser()
-    //}, [datosUser])
-
-    //useEffect(() => {
-    //    validationUserGoogle()
-    //}, [datosUserTwo])
-
 
     useEffect(() => {
         //validateData()
@@ -145,10 +56,6 @@ const NavBar = () => {
         }
 
     }, [usuario])
-
-    //useEffect(() => {
-    //    validateDataTwo()
-    //}, [google])
 
     const datosUser = JSON.parse(localStorage.getItem("user"));
 
@@ -192,30 +99,6 @@ const NavBar = () => {
 
         console.log("datos removidos")
     }
-
-    //const removerDatosTres = async () => {
-    //    const Toast = Swal.mixin({
-    //        toast: true,
-    //        position: 'top-end',
-    //        showConfirmButton: false,
-    //        timer: 3000,
-    //        timerProgressBar: true,
-    //        didOpen: (toast) => {
-    //          toast.addEventListener('mouseenter', Swal.stopTimer)
-    //          toast.addEventListener('mouseleave', Swal.resumeTimer)
-    //        }
-    //    })
-    //      
-    //    Toast.fire({
-    //        icon: 'success',
-    //        title: 'Closed session'
-    //    })
-//
-    //    await localStorage.removeItem("user");
-    //    await dispatch(logoutGoogle())
-//
-    //    console.log("datos removidos de google")
-    //}
 
     function peticionData() {
         dispatch(getDataGoogle())
