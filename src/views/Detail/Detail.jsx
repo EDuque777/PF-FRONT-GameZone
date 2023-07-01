@@ -15,7 +15,6 @@ const Detail = (props) => {
   const isLoading = game === undefined || game === null;
   const genres = game && game?.genres;
   const [videoUrl, setVideoUrl] = useState("");
-  // const categoriesLimited = game && game?.categories?.slice(0, 3);
   const id = props.match.params.id
   let idReview
   
@@ -26,14 +25,16 @@ const Detail = (props) => {
   // const rightRef = useRef(null);
 
   // useEffect(() => {
-  //   const leftHeight = leftRef.current;
-  //   const rightHeight = rightRef.current;
-  //   const minHeight = Math.max(leftHeight, rightHeight);
-
-  //   leftRef.current.style.height = `${minHeight}px`;
-  //   rightRef.current.style.height = `${minHeight}px`;
-    
+  //   if (leftRef.current && rightRef.current) {
+  //     const leftHeight = leftRef.current.offsetHeight;
+  //     const rightHeight = rightRef.current.offsetHeight;
+  //     const minHeight = Math.max(leftHeight, rightHeight);
+  
+  //     leftRef.current.style.height = `${minHeight}px`;
+  //     rightRef.current.style.height = `${minHeight}px`;
+  //   }
   // }, []);
+  
 
 
   
@@ -145,17 +146,6 @@ const Detail = (props) => {
     return ratingPercentages;
   };
 
-  // const handleEditReview = () => {
-  //   dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
-  // };
-
-  // const handleDeleteReview = () => {
-  //   dispatch(act.getDeleteReview(idReview))
-  //   window.location.reload()
-  //   // console.log("IIIIDDDD HANDLER",idReview);
-  // };
-  
-  
   const reviews = game?.Reviews || [];
   const averageRating = calculateAverageRating(game?.Reviews);
   const ratingCounts = calculateRatingCounts(game?.Reviews);
@@ -171,15 +161,6 @@ const Detail = (props) => {
     history.push("/home");
   };
 
-
-
-  console.log("GAMEEEEEEEEEEEEEEE",game);
-  // console.log(game && game.Reviews);
-  // console.log("REVIEEEEEEEEEEEEW", game?.Reviews[0].id);
-  // console.log(game?.Reviews[0].Users[0].profileImage);
-
-
-
   return (
     
     <div className={style.info}>
@@ -189,16 +170,20 @@ const Detail = (props) => {
         </div>
       ) : (
         <div className={style.container}>
-          <div className={style.container_juego}>
           <button className={`fa fa-arrow-circle-left ${style["backButton"]}`} onClick={() => handleBack()}></button>
+          <div className={style.container_juego}>
+          <div className={style.container_back}>
+            </div>
             <div className={style.container_texto}>
-              <div className={style.name_margen}>
-                <h1 className={style.name} translate="no">
+              <div className={style.name}>
+                <div className={style.nameCont}>
                   {sanitizeText(game.name)}
-                </h1>
+                </div>
               </div>
               <p className={style.descripcion}>
+              <p className={style.descripcionCont}>
                 {sanitizeText(game.detailed_description)}
+              </p>
               </p>
               <div className={style.comprar}>
                 <p className={style.texto_comprar}>
@@ -235,43 +220,38 @@ const Detail = (props) => {
             
             <div className={style.container_screenshots}>
             {game?.Videos && game?.Videos.length > 0 ? (
-  <video className={style.video} controls>
-    <source src={game.Videos[0].video} />
-  </video>
-) : (
-  game.Images.slice(0, 4).map((image, index) => (
-    <div key={index} className={style[`container_screenshots${index + 1}`]}>
-      <img
-        className={style.img}
-        src={image.image}
-        alt={`Screenshot ${index + 1}`}
-      />
-    </div>
-  ))
-)}
+            <video className={style.video} controls>
+              <source src={game.Videos[0].video} />
+            </video>
+            ) : (
+            game.Images.slice(0, 4).map((image, index) => (
+            <div key={index} className={style[`container_screenshots${index + 1}`]}>
+            <img
+                    className={style.images}
+                    src={image.image}
+                    alt={`Screenshot ${index + 1}`}
+                  />
+                </div>
+              ))
+            )}
 
-{game?.Videos && game?.Videos.length > 0 && (
-  game.Images.slice(0, 3).map((image, index) => (
-    <div key={index} className={style[`container_screenshots${index + 1}`]}>
-      <img
-        className={style.img}
-        src={image.image}
-        alt={`Screenshot ${index + 1}`}
-      />
-    </div>
-  ))
-)}
+            {game?.Videos && game?.Videos.length > 0 && (
+              game.Images.slice(0, 3).map((image, index) => (
+                <div key={index} className={style[`container_screenshots${index + 1}`]}>
+                  <img
+                    className={style.images}
+                    src={image.image}
+                    alt={`Screenshot ${index + 1}`}
+                  />
+                </div>
+              ))
+            )}
         </div>
 
           </div>
           </div>
-
-
-
           <div className={style.detail_container}>
-
-            
-            <div className={style.detail_left } >
+            <div className={style.detail_left }>
               <h2>
                 <strong>Requirements </strong>
               </h2>
@@ -292,16 +272,11 @@ const Detail = (props) => {
               <p>{sanitizeText(game?.Developers.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
             </div>
 
-
-
-
-            <div className={style.detail_rigth } >
+            <div className={style.detail_rigth }>
               <h2>
                 <strong>Categories</strong>
               </h2>
-              {/* {categoriesLimited && categoriesLimited.map((category) => ( */}
                 <p>{sanitizeText(game?.Categories.map(c => `<p>${c.category}</p>`).join(', '))}</p>
-              {/* ))} */}
               <h2>
                 <strong>Genres </strong>
               </h2>
@@ -314,8 +289,7 @@ const Detail = (props) => {
                 <strong>ID :</strong>
               </h2>
               <p>{game?.id}</p>
-            </div>
-              
+            </div>  
             </div>
 
 
@@ -348,10 +322,10 @@ const Detail = (props) => {
               <span>{`${ratingPercentages[rating].toFixed(0)}%`}</span>
               </div>
          </div>
-    ))}
-  </div>
-</div>
-</div>
+            ))}
+          </div>
+        </div>
+        </div>
 
 
                 <div className={style.opiniones}>
@@ -373,14 +347,7 @@ const Detail = (props) => {
                     <div className={style.opinionback} >
                       <p>{review?.reviews}</p>
                       <p hidden>{idReview = review?.id}</p>
-                      {/* {review?.Users[0].name  === datosUser.name &&
-                      <div className={style.opinionbuton} >
-                      <Link to={`reviews/${review?.id}` }>
-                      <button onClick={() => handleEditReview(review?.id)}>Edit Review</button>
-                      </Link>
-                      <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button>
-                      </div>
-                      } */}
+                      
                     </div>
                   </div>
                 ))}
