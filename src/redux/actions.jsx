@@ -49,6 +49,7 @@ export const GET_MYGAMES = "GET_MYGAMES";
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 export const GETALLUSERS = "GETALLUSERS";
+export const EDITNAMEUSER = "EDITNAMEUSER";
 
 
 export const mandarAReview = (game) => {
@@ -669,3 +670,18 @@ export const getUsers = () => {
         })
     }
 }
+
+export const editNameUser = (id, newName) => {
+    const endpoint = `http://localhost:3001/users/${id}`;
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(endpoint, { name: newName });
+        dispatch({
+          type: EDITNAMEUSER,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };

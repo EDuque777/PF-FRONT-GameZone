@@ -482,7 +482,7 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     library: action.payload
                 }
-// ADMIN
+// CASO ADMIN ***********************************************************************
 case act.GETALLUSERS:
                 return {
                     ...state,
@@ -491,7 +491,19 @@ case act.GETALLUSERS:
             
         default:
             return {...state};
+
+            case act.EDITNAMEUSER:
+                return {
+                  ...state,
+                  user: {
+                    ...state.user,
+                    name: action.payload.name,
+                  },
+                };
+
     }
+
+    
 };
 
 
