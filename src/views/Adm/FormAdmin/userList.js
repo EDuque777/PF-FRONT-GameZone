@@ -50,7 +50,7 @@ function UserList() {
   useEffect(() => {
     dispatch(act.getUsers());
   }, [dispatch]);
-
+  console.log(users)
   const handleEdit = (rowIndex) => {
     const { page, rowsPerPage } = muiTableRef.current.state;
     const dataIndex = rowIndex % rowsPerPage;
@@ -107,14 +107,22 @@ function UserList() {
       // Manejar el error de eliminación del usuario
     }
   };
+
+  const handleBan = (rowIndex) => {
+    const { page, rowsPerPage } = muiTableRef.current.state;
+    const dataIndex = rowIndex % rowsPerPage;
+    const userIndex = dataIndex + page * rowsPerPage;
+    const bannedUser = users[userIndex];
+    const newData = [...users];
+    const rowData = newData[userIndex];
+    rowData.ban = !rowData.ban; // Cambia la asignación a un valor booleano
+    newData[userIndex] = rowData;
+    dispatch(act.banUser(bannedUser.id, rowData.ban));
+    setOpenModal(false);
+    Swal.fire('You clicked on Ban: ' + bannedUser.name + '. New estado: ' + rowData.ban);
+  };
   
-  
-  
-  
-  
-  
-  
-  
+
 
 //   const handleBan = (rowIndex) => {
 //     const { page, rowsPerPage } = muiTableRef.current.state;
@@ -153,7 +161,12 @@ function UserList() {
           { name: 'user_name', label: 'UserName' },
           { name: 'email', label: 'Email' },
           { name: 'country', label: 'Country' },
-          { name: 'ban', label: 'Status' },
+          { name: 'ban',
+          label: 'Status',
+          options: {
+            customBodyRenderLite: (dataIndex) =>
+              users[dataIndex].ban ? 'Banned' : 'Active', },
+          },
           {
             name: 'Actions',
             options: {
@@ -165,9 +178,9 @@ function UserList() {
                   <IconButton onClick={() => handleDelete(rowIndex)}>
                     <DeleteIcon />
                   </IconButton>
-                  {/* <IconButton onClick={() => handleBan(rowIndex)}>
+                  <IconButton onClick={() => handleBan(rowIndex)}>
                     <BlockIcon />
-                  </IconButton> */}
+                  </IconButton>
                 </div>
               ),
             },
@@ -226,17 +239,17 @@ function UserList() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <label>
+                  {/* <label>
                     <strong>Status:</strong>
-                  </label>
-                  <input
+                  </label> */}
+                  {/* <input
                     type="text"
                     value={editedUser.ban}
                     onChange={(e) => setEditedUser({ ...editedUser, ban: e.target.value })}
                     style={{ width: '100%' }}
                   />
-                </Grid>
-                <Grid item xs={12} className={classes.buttonContainer}>
+                </Grid> */}
+                {/* <Grid item xs={12} className={classes.buttonContainer}> */}
                   <Button variant="contained" color="secondary" onClick={() => setOpenModal(false)}>
                     Cancelar
                   </Button>

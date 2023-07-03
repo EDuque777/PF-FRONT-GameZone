@@ -53,7 +53,7 @@ export const EDITDATAUSER = "EDITDATAUSER";
 export const DELETEDATAUSER = "CLEANDATAUSER";
 export const SET_USERS = "SET_USERS";
 export const DELETE_USER = "DELETE_USER";
-
+export const BAN_USER = "BAN_USER";
 
 
 export const mandarAReview = (game) => {
@@ -668,6 +668,7 @@ export const getUsers = () => {
     const endpoint = `http://localhost:3001/users`;
     return async (dispatch) => {
         const {data} = await axios.get(endpoint);
+        console.log("SSSSSSSS", data);
         return dispatch({
             type: GETALLUSERS,
             payload: data
@@ -727,6 +728,31 @@ export const editUser = (id, updatedUser) => {
     };
   };
   
+  export const banUser = (userId, banStatus) => {
+    return (dispatch) => {
+      // Realiza las operaciones necesarias para banear al usuario en el backend
+      // Puedes utilizar fetch, axios u otra librería para enviar una solicitud al servidor y actualizar el estado del usuario
+  
+      // Ejemplo de solicitud utilizando fetch
+      fetch(`//localhost:3001/users/${userId}/ban`, { 
+        method: 'PUT',
+        body: JSON.stringify({ ban: banStatus }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Si la solicitud es exitosa, actualiza el estado del usuario en el store de Redux
+          dispatch({ type: 'BAN_USER', payload: { userId, banStatus } });
+        })
+        .catch((error) => {
+          // Maneja el error en caso de que la solicitud falle
+          console.error('Error al banear el usuario:', error);
+          // Puedes enviar una acción de error o realizar alguna otra acción para manejar el error
+        });
+    };
+  };
   
   
   

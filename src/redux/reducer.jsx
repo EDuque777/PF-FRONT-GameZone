@@ -525,6 +525,34 @@ const rootReducer = (state = initialState, action) => {
                         return state;
                     }
                   };
+
+                  const userReducer = (state = initialState, action) => {
+                    switch (action.type) {
+                      case 'SET_USERS':
+                        return {
+                          ...state,
+                          users: action.payload,
+                        };
+                      case 'BAN_USER':
+                        const { userId, banStatus } = action.payload;
+                        const updatedUsers = state.users.map((user) => {
+                          if (user.id === userId) {
+                            return {
+                              ...user,
+                              ban: banStatus,
+                            };
+                          }
+                          return user;
+                        });
+                        return {
+                          ...state,
+                          users: updatedUsers,
+                        };
+                      // Agrega otros casos de acciones si los tienes
+                      default:
+                        return state;
+                    }
+                  };
                   
                   
                   
