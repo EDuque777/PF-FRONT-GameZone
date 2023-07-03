@@ -28,7 +28,8 @@ const initialState = {
     genresGames: [],
     userStorage: null,
     gameReview: [],
-    library: []
+    library: [],
+    errorBack : null
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -472,6 +473,11 @@ const rootReducer=(state = initialState, action) => {
                 return {
                     ...state,
                     library: action.payload
+                }
+            case act.ERROR:
+                return {
+                    ...state,
+                    errorBack : action.payload
                 }
 
             

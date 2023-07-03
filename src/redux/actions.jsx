@@ -48,6 +48,7 @@ export const GETUSERSTORAGE = "GETUSERSTORAGE";
 export const GET_MYGAMES = "GET_MYGAMES";
 
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
+export const ERROR = "ERROR"
 
 
 
@@ -667,3 +668,60 @@ export const updatePassword = (id, currentPassword, newPassword, confirmNewPassw
         }
     }
 }
+
+//ACTION DE RECUPERAR CUENTA
+
+export const submitEmail = (email) => {
+    return async function (dispatch) {
+        try {
+
+            const emailDos = { email : email}
+
+            const responseEmail = await axios.post("/forgot-password", emailDos)
+            console.log(responseEmail.data)
+        } catch (error) {
+            console.log(error.response.data)
+            return dispatch({
+                type : ERROR,
+                payload : error.response.data
+            })
+            //alert(error.response.data)
+        }
+    }
+}
+
+export const verifyToken = (id, token) => {
+    return async function (dispatch) {
+        try {
+            const verify = await axios.get(`/verify-url/${id}/${token}`)
+            console.log(verify.data)
+        } catch (error) {
+            console.log(error)
+            //alert(error.response.data)
+        }
+    }
+}
+
+export const resetPasswordBack = (id, token, passwordReset, passwordConfirmReset) => {
+    return async function (dispatch) {
+        try {
+            //const password = { password : passwordReset }
+            const reset = await axios.put(`/reset-password/${id}/${token}`, {passwordReset, passwordConfirmReset})
+            console.log(reset.data)
+        } catch (error) {
+            console.log(error)
+            return dispatch({// esto es de tokens invalidos
+                type : ERROR,
+                payload : error.response.data
+            })
+            //alert(error.data.message)
+        }
+    }
+}
+
+export const setError = (error) => {
+    return {
+      type: ERROR,
+      payload: error,
+    };
+};

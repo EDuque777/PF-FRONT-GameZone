@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Route, useLocation } from 'react-router-dom';
+import { Route, useLocation, Switch } from 'react-router-dom';
 import { Landing, Home, ShoppingCart, Detail, Whishlist , Form} from "./views";
 import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
@@ -13,7 +13,9 @@ import MyGames from './views/MyGames/MyGames';
 
 import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
 import ChangePassword from './views/Profile/ProfileViews/changePassword';
-import ForgotPassword from './views/Form/ForgotPassword/fotgotPassword';
+import ForgotPassword from './views/Form/ForgotPassword/forgotPassword';
+import PasswordReset from './views/Form/passwordReset/passwordReset';
+import Error from './views/Error/error';
 
 function App() {
 
@@ -26,20 +28,26 @@ return (
     </head>
     <>
       {location.pathname !== "/" && location.pathname !== "/dashboard" && <NavBar/>}
-      <Route exact path="/" render={() => <Landing/>} />
-      <Route path="/home" render={() => <Home/>}/>
-      <Route path="/cart" render={() => <ShoppingCart/>} /> 
-      <Route path="/login" render={() => <Form/>} /> 
-      <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
-      <Route path="/whishlist" render={() => <Whishlist />} />
-      <Route path="/dashboard" render={() => <Dashboard />} />
-      <Route path="/search" render={() => <Search />} />
-      <Route path="/review" render={() => <Review />} />
-      <Route path="/library" render={() => <MyGames />}/>
-      <Route path="/pruebas" render={() => <ShoppingView />}/>
-      <Route path="/segurity" render={() => <ChangePassword/>} />
-      <Route path="/forgotPassword" render={() => <ForgotPassword/>} />
-      <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
+      <Switch>
+
+        <Route exact path="/" render={() => <Landing/>} />
+        <Route path="/home" render={() => <Home/>}/>
+        <Route path="/cart" render={() => <ShoppingCart/>} /> 
+        <Route path="/login" render={() => <Form/>} /> 
+        <Route exact path="/detail/:id" render={(routeProps) => <Detail {...routeProps} />} />
+        <Route path="/whishlist" render={() => <Whishlist />} />
+        <Route path="/dashboard" render={() => <Dashboard />} />
+        <Route path="/search" render={() => <Search />} />
+        <Route path="/review" render={() => <Review />} />
+        <Route path="/library" render={() => <MyGames />}/>
+        <Route path="/pruebas" render={() => <ShoppingView />}/>
+        <Route path="/segurity" render={() => <ChangePassword/>} />
+        <Route path="/forgotPassword" render={() => <ForgotPassword/>} />
+        <Route exact path="/reset-password/:id/:token" render={() => <PasswordReset/>} />
+        <Route path="/user" render={(routeProps) => <Profile {...routeProps} />} />
+        <Route path="*" render={() => <Error/>} />
+
+      </Switch>
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
