@@ -15,8 +15,8 @@ const initialState = {
     gamesTopSellers: null,
     gamesNewReleases: null,
     gamesFiltered: null,
-    createAccount : [],
-    user : null,
+    createAccount: [],
+    user: null,
     //userGoogle : null,
     orderCreated: false,
     error: null,
@@ -30,14 +30,16 @@ const initialState = {
     gamesReviews: [],
     library: [],
     allusers: [],
+    users: [],
+    
 };
 
-const rootReducer=(state = initialState, action) => {
-    switch(action.type) {
+const rootReducer = (state = initialState, action) => {
+    switch (action.type) {
         //filtros combinadosconst combtype = "COMBTYPE"
-        
+
         case act.MANDARREVIEW:
-            const {name } = action.payload
+            const { name } = action.payload
             console.log(name);
             // const biblio = action.payload;
             // const juegoReview = biblio.filter(game => game.name !== game.name)
@@ -45,42 +47,42 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 review: name
             }
-        
+
         //filtros de busqueda
 
         case act.FILTER_LANGUAGES:
             const language = action.payload.toLowerCase();
             const filteredSearchsssssssss = state.search.filter(game =>
                 game.supported_languages && game.supported_languages.toLowerCase().includes(language))
-            return{
+            return {
                 ...state,
-              search: filteredSearchsssssssss
+                search: filteredSearchsssssssss
             }
 
         case act.FILTER_GENRES:
             const genre = action.payload;
-          
+
             const filteredSearchsssssss = state.search.filter(game =>
-              game.genres && game.genres.some(categor => categor.description === genre)
+                game.genres && game.genres.some(categor => categor.description === genre)
             );
-          
+
             return {
-              ...state,
-              search: filteredSearchsssssss
+                ...state,
+                search: filteredSearchsssssss
             };
-          
+
         case act.FILTER_CATEGORIES:
             const category = action.payload;
-          
+
             const filteredSearchssssss = state.search.filter(game =>
-              game.categories && game.categories.some(categor => categor.description === category)
+                game.categories && game.categories.some(categor => categor.description === category)
             );
-          
+
             return {
-              ...state,
-              search: filteredSearchssssss
+                ...state,
+                search: filteredSearchssssss
             };
-          
+
 
 
         case act.FILTER_PLATFORMS:
@@ -88,31 +90,31 @@ const rootReducer=(state = initialState, action) => {
             const platform = action.payload
             console.log(platform)
             if (platform === "windows") {
-              filteredSearchssss = state.search.filter(game => game.platforms.windows === true);
-            } else if(platform === "linux"){
-              filteredSearchssss = state.search.filter(game => game.platforms.linux === true);
-            } else if(platform === "mac"){
+                filteredSearchssss = state.search.filter(game => game.platforms.windows === true);
+            } else if (platform === "linux") {
+                filteredSearchssss = state.search.filter(game => game.platforms.linux === true);
+            } else if (platform === "mac") {
                 filteredSearchssss = state.search.filter(game => game.platforms.mac === true);
             }
             return {
-              ...state,
-              search: filteredSearchssss
+                ...state,
+                search: filteredSearchssss
             };
 
 
 
-            case act.FILTER_FREE:
-                let filteredSearchsssss;
-                if (action.payload === "false") {
-                  filteredSearchsssss = state.search.filter(game => game.is_free === true && game.release_date.coming_soon !== true);
-                } else {
-                  filteredSearchsssss = state.search.filter(game => game.is_free === false && game.release_date.coming_soon !== true);
-                }
-                return {
-                  ...state,
-                  search: filteredSearchsssss
-                };
-              
+        case act.FILTER_FREE:
+            let filteredSearchsssss;
+            if (action.payload === "false") {
+                filteredSearchsssss = state.search.filter(game => game.is_free === true && game.release_date.coming_soon !== true);
+            } else {
+                filteredSearchsssss = state.search.filter(game => game.is_free === false && game.release_date.coming_soon !== true);
+            }
+            return {
+                ...state,
+                search: filteredSearchsssss
+            };
+
 
         case act.FILTER_TYPE:
             const typess = action.payload;
@@ -123,100 +125,100 @@ const rootReducer=(state = initialState, action) => {
                 search: typesearchss
             };
 
-            case act.FILTER_AGE:
-                const types = action.payload;
-                const typesearchs = state.search.filter(game => game.required_age === types);
-    
-                return {
-                    ...state,
-                    search: typesearchs
-                };
+        case act.FILTER_AGE:
+            const types = action.payload;
+            const typesearchs = state.search.filter(game => game.required_age === types);
 
-            case act.FILTER_CONTROLLER:
-                const CONTROLLER = action.payload;
-                const typesearc = state.search.filter(game => game.controller_support === CONTROLLER);
-    
-                return {
-                    ...state,
-                    search: typesearc
-                };
-            
+            return {
+                ...state,
+                search: typesearchs
+            };
+
+        case act.FILTER_CONTROLLER:
+            const CONTROLLER = action.payload;
+            const typesearc = state.search.filter(game => game.controller_support === CONTROLLER);
+
+            return {
+                ...state,
+                search: typesearc
+            };
+
 
         case act.ORDER_BY:
             const orderBy = action.payload;
             let sortedSearch = [...state.search];
-          
-            if (orderBy === "des") {
-              sortedSearch.sort((a, b) => {
-                if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  if (a.is_free && b.is_free) {
-                    return a.price_overview?.final - b.price_overview?.final;
-                  } else if (a.is_free && !b.is_free) {
-                    return -1;
-                  } else if (!a.is_free && b.is_free) {
-                    return 1;
-                  } else {
-                    return a.price_overview?.final - b.price_overview?.final;
-                  }
-                } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
-                  return -1;
-                } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              });
-            } else if (orderBy === "asc") {
-              sortedSearch.sort((a, b) => {
-                if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  if (a.is_free && b.is_free) {
-                    return a.price_overview?.final - b.price_overview?.final;
-                  } else if (a.is_free && !b.is_free) {
-                    return 1;
-                  } else if (!a.is_free && b.is_free) {
-                    return -1;
-                  } else {
-                    return b.price_overview?.final - a.price_overview?.final;
-                  }
-                } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
-                  return -1;
-                } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              });
-            }
-          
-            const filteredSearch = sortedSearch.filter(game => !game.release_date.coming_soon);
-          
-            return {
-              ...state,
-              search: filteredSearch
-            };
-          
-            case act.RESET_FILTERS:
-                return {
-                    ...state,
-                    search: state.searchcopy
-                    
-                }
-            
-            case act.GET_BY_NAME:
-                return {
-                    ...state,
-                    search: action.payload,
-                    searchcopy: action.payload
-                }
 
-//? CASOS DE PETICIONES
+            if (orderBy === "des") {
+                sortedSearch.sort((a, b) => {
+                    if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
+                        if (a.is_free && b.is_free) {
+                            return a.price_overview?.final - b.price_overview?.final;
+                        } else if (a.is_free && !b.is_free) {
+                            return -1;
+                        } else if (!a.is_free && b.is_free) {
+                            return 1;
+                        } else {
+                            return a.price_overview?.final - b.price_overview?.final;
+                        }
+                    } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
+                        return -1;
+                    } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+            } else if (orderBy === "asc") {
+                sortedSearch.sort((a, b) => {
+                    if (!a.release_date.coming_soon && !b.release_date.coming_soon) {
+                        if (a.is_free && b.is_free) {
+                            return a.price_overview?.final - b.price_overview?.final;
+                        } else if (a.is_free && !b.is_free) {
+                            return 1;
+                        } else if (!a.is_free && b.is_free) {
+                            return -1;
+                        } else {
+                            return b.price_overview?.final - a.price_overview?.final;
+                        }
+                    } else if (!a.release_date.coming_soon && b.release_date.coming_soon) {
+                        return -1;
+                    } else if (a.release_date.coming_soon && !b.release_date.coming_soon) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+            }
+
+            const filteredSearch = sortedSearch.filter(game => !game.release_date.coming_soon);
+
+            return {
+                ...state,
+                search: filteredSearch
+            };
+
+        case act.RESET_FILTERS:
+            return {
+                ...state,
+                search: state.searchcopy
+
+            }
+
+        case act.GET_BY_NAME:
+            return {
+                ...state,
+                search: action.payload,
+                searchcopy: action.payload
+            }
+
+        //? CASOS DE PETICIONES
 
         case act.GET_GAMES:
             return {
                 ...state,
                 games: action.payload
             }
-        
+
 
         case act.GET_DETAIL:
             return {
@@ -246,7 +248,7 @@ const rootReducer=(state = initialState, action) => {
                 ...state,
                 gameComingSoon: action.payload
             }
-        
+
         case act.GET_GAMES_NEW_RELEASES:
             return {
                 ...state,
@@ -259,7 +261,7 @@ const rootReducer=(state = initialState, action) => {
                 gamesTopSellers: action.payload
             }
 
-//?CASOS DEL CARRITO
+        //?CASOS DEL CARRITO
         case act.ADD_TO_CART:
             const addGame = action.payload
             const existingGame = state.cart.find(game => game.id === addGame.id)
@@ -271,15 +273,15 @@ const rootReducer=(state = initialState, action) => {
                     showConfirmButton: false,
                     timer: 2000
                 })
-                return state; 
+                return state;
             }
-                Swal.fire({
+            Swal.fire({
                 position: "center",
                 icon: "success",
                 title: "Game added successfully",
                 showConfirmButton: false,
                 timer: 2000
-            }) 
+            })
             const updateCart = [...state.cart, addGame]
             const updatePrice = state.total + (addGame.price === 'free' ? 0 : addGame.price);
             return {
@@ -319,21 +321,21 @@ const rootReducer=(state = initialState, action) => {
                 orderCreated: false,
                 error: action.payload
             }
-        
-//? CASOS DE LA LISTA DE DESEADOS
+
+        //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
             const addList = action.payload
             const gameInWhishList = state.whishList.find(game => game.id === addList.id);
             if (gameInWhishList) {
-            Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'the game is already in the list',
-                showConfirmButton: false,
-                timer: 2000
-            });
-            return state;
-            }   
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'the game is already in the list',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return state;
+            }
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -344,14 +346,14 @@ const rootReducer=(state = initialState, action) => {
             return {
                 ...state,
                 whishList: [...state.whishList, addList],
-                counter: ++ state.counter,
+                counter: ++state.counter,
             }
 
         case act.REMOVE_TO_WHISH_LIST:
-            return{
+            return {
                 ...state,
-                whishList: state.whishList.filter( game => game.id !== action.payload),
-                counter: -- state.counter,
+                whishList: state.whishList.filter(game => game.id !== action.payload),
+                counter: --state.counter,
             }
 
         case act.CLEAR_WHISH_LIST:
@@ -360,35 +362,35 @@ const rootReducer=(state = initialState, action) => {
                 whishList: [],
                 counter: 0
             }
-// CASOS DEL USUARIO 
-        case act.CREATE_USER: 
+        // CASOS DEL USUARIO 
+        case act.CREATE_USER:
             return {
                 ...state,
-                createAccount : action.payload
+                createAccount: action.payload
             }
         case act.LOGIN_USER:
             return {
                 ...state,
-                user : action.payload
+                user: action.payload
             }
         case act.DATA_GOOGLE:
             //console.log(userGoogle)
             return {
                 ...state,
-                user : action.payload
+                user: action.payload
             }
 
-        case act.LOGOUT_USER:{
-            return{
+        case act.LOGOUT_USER: {
+            return {
                 ...state,
-                user : null
+                user: null
             }
         }
 
         case act.LOGOUT_USERGOOGLE:
             return {
                 ...state,
-                user : null
+                user: null
             }
 
         case act.PLATFORMS:
@@ -428,82 +430,108 @@ const rootReducer=(state = initialState, action) => {
                 user: null,
             };
 
-            case act.EDITNAME:
-                return {
-                  ...state,
-                  user: {
+        case act.EDITNAME:
+            return {
+                ...state,
+                user: {
                     ...state.user,
                     name: action.payload.name,
-                  },
-                };
+                },
+            };
 
-            case act.EDITUSERNAME:
-                return {
-                    ...state,
-                    user: {
+        case act.EDITUSERNAME:
+            return {
+                ...state,
+                user: {
                     ...state.user,
                     user_name: action.payload.user_name,
-                      },
-                    };
+                },
+            };
 
-            case act.EDITCOUNTRY:
-                return {
-                    ...state,
-                    user: {
+        case act.EDITCOUNTRY:
+            return {
+                ...state,
+                user: {
                     ...state.user,
                     country: action.payload.country,
-                        },
-                    };
-            //  case act.EDITPROFILEIMAGE:
-            //     return {
-            //         ...state,
-            //         user: {
-            //         ...state.user,
-            //         profileImage: action.payload.profileImage,
-            //           },
-            //         };
+                },
+            };
+        //  case act.EDITPROFILEIMAGE:
+        //     return {
+        //         ...state,
+        //         user: {
+        //         ...state.user,
+        //         profileImage: action.payload.profileImage,
+        //           },
+        //         };
 
-            case act.GETUSERSTORAGE:
-                return {
-                    ...state,
-                    userStorage: action.payload
+        case act.GETUSERSTORAGE:
+            return {
+                ...state,
+                userStorage: action.payload
             }
 
-            case act.GETGAMEREVIEW:
-                return {
-                    ...state,
-                    gameReview: action.payload
-                }
-            
-//? CASOS DE LA BIBLIOTECA
+        case act.GETGAMEREVIEW:
+            return {
+                ...state,
+                gameReview: action.payload
+            }
 
-            case act.GET_MYGAMES:
-                return {
-                    ...state,
-                    library: action.payload
-                }
-// CASO ADMIN ***********************************************************************
-case act.GETALLUSERS:
-                return {
-                    ...state,
-                    allusers: action.payload
-                }
-            
+        //? CASOS DE LA BIBLIOTECA
+
+        case act.GET_MYGAMES:
+            return {
+                ...state,
+                library: action.payload
+            }
+        // CASO ADMIN ***********************************************************************
+        case act.GETALLUSERS:
+            return {
+                ...state,
+                allusers: action.payload
+            }
+
         default:
-            return {...state};
+            return { ...state };
 
-            case act.EDITNAMEUSER:
+            case act.EDITDATAUSER:
                 return {
                   ...state,
                   user: {
                     ...state.user,
-                    name: action.payload.name,
+                    ...action.payload,
                   },
                 };
 
+                const initialState = {
+                    users: [],
+                    user: null,
+                  };
+                  
+                  const reducer = (state = initialState, action) => {
+                    switch (action.type) {
+                      case 'SET_USERS':
+                        return {
+                          ...state,
+                          users: action.payload,
+                        };
+                      case 'DELETEDATAUSER':
+                        return {
+                          ...state,
+                          // Puedes realizar otras actualizaciones del estado aquí si es necesario
+                        };
+                      // Otros cases del reducer...
+                      default:
+                        return state;
+                    }
+                  };
+                  
+                  
+                  
+              
     }
 
-    
+
 };
 
 

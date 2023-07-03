@@ -49,7 +49,11 @@ export const GET_MYGAMES = "GET_MYGAMES";
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 export const GETALLUSERS = "GETALLUSERS";
-export const EDITNAMEUSER = "EDITNAMEUSER";
+export const EDITDATAUSER = "EDITDATAUSER";
+export const DELETEDATAUSER = "CLEANDATAUSER";
+export const SET_USERS = "SET_USERS";
+export const DELETE_USER = "DELETE_USER";
+
 
 
 export const mandarAReview = (game) => {
@@ -671,17 +675,59 @@ export const getUsers = () => {
     }
 }
 
-export const editNameUser = (id, newName) => {
-    const endpoint = `http://localhost:3001/users/${id}`;
+// export const editNameUser = (id, newName) => {
+//     return async (dispatch) => {
+//       try {
+//         const endpoint = `http://localhost:3001/users/${id}`;
+//         const response = await axios.put(endpoint, { name: newName });
+  
+//         // Aquí puedes realizar acciones adicionales después de guardar los cambios,
+//         // como actualizar el estado de Redux con los nuevos datos del usuario modificado.
+//         // Por ejemplo, puedes llamar a otra acción para actualizar la lista de usuarios.
+  
+//         dispatch(getUsers());
+//       } catch (error) {
+//         console.log(error.message);
+//       }
+//     };
+//   };
+
+export const editUser = (id, updatedUser) => {
     return async (dispatch) => {
       try {
-        const response = await axios.put(endpoint, { name: newName });
-        dispatch({
-          type: EDITNAMEUSER,
-          payload: response.data,
-        });
+        const endpoint = `http://localhost:3001/users/${id}`;
+        const response = await axios.put(endpoint, updatedUser);
+  
+        // Aquí puedes realizar acciones adicionales después de guardar los cambios,
+        // como actualizar el estado de Redux con los nuevos datos del usuario modificado.
+        // Por ejemplo, puedes llamar a otra acción para actualizar la lista de usuarios.
+  
+        dispatch(getUsers());
       } catch (error) {
         console.log(error.message);
       }
     };
   };
+  
+
+  export const setUsers = (users) => {
+    return { type: 'SET_USERS', payload: users };
+  };
+  
+  export const deleteUser = (id) => {
+    return async function(dispatch) {
+      try {
+        const endpoint = `http://localhost:3001/users/${id}`;
+        await axios.delete(endpoint);
+        dispatch({ type: 'DELETEDATAUSER' });
+      } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        // Manejar el error de eliminación del usuario
+      }
+    };
+  };
+  
+  
+  
+  
+  
