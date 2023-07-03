@@ -94,6 +94,7 @@ import * as act from '../../redux/actions';
 import style from './Card.module.css';
 import { useHistory } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const Card = (props) => {
   //console.log(props);
@@ -105,6 +106,7 @@ const Card = (props) => {
   const history = useHistory();
   const isShoppCartRoute = location.pathname === "/cart";
   const isWhishListRoute = location.pathname === "/whishlist";
+  const dataUser = JSON.parse(localStorage.getItem("user"));
   const renderStars = () => {
     const rating = Math.round(averageRating);
     const stars = [];
@@ -115,10 +117,30 @@ const Card = (props) => {
   };
 
   const handleAdd = () => {
+    if (!dataUser) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Please register or log in to make a purchase',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return 
+    }
       dispatch(act.addCart({ id, price: price, name, image }));
   };
 
   const handleAddWhish = () => {
+    if (!dataUser) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please register or log in to be able to add to the list',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return;
+    }
       dispatch(act.addWhishList({ id, price: price, name, image }));
   };
 

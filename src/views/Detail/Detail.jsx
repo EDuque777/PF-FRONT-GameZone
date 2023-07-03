@@ -6,6 +6,7 @@ import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import * as act from "../../redux/actions";
 import { FaStar } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const Detail = (props) => {
@@ -60,10 +61,30 @@ const Detail = (props) => {
   }
   
   const handleAdd = () => {
+    if (!datosUser) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Please register or log in to make a purchase',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return;
+    }
     dispatch(act.addCart({id: bkId, image: img, name:name , price: isNaN(price) ? 0 : price}));
   }
   
   const handleAddWhish = () => {
+    if (!datosUser) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please register or log in to be able to add to the list',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return;
+    }
     dispatch(act.addWhishList({ id: bkId, price: isNaN(price) ? 0 : price, name:name, image: img }));
   };
   
