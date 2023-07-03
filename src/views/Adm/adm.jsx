@@ -4,7 +4,7 @@ import * as act from "../../redux/actions";
 import MUIDataTable from "mui-datatables";
 import styles from './adm.module.css';
 import { Link } from 'react-router-dom';
-//import { TableReview } from "./Tablas/TableReview"
+import UserList from './Tablas/userList';
 
 
 function Dashboard() {
@@ -39,7 +39,7 @@ function Dashboard() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('user');
 
-  //const [showReviewTable, setShowReviewTable] = useState(false);
+  const [showUserList, setShowUserList] = useState(false);
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
@@ -110,22 +110,20 @@ function Dashboard() {
   const handleCreateGameClick = () => {
     setShowForm(true);
     setShowUserForm(false);
-    //setShowReviewTable(false);
+    setShowUserList(false);
   };
 
   const handleCreateUserClick = () => {
     setShowUserForm(true);
     setShowForm(false);
-  
-  //  setShowReviewTable(false);
+    setShowUserList(false);
   };
 
-/*   const handleReviewClick = () => {
-    
+   const handleUserListClick = () => {
+    setShowUserList (true)
     setShowForm(false);
     setShowUserForm(false);
-    setShowReviewTable(true);
-  }; */
+  }; 
 
   return (
     <html>
@@ -167,7 +165,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" >
+              <a href="#" onClick={handleUserListClick} >
                 <i className={`fa fa-users ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Search User
@@ -175,7 +173,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" /* onClick={handleReviewClick} */>
+              <a href="#" /* onClick={} */ >
                 <i className={`fa fa-comments ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Review
@@ -340,6 +338,9 @@ function Dashboard() {
               </form>
             </div>
           </div>
+        )}
+         {showUserList && (
+          <UserList />
         )}
   
       </body>
