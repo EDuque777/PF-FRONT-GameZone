@@ -339,7 +339,7 @@ export const createOrder = (totalPrice, cartGames, dataUser) => {
     console.log(totalPrice, cartGames, dataUser);
     return async function (dispatch) {
         try {
-            const response = await axios.post("createOrder", {totalPrice, cartGames, dataUser})
+            const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,

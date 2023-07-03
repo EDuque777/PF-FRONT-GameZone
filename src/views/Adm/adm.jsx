@@ -5,7 +5,7 @@ import MUIDataTable from "mui-datatables";
 import styles from './adm.module.css';
 import { Link } from 'react-router-dom';
 import { TableDb } from "./Tablas/TableGames";
-
+import { TableReview } from "./Tablas/TableReview"
 
 
 function Dashboard() {
@@ -40,6 +40,8 @@ function Dashboard() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('user');
+
+  const [showReviewTable, setShowReviewTable] = useState(false);
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
@@ -110,19 +112,35 @@ function Dashboard() {
   const handleCreateGameClick = () => {
     setShowForm(true);
     setShowUserForm(false);
-    setShowTable(false); // Adicionado para ocultar a tabela
+    setShowTable(false); 
+    setShowReviewTable(false);
   };
 
   const handleCreateUserClick = () => {
     setShowUserForm(true);
     setShowForm(false);
-    setShowTable(false); // Adicionado para ocultar a tabela
+    setShowTable(false); 
+    setShowReviewTable(false);
   };
 
   const handleSearchUserClick = () => {
-    setShowTable(true);
     setShowForm(false);
     setShowUserForm(false);
+    setShowReviewTable(false);
+
+  };
+  const handleSearchGamesClick = () => {
+    setShowTable(true); 
+    setShowForm(false);
+    setShowUserForm(false);
+    setShowReviewTable(false);
+  };
+
+  const handleReviewClick = () => {
+    setShowTable(false); 
+    setShowForm(false);
+    setShowUserForm(false);
+    setShowReviewTable(true);
   };
 
   return (
@@ -157,7 +175,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" onClick={handleSearchUserClick}>
+              <a href="#" onClick={handleSearchGamesClick}>
                 <i className={`fa fa-gamepad ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Search Games
@@ -173,10 +191,10 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" onClick={handleSearchUserClick}>
+              <a href="#" onClick={handleReviewClick}>
                 <i className={`fa fa-comments ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
-                Review
+                  Review
                 </span>
               </a>
             </li>
@@ -341,6 +359,9 @@ function Dashboard() {
         )}
         {showTable && (
           <TableDb />
+        )}
+        {showReviewTable && (
+          <TableReview />
         )}
       </body>
     </html>
