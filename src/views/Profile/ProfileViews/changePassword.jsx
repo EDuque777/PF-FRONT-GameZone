@@ -1,10 +1,12 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updatePassword } from "../../../redux/actions";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePassword, setError } from "../../../redux/actions";
 import Swal from "sweetalert2";
 
 const ChangePassword = () => {
+
+    const error = useSelector((state) => state.errorBack)
 
     const dispatch = useDispatch()
     
@@ -57,7 +59,7 @@ const ChangePassword = () => {
         }
     }
 
-    const handleOnSubmit = (e) => {
+    const handleOnSubmit = async (e) => {
         e.preventDefault();
 
         const currentPasswordError = validateCurrentPassword()
@@ -74,26 +76,40 @@ const ChangePassword = () => {
                     return; // Detener la ejecución si hay errores de validación
                 }
 
-                dispatch(updatePassword(datosUser.id, "", newPassword, confirmNewPassword))
+                await dispatch(updatePassword(datosUser.id, "", newPassword, confirmNewPassword))
+                await Swal.fire(
+                    'Good job!',
+                    'Updated Password!',
+                    'success'
+                )
             }else if(datosUser.password){
 
                 if (currentPasswordError || newPasswordError || confirmNewPasswordError) {
                     return; // Detener la ejecución si hay errores de validación
+                }else{
+                    await dispatch(updatePassword(datosUser.id, currentPassword, newPassword, confirmNewPassword))
+                    //localStorage.setItem("user", JSON.stringify({ ...datosUser, password: newPassword }));
+                    await Swal.fire(
+                        'Good job!',
+                        'Updated Password!',
+                        'success'
+                    )
                 }
-                dispatch(updatePassword(datosUser.id, currentPassword, newPassword, confirmNewPassword))
-                //localStorage.setItem("user", JSON.stringify({ ...datosUser, password: newPassword }));
             }
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-            )
 
             console.log("cambios guardados")
         }else{
             console.log("el id no esta definido")
         }
     }
+
+    useEffect(() => {
+        if (error) {
+            Swal.fire('Ups!', `${error}`, 'error').then(() => {
+              dispatch(setError(null)); // Limpiar el error después de mostrarlo
+            });
+        }
+    }, [error, dispatch])
 
     return (
         <div>

@@ -665,6 +665,10 @@ export const updatePassword = (id, currentPassword, newPassword, confirmNewPassw
             //});
         } catch (error) {
             console.log(error)
+            return dispatch({
+                type : ERROR,
+                payload : error.response.data
+            })
         }
     }
 }
