@@ -4,15 +4,13 @@ import * as act from "../../redux/actions";
 import MUIDataTable from "mui-datatables";
 import styles from './adm.module.css';
 import { Link } from 'react-router-dom';
-import { TableDb } from "./Tablas/TableGames";
-import { TableReview } from "./Tablas/TableReview"
+//import { TableReview } from "./Tablas/TableReview"
 
 
 function Dashboard() {
   //Form Game
   const [showForm, setShowForm] = useState(false);
   const [showUserForm, setShowUserForm] = useState(false);
-  const [showTable, setShowTable] = useState(false); // Adicionado estado para a tabela
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [requiredAge, setRequiredAge] = useState('');
@@ -41,7 +39,7 @@ function Dashboard() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('user');
 
-  const [showReviewTable, setShowReviewTable] = useState(false);
+  //const [showReviewTable, setShowReviewTable] = useState(false);
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
@@ -112,36 +110,22 @@ function Dashboard() {
   const handleCreateGameClick = () => {
     setShowForm(true);
     setShowUserForm(false);
-    setShowTable(false); 
-    setShowReviewTable(false);
+    //setShowReviewTable(false);
   };
 
   const handleCreateUserClick = () => {
     setShowUserForm(true);
     setShowForm(false);
-    setShowTable(false); 
-    setShowReviewTable(false);
+  
+  //  setShowReviewTable(false);
   };
 
-  const handleSearchUserClick = () => {
-    setShowForm(false);
-    setShowUserForm(false);
-    setShowReviewTable(false);
-
-  };
-  const handleSearchGamesClick = () => {
-    setShowTable(true); 
-    setShowForm(false);
-    setShowUserForm(false);
-    setShowReviewTable(false);
-  };
-
-  const handleReviewClick = () => {
-    setShowTable(false); 
+/*   const handleReviewClick = () => {
+    
     setShowForm(false);
     setShowUserForm(false);
     setShowReviewTable(true);
-  };
+  }; */
 
   return (
     <html>
@@ -175,7 +159,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" onClick={handleSearchGamesClick}>
+              <a href="#" >
                 <i className={`fa fa-gamepad ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Search Games
@@ -183,7 +167,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" onClick={handleSearchUserClick}>
+              <a href="#" >
                 <i className={`fa fa-users ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Search User
@@ -191,7 +175,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" onClick={handleReviewClick}>
+              <a href="#" /* onClick={handleReviewClick} */>
                 <i className={`fa fa-comments ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Review
@@ -357,12 +341,7 @@ function Dashboard() {
             </div>
           </div>
         )}
-        {showTable && (
-          <TableDb />
-        )}
-        {showReviewTable && (
-          <TableReview />
-        )}
+  
       </body>
     </html>
   );

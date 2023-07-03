@@ -48,7 +48,13 @@ export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 export const DELETEREVIEW = "DELETEREVIEW";
 export const FREE_ORDER = "FREE_ORDER";
-export const ALLGAMESADMIN = "ALLGAMESADMIN";
+
+export const GETALLUSERS = "GETALLUSERS";
+export const EDITDATAUSER = "EDITDATAUSER";
+export const DELETEDATAUSER = "CLEANDATAUSER";
+export const SET_USERS = "SET_USERS";
+export const DELETE_USER = "DELETE_USER";
+export const BAN_USER = "BAN_USER";
 
 export const mandarAReview = (game) => {
     //console.log(game);
@@ -661,13 +667,75 @@ export const getMyGames = (id) => {
 
 }
 
-export const allGamesAdmin = () => {
-    const endpoint = allGamesAdmin;
+
+
+
+//ADMIN *************************
+
+export const getUsers = () => {
+    const endpoint = `http://localhost:3001/users`;
     return async (dispatch) => {
         const {data} = await axios.get(endpoint);
+        console.log("SSSSSSSS", data);
         return dispatch({
-            type: ALLGAMESADMIN,
+            type: GETALLUSERS,
             payload: data
         })
     }
 }
+
+
+export const editUser = (id, updatedUser) => {
+    return async (dispatch) => {
+      try {
+        const endpoint = `http://localhost:3001/users/${id}`;
+        const response = await axios.put(endpoint, updatedUser);
+  
+        dispatch(getUsers());
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+  
+
+  export const setUsers = (users) => {
+    return { type: 'SET_USERS', payload: users };
+  };
+  
+  export const deleteUser = (id) => {
+    return async function(dispatch) {
+      try {
+        const endpoint = `http://localhost:3001/users/${id}`;
+        await axios.delete(endpoint);
+        dispatch({ type: 'DELETEDATAUSER' });
+      } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        
+      }
+    };
+  };
+  
+  export const banUser = (userId, banStatus) => {
+    return (dispatch) => {
+    
+      fetch(`//localhost:3001/users/${userId}/ban`, { 
+        method: 'PUT',
+        body: JSON.stringify({ ban: banStatus }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+         
+          dispatch({ type: 'BAN_USER', payload: { userId, banStatus } });
+        })
+        .catch((error) => {
+         
+          console.error('Error al banear el usuario:', error);
+         
+        });
+    };
+  };
+

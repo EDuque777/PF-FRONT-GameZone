@@ -14,7 +14,8 @@ import ShoppingView from './views/Profile/ProfileViews/ShoppingView';
 import Terms from './views/FooterViews/Terms and conditions/Terms';
 import AboutUs from './views/FooterViews/About us/AboutUs';
 import Contact from './views/FooterViews/Contact/Contact';
-import {TableDb} from './views/Adm/Tablas/TableGames';
+/* import {TableDb} from './views/Adm/Tablas/TableGames'; */
+import UserList from './views/Adm/Tablas/userList';
 
 function App() {
 
@@ -43,7 +44,8 @@ return (
       <Route path="/terms" render={() => <Terms />} />
       <Route path="/aboutus" render={() => <AboutUs />} />
       <Route path="/contact" render={() => <Contact />} />
-      <Route path="/TABLA" render={() => <TableDb />}/>
+      {/* <Route path="/TABLA" render={() => <TableDb />}/> */}
+      <Route path="/allusers" render={() => <UserList />}/>
 
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
