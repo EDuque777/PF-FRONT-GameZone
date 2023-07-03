@@ -63,7 +63,7 @@ export const getDeleteReview = (idRev) => {
         try {
             const response = await axios.delete(`/user/deleteReview/${idRev}`)
             //console.log("RESPONSEEEE",response);
-            //console.log("IIIIIID",ids);
+            console.log("IIIIIID",idRev);
             const game = response.data
             dispatch({
                 type: DELETEREVIEW,
@@ -76,12 +76,17 @@ export const getDeleteReview = (idRev) => {
 }
 
 export const getGameReview = (game) => {
-    //console.log(game);
+    console.log(game);
     return (dispatch) => {
-        return dispatch({
-            type: GETGAMEREVIEW,
-            payload: game
-        })
+        try {
+            return dispatch({
+                type: GETGAMEREVIEW,
+                payload: game
+            })
+        } catch (error) {
+            
+        }
+       
     }
 }
 

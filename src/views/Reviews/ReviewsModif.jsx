@@ -15,7 +15,7 @@ const ReviewsModif = () => {
   //console.log("IIIIIIIIIIIDDDDDDDDDDD", id);
   const id = gameRe
   const IDUser = JSON.parse(localStorage.getItem("user"));
-  console.log(IDUser);
+  //console.log(IDUser);
   const idsGames = gameRe.idGame
 
   const [form, setForm] = useState({

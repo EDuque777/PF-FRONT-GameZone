@@ -43,7 +43,7 @@ const NavBar = () => {
 
     //console.log(conteoTwo, "esto es de google")
 
-    console.log(conteo)
+    //console.log(conteo)
 
     useEffect(() => {
         //validateData()

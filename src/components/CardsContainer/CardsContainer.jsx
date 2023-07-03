@@ -14,7 +14,7 @@ const CardsContainer = (props) => {
     
     return (
       <div className={styles.container}>
-        {/* {console.log(uniqueGames)} */}
+        {console.log(uniqueGames)}
         {uniqueGames.map((game, index) => {
 
           const ratings = game.Reviews?.map(r => r.rating);

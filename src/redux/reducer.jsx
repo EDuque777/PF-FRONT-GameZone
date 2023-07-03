@@ -37,7 +37,7 @@ const rootReducer=(state = initialState, action) => {
         //?filtros combinadosconst combtype = "COMBTYPE"
         case act.MANDARREVIEW:
             const game = action.payload
-            //console.log(game);
+            console.log(game);
             return {
                 ...state,
                 review: game
@@ -254,25 +254,25 @@ const rootReducer=(state = initialState, action) => {
         case act.GET_GAMES_OFFER:
             return {
                 ...state,
-                gameOffer: action.payload
+                gameOffer: action.payload,
             }
 
         case act.GET_GAMES_COMING_SOON:
             return {
                 ...state,
-                gameComingSoon: action.payload
+                gameComingSoon: action.payload,
             }
         
         case act.GET_GAMES_NEW_RELEASES:
             return {
                 ...state,
-                gamesNewReleases: action.payload
+                gamesNewReleases: action.payload,
             }
 
         case act.GET_GAMES_TOP_SELLERS:
             return {
                 ...state,
-                gamesTopSellers: action.payload
+                gamesTopSellers: action.payload,
             }
 
 //?CASOS DEL CARRITO

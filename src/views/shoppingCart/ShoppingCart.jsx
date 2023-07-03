@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import * as act from "../../redux/actions";
 import Card from "../../components/Card/Card"
 import styles from "./ShoppingCart.module.css"
-import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 //* las cards que vengan del home...
@@ -14,13 +14,13 @@ const ShoppingCart = () => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const totalPrice = useSelector(state => state.total)
-    const totalPrices = totalPrice.toFixed(2) 
+    //console.log(totalPrice);
+    const totalPrices = parseFloat(totalPrice).toFixed(2);
     const history = useHistory()
     // const wholePart = Math.floor(totalPrice / 100);
     // const partDecimal = (totalPrice % 100).toString().padStart(2, '0');
     // const formattedTotalPrice = parseFloat(`${wholePart}.${partDecimal}`);
     const dataUser = JSON.parse(localStorage.getItem("user"));
-    //console.log(dataUser);
 
     //! no deberia borrar si no hay nada, METER EL CAMBIO
     const handleRemove = () => {
@@ -46,17 +46,6 @@ const ShoppingCart = () => {
 
     const handleBuy = async () => {
         try {
-
-          if (dataUser === null) {
-            Swal.fire({
-              position: 'center',
-              icon: 'warning',
-              title: 'Please register or log in to make a purchase',
-              showConfirmButton: false,
-              timer: 2000
-            })
-            return 
-          }
           if (cart.length === 0) {
             Swal.fire({
               position: 'center',
@@ -65,15 +54,11 @@ const ShoppingCart = () => {
               showConfirmButton: false,
               timer: 2000
             });
-            //console.log(totalPrices == 0.00);
           } else if (totalPrices == 0.00) {
-            //console.log("SIRVIOOO AAAAAA", totalPrices, cart, dataUser);
             dispatch(act.freeOrder(totalPrices, cart, dataUser));
             dispatch(act.clearCart())
-            history.push("/library")
-            //console.log("Free order dispatched");
+            history.push("/user")
           } else if (totalPrice > 0.00) {
-            //console.log("NOOOOOOOOOO AAAAAAAA");
             dispatch(act.createOrder(totalPrices, cart, dataUser))
           }
         } catch (error) {

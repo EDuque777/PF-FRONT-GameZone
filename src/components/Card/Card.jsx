@@ -5,6 +5,7 @@ import * as act from '../../redux/actions';
 import style from './Card.module.css';
 import { useHistory } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const Card = (props) => {
   //console.log(props);
@@ -16,15 +17,42 @@ const Card = (props) => {
   const history = useHistory();
   const isShoppCartRoute = location.pathname === "/cart";
   const isWhishListRoute = location.pathname === "/whishlist";
-  // const wholePart = Math.floor(price / 100);
-  // const partDecimal = (price % 100).toString().padStart(2, '0');
-  // const formattedNumber = parseFloat(`${wholePart}.${partDecimal}`);
+  const dataUser = JSON.parse(localStorage.getItem("user"));
+
+  const renderStars = () => {
+    const rating = Math.round(averageRating);
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(<FaStar key={i} className={style.starIcon} />);
+    }
+    return stars;
+  };
 
   const handleAdd = () => {
+    if (!dataUser) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Please register or log in to make a purchase',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return 
+    }
       dispatch(act.addCart({ id, price: price, name, image }));
   };
 
   const handleAddWhish = () => {
+    if (!dataUser) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please register or log in to be able to add to the list',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return;
+    }
       dispatch(act.addWhishList({ id, price: price, name, image }));
   };
 
@@ -60,9 +88,9 @@ const Card = (props) => {
       <div className={style.imagecontainer} onClick={() => { handleClick(id) }}>
         <img className={style.image} src={image} alt={name}></img>
         <h1 ref={titleRef} className={style.name}>{name}</h1>
-        {averageRating > 0 && (
-          <h4 className={style.rating}>{averageRating}</h4>
-        )}
+      {averageRating > 0 && (
+        <div className={style.rating}>{renderStars()}</div>
+      )}
       </div>
       <h3 className={style.price}>{price !== undefined && price !== 0 ? `$ ${price}` : 'Free'}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
