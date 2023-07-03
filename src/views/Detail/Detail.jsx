@@ -239,13 +239,13 @@ const Detail = (props) => {
               <h2>
                 <strong>Requirements </strong>
               </h2>
-              <p>{sanitizeText(game?.pc_requirements.minimum.replace(/:/g, ': '))}</p>
-              <p>{sanitizeText(game?.pc_requirements.recommended.replace(/:/g, ': '))}</p>
+              <p>{sanitizeText(game?.pc_requirements?.minimum?.replace(/:/g, ': '))}</p>
+              <p>{sanitizeText(game?.pc_requirements?.recommended?.replace(/:/g, ': '))}</p>
 
               <h2>
                 <strong>Languages </strong>
               </h2>
-              <p>{sanitizeText(game?.Languages.map(l => `<p>${l.language}</p>`).join(', '))}</p>
+              <p>{sanitizeText(game?.Languages?.map(l => `<p>${l.language}</p>`).join(', '))}</p>
 
               <h2>
                 <strong>Minimum age </strong>
@@ -254,22 +254,22 @@ const Detail = (props) => {
               <h2>
                 <strong>Developers </strong>
               </h2>
-              <p>{sanitizeText(game?.Developers.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
+              <p>{sanitizeText(game?.Developers?.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
             </div>
 
             <div className={style.detail_rigth} >
               <h2>
                 <strong>Categories</strong>
               </h2>
-                <p>{sanitizeText(game?.Categories.map(c => `<p>${c.category}</p>`).join(', '))}</p>
+                <p>{sanitizeText(game?.Categories?.map(c => `<p>${c.category}</p>`).join(', '))}</p>
               <h2>
                 <strong>Genres </strong>
               </h2>
-              <p>{sanitizeText(game?.Genres.map(g => `<p>${g.genre}</p>`).join(', '))}</p>
+              <p>{sanitizeText(game?.Genres?.map(g => `<p>${g.genre}</p>`).join(', '))}</p>
               <h2>
                 <strong>Released date </strong>
               </h2>
-              <p>{game.release_date}</p>
+              <p>{game?.release_date}</p>
               <h2>
                 <strong>ID :</strong>
               </h2>
@@ -304,7 +304,7 @@ const Detail = (props) => {
             ></div>
             </div>
             <div className={style.ratingPercentage}>
-              <span>{`${ratingPercentages[rating].toFixed(0)}%`}</span>
+              <span>{`${ratingPercentages[rating]?.toFixed(0)}%`}</span>
               </div>
          </div>
             ))}
@@ -316,7 +316,7 @@ const Detail = (props) => {
                 <div className={style.opiniones}>
 
                 {game?.Reviews &&
-                game?.Reviews.map((review, index) => (
+                game?.Reviews?.map((review, index) => (
                   <div className={style.opinion} key={index}>
                     <div className={style.opiniontop} >
                       <div className={style.opiniontopleft} >
@@ -324,7 +324,7 @@ const Detail = (props) => {
                        </div>
                        <div className={style.opiniontopright} >
                         <h3>{review?.author}</h3>
-                        <p>{review?.Users[0].name}</p>
+                        <p>{review?.Users[0]?.name}</p>
                         <p>{review?.date}</p>
                         <Rating rating={review?.rating} />
                        </div> 
