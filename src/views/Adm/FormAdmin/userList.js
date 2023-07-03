@@ -51,25 +51,47 @@ function UserList() {
     dispatch(act.getUsers());
   }, [dispatch]);
   console.log(users)
+
+  
   const handleEdit = (rowIndex) => {
     const { page, rowsPerPage } = muiTableRef.current.state;
     const dataIndex = rowIndex % rowsPerPage;
     const userIndex = dataIndex + page * rowsPerPage;
     const selectedUser = users[userIndex];
     setEditedUser(selectedUser);
-    setOpenModal(true);
+  
+    Swal.fire({
+      title: '¿Do you want to edit to ' + selectedUser.name + '?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm ',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setOpenModal(true);
+      }
+    });
   };
-
+  
   const handleSave = () => {
     if (!editedUser) {
       return;
     }
-    console.log('Usuario editado:', editedUser);
+  
+    console.log('Edited user:', editedUser);
     dispatch(act.editUser(editedUser.id, editedUser));
   
-    // Cerrar la ventana modal
     setOpenModal(false);
+  
+    Swal.fire({
+      title: 'Edit Modificado',
+      text: 'The user has been successfully edited.',
+      icon: 'success',
+    });
   };
+  
+  
   
   const handleDelete = async (rowIndex) => {
     const { page, rowsPerPage } = muiTableRef.current.state;
@@ -79,12 +101,12 @@ function UserList() {
   
     try {
       const result = await Swal.fire({
-        title: '¿Estás seguro?',
-        text: `Estás a punto de eliminar al usuario ${deletedUser.name}`,
+        title: '¿You re sure?',
+        text: `You are about to delete the user ${deletedUser.name}`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Eliminar',
-        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Eliminate',
+        cancelButtonText: 'Cancel',
         reverseButtons: true,
       });
   
@@ -93,50 +115,64 @@ function UserList() {
         // Eliminar el usuario de la base de datos utilizando la acción `deleteUser`
         await dispatch(act.deleteUser(deletedUser.id));
   
-        Swal.fire('Usuario eliminado: ' + deletedUser.name).then(() => {
+        Swal.fire('User Deleted: ' + deletedUser.name).then(() => {
           // Realizar cualquier acción adicional después de hacer clic en "OK" en el Swal alert
           // Por ejemplo, redireccionar a otra página o realizar alguna acción específica
           window.location.reload();
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // El usuario ha cancelado la eliminación
-        Swal.fire('Eliminación cancelada', '', 'info');
+        Swal.fire('Deletion canceled', '', 'info');
       }
     } catch (error) {
-      console.error('Error al eliminar el usuario:', error);
+      console.error('Error deleting user:', error);
       // Manejar el error de eliminación del usuario
     }
   };
 
-  const handleBan = (rowIndex) => {
+  const handleBan = async (rowIndex) => {
     const { page, rowsPerPage } = muiTableRef.current.state;
     const dataIndex = rowIndex % rowsPerPage;
     const userIndex = dataIndex + page * rowsPerPage;
     const bannedUser = users[userIndex];
     const newData = [...users];
     const rowData = newData[userIndex];
-    rowData.ban = !rowData.ban; // Cambia la asignación a un valor booleano
+    rowData.ban = !rowData.ban; // Cambiar el estado de ban
     newData[userIndex] = rowData;
-    dispatch(act.banUser(bannedUser.id, rowData.ban));
-    setOpenModal(false);
-    Swal.fire('You clicked on Ban: ' + bannedUser.name + '. New estado: ' + rowData.ban);
-  };
   
+    // Actualizar el estado de ban correspondiente en el estado de Redux
+    const updatedUsers = [...users];
+    updatedUsers[userIndex].ban = rowData.ban;
+    dispatch({ type: 'SET_USERS', payload: updatedUsers });
+  
+    // Mostrar la alerta de confirmación antes de realizar el baneo
+    const confirmed = await Swal.fire({
+      title: '¿You re sure?',
+      text: '¿You want to ban ' + bannedUser.name + '?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    });
+  
+    if (confirmed.isConfirmed) {
+      try {
+        
+        await dispatch(act.banUser(bannedUser.id, rowData.ban));
+  
+        Swal.fire('Updating Status ' + bannedUser.name )
+          .then(() => {
 
-
-//   const handleBan = (rowIndex) => {
-//     const { page, rowsPerPage } = muiTableRef.current.state;
-//     const dataIndex = rowIndex % rowsPerPage;
-//     const userIndex = dataIndex + page * rowsPerPage;
-//     const bannedUser = users[userIndex];
-//     const newData = [...users];
-//     const rowData = newData[userIndex];
-//     rowData.ban = rowData.ban === 'true' ? 'false' : 'true';
-//     newData[userIndex] = rowData;
-//     dispatch(act.banUser(bannedUser.id, rowData.ban));
-//     setOpenModal(false);
-//     Swal.fire('You clicked on Ban: ' + bannedUser.name + '. New estado: ' + rowData.ban);
-//   };
+            window.location.reload();
+          });
+      } catch (error) {
+        console.error('Error when banning the user:', error);
+      }
+    } else {
+     
+    }
+  };
 
   const getMuiTheme = () =>
     createTheme({
@@ -239,17 +275,6 @@ function UserList() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  {/* <label>
-                    <strong>Status:</strong>
-                  </label> */}
-                  {/* <input
-                    type="text"
-                    value={editedUser.ban}
-                    onChange={(e) => setEditedUser({ ...editedUser, ban: e.target.value })}
-                    style={{ width: '100%' }}
-                  />
-                </Grid> */}
-                {/* <Grid item xs={12} className={classes.buttonContainer}> */}
                   <Button variant="contained" color="secondary" onClick={() => setOpenModal(false)}>
                     Cancelar
                   </Button>
@@ -267,7 +292,6 @@ function UserList() {
 }
 
 export default UserList;
-
 
 
 
