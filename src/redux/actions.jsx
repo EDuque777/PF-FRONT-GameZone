@@ -664,6 +664,9 @@ export const getMyGames = (id) => {
     }
 }
 
+
+//ADMIN ***********************************************************************
+
 export const getUsers = () => {
     const endpoint = `http://localhost:3001/users`;
     return async (dispatch) => {
@@ -676,32 +679,11 @@ export const getUsers = () => {
     }
 }
 
-// export const editNameUser = (id, newName) => {
-//     return async (dispatch) => {
-//       try {
-//         const endpoint = `http://localhost:3001/users/${id}`;
-//         const response = await axios.put(endpoint, { name: newName });
-  
-//         // Aquí puedes realizar acciones adicionales después de guardar los cambios,
-//         // como actualizar el estado de Redux con los nuevos datos del usuario modificado.
-//         // Por ejemplo, puedes llamar a otra acción para actualizar la lista de usuarios.
-  
-//         dispatch(getUsers());
-//       } catch (error) {
-//         console.log(error.message);
-//       }
-//     };
-//   };
-
 export const editUser = (id, updatedUser) => {
     return async (dispatch) => {
       try {
         const endpoint = `http://localhost:3001/users/${id}`;
         const response = await axios.put(endpoint, updatedUser);
-  
-        // Aquí puedes realizar acciones adicionales después de guardar los cambios,
-        // como actualizar el estado de Redux con los nuevos datos del usuario modificado.
-        // Por ejemplo, puedes llamar a otra acción para actualizar la lista de usuarios.
   
         dispatch(getUsers());
       } catch (error) {
@@ -723,17 +705,14 @@ export const editUser = (id, updatedUser) => {
         dispatch({ type: 'DELETEDATAUSER' });
       } catch (error) {
         console.error('Error al eliminar el usuario:', error);
-        // Manejar el error de eliminación del usuario
+        
       }
     };
   };
   
   export const banUser = (userId, banStatus) => {
     return (dispatch) => {
-      // Realiza las operaciones necesarias para banear al usuario en el backend
-      // Puedes utilizar fetch, axios u otra librería para enviar una solicitud al servidor y actualizar el estado del usuario
-  
-      // Ejemplo de solicitud utilizando fetch
+    
       fetch(`//localhost:3001/users/${userId}/ban`, { 
         method: 'PUT',
         body: JSON.stringify({ ban: banStatus }),
@@ -743,13 +722,13 @@ export const editUser = (id, updatedUser) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Si la solicitud es exitosa, actualiza el estado del usuario en el store de Redux
+         
           dispatch({ type: 'BAN_USER', payload: { userId, banStatus } });
         })
         .catch((error) => {
-          // Maneja el error en caso de que la solicitud falle
+         
           console.error('Error al banear el usuario:', error);
-          // Puedes enviar una acción de error o realizar alguna otra acción para manejar el error
+         
         });
     };
   };
