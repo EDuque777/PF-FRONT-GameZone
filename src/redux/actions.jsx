@@ -50,6 +50,13 @@ export const DELETEREVIEW = "DELETEREVIEW";
 export const FREE_ORDER = "FREE_ORDER";
 export const SET_CART = "SET_CART";
 export const SET_TOTALPRICE = "SET_TOTALPRICE";
+export const GETALLUSERS = "GETALLUSERS";
+export const EDITDATAUSER = "EDITDATAUSER";
+export const DELETEDATAUSER = "CLEANDATAUSER";
+export const SET_USERS = "SET_USERS";
+// export const DELETE_USER = "DELETE_USER";
+export const BAN_USER = "BAN_USER";
+
 
 export const mandarAReview = (game) => {
     console.log(game);
@@ -86,9 +93,8 @@ export const getGameReview = (game) => {
                 payload: game
             })
         } catch (error) {
-            
+          console.error(error.message);  
         }
-       
     }
 }
 
@@ -319,45 +325,71 @@ export const getGamesNewReleases = () => {
 
 //? FUNCIONES DEL CARRITO
 
-// export const setTotalPrice = (totalPrice) => {
-//     return function (dispatch) {
-//         dispatch({
-//             type: SET_TOTALPRICE,
-//             payload: totalPrice
-//         })
-//     }
-// }
+export const setTotalPrice = (totalPrice) => {
+    console.log(totalPrice);
+    return function (dispatch, getState) {
+        dispatch({
+            type: SET_TOTALPRICE,
+            payload: totalPrice
+        })
 
-// export const setCart = (cart) => {
-//     return function (dispatch) {
-//         dispatch({
-//             type: SET_CART,
-//             payload: cart
-//         })
-//     }
-// }
+        const total = getState().total;
+        localStorage.setItem("total", JSON.stringify(total));
+    }
+}
+
+export const setCart = (cart) => {
+    return function (dispatch) {
+        dispatch({
+            type: SET_CART,
+            payload: cart
+        })
+    }
+}
 
 export const addCart = (game) => {
-    return function(dispatch){
+    return function(dispatch, getState) {
         dispatch({
             type: ADD_TO_CART,
             payload: game,
         })
+
+         //! revisar si funca YA
+         const cart = getState().cart;
+         localStorage.setItem("cart", JSON.stringify(cart));
+         const total = getState().total;
+         localStorage.setItem("total", JSON.stringify(total));
     }
 }
 
 export const removeCart = (id) => {
     //console.log(id);
-    return {
-        type: REMOVE_TO_CART,
-        payload: id,
+    return function(dispatch, getState) {
+        dispatch({
+            type: REMOVE_TO_CART,
+            payload: id,
+        })
+
+        //! revisar si funca YA
+        const cart = getState().cart;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        const total = getState().total;
+        localStorage.setItem("total", JSON.stringify(total));
     }
 }
 
 export const clearCart = ()  => {
-    return  {
-            type: CLEAR_CART  
-    }
+    return function(dispatch, getState) {
+        dispatch({
+            type: CLEAR_CART 
+        })
+           
+         //! revisar si funca YA
+     const cart = getState().cart;
+     localStorage.setItem("cart", JSON.stringify(cart));
+     const total = getState().total;
+     localStorage.setItem("total", JSON.stringify(total));
+    }  
 }
 
 export const createOrder = (totalPrice, cartGames, dataUser) => {
@@ -682,5 +714,73 @@ export const getMyGames = (id) => {
             console.error(error.message);    
         }
     }
-
 }
+
+//ADMIN *************************
+
+export const getUsers = () => {
+    const endpoint = `http://localhost:3001/users`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        console.log("SSSSSSSS", data);
+        return dispatch({
+            type: GETALLUSERS,
+            payload: data
+        })
+    }
+}
+
+
+export const editUser = (id, updatedUser) => {
+    return async (dispatch) => {
+      try {
+        const endpoint = `http://localhost:3001/users/${id}`;
+        const response = await axios.put(endpoint, updatedUser);
+  
+        dispatch(getUsers());
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+  
+
+  export const setUsers = (users) => {
+    return { type: 'SET_USERS', payload: users };
+  };
+  
+  export const deleteUser = (id) => {
+    return async function(dispatch) {
+      try {
+        const endpoint = `http://localhost:3001/users/${id}`;
+        await axios.delete(endpoint);
+        dispatch({ type: 'DELETEDATAUSER' });
+      } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        
+      }
+    };
+  };
+  
+  export const banUser = (userId, banStatus) => {
+    return (dispatch) => {
+    
+      fetch(`//localhost:3001/users/${userId}/ban`, { 
+        method: 'PUT',
+        body: JSON.stringify({ ban: banStatus }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+         
+          dispatch({ type: 'BAN_USER', payload: { userId, banStatus } });
+        })
+        .catch((error) => {
+         
+          console.error('Error al banear el usuario:', error);
+         
+        });
+    };
+  };

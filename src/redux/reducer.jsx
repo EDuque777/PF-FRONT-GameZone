@@ -30,6 +30,8 @@ const initialState = {
     library: [],
     review: [],
     deleteReview: null,
+    allusers: [],
+    users: [],
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -37,7 +39,6 @@ const rootReducer=(state = initialState, action) => {
         //?filtros combinadosconst combtype = "COMBTYPE"
         case act.MANDARREVIEW:
             const game = action.payload
-            console.log(game);
             return {
                 ...state,
                 review: game
@@ -51,11 +52,14 @@ const rootReducer=(state = initialState, action) => {
                 title: "Review removed successfuly",
                 showConfirmButton: false,
                 timer: 2000
+            }).then(() => {
+                window.location.reload();
             })
             return {
                 ...state,
                 deleteReview: action.payload
             }
+            
 
         case act.GETGAMEREVIEW:
             //console.log(action.payload);
@@ -271,20 +275,18 @@ const rootReducer=(state = initialState, action) => {
 
 //?CASOS DEL CARRITO
 
-        // case act.SET_TOTALPRICE:
-        //     const totals = action.payload;
-        //     return {
-        //         ...state,
-        //         total: totals
-        //     }
+        case act.SET_TOTALPRICE:
+            console.log(action.payload);
+            return {
+                ...state,
+                total: action.payload
+            }
 
-        // case act.SET_CART:
-        //     const cartDeslogin = action.payload;
-        //     console.log(cartDeslogin);
-        //     return {
-        //         ...state,
-        //         cart: cartDeslogin.cart,
-        //     }
+        case act.SET_CART:
+            return {
+                ...state,
+                cart: action.payload,
+            }
         
         case act.ADD_TO_CART:
             const addGame = action.payload
@@ -355,6 +357,7 @@ const rootReducer=(state = initialState, action) => {
                 showConfirmButton: false,
                 timer: 2000
               });
+              console.log(action.payload);
             return {
                 ...state,
                 orderCreated: true,
@@ -509,7 +512,52 @@ const rootReducer=(state = initialState, action) => {
                     ...state,
                     library: action.payload
                 }  
-            
+
+
+//? CASO ADMIN *************************
+        case act.GETALLUSERS:
+            return {
+                ...state,
+                allusers: action.payload
+            }
+
+        case act.EDITDATAUSER:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    ...action.payload,
+                },
+            }
+
+        case act.SET_USERS:
+            return {
+                ...state,
+                users: action.payload,
+            };
+
+        case act.DELETEDATAUSER:
+            return {
+                ...state,
+                // Puedes realizar otras actualizaciones del estado aquí si es necesario
+            };
+
+        case act.BAN_USER:
+            const { userId, banStatus } = action.payload;
+            const updatedUsers = state.users.map((user) => {
+                if (user.id === userId) {
+                    return {
+                        ...user,
+                        ban: banStatus,
+                    };
+                }
+                return user;
+            });
+            return {
+                ...state,
+                users: updatedUsers,
+            }
+        
         default:
             return {...state};
     }
