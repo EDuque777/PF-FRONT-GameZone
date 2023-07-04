@@ -12,6 +12,7 @@ const Detail = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const game = useSelector((state) => state.gameDetail);
+  //console.log(game);
   const isLoading = game === undefined || game === null;
   const genres = game && game?.genres;
   const [videoUrl, setVideoUrl] = useState("");
@@ -19,7 +20,7 @@ const Detail = (props) => {
   let idReview
   
   const datosUser = JSON.parse(localStorage.getItem("user"));
-  console.log("asdfghjhgfds",datosUser?.name)
+  //console.log("asdfghjhgfds",datosUser?.name)
 
 
   useEffect(() => {
@@ -60,16 +61,16 @@ const Detail = (props) => {
   }
   
   const handleAdd = () => {
-    if (!datosUser) {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'Please register or log in to make a purchase',
-        showConfirmButton: false,
-        timer: 2000
-      })
-      return;
-    }
+    // if (!datosUser) {
+    //   Swal.fire({
+    //     position: 'center',
+    //     icon: 'warning',
+    //     title: 'Please register or log in to make a purchase',
+    //     showConfirmButton: false,
+    //     timer: 2000
+    //   })
+    //   return;
+    // }
     dispatch(act.addCart({id: bkId, image: img, name:name , price: isNaN(price) ? 0 : price}));
   }
   

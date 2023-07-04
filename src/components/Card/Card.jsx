@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 const Card = (props) => {
   //console.log(props);
-  let { id ,price, name, image, averageRating } = props;
+  let { id ,price, name, image, averageRating, coming_soon} = props;
   price = parseFloat(isNaN(price) ? 0 : price) ?? 0;
   //console.log(price)
   const dispatch = useDispatch();
@@ -29,16 +29,6 @@ const Card = (props) => {
   };
 
   const handleAdd = () => {
-    if (!dataUser) {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'Please register or log in to make a purchase',
-        showConfirmButton: false,
-        timer: 2000
-      })
-      return 
-    }
       dispatch(act.addCart({ id, price: price, name, image }));
   };
 
@@ -92,7 +82,7 @@ const Card = (props) => {
         <div className={style.rating}>{renderStars()}</div>
       )}
       </div>
-      <h3 className={style.price}>{price !== undefined && price !== 0 ? `$ ${price}` : 'Free'}</h3>
+      <h3 className={style.price}> {coming_soon ? "coming soon" : (price !== undefined && price !== 0 ? `$ ${price}` : 'Free')}</h3>
       {!isShoppCartRoute && !isWhishListRoute && (
         <div>
           <button className={style.button} onClick={() => { handleAddWhish() }}>Add to WhishList</button>

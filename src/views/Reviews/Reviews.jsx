@@ -12,7 +12,7 @@ const Review = () => {
   const history = useHistory()
   const gameRe = useSelector(state => state.review)
   const { id, name } = gameRe
-  //console.log(gameRe);
+  console.log(gameRe);
   const IDUser = JSON.parse(localStorage.getItem("user"));
 
   const [form, setForm] = useState({

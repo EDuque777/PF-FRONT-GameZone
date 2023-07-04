@@ -48,9 +48,11 @@ export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 export const DELETEREVIEW = "DELETEREVIEW";
 export const FREE_ORDER = "FREE_ORDER";
+export const SET_CART = "SET_CART";
+export const SET_TOTALPRICE = "SET_TOTALPRICE";
 
 export const mandarAReview = (game) => {
-    //console.log(game);
+    console.log(game);
     return {
         type: MANDARREVIEW,
         payload: game
@@ -316,6 +318,25 @@ export const getGamesNewReleases = () => {
 }
 
 //? FUNCIONES DEL CARRITO
+
+// export const setTotalPrice = (totalPrice) => {
+//     return function (dispatch) {
+//         dispatch({
+//             type: SET_TOTALPRICE,
+//             payload: totalPrice
+//         })
+//     }
+// }
+
+// export const setCart = (cart) => {
+//     return function (dispatch) {
+//         dispatch({
+//             type: SET_CART,
+//             payload: cart
+//         })
+//     }
+// }
+
 export const addCart = (game) => {
     return function(dispatch){
         dispatch({
@@ -389,7 +410,6 @@ export const freeOrder = (totalPrice, cartGames, dataUser) => {
     };
   };
   
-
 //? FUNCIONES DE LA LISTA DE DESEADOS
 
 export const addWhishList = (game) => {

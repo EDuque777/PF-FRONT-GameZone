@@ -11,20 +11,20 @@ import { useHistory } from "react-router-dom";
 const Home = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const gameOffer = useSelector(state => state.gameOffer);
-  const search = useSelector(state => state.search);
-  const gamesNewReleases = useSelector(state => state.gamesNewReleases);
-  const gamesTopSellers = useSelector(state => state.gamesTopSellers);
+  //const gameOffer = useSelector(state => state.gameOffer);
+  //const search = useSelector(state => state.search);
+  //const gamesNewReleases = useSelector(state => state.gamesNewReleases);
+  //const gamesTopSellers = useSelector(state => state.gamesTopSellers);
   const games = useSelector(state => state.games);
   const [name, setName] = useState("");
   //console.log(games);
   
   useEffect(() => {
     dispatch(act.getGames());
-    dispatch(act.getGamesOffer());
-    dispatch(act.getGamesNewReleases());
-    dispatch(act.getGamesComingSoon());
-    dispatch(act.getGamesTopSellers());
+    //dispatch(act.getGamesOffer());
+    // dispatch(act.getGamesNewReleases());
+    //dispatch(act.getGamesComingSoon());
+    //dispatch(act.getGamesTopSellers());
     dispatch(act.clearSearch());
     // dispatch(act.preload());
   }, [dispatch]);
@@ -49,7 +49,9 @@ const Home = () => {
   };
 
   // Verificar si el array de juegos tiene al menos 14 elementos
-  const selectedGames = games.length >= 12 ? games.slice(0, 12) : games;
+  const selectedGames = games.length >= 40 ? games.slice(0, 40) : games;
+  const freeGames = games.filter(game => game.is_free === true);
+  const type = games.filter(game => game.type === "demo" || game.type === "dlc");
 
   //console.log(search)
   return (
@@ -72,16 +74,19 @@ const Home = () => {
             size="xl"
           />
         </div>
-
         <h3 className={style.title}>All Games</h3>
         <CardsContainer gameComingSoon={selectedGames} />
       </div>
-      <h3 className={style.title}>Top Sells</h3>
+      <h3 className={style.title}>Free</h3>
+      <CardsContainer gameComingSoon={freeGames} />
+      <h3 className={style.title}>Demos y DLCs</h3>
+        <CardsContainer gameComingSoon={type} />
+      {/* <h3 className={style.title}>Top Sells</h3>
       <CardsContainer gameComingSoon={gamesTopSellers} />
       <h3 className={style.title}>Game Offers</h3>
-      <CardsContainer gameComingSoon={gameOffer} />
-      <h3 className={style.title}>New Releases</h3>
-      <CardsContainer gameComingSoon={gamesNewReleases} />
+      <CardsContainer gameComingSoon={gameOffer} /> */}
+      {/* <h3 className={style.title}>New Releases</h3>
+      <CardsContainer gameComingSoon={gamesNewReleases} /> */}
     </div>
   );
 };

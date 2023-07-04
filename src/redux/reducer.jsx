@@ -97,8 +97,6 @@ const rootReducer=(state = initialState, action) => {
               search: filteredSearchssssss
             };
           
-
-
         case act.FILTER_PLATFORMS:
             let filteredSearchssss;
             const platform = action.payload
@@ -115,8 +113,6 @@ const rootReducer=(state = initialState, action) => {
               search: filteredSearchssss
             };
 
-
-
             case act.FILTER_FREE:
                 let filteredSearchsssss;
                 if (action.payload === "false") {
@@ -129,7 +125,6 @@ const rootReducer=(state = initialState, action) => {
                   search: filteredSearchsssss
                 };
               
-
         case act.FILTER_TYPE:
             const typess = action.payload;
             const typesearchss = state.search.filter(game => game.type === typess);
@@ -157,7 +152,6 @@ const rootReducer=(state = initialState, action) => {
                     search: typesearc
                 };
             
-
         case act.ORDER_BY:
             const orderBy = action.payload;
             let sortedSearch = [...state.search];
@@ -276,6 +270,22 @@ const rootReducer=(state = initialState, action) => {
             }
 
 //?CASOS DEL CARRITO
+
+        // case act.SET_TOTALPRICE:
+        //     const totals = action.payload;
+        //     return {
+        //         ...state,
+        //         total: totals
+        //     }
+
+        // case act.SET_CART:
+        //     const cartDeslogin = action.payload;
+        //     console.log(cartDeslogin);
+        //     return {
+        //         ...state,
+        //         cart: cartDeslogin.cart,
+        //     }
+        
         case act.ADD_TO_CART:
             const addGame = action.payload
             const existingGame = state.cart.find(game => game.id === addGame.id)
@@ -350,7 +360,7 @@ const rootReducer=(state = initialState, action) => {
                 orderCreated: true,
                 error: null
             }
-        
+    
 //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
             const addList = action.payload
