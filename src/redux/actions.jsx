@@ -684,7 +684,6 @@ export const getUsers = () => {
     }
 }
 
-
 export const editUser = (id, updatedUser) => {
     return async (dispatch) => {
       try {
@@ -738,4 +737,3 @@ export const editUser = (id, updatedUser) => {
         });
     };
   };
-
