@@ -39,14 +39,14 @@ const MyGames = () => {
     }
   }
 
-  const handleDelete = (id) => {
-    const gameFilter = allGames.find(game => game.id === id)
-    if (gameFilter) {
-      const idRev = gameFilter?.Reviews[0]?.id
-      console.log(idRev);
-      dispatch(act.getDeleteReview(idRev))
-    }
-  }
+  // const handleDelete = (id) => {
+  //   const gameFilter = allGames.find(game => game.id === id)
+  //   if (gameFilter) {
+  //     const idRev = gameFilter?.Reviews[0]?.id
+  //     console.log(idRev);
+  //     dispatch(act.getDeleteReview(idRev))
+  //   }
+  // }
     
     //! agregar la ruta al detail
     return (
@@ -68,7 +68,7 @@ const MyGames = () => {
                 <Link to={`/detail/reviews/${game.id}`}>
                     <button className={style.button} onClick={() => {handleEdit(game.id, game.name)}}>Edit Review</button>
                 </Link>
-                <button className={style.buttonBorrar} onClick={() => handleDelete(game.id)}>x</button>
+                {/* <button className={style.buttonBorrar} onClick={() => handleDelete(game.id)}>x</button> */}
               </div>
             </div>
           ))}

@@ -39,29 +39,29 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         //filtros combinadosconst combtype = "COMBTYPE"
 
-        case act.MANDARREVIEW:
-            const { name } = action.payload
-            console.log(name);
-            // const biblio = action.payload;
-            // const juegoReview = biblio.filter(game => game.name !== game.name)
-            return {
-                ...state,
-                review: game
-            }
+        // case act.MANDARREVIEW:
+        //     const { name } = action.payload
+        //     console.log(name);
+        //     // const biblio = action.payload;
+        //     // const juegoReview = biblio.filter(game => game.name !== game.name)
+        //     return {
+        //         ...state,
+        //         review: game
+        //     }
 
-        case act.DELETEREVIEW:
-            //console.log(action.payload);
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Review removed successfuly",
-                showConfirmButton: false,
-                timer: 2000
-            })
-            return {
-                ...state,
-                deleteReview: action.payload
-            }
+        // case act.DELETEREVIEW:
+        //     //console.log(action.payload);
+        //     Swal.fire({
+        //         position: "center",
+        //         icon: "success",
+        //         title: "Review removed successfuly",
+        //         showConfirmButton: false,
+        //         timer: 2000
+        //     })
+        //     return {
+        //         ...state,
+        //         deleteReview: action.payload
+        //     }
 
         case act.GETGAMEREVIEW:
             //console.log(action.payload);
@@ -342,20 +342,20 @@ const rootReducer = (state = initialState, action) => {
                 error: action.payload
             }
 
-        case act.FREE_ORDER:
-            console.log(action.payload);
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Thanks for your purchase",
-                showConfirmButton: false,
-                timer: 2000
-            });
-            return {
-                ...state,
-                orderCreated: true,
-                error: null
-            }
+        // case act.FREE_ORDER:
+        //     console.log(action.payload);
+        //     Swal.fire({
+        //         position: "center",
+        //         icon: "success",
+        //         title: "Thanks for your purchase",
+        //         showConfirmButton: false,
+        //         timer: 2000
+        //     });
+        //     return {
+        //         ...state,
+        //         orderCreated: true,
+        //         error: null
+        //     }
 
         //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:

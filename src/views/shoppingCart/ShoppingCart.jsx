@@ -68,7 +68,7 @@ const ShoppingCart = () => {
             //console.log(totalPrices == 0.00);
           } else if (totalPrices == 0.00) {
             //console.log("SIRVIOOO AAAAAA", totalPrices, cart, dataUser);
-            dispatch(act.freeOrder(totalPrices, cart, dataUser));
+            // dispatch(act.freeOrder(totalPrices, cart, dataUser));
             dispatch(act.clearCart())
             history.push("/library")
             //console.log("Free order dispatched");

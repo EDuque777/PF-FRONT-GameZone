@@ -61,23 +61,23 @@ export const mandarAReview = (game) => {
     }
 }
 
-export const getDeleteReview = (idRev) => {
+// export const getDeleteReview = (idRev) => {
 
-    return async function (dispatch) {
-        try {
-            const response = await axios.delete(`/user/deleteReview/${idRev}`)
-            //console.log("RESPONSEEEE",response);
-            //console.log("IIIIIID",ids);
-            const game = response.data
-            dispatch({
-                type: DELETEREVIEW,
-                payload: game
-            })
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-}
+//     return async function (dispatch) {
+//         try {
+//             const response = await axios.delete(`/user/deleteReview/${idRev}`)
+//             //console.log("RESPONSEEEE",response);
+//             //console.log("IIIIIID",ids);
+//             const game = response.data
+//             dispatch({
+//                 type: DELETEREVIEW,
+//                 payload: game
+//             })
+//         } catch (error) {
+//             console.log(error.message);
+//         }
+//     }
+// }
 
 export const getGameReview = (game) => {
     //console.log(game);
@@ -368,25 +368,25 @@ export const createOrderFailure = (errorMessage) => {
     }
 }
 
-export const freeOrder = (totalPrice, cartGames, dataUser) => {
-    console.log(totalPrice, cartGames, dataUser);
-    return async function (dispatch) {
-      try {
-        const response = await axios.post('/freeOrder', {totalPrice, cartGames, dataUser});
+// export const freeOrder = (totalPrice, cartGames, dataUser) => {
+//     console.log(totalPrice, cartGames, dataUser);
+//     return async function (dispatch) {
+//       try {
+//         const response = await axios.post('/freeOrder', {totalPrice, cartGames, dataUser});
         
-        if (response.status === 200) {
-          dispatch({
-            type: FREE_ORDER,
-            payload: response.data
-          });
-        } else {
-          dispatch(createOrderFailure('Error creating order'));
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-  };
+//         if (response.status === 200) {
+//           dispatch({
+//             type: FREE_ORDER,
+//             payload: response.data
+//           });
+//         } else {
+//           dispatch(createOrderFailure('Error creating order'));
+//         }
+//       } catch (error) {
+//         console.error(error.message);
+//       }
+//     };
+//   };
   
 
 //? FUNCIONES DE LA LISTA DE DESEADOS

@@ -223,13 +223,21 @@ function UserList() {
                         name: 'ban',
                         label: 'Status',
                         options: {
+                            filter: true,
+                            filterOptions: {
+                                names: ["Active", "Banned"],
+                            },
                             customBodyRenderLite: (dataIndex) =>
                                 users[dataIndex].ban ? 'Banned' : 'Active',
                         },
                     },
+
+
                     {
-                        name: 'Actions',
+                        name: 'ACTIONS',
                         options: {
+                            filter: false,
+                            sort: false,
                             customBodyRenderLite: (dataIndex, rowIndex) => (
                                 <div>
                                     <IconButton onClick={() => handleEdit(rowIndex)}>
@@ -297,7 +305,7 @@ function UserList() {
                                     <Select
                                         value={editedUser.country}
                                         onChange={(e) => setEditedUser({ ...editedUser, country: e.target.value })}
-                                        style={{ width: '100%' }} 
+                                        style={{ width: '100%' }}
                                     >
                                         {countries.map((country) => (
                                             <MenuItem key={country.id} value={country.label}>
@@ -345,25 +353,15 @@ function UserList() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography>
-                                        <strong>Email:</strong>
+                                        <strong>Email: </strong>
                                         {editedUser.email}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <label>
-                                        <strong>Country:</strong>
-                                    </label>
-                                    <Select
-                                        value={editedUser.country}
-                                        onChange={(e) => setEditedUser({ ...editedUser, country: e.target.value })}
-                                        style={{ width: '100%' }}
-                                    >
-                                        {countries.map((country) => (
-                                            <MenuItem key={country.code} value={country.name}>
-                                                {country.name}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
+                                    <Typography>
+                                        <strong>Country: </strong>
+                                        {editedUser.country}
+                                    </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button variant="contained" color="primary" onClick={() => setOpenInfoModal(false)}>
@@ -375,6 +373,7 @@ function UserList() {
                     )}
                 </div>
             </Modal>
+
 
         </ThemeProvider>
     );

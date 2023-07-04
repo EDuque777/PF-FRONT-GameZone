@@ -163,10 +163,10 @@ function Dashboard() {
       Swal.fire('Error', 'Passwords do not match', 'error');
       return;
     }
-    if (!validateEmail(email)) {
-      Swal.fire('Error', 'Please enter a valid email', 'error');
-      return;
-    }
+    // if (!validateEmail(email)) {
+    //   Swal.fire('Error', 'Please enter a valid email', 'error');
+    //   return;
+    // }
 
     if (role !== "users" && role !== "admin") {
       Swal.fire("Please select a valid role (User o Admin).");
