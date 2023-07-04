@@ -369,13 +369,17 @@ export const postCreateUser = (props) => {
     return async function (dispatch) {
         try {
            const user = await axios.post("crearCuenta",props)
-           console.log(user.props)
+           console.log(user.data)
             return dispatch({
                 type : CREATE_USER,
                 payload : user.props
             })
         } catch (error) {
             console.log(error)
+            return dispatch({// esto es de tokens invalidos
+                type : ERROR,
+                payload : error.response.data
+            })
         }
     }
 }
@@ -393,10 +397,10 @@ export const postLogin = (datos) =>{
             })
         } catch (error) {
             console.log(error.response.data)
-            //return dispatch({
-            //    type : LOGIN_USER,
-            //    payload : error.response.data
-            //})
+            return dispatch({// esto es de tokens invalidos
+                type : ERROR,
+                payload : error.response.data
+            })
         }
     }
 }

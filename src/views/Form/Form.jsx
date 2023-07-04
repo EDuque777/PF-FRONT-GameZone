@@ -3,44 +3,20 @@ import React from "react";
 import styles from "./Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postCreateUser, postLogin, loginGoogle } from "../../redux/actions";
+import { postCreateUser, postLogin, loginGoogle, setError } from "../../redux/actions";
 import countries from "./countries";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../firebase.js";
 //import NavBar from '../../components/NavBar/NavBar'
-
 
 const Form = () => {
 
   const history = useHistory()
   const dispatch = useDispatch()
 
-  //const usuario = useSelector((state) => state.user)
-  //const usuarioTwo = useSelector((state) => state.userGoogle )
-
-  //const verificacion = async () => {
-  //  if (usuario === null) {
-  //    return console.log(true)
-  //  }else{
-  //    await localStorage.setItem("user", JSON.stringify(usuario));
-  //  }
-  //}
-
-  //const verificacionTwo = async () => {
-  //  if (usuarioTwo === null) {
-  //    return console.log(true)
-  //  }else{
-  //    await localStorage.setItem("userTwo", JSON.stringify(usuarioTwo));
-  //  }
-  //}
-
-  //useEffect(() => {
-  //  verificacion()
-  //}, [usuario])
-
-  //useEffect(() => {
-  //  verificacionTwo()
-  //}, [usuarioTwo])
+  const error = useSelector((state) => state.errorBack)
 
   const [ name, setName ] = useState("")
   const [ user_name, setUser_name ] = useState("")
@@ -177,45 +153,45 @@ const Form = () => {
     container.classList.add(styles["right-panel-active"]);
   };
 
-  const submitValidation = async (datosTwo) => {
-
-    const validacion = JSON.parse(localStorage.getItem("user"));
-
-    if ( validacion && validacion.user && validacion.user.message) {
-      Swal.fire(
-        `${validacion.user.messsage}`,
-        'Congratulations you are part of GameZone',
-        'error'
-      )
-
-      console.log("deberia de aparecer el message")
-
-    }else{
-
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-start',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Signed in successfully'
-      })
-
-      await dispatch(postLogin(datosTwo))
-
-      await history.push("/home")
-    }
-    
-    //console.log("validaciones")
-  }
+  //const submitValidation = async (datosTwo) => {
+//
+  //  const validacion = JSON.parse(localStorage.getItem("user"));
+//
+  //  if ( validacion && validacion.user && validacion.user.message) {
+  //    Swal.fire(
+  //      `${validacion.user.messsage}`,
+  //      'Congratulations you are part of GameZone',
+  //      'error'
+  //    )
+//
+  //    console.log("deberia de aparecer el message")
+//
+  //  }else{
+//
+  //    const Toast = Swal.mixin({
+  //      toast: true,
+  //      position: 'top-start',
+  //      showConfirmButton: false,
+  //      timer: 3000,
+  //      timerProgressBar: true,
+  //      didOpen: (toast) => {
+  //        toast.addEventListener('mouseenter', Swal.stopTimer)
+  //        toast.addEventListener('mouseleave', Swal.resumeTimer)
+  //      }
+  //    })
+  //    
+  //    Toast.fire({
+  //      icon: 'success',
+  //      title: 'Signed in successfully'
+  //    })
+//
+  //    await dispatch(postLogin(datosTwo))
+//
+  //    //await history.push("/home")
+  //  }
+  //  
+  //  //console.log("validaciones")
+  //}
 
   const handleForm1Submit = async (e) => {
     e.preventDefault();
@@ -231,12 +207,8 @@ const Form = () => {
     // Restante da lógica de envio do formulário
 
     if (password !== confirmPassword) {
-      Swal.fire(
-        'Ups!',
-        'Password does not match!',
-        'error'
-      )
       setErrorConfirmPassword("Passwords Do Not Match");
+      return;
     }else if (password === confirmPassword) {
       setErrorConfirmPassword('')
     }
@@ -256,37 +228,26 @@ const Form = () => {
       confirmPassword
     }
 
-    if (!datos.name || !datos.user_name || !datos.password || !datos.country || !datos.confirmPassword) {
-      Swal.fire(
-        'Ups!',
-        'The fields are empty!',
-        'error'
-      )
-      //alert("ups hay datos en form")
-    }else if(nameError || userNameError || emailError || passwordError || errorConfirmPassword){
-      Swal.fire(
-        'Ups!',
-        'There are some errors in your registry',
-        'error'
-      )
+    if (!datos.name || !datos.user_name || !datos.password || !datos.country || !datos.confirmPassword || !datos.email) {
+      return; // Detener la ejecución si hay errores de validación
     }else{
-
       Swal.fire(
         'Create Account',
         'Congratulations you are part of GameZone',
         'success'
       )
-
       await dispatch(postCreateUser(datos))
-      history.push("/login")
+      //history.push("/login") ESTO ESTA EN PAUSA
     }
-
-    // Realizar la acción de envío del formulario aquí
-
-    //alert("Inicia Sesion")
-
-    //console.log()
   };
+
+  useEffect(() => {
+    if (error) {
+        Swal.fire('Ups!', `${error}`, 'error').then(() => {
+          dispatch(setError(null)); // Limpiar el error después de mostrarlo
+        });
+    }
+  }, [error, dispatch])
 
   const handleForm2Submit = async (e) => {
     e.preventDefault();
@@ -302,21 +263,38 @@ const Form = () => {
     }
 
     if (!datosTwo.emailLogin || !datosTwo.passwordLogin) {
-      Swal.fire(
-        'Ups!',
-        'The fields are empty!',
-        'error'
-      )
-      //alert("los campos estan vacios")
-    }else{
+      return;
 
-      await submitValidation(datosTwo)
+    }else if (emailErrorLogin || passwordErrorLogin) {
+      return;
+    }else {
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-start',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+      })
+
+      await dispatch(postLogin(datosTwo))
+      await history.push("/home")
+      //await submitValidation(datosTwo)// ESTA FUNCION CREO QUE OMITIRA
     }
   };
 
-  // inicio sesion con google
+  // INICIO DE SESION CON GOOGLE
 
-  const continueGoogle = async () => {
+  const continueGoogle = async () => {  
 
     const Toast = Swal.mixin({
       toast: true,
@@ -329,14 +307,16 @@ const Form = () => {
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-    
+
     Toast.fire({
       icon: 'success',
       title: 'Signed in successfully'
     })
-
-    await dispatch(loginGoogle())
-
+    
+    const google = new GoogleAuthProvider()
+    //return await signInWithPopup(auth, google)
+    //console.log(loginWithRedirect)  
+    await dispatch(loginGoogle()) 
     console.log("iniciado sesion con google")
   }
 
