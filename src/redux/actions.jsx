@@ -730,7 +730,6 @@ export const getUsers = () => {
     }
 }
 
-
 export const editUser = (id, updatedUser) => {
     return async (dispatch) => {
       try {
@@ -746,7 +745,7 @@ export const editUser = (id, updatedUser) => {
   
 
   export const setUsers = (users) => {
-    return { type: 'SET_USERS', payload: users };
+    return { type: SET_USERS, payload: users };
   };
   
   export const deleteUser = (id) => {
@@ -775,7 +774,7 @@ export const editUser = (id, updatedUser) => {
         .then((response) => response.json())
         .then((data) => {
          
-          dispatch({ type: 'BAN_USER', payload: { userId, banStatus } });
+          dispatch({ type: BAN_USER, payload: { userId, banStatus } });
         })
         .catch((error) => {
          
