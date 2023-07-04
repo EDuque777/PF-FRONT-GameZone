@@ -63,21 +63,21 @@ export const mandarAReview = (game) => {
 
 // export const getDeleteReview = (idRev) => {
 
-//     return async function (dispatch) {
-//         try {
-//             const response = await axios.delete(`/user/deleteReview/${idRev}`)
-//             //console.log("RESPONSEEEE",response);
-//             //console.log("IIIIIID",ids);
-//             const game = response.data
-//             dispatch({
-//                 type: DELETEREVIEW,
-//                 payload: game
-//             })
-//         } catch (error) {
-//             console.log(error.message);
-//         }
-//     }
-// }
+    return async function (dispatch) {
+        try {
+            const response = await axios.delete(`/user/deleteReview/${idRev}`)
+            //console.log("RESPONSEEEE",response);
+            console.log("IIIIIID",idRev);
+            const game = response.data
+            dispatch({
+                type: DELETEREVIEW,
+                payload: game
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
 
 export const getGameReview = (game) => {
     //console.log(game);

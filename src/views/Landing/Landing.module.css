@@ -4,12 +4,15 @@
 }
 
 .container {
+  /* outline: red solid 3px; */
+  display: flex;
   position: relative;
-  height: 90.5vh;
+  height: 93vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-attachment: fixed;
 }
 
 .container::before {

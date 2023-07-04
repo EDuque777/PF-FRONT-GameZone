@@ -9,6 +9,8 @@ import Pagination from "../../components/Pagination/Pagination";
 import Filters from "../../components/Filters/Filters";
 
 const Search = () => {
+  const search = useSelector((state) => state.search);
+  // console.log("searaaaaaaaaach", search);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(act.languagesGames());
@@ -16,7 +18,6 @@ const Search = () => {
   const [name, setName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage, setResultsPerPage] = useState(8);
-  const search = useSelector((state) => state.search);
   const searchcopy = useSelector((state) => state.searchcopy);
   const gamesFilterLanguages = useSelector(state => state.languagesGames);
 
