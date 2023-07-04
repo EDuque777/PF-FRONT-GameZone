@@ -26,12 +26,13 @@ const initialState = {
     developersGames: [],
     genresGames: [],
     userStorage: null,
-    review: [],
-    gamesReviews: [],
+    gameReview: [],
     library: [],
+    review: [],
+    deleteReview: null,
     allusers: [],
     users: [],
-    
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -45,11 +46,30 @@ const rootReducer = (state = initialState, action) => {
             // const juegoReview = biblio.filter(game => game.name !== game.name)
             return {
                 ...state,
-                review: name
+                review: game
             }
 
-        //filtros de busqueda
+        case act.DELETEREVIEW:
+            //console.log(action.payload);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Review removed successfuly",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            return {
+                ...state,
+                deleteReview: action.payload
+            }
 
+        case act.GETGAMEREVIEW:
+            //console.log(action.payload);
+            return {
+                ...state,
+                review: action.payload
+            }
+        //?filtros de busqueda
         case act.FILTER_LANGUAGES:
             const language = action.payload.toLowerCase();
             const filteredSearchsssssssss = state.search.filter(game =>
@@ -322,6 +342,21 @@ const rootReducer = (state = initialState, action) => {
                 error: action.payload
             }
 
+        case act.FREE_ORDER:
+            console.log(action.payload);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Thanks for your purchase",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            return {
+                ...state,
+                orderCreated: true,
+                error: null
+            }
+
         //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
             const addList = action.payload
@@ -561,6 +596,8 @@ const rootReducer = (state = initialState, action) => {
 
 
 };
+
+
 
 
 export default rootReducer;

@@ -19,7 +19,6 @@ export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const DATA_GOOGLE = "DATA_GOOGLE"
 export const LOGOUT_USERGOOGLE = "LOGOUT_USERGOOGLE"
-
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE"
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS"
 export const PLATFORMS = "PLATFORMS"
@@ -27,7 +26,6 @@ export const LANGUAGES = "LANGUAGES"
 export const CATEGORIES = "CATEGORIES"
 export const DEVELOPERS = "DEVELOPERS"
 export const GENRES = "GENRES"
-
 export const ORDER_BY = "ORDER_BY"
 export const FILTER_TYPE = "FILTER_TYPE"
 export const FILTER_AGE = "FILTER_AGE"
@@ -55,12 +53,39 @@ export const SET_USERS = "SET_USERS";
 export const DELETE_USER = "DELETE_USER";
 export const BAN_USER = "BAN_USER";
 
-
 export const mandarAReview = (game) => {
-    console.log(game);
+    //console.log(game);
     return {
         type: MANDARREVIEW,
         payload: game
+    }
+}
+
+export const getDeleteReview = (idRev) => {
+
+    return async function (dispatch) {
+        try {
+            const response = await axios.delete(`/user/deleteReview/${idRev}`)
+            //console.log("RESPONSEEEE",response);
+            //console.log("IIIIIID",ids);
+            const game = response.data
+            dispatch({
+                type: DELETEREVIEW,
+                payload: game
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+
+export const getGameReview = (game) => {
+    //console.log(game);
+    return (dispatch) => {
+        return dispatch({
+            type: GETGAMEREVIEW,
+            payload: game
+        })
     }
 }
 
@@ -160,6 +185,7 @@ export const gameDetail = (id) => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`search/${id}`)
+            console.log(response);
             dispatch({
                 type: GET_DETAIL,
                 payload: response.data
@@ -170,17 +196,6 @@ export const gameDetail = (id) => {
         
     }
 }
-
-// export const preload = () => {
-//     return async (dispatch) => {
-//         try {
-//             await axios.get('http://localhost:3001/preload');
-//             console.log("base de datos cargada")
-//         } catch (error) {
-//         dispatch(console.log(error));
-//         }
-//     };
-// };
 
 export const getByName = (name) => {
     return async function(dispatch) {
@@ -324,9 +339,10 @@ export const clearCart = ()  => {
 }
 
 export const createOrder = (totalPrice, cartGames, dataUser) => {
+    console.log(totalPrice, cartGames, dataUser);
     return async function (dispatch) {
         try {
-            const response = await axios.post("createOrder", {totalPrice, cartGames, dataUser})
+            const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,
@@ -352,6 +368,26 @@ export const createOrderFailure = (errorMessage) => {
     }
 }
 
+export const freeOrder = (totalPrice, cartGames, dataUser) => {
+    console.log(totalPrice, cartGames, dataUser);
+    return async function (dispatch) {
+      try {
+        const response = await axios.post('/freeOrder', {totalPrice, cartGames, dataUser});
+        
+        if (response.status === 200) {
+          dispatch({
+            type: FREE_ORDER,
+            payload: response.data
+          });
+        } else {
+          dispatch(createOrderFailure('Error creating order'));
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+  };
+  
 
 //? FUNCIONES DE LA LISTA DE DESEADOS
 
@@ -392,7 +428,6 @@ export const postCreateUser = (props) => {
 }
 
 //? Accion de Loguear Usuario
-
 export const postLogin = (datos) =>{
     return async function (dispatch) {
         try {
@@ -413,7 +448,6 @@ export const postLogin = (datos) =>{
 }
 
 //? Action de Logout Usuario
-
 export const logoutUser = () => {
     return async function (dispatch) {
         try {
@@ -430,7 +464,6 @@ export const logoutUser = () => {
 }
 
 //Action de login with Google
-
 export const loginGoogle = () => {
     return function (dispatch) {
         try {
@@ -600,29 +633,6 @@ export const editName = (id, newName) => {
     };
   };
 
-//   export const editProfileImage = () => {
-//     return async function () {
-//         try {
-//             const formData = new FormData();
-//             formData.append('file', selectedImage);
-//             const response = await axios.post('http://localhost:3001/upload', formData, {
-//               headers: {
-//                 'Content-Type': 'multipart/form-data',
-//                 datosUser: JSON.stringify(datosUser.id),
-//               },
-//             });
-      
-//             if (response.status === 200) {
-//               console.log(response.data); // URL de la imagen en Cloudinary
-//             } else {
-//               console.log(response.data); // Mensaje de error
-//             }
-//           } catch (error) {
-//             console.log(error.message);
-//           }
-//     }
-// };
-
 export const getUserStorage = (id) => {
     const endpoint = `/profile/${id}`;
     return async (dispatch) => {
@@ -634,17 +644,6 @@ export const getUserStorage = (id) => {
     }
 }
 
-
-export const getGameReview = (id) => {
-    const endpoint = `/reviewsDemo/${id}`;
-    return async (dispatch) => {
-        const {data} = await axios.get(endpoint);
-        return dispatch({
-            type: GETGAMEREVIEW,
-            payload: data
-        })
-    }
-}
 //? ACCIONES DE MI BIBLIOTECA
 
 export const getMyGames = (id) => {
@@ -652,7 +651,7 @@ export const getMyGames = (id) => {
         try {
             const response = await axios.get(`/user/games?id=${id}`);
         console.log(response);
-        const games = response.data
+        const games = response.data;
         dispatch({
             type: GET_MYGAMES,
             payload: games.Games
@@ -662,10 +661,13 @@ export const getMyGames = (id) => {
             console.error(error.message);    
         }
     }
+
 }
 
 
-//ADMIN ***********************************************************************
+
+
+//ADMIN *************************
 
 export const getUsers = () => {
     const endpoint = `http://localhost:3001/users`;
@@ -732,7 +734,4 @@ export const editUser = (id, updatedUser) => {
         });
     };
   };
-  
-  
-  
   

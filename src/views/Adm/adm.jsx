@@ -1,7 +1,12 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as act from "../../redux/actions";
+import MUIDataTable from "mui-datatables";
 import styles from './adm.module.css';
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import UserList from './Tablas/userList';
+
 
 function Dashboard() {
   //Form Game
@@ -34,6 +39,8 @@ function Dashboard() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('user');
+
+  const [showUserList, setShowUserList] = useState(false);
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
@@ -269,17 +276,20 @@ function Dashboard() {
   const handleCreateGameClick = () => {
     setShowForm(true);
     setShowUserForm(false);
+    setShowUserList(false);
   };
 
   const handleCreateUserClick = () => {
     setShowUserForm(true);
     setShowForm(false);
+    setShowUserList(false);
   };
 
-  const handleUserListClick = () => {
-    setShowUserForm(true);
+   const handleUserListClick = () => {
+    setShowUserList (true)
     setShowForm(false);
-  };
+    setShowUserForm(false);
+  }; 
 
   return (
     <html>
@@ -314,10 +324,26 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#">
-                <i className={`fa fa-shopping-cart ${styles["fa-2x"]}`}></i>
+              <a href="#" >
+                <i className={`fa fa-gamepad ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
-                  Sales
+                  Search Games
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={handleUserListClick} >
+                <i className={`fa fa-users ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>
+                  Search User
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#" /* onClick={} */ >
+                <i className={`fa fa-comments ${styles["fa-2x"]}`}></i>
+                <span className={styles.nav_text}>
+                  Review
                 </span>
               </a>
             </li>
@@ -480,6 +506,10 @@ function Dashboard() {
             </div>
           </div>
         )}
+         {showUserList && (
+          <UserList />
+        )}
+  
       </body>
     </html>
   );
