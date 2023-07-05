@@ -52,7 +52,8 @@ export const DELETEDATAUSER = "CLEANDATAUSER";
 export const SET_USERS = "SET_USERS";
 export const DELETE_USER = "DELETE_USER";
 export const BAN_USER = "BAN_USER";
-
+export const DELETEREVIEW = "DELETEREVIEW";
+export const FREE_ORDER = "FREE_ORDER";
 export const mandarAReview = (game) => {
     //console.log(game);
     return {
@@ -61,7 +62,9 @@ export const mandarAReview = (game) => {
     }
 }
 
-// export const getDeleteReview = (idRev) => {
+
+
+export const getDeleteReview = (idRev) => {
 
     return async function (dispatch) {
         try {
@@ -77,6 +80,7 @@ export const mandarAReview = (game) => {
             console.log(error.message);
         }
     }
+}
 
 
 export const getGameReview = (game) => {
@@ -360,6 +364,26 @@ export const createOrder = (totalPrice, cartGames, dataUser) => {
         }
     }
 }
+
+export const freeOrder = (totalPrice, cartGames, dataUser) => {
+    console.log(totalPrice, cartGames, dataUser);
+    return async function (dispatch) {
+      try {
+        const response = await axios.post('/freeOrder', {totalPrice, cartGames, dataUser});
+        
+        if (response.status === 200) {
+          dispatch({
+            type: FREE_ORDER,
+            payload: response.data
+          });
+        } else {
+          dispatch(createOrderFailure('Error creating order'));
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+  };
 
 export const createOrderFailure = (errorMessage) => {
     return {

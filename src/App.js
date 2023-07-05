@@ -16,7 +16,9 @@ import AboutUs from './views/FooterViews/About us/AboutUs';
 import Contact from './views/FooterViews/Contact/Contact';
 /* import {TableDb} from './views/Adm/Tablas/TableGames'; */
 import UserList from './views/Adm/Tablas/userList';
-
+// import TabletReviews from './views/Adm/Tablas/tableReviews';
+// import Reviews from './views/Adm/Tablas/tableReviews';
+import AllReviews from './views/Adm/Tablas/allReviews';
 function App() {
 
   const location = useLocation()
@@ -46,7 +48,8 @@ return (
       <Route path="/contact" render={() => <Contact />} />
       {/* <Route path="/TABLA" render={() => <TableDb />}/> */}
       <Route path="/allusers" render={() => <UserList />}/>
-
+      <Route path="/allreview" render={() => <AllReviews />}/>
+      {/* <Route path="/allreviews" render={() => <Reviews />}/> */}
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>
