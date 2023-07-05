@@ -50,6 +50,12 @@ export const GET_MYGAMES = "GET_MYGAMES";
 export const GETGAMEREVIEW = "GETGAMEREVIEW";
 export const MANDARREVIEW = "MANDARREVIEW";
 
+export const ALLGAMESADMIN = "ALLGAMESADMIN";
+export const EDITGAMESADMIN = "EDITGAMESADMIN"
+export const INFOGAMES = "INFOGAMES";
+export const BANGAMES = "BANGAMES";
+export const DELETEGAME = "DELETEGAME";
+
 export const mandarAReview = (game) => {
     console.log(game);
     return {
@@ -411,7 +417,7 @@ export const postLogin = (datos) =>{
 export const logoutUser = () => {
     return async function (dispatch) {
         try {
-            const logout = await axios.post("cerrarSesion")
+            const logout = axios.post("cerrarSesion")
             console.log(logout)
             return dispatch({
                 type : LOGOUT_USER
@@ -655,5 +661,65 @@ export const getMyGames = (id) => {
         } catch (error) {
             console.error(error.message);    
         }
+    }
+}
+
+
+export const allGamesAdmin = () => {
+    const endpoint = `allGamesAdmin`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: ALLGAMESADMIN,
+            payload: data
+        })
+    }
+}
+
+
+export const gamesBanAdmin = (id) => {
+    const endpoint = `/games/${id}/ban`;
+    return async (dispatch) => {
+        const {data} = await axios.put(endpoint);
+        return dispatch({
+            type: BANGAMES,
+            payload: data
+        })
+    }
+}
+
+
+export const editGamesAdmin = (id, gameData) => {
+    const endpoint = `games/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.put(endpoint, gameData);
+        return dispatch({
+            type: EDITGAMESADMIN,
+            payload: data
+        })
+    }
+}
+
+
+export const infoGamesAdmin = (id) => {
+    const endpoint = `games/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: INFOGAMES,
+            payload: data
+        })
+    }
+}
+
+
+export const deleteGamesAdmin = (id) => {
+    const endpoint = `games/${id}`;
+    return async (dispatch) => {
+        const {data} = await axios.delete(endpoint);
+        return dispatch({
+            type: DELETEGAME,
+            payload: data
+        })
     }
 }
