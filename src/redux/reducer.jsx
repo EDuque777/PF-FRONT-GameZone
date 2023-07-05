@@ -33,6 +33,11 @@ const initialState = {
     allusers: [],
     users: [],
 
+    gamesAdmin: [],
+    gamesInfoId: {},
+    gamesDeleteAdmin: {},
+    editGamesAdmin: [],
+    banGames: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -44,7 +49,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 review: game
             }
-                
+
         case act.DELETEREVIEW:
             //console.log(action.payload);
             Swal.fire({
@@ -60,7 +65,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 deleteReview: action.payload
             }
-            
+
 
         case act.GETGAMEREVIEW:
             //console.log(action.payload);
@@ -546,6 +551,37 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: updatedUsers,
+            }
+
+
+        case act.ALLGAMESADMIN:
+            return {
+                ...state,
+                gamesAdmin: action.payload
+            }
+
+        case act.INFOGAMES:
+            return {
+                ...state,
+                gamesInfoId: action.payload
+            }
+
+        case act.BANGAMES:
+            return {
+                ...state,
+                banGames: action.payload
+            }
+
+        case act.DELETEGAME:
+            return {
+                ...state,
+                gamesDeleteAdmin: action.payload
+            }
+
+        case act.EDITGAMESADMIN:
+            return {
+                ...state,
+                editGamesAdmin: action.payload
             }
 
         default:
