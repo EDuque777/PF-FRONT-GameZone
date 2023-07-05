@@ -411,9 +411,3 @@ const Form = () => {
 
 export default Form;
 
-//<Select
-//placeholder="Select a country"
-//options={countries}
-//id={selectedCountry}
-//onChange={setSelectedCountry}
-///>

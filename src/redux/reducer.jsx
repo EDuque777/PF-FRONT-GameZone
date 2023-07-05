@@ -40,12 +40,11 @@ const rootReducer = (state = initialState, action) => {
         //?filtros combinadosconst combtype = "COMBTYPE"
         case act.MANDARREVIEW:
             const game = action.payload
-            //console.log(game);
             return {
                 ...state,
                 review: game
             }
-
+                
         case act.DELETEREVIEW:
             //console.log(action.payload);
             Swal.fire({
@@ -54,11 +53,14 @@ const rootReducer = (state = initialState, action) => {
                 title: "Review removed successfuly",
                 showConfirmButton: false,
                 timer: 2000
+            }).then(() => {
+                window.location.reload();
             })
             return {
                 ...state,
                 deleteReview: action.payload
             }
+            
 
         case act.GETGAMEREVIEW:
             //console.log(action.payload);
@@ -502,16 +504,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 library: action.payload
             }
-
-        // CASO ADMIN *************************
+        //? CASO ADMIN *********
         case act.GETALLUSERS:
             return {
                 ...state,
                 allusers: action.payload
             }
-
-        default:
-            return { ...state };
 
         case act.EDITDATAUSER:
             return {
@@ -520,65 +518,40 @@ const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     ...action.payload,
                 },
+            }
+
+        case act.SET_USERS:
+            return {
+                ...state,
+                users: action.payload,
             };
 
-            const initialState = {
-                users: [],
-                user: null,
+        case act.DELETEDATAUSER:
+            return {
+                ...state,
+                // Puedes realizar otras actualizaciones del estado aquí si es necesario
             };
 
-            const reducer = (state = initialState, action) => {
-                switch (action.type) {
-                    case 'SET_USERS':
-                        return {
-                            ...state,
-                            users: action.payload,
-                        };
-                    case 'DELETEDATAUSER':
-                        return {
-                            ...state,
-                            // Puedes realizar otras actualizaciones del estado aquí si es necesario
-                        };
-                    // Otros cases del reducer...
-                    default:
-                        return state;
+        case act.BAN_USER:
+            const { userId, banStatus } = action.payload;
+            const updatedUsers = state.users.map((user) => {
+                if (user.id === userId) {
+                    return {
+                        ...user,
+                        ban: banStatus,
+                    };
                 }
-            };
+                return user;
+            });
+            return {
+                ...state,
+                users: updatedUsers,
+            }
 
-            const userReducer = (state = initialState, action) => {
-                switch (action.type) {
-                    case 'SET_USERS':
-                        return {
-                            ...state,
-                            users: action.payload,
-                        };
-                    case 'BAN_USER':
-                        const { userId, banStatus } = action.payload;
-                        const updatedUsers = state.users.map((user) => {
-                            if (user.id === userId) {
-                                return {
-                                    ...user,
-                                    ban: banStatus,
-                                };
-                            }
-                            return user;
-                        });
-                        return {
-                            ...state,
-                            users: updatedUsers,
-                        };
-                    // Agrega otros casos de acciones si los tienes
-                    default:
-                        return state;
-                }
-            };
-
+        default:
+            return { ...state };
     }
-
-
 };
-
-
 
 
 export default rootReducer;

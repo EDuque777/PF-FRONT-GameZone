@@ -16,6 +16,7 @@ import AboutUs from './views/FooterViews/About us/AboutUs';
 import Contact from './views/FooterViews/Contact/Contact';
 /* import {TableDb} from './views/Adm/Tablas/TableGames'; */
 import UserList from './views/Adm/Tablas/userList';
+import AllReviews from './views/Adm/Tablas/allReviews';
 
 function App() {
 
@@ -46,7 +47,7 @@ return (
       <Route path="/contact" render={() => <Contact />} />
       {/* <Route path="/TABLA" render={() => <TableDb />}/> */}
       <Route path="/allusers" render={() => <UserList />}/>
-
+      <Route path="/allreviews" render={() => <AllReviews />}/>
       {location.pathname !== "/dashboard" && <Footer/>}
     </>
   </div>

@@ -14,7 +14,11 @@ import InfoIcon from '@mui/icons-material/Info';
 import MUIDataTable from 'mui-datatables';
 import * as act from '../../../redux/actions';
 import { Typography } from '@material-ui/core';
-import { Select, MenuItem } from '@material-ui/core';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import countries from '../../Form/countries';
+
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -61,13 +65,16 @@ function UserList() {
         const dataIndex = rowIndex % rowsPerPage;
         const userIndex = dataIndex + page * rowsPerPage;
         const selectedUser = users[userIndex];
-        setEditedUser(selectedUser);
+        setEditedUser({
+            ...selectedUser,
+            country: selectedUser.country
+        });
 
         Swal.fire({
-            title: '¿Do you want to edit to ' + selectedUser.name + '?',
+            title: 'Do you want to edit ' + selectedUser.name + '?',
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Confirm ',
+            confirmButtonText: 'Confirm',
             cancelButtonText: 'Cancel',
             reverseButtons: true,
         }).then((result) => {
@@ -76,25 +83,6 @@ function UserList() {
             }
         });
     };
-
-    const handleSave = () => {
-        if (!editedUser) {
-            return;
-        }
-
-        console.log('Edited user:', editedUser);
-        dispatch(act.editUser(editedUser.id, editedUser));
-
-        setOpenModal(false);
-
-        Swal.fire({
-            title: 'Edit Modificado',
-            text: 'The user has been successfully edited.',
-            icon: 'success',
-        });
-    };
-
-
 
     const handleDelete = async (rowIndex) => {
         const { page, rowsPerPage } = muiTableRef.current.state;
@@ -188,9 +176,6 @@ function UserList() {
         setOpenInfoModal(true);
     };
 
-
-
-
     const getMuiTheme = () =>
         createTheme({
             overrides: {
@@ -201,6 +186,26 @@ function UserList() {
                 },
             },
         });
+
+
+    const handleSave = () => {
+        if (!editedUser) {
+            return;
+        }
+
+        console.log('Edited user:', editedUser);
+        dispatch(act.editUser(editedUser.id, editedUser));
+
+        setOpenModal(false);
+
+        Swal.fire({
+            title: 'Edit Modificado',
+            text: 'The user has been successfully edited.',
+            icon: 'success',
+        });
+    };
+
+
 
     return (
         <ThemeProvider theme={getMuiTheme()}>
@@ -218,13 +223,21 @@ function UserList() {
                         name: 'ban',
                         label: 'Status',
                         options: {
+                            filter: true,
+                            filterOptions: {
+                                names: ["Active", "Banned"],
+                            },
                             customBodyRenderLite: (dataIndex) =>
                                 users[dataIndex].ban ? 'Banned' : 'Active',
                         },
                     },
+
+
                     {
-                        name: 'Actions',
+                        name: 'ACTIONS',
                         options: {
+                            filter: false,
+                            sort: false,
                             customBodyRenderLite: (dataIndex, rowIndex) => (
                                 <div>
                                     <IconButton onClick={() => handleEdit(rowIndex)}>
@@ -286,15 +299,20 @@ function UserList() {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <label>
-                                        <strong>Country:</strong>
-                                    </label>
-                                    <input
-                                        type="text"
+                                    <InputLabel>
+                                        <strong> Select a Country:</strong>
+                                    </InputLabel>
+                                    <Select
                                         value={editedUser.country}
                                         onChange={(e) => setEditedUser({ ...editedUser, country: e.target.value })}
                                         style={{ width: '100%' }}
-                                    />
+                                    >
+                                        {countries.map((country) => (
+                                            <MenuItem key={country.id} value={country.label}>
+                                                {country.label}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button variant="contained" color="secondary" onClick={() => setOpenModal(false)}>
@@ -335,13 +353,13 @@ function UserList() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography>
-                                        <strong>Email:</strong>
+                                        <strong>Email: </strong>
                                         {editedUser.email}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography>
-                                        <strong>Country:</strong>
+                                        <strong>Country: </strong>
                                         {editedUser.country}
                                     </Typography>
                                 </Grid>
@@ -355,6 +373,7 @@ function UserList() {
                     )}
                 </div>
             </Modal>
+
 
         </ThemeProvider>
     );

@@ -52,9 +52,9 @@ export const FREE_ORDER = "FREE_ORDER";
 export const GETALLUSERS = "GETALLUSERS";
 export const EDITDATAUSER = "EDITDATAUSER";
 export const DELETEDATAUSER = "CLEANDATAUSER";
-export const SET_USERS = "SET_USERS";
+ export const SET_USERS = "SET_USERS";
 export const DELETE_USER = "DELETE_USER";
-export const BAN_USER = "BAN_USER";
+export const BAN_USER = "BAN_USER"; 
 
 export const mandarAReview = (game) => {
     //console.log(game);
@@ -70,7 +70,7 @@ export const getDeleteReview = (idRev) => {
         try {
             const response = await axios.delete(`/user/deleteReview/${idRev}`)
             //console.log("RESPONSEEEE",response);
-            //console.log("IIIIIID",ids);
+            console.log("IIIIIID",idRev);
             const game = response.data
             dispatch({
                 type: DELETEREVIEW,
@@ -699,7 +699,7 @@ export const editUser = (id, updatedUser) => {
   
 
   export const setUsers = (users) => {
-    return { type: 'SET_USERS', payload: users };
+    return { type: SET_USERS, payload: users };
   };
   
   export const deleteUser = (id) => {
@@ -728,7 +728,7 @@ export const editUser = (id, updatedUser) => {
         .then((response) => response.json())
         .then((data) => {
          
-          dispatch({ type: 'BAN_USER', payload: { userId, banStatus } });
+          dispatch({ type: BAN_USER, payload: { userId, banStatus } });
         })
         .catch((error) => {
          

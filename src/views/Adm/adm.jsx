@@ -5,6 +5,9 @@ import MUIDataTable from "mui-datatables";
 import styles from './adm.module.css';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import UserList from './Tablas/userList';
+import AllReviews from "./Tablas/allReviews";
+
 
 function Dashboard() {
   //Form Game
@@ -39,6 +42,7 @@ function Dashboard() {
   const [role, setRole] = useState('user');
 
   const [showUserList, setShowUserList] = useState(false);
+  const [showAllReviews, setShowAllReviews] = useState(false);
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
@@ -161,10 +165,10 @@ function Dashboard() {
       Swal.fire('Error', 'Passwords do not match', 'error');
       return;
     }
-    if (!validateEmail(email)) {
-      Swal.fire('Error', 'Please enter a valid email', 'error');
-      return;
-    }
+    // if (!validateEmail(email)) {
+    //   Swal.fire('Error', 'Please enter a valid email', 'error');
+    //   return;
+    // }
 
     if (role !== "users" && role !== "admin") {
       Swal.fire("Please select a valid role (User o Admin).");
@@ -191,7 +195,7 @@ function Dashboard() {
   };
 
   const validateEmail = async (email) => {
-    const emailRegex = /^[a-z][\w.-]*[a-z0-9]@[a-z][a-z0-9]+([.-][a-z0-9]+)*(\.[a-z]{2,10})+$/
+    const emailRegex = /^[a-z][\w.-]@[a-z][a-z0-9]([.-][a-z0-9]+)*(\.[a-z]{2,10})+$/
 
     if (!emailRegex.test(email)) {
       Swal.fire('Error', `Please enter a valid email`, 'error');
@@ -272,22 +276,33 @@ function Dashboard() {
   };
 
   const handleCreateGameClick = () => {
+    setShowAllReviews(false);
     setShowForm(true);
     setShowUserForm(false);
     setShowUserList(false);
   };
 
   const handleCreateUserClick = () => {
+    setShowAllReviews(false);
     setShowUserForm(true);
     setShowForm(false);
     setShowUserList(false);
   };
 
-   const handleUserListClick = () => {
-    setShowUserList (true)
+  const handleUserListClick = () => {
+    setShowAllReviews(false);
+    setShowUserList(true)
     setShowForm(false);
     setShowUserForm(false);
-  }; 
+  };
+
+  const handleAllReviewsClick = () => {
+    setShowAllReviews(true);
+    setShowUserList(false);
+    setShowForm(false);
+    setShowUserForm(false);
+    
+  };
 
   return (
     <html>
@@ -338,7 +353,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" /* onClick={} */ >
+              <a href="#"  onClick={handleAllReviewsClick}  >
                 <i className={`fa fa-comments ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Review
@@ -504,10 +519,13 @@ function Dashboard() {
             </div>
           </div>
         )}
-         {showUserList && (
+        {showUserList && (
           <UserList />
         )}
-  
+        {showAllReviews && (
+          <AllReviews />
+        )}
+
       </body>
     </html>
   );

@@ -245,3 +245,25 @@
 .login_button:active {
     background-color: #7700a2d7;
 }
+
+@media only screen and (max-width: 600px) {
+    .img {
+        position: absolute;
+        width: 210px;
+        top: -4px;
+        left: -38px;
+    }
+
+    .fixedNavbar {
+    list-style-type: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #141414;
+    height: 72px;
+    z-index: 900 !important;
+    transition: 2.0s ease all;
+}
+  
+}
