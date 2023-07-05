@@ -917,18 +917,21 @@ function Dashboard() {
   };
 
   const handleCreateGameClick = () => {
+    setShowAllReviews(false);
     setShowForm(true);
     setShowUserForm(false);
     setShowUserList(false);
   };
 
   const handleCreateUserClick = () => {
+    setShowAllReviews(false);
     setShowUserForm(true);
     setShowForm(false);
     setShowUserList(false);
   };
 
   const handleUserListClick = () => {
+    setShowAllReviews(false);
     setShowUserList(true)
     setShowForm(false);
     setShowUserForm(false);
