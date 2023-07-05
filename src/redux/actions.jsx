@@ -52,7 +52,7 @@ export const FREE_ORDER = "FREE_ORDER";
 export const GETALLUSERS = "GETALLUSERS";
 export const EDITDATAUSER = "EDITDATAUSER";
 export const DELETEDATAUSER = "CLEANDATAUSER";
-export const SET_USERS = "SET_USERS";
+ export const SET_USERS = "SET_USERS";
 export const DELETE_USER = "DELETE_USER";
 export const BAN_USER = "BAN_USER";
 
@@ -61,6 +61,7 @@ export const EDITGAMESADMIN = "EDITGAMESADMIN"
 export const INFOGAMES = "INFOGAMES";
 export const BANGAMES = "BANGAMES";
 export const DELETEGAME = "DELETEGAME";
+
 export const mandarAReview = (game) => {
     //console.log(game);
     return {
@@ -69,15 +70,13 @@ export const mandarAReview = (game) => {
     }
 }
 
-
-
 export const getDeleteReview = (idRev) => {
 
     return async function (dispatch) {
         try {
             const response = await axios.delete(`/user/deleteReview/${idRev}`)
             //console.log("RESPONSEEEE",response);
-            console.log("IIIIIID", idRev);
+            console.log("IIIIIID",idRev);
             const game = response.data
             dispatch({
                 type: DELETEREVIEW,
@@ -88,7 +87,6 @@ export const getDeleteReview = (idRev) => {
         }
     }
 }
-
 
 export const getGameReview = (game) => {
     //console.log(game);
@@ -104,79 +102,79 @@ export const getGameReview = (game) => {
 //? FUNCIONES DE PETICIONES
 export const resetfilters = () => {
     return {
-        type: "RESET_FILTERS",
-
+            type: "RESET_FILTERS",
+        
     }
 }
 export const filterplatforms = (payload) => {
     return {
-
-        type: "FILTER_PLATFORMS",
-        payload: payload
-
+            
+            type: "FILTER_PLATFORMS",
+            payload: payload
+        
     }
 }
 export const filterlanguages = (payload) => {
     return {
-
-        type: "FILTER_LANGUAGES",
-        payload: payload
-
+            
+            type: "FILTER_LANGUAGES",
+            payload: payload
+        
     }
 }
 export const filtercontroller = (payload) => {
     return {
-
-        type: "FILTER_CONTROLLER",
-        payload: payload
-
+            
+            type: "FILTER_CONTROLLER",
+            payload: payload
+        
     }
 }
 export const filtergenres = (payload) => {
     return {
-        type: "FILTER_GENRES",
-        payload: payload
-
+            type: "FILTER_GENRES",
+            payload: payload
+        
     }
 }
 export const filtercategories = (payload) => {
     return {
-
-        type: "FILTER_CATEGORIES",
-        payload: payload
-
+            
+            type: "FILTER_CATEGORIES",
+            payload: payload
+        
     }
 }
 export const filterage = (payload) => {
     return {
-
-        type: "FILTER_AGE",
-        payload: payload
-
+            
+            type: "FILTER_AGE",
+            payload: payload
+        
     }
 }
 export const orderBy = (payload) => {
     return {
-
-        type: "ORDER_BY",
-        payload: payload
-
+            
+            type: "ORDER_BY",
+            payload: payload
+        
     }
 }
 export const filtertype = (payload) => {
     return {
-        type: "FILTER_TYPE",
-        payload: payload
+            type: "FILTER_TYPE",
+            payload: payload
     }
 }
 export const filterfree = (payload) => {
     return {
-        type: "FILTER_FREE",
-        payload: payload
+            type: "FILTER_FREE",
+            payload: payload
     }
 }
 export const getGames = () => {
-
+    
     return async function (dispatch) {
         try {
             const response = await axios.get(`allGames`)
@@ -187,7 +185,7 @@ export const getGames = () => {
                 payload: game
             })
         } catch (error) {
-            console.log(error.message);
+            console.log(error.message);            
         }
     }
 }
@@ -204,33 +202,33 @@ export const gameDetail = (id) => {
         } catch (error) {
             console.log(error.message);
         }
-
+        
     }
 }
 
 export const getByName = (name) => {
-    return async function (dispatch) {
-        try {
-            const response = await axios.get(`nameGames?name=${name}`);
+    return async function(dispatch) {
+    try {
+        const response = await axios.get(`nameGames?name=${name}`);
 
-            const sortedResponse = response.data.sort((a, b) => {
-                const aHasRecommendations = a.hasOwnProperty('recommendations');
-                const bHasRecommendations = b.hasOwnProperty('recommendations');
-                if (!aHasRecommendations && !bHasRecommendations) {
-                    return 0;
-                } else if (!aHasRecommendations) {
-                    return 1;
-                } else if (!bHasRecommendations) {
-                    return -1;
-                }
+        const sortedResponse = response.data.sort((a, b) => {
+        const aHasRecommendations = a.hasOwnProperty('recommendations');
+        const bHasRecommendations = b.hasOwnProperty('recommendations');
+        if (!aHasRecommendations && !bHasRecommendations) {
+            return 0;
+        } else if (!aHasRecommendations) {
+            return 1;
+        } else if (!bHasRecommendations) {
+            return -1;
+        }
 
-                return b.recommendations.total - a.recommendations.total;
-            });
+        return b.recommendations.total - a.recommendations.total;
+        });
 
-            dispatch({
-                type: GET_BY_NAME,
-                payload: sortedResponse
-            });
+        dispatch({
+            type: GET_BY_NAME,
+            payload: sortedResponse
+        });
         } catch (error) {
             console.log(error.message);
         }
@@ -239,7 +237,7 @@ export const getByName = (name) => {
 
 
 export const clearDetail = () => {
-    return function (dispatch) {
+    return function (dispatch){
         dispatch({
             type: CLEAR_DETAIL
         })
@@ -247,7 +245,7 @@ export const clearDetail = () => {
 }
 
 export const clearSearch = () => {
-    return function (dispatch) {
+    return function (dispatch){
         dispatch({
             type: CLEAR_SEARCH
         })
@@ -271,26 +269,26 @@ export const getGamesOffer = () => {
 
 export const getGamesComingSoon = () => {
     return async function (dispatch) {
-        try {
-            const response = await axios.get(`coming`);
+    try {
+        const response = await axios.get(`coming`);
+        
+        const games = response.data;
 
-            const games = response.data;
+        // Eliminar objetos duplicados
+        const uniqueGames = games.filter((game, index, self) => {
+            return (
+            index ===
+            self.findIndex((g) => g.id === game.id)
+            );
+        });
 
-            // Eliminar objetos duplicados
-            const uniqueGames = games.filter((game, index, self) => {
-                return (
-                    index ===
-                    self.findIndex((g) => g.id === game.id)
-                );
-            });
-
-            dispatch({
-                type: GET_GAMES_COMING_SOON,
-                payload: uniqueGames
-            });
-        } catch (error) {
-            console.log(error.message);
-        }
+        dispatch({
+            type: GET_GAMES_COMING_SOON,
+            payload: uniqueGames
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
     };
 };
 
@@ -321,13 +319,13 @@ export const getGamesNewReleases = () => {
         } catch (error) {
             console.log(error.message);
         }
-
+        
     }
 }
 
 //? FUNCIONES DEL CARRITO
 export const addCart = (game) => {
-    return function (dispatch) {
+    return function(dispatch){
         dispatch({
             type: ADD_TO_CART,
             payload: game,
@@ -343,9 +341,9 @@ export const removeCart = (id) => {
     }
 }
 
-export const clearCart = () => {
-    return {
-        type: CLEAR_CART
+export const clearCart = ()  => {
+    return  {
+            type: CLEAR_CART  
     }
 }
 
@@ -353,7 +351,7 @@ export const createOrder = (totalPrice, cartGames, dataUser) => {
     console.log(totalPrice, cartGames, dataUser);
     return async function (dispatch) {
         try {
-            const response = await axios.post("/createOrder", { totalPrice, cartGames, dataUser })
+            const response = await axios.post("/createOrder", {totalPrice, cartGames, dataUser})
             if (response.status === 200) {
                 dispatch({
                     type: CREATE_ORDER_SUCCESS,
@@ -372,26 +370,6 @@ export const createOrder = (totalPrice, cartGames, dataUser) => {
     }
 }
 
-export const freeOrder = (totalPrice, cartGames, dataUser) => {
-    console.log(totalPrice, cartGames, dataUser);
-    return async function (dispatch) {
-        try {
-            const response = await axios.post('/freeOrder', { totalPrice, cartGames, dataUser });
-
-            if (response.status === 200) {
-                dispatch({
-                    type: FREE_ORDER,
-                    payload: response.data
-                });
-            } else {
-                dispatch(createOrderFailure('Error creating order'));
-            }
-        } catch (error) {
-            console.error(error.message);
-        }
-    };
-};
-
 export const createOrderFailure = (errorMessage) => {
     return {
         type: CREATE_ORDER_FAILURE,
@@ -399,26 +377,26 @@ export const createOrderFailure = (errorMessage) => {
     }
 }
 
-// export const freeOrder = (totalPrice, cartGames, dataUser) => {
-//     console.log(totalPrice, cartGames, dataUser);
-//     return async function (dispatch) {
-//       try {
-//         const response = await axios.post('/freeOrder', {totalPrice, cartGames, dataUser});
-
-//         if (response.status === 200) {
-//           dispatch({
-//             type: FREE_ORDER,
-//             payload: response.data
-//           });
-//         } else {
-//           dispatch(createOrderFailure('Error creating order'));
-//         }
-//       } catch (error) {
-//         console.error(error.message);
-//       }
-//     };
-//   };
-
+export const freeOrder = (totalPrice, cartGames, dataUser) => {
+    console.log(totalPrice, cartGames, dataUser);
+    return async function (dispatch) {
+      try {
+        const response = await axios.post('/freeOrder', {totalPrice, cartGames, dataUser});
+        
+        if (response.status === 200) {
+          dispatch({
+            type: FREE_ORDER,
+            payload: response.data
+          });
+        } else {
+          dispatch(createOrderFailure('Error creating order'));
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+  };
+  
 
 //? FUNCIONES DE LA LISTA DE DESEADOS
 
@@ -446,11 +424,11 @@ export const removeWhishList = (id) => {
 export const postCreateUser = (props) => {
     return async function (dispatch) {
         try {
-            const user = await axios.post("crearCuenta", props)
-            console.log(user.props)
+           const user = await axios.post("crearCuenta",props)
+           console.log(user.props)
             return dispatch({
-                type: CREATE_USER,
-                payload: user.props
+                type : CREATE_USER,
+                payload : user.props
             })
         } catch (error) {
             console.log(error)
@@ -459,14 +437,14 @@ export const postCreateUser = (props) => {
 }
 
 //? Accion de Loguear Usuario
-export const postLogin = (datos) => {
+export const postLogin = (datos) =>{
     return async function (dispatch) {
         try {
-            const userTwo = await axios.post("iniciarSesion", datos)
+            const userTwo = await axios.post("iniciarSesion",datos)
             console.log(userTwo.data, "estos son de las actions")
             return dispatch({
-                type: LOGIN_USER,
-                payload: userTwo.data
+                type : LOGIN_USER,
+                payload : userTwo.data
             })
         } catch (error) {
             console.log(error.response.data)
@@ -482,10 +460,10 @@ export const postLogin = (datos) => {
 export const logoutUser = () => {
     return async function (dispatch) {
         try {
-            const logout = axios.post("cerrarSesion")
+            const logout = await axios.post("cerrarSesion")
             console.log(logout)
             return dispatch({
-                type: LOGOUT_USER
+                type : LOGOUT_USER
             })
         } catch (error) {
             console.log(error)
@@ -510,21 +488,21 @@ export const getDataGoogle = () => {
     return async (dispatch) => {
         try {
             const dataGoogle = await axios.get("/auth/user", {
-                withCredentials: true,
-                headers: {
+                withCredentials : true,
+                headers : {
                     Accept: "application/json",
                     "Content-Type": "application/json",
-                    'Access-Control-Allow-Credential': true
+                    'Access-Control-Allow-Credential' : true
                 }
             })
             if (dataGoogle.status === 200) {
                 console.log(dataGoogle.data, "datos desde la action")
                 return dispatch({
-                    type: DATA_GOOGLE,
-                    payload: dataGoogle.data
+                    type : DATA_GOOGLE,
+                    payload : dataGoogle.data
                 })
                 //setUser(dato.data.user);
-            } else {
+            }else {
                 throw new Error("Authentication has failed!")
             }
         } catch (error) {
@@ -539,7 +517,7 @@ export const logoutGoogle = () => {
             const logoutTwo = await window.open("http://localhost:3001/auth/logout", "_self")
             console.log(logoutTwo)
             return dispatch({
-                type: LOGOUT_USERGOOGLE
+                type : LOGOUT_USERGOOGLE
             })
         } catch (error) {
             console.log(error)
@@ -559,7 +537,7 @@ export const clearWhishList = () => {
 export const platformsAll = () => {
     const endpoint = `platformGames`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         return dispatch({
             type: PLATFORMS,
             payload: data
@@ -572,7 +550,7 @@ export const platformsAll = () => {
 export const languagesGames = () => {
     const endpoint = `languagesGames`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         return dispatch({
             type: LANGUAGES,
             payload: data
@@ -583,7 +561,7 @@ export const languagesGames = () => {
 export const categoriesGames = () => {
     const endpoint = `categoriesGames`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         return dispatch({
             type: CATEGORIES,
             payload: data
@@ -594,7 +572,7 @@ export const categoriesGames = () => {
 export const developersGames = () => {
     const endpoint = `developersGames`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         return dispatch({
             type: DEVELOPERS,
             payload: data
@@ -605,7 +583,7 @@ export const developersGames = () => {
 export const genresGames = () => {
     const endpoint = `genresGames`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         return dispatch({
             type: GENRES,
             payload: data
@@ -614,60 +592,60 @@ export const genresGames = () => {
 }
 
 export const CleanDetail = () => {
-    return function (dispatch) {
+    return function(dispatch){
         dispatch({ type: CLEANDETAIL })
-    }
+    }   
 };
 
 export const editName = (id, newName) => {
     const endpoint = `/users/${id}`;
     return async (dispatch) => {
-        try {
-            const response = await axios.put(endpoint, { name: newName });
-            dispatch({
-                type: EDITNAME,
-                payload: response.data,
-            });
-        } catch (error) {
-            console.log(error.message);
-        }
+      try {
+        const response = await axios.put(endpoint, { name: newName });
+        dispatch({
+          type: EDITNAME,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
     };
-};
+  };
 
-export const editUserName = (id, newUserName) => {
+  export const editUserName = (id, newUserName) => {
     const endpoint = `/users/${id}`;
     return async (dispatch) => {
-        try {
-            const response = await axios.put(endpoint, { user_name: newUserName });
-            dispatch({
-                type: EDITUSERNAME,
-                payload: response.data,
-            });
-        } catch (error) {
-            console.log(error.message);
-        }
+      try {
+        const response = await axios.put(endpoint, { user_name: newUserName });
+        dispatch({
+          type: EDITUSERNAME,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
     };
-};
+  };
 
-export const editCountry = (id, newCountry) => {
+  export const editCountry = (id, newCountry) => {
     const endpoint = `/users/${id}`;
     return async (dispatch) => {
-        try {
-            const response = await axios.put(endpoint, { country: newCountry });
-            dispatch({
-                type: EDITCOUNTRY,
-                payload: response.data,
-            });
-        } catch (error) {
-            console.log(error.message);
-        }
+      try {
+        const response = await axios.put(endpoint, { country: newCountry });
+        dispatch({
+          type: EDITCOUNTRY,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
     };
-};
+  };
 
 export const getUserStorage = (id) => {
     const endpoint = `/profile/${id}`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         return dispatch({
             type: GETUSERSTORAGE,
             payload: data
@@ -681,15 +659,15 @@ export const getMyGames = (id) => {
     return async function (dispatch) {
         try {
             const response = await axios.get(`/user/games?id=${id}`);
-            console.log(response);
-            const games = response.data;
-            dispatch({
-                type: GET_MYGAMES,
-                payload: games.Games
-            })
-            //console.log(games.Games);
+        console.log(response);
+        const games = response.data;
+        dispatch({
+            type: GET_MYGAMES,
+            payload: games.Games
+        })
+        //console.log(games.Games);
         } catch (error) {
-            console.error(error.message);
+            console.error(error.message);    
         }
     }
 
@@ -703,20 +681,10 @@ export const getMyGames = (id) => {
 export const getUsers = () => {
     const endpoint = `http://localhost:3001/users`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         console.log("SSSSSSSS", data);
         return dispatch({
             type: GETALLUSERS,
-        })
-    }
-}
-
-export const allGamesAdmin = () => {
-    const endpoint = `allGamesAdmin`;
-    return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
-        return dispatch({
-            type: ALLGAMESADMIN,
             payload: data
         })
     }
@@ -724,61 +692,73 @@ export const allGamesAdmin = () => {
 
 export const editUser = (id, updatedUser) => {
     return async (dispatch) => {
-        try {
-            const endpoint = `http://localhost:3001/users/${id}`;
-            const response = await axios.put(endpoint, updatedUser);
-            dispatch(getUsers());
-        } catch (error) {
-            console.log(error.message);
-        }
+      try {
+        const endpoint = `http://localhost:3001/users/${id}`;
+        const response = await axios.put(endpoint, updatedUser);
+  
+        dispatch(getUsers());
+      } catch (error) {
+        console.log(error.message);
+      }
     };
-};
+  };
+  
 
-
-export const setUsers = (users) => {
+  export const setUsers = (users) => {
     return { type: SET_USERS, payload: users };
-};
-
-export const deleteUser = (id) => {
-    return async function (dispatch) {
-        try {
-            const endpoint = `http://localhost:3001/users/${id}`;
-            await axios.delete(endpoint);
-            dispatch({ type: 'DELETEDATAUSER' });
-        } catch (error) {
-            console.error('Error al eliminar el usuario:', error);
-
-        }
+  };
+  
+  export const deleteUser = (id) => {
+    return async function(dispatch) {
+      try {
+        const endpoint = `http://localhost:3001/users/${id}`;
+        await axios.delete(endpoint);
+        dispatch({ type: 'DELETEDATAUSER' });
+      } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        
+      }
     };
-};
-
-/* export const banUser = (userId, banStatus) => {
+  };
+  
+  export const banUser = (userId, banStatus) => {
     return (dispatch) => {
-
-        fetch(`//localhost:3001/users/${userId}/ban`, {
-            method: 'PUT',
-            body: JSON.stringify({ ban: banStatus }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    
+      fetch(`//localhost:3001/users/${userId}/ban`, { 
+        method: 'PUT',
+        body: JSON.stringify({ ban: banStatus }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+         
+          dispatch({ type: BAN_USER, payload: { userId, banStatus } });
         })
-            .then((response) => response.json())
-            .then((data) => {
-
-                dispatch({ type: BAN_USER, payload: { userId, banStatus } });
-            })
-            .catch((error) => {
-
-                console.error('Error al banear el usuario:', error);
-
-            });
+        .catch((error) => {
+         
+          console.error('Error al banear el usuario:', error);
+         
+        });
     };
-}; */
+  };
+  export const allGamesAdmin = () => {
+    const endpoint = `allGamesAdmin`;
+    return async (dispatch) => {
+        const {data} = await axios.get(endpoint);
+        return dispatch({
+            type: ALLGAMESADMIN,
+            payload: data
+        })
+    }
+}
+
 
 export const gamesBanAdmin = (id) => {
     const endpoint = `/games/${id}/ban`;
     return async (dispatch) => {
-        const { data } = await axios.put(endpoint);
+        const {data} = await axios.put(endpoint);
         return dispatch({
             type: BANGAMES,
             payload: data
@@ -790,7 +770,7 @@ export const gamesBanAdmin = (id) => {
 export const editGamesAdmin = (id, gameData) => {
     const endpoint = `games/${id}`;
     return async (dispatch) => {
-        const { data } = await axios.put(endpoint, gameData);
+        const {data} = await axios.put(endpoint, gameData);
         return dispatch({
             type: EDITGAMESADMIN,
             payload: data
@@ -802,7 +782,7 @@ export const editGamesAdmin = (id, gameData) => {
 export const infoGamesAdmin = (id) => {
     const endpoint = `games/${id}`;
     return async (dispatch) => {
-        const { data } = await axios.get(endpoint);
+        const {data} = await axios.get(endpoint);
         return dispatch({
             type: INFOGAMES,
             payload: data
@@ -814,35 +794,10 @@ export const infoGamesAdmin = (id) => {
 export const deleteGamesAdmin = (id) => {
     const endpoint = `games/${id}`;
     return async (dispatch) => {
-        const { data } = await axios.delete(endpoint);
+        const {data} = await axios.delete(endpoint);
         return dispatch({
             type: DELETEGAME,
             payload: data
         })
     }
 }
-
-
-export const banUser = (userId, banStatus) => {
-    return (dispatch) => {
-
-        fetch(`//localhost:3001/users/${userId}/ban`, {
-            method: 'PUT',
-            body: JSON.stringify({ ban: banStatus }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-
-                dispatch({ type: 'BAN_USER', payload: { userId, banStatus } });
-            })
-            .catch((error) => {
-
-                console.error('Error al banear el usuario:', error);
-
-            });
-    };
-};
-

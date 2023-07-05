@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Swal from 'sweetalert2';
 import Tooltip from '@mui/material/Tooltip';
 import { FaStar } from "react-icons/fa";
+import style from  "./tabla.module.css"
 
 function AllReviews() {
     const history = useHistory();
@@ -192,14 +193,16 @@ function AllReviews() {
         });
 
     return (
-        <ThemeProvider theme={getMuiTheme()}>
-            <MUIDataTable
-                ref={muiTableRef}
-                title="Reviews List"
-                data={allReviews}
-                columns={columns}
-            />
-        </ThemeProvider>
+        <div className= {style.total} >
+            <ThemeProvider theme={getMuiTheme()}>
+                <MUIDataTable
+                    ref={muiTableRef}
+                    title="Reviews List"
+                    data={allReviews}
+                    columns={columns}
+                />
+                </ThemeProvider>
+        </div>
     );
 }
 

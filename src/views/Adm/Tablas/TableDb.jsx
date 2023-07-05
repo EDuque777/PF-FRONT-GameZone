@@ -17,6 +17,7 @@ import { Switch } from '@material-ui/core';
 import { Checkbox } from '@material-ui/core';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import style from "./tabla.module.css";
 
 export const TableDb = () => {
 
@@ -509,7 +510,7 @@ export const TableDb = () => {
   ];
 
   const options = {
-    selectableRows: "none",
+    selectableRows: "multiple",
     filterType: "multiselect",
     responsive: "vertical",
   };
@@ -522,8 +523,10 @@ export const TableDb = () => {
 
 
   return (
-    <>
+    <div className= {style.total} >
+    
       <MUIDataTable
+
         title={"ALL GAMES"}
         data={AllGamesAdmin}
         columns={columns}
@@ -843,6 +846,7 @@ export const TableDb = () => {
           <Button onClick={() => setShowGameInfo(false)}>Close</Button>
         </DialogActions>
       </Dialog>
-    </>
+      </div>
+    
   );
 };

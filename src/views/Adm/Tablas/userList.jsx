@@ -18,7 +18,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import countries from '../../Form/countries';
-
+import style from './tabla.module.css';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -208,13 +208,14 @@ function UserList() {
 
 
     return (
+        <div className= {style.total} >
         <ThemeProvider theme={getMuiTheme()}>
             <MUIDataTable
                 ref={muiTableRef}
                 title="Users List"
                 data={users}
                 columns={[
-                    { name: 'id', label: 'Id' },
+                    { name: 'role', label: 'Type' },
                     { name: 'name', label: 'Name' },
                     { name: 'user_name', label: 'UserName' },
                     { name: 'email', label: 'Email' },
@@ -316,10 +317,10 @@ function UserList() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button variant="contained" color="secondary" onClick={() => setOpenModal(false)}>
-                                        Cancelar
+                                        Cancel
                                     </Button>
                                     <Button variant="contained" color="primary" onClick={handleSave} style={{ marginLeft: '10px' }}>
-                                        Guardar
+                                        Save
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -365,7 +366,7 @@ function UserList() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button variant="contained" color="primary" onClick={() => setOpenInfoModal(false)}>
-                                        Cerrar
+                                        Close
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -376,6 +377,7 @@ function UserList() {
 
 
         </ThemeProvider>
+        </div>
     );
 }
 
