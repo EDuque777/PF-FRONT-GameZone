@@ -31,6 +31,9 @@ const initialState = {
     review: [],
     deleteReview: null,
     gamesAdmin: [],
+    errorBack : null,
+    allusers: [],
+    users: [],
 };
 
 const rootReducer=(state = initialState, action) => {
@@ -506,11 +509,89 @@ const rootReducer=(state = initialState, action) => {
                         ...state,
                         gamesAdmin: action.payload
                     }
+
+                    case act.ERROR:
+                        return {
+                            ...state,
+                            errorBack : action.payload
+                        }
+                
             
-        default:
-            return {...state};
+                        case act.GETALLUSERS:
+                            return {
+                                ...state,
+                                allusers: action.payload
+                            }
+                
+                        default:
+                            return { ...state };
+                
+                            case act.EDITDATAUSER:
+                                return {
+                                  ...state,
+                                  user: {
+                                    ...state.user,
+                                    ...action.payload,
+                                  },
+                                };
+                
+                                const initialState = {
+                                    users: [],
+                                    user: null,
+                                  };
+                                  
+                                  const reducer = (state = initialState, action) => {
+                                    switch (action.type) {
+                                      case 'SET_USERS':
+                                        return {
+                                          ...state,
+                                          users: action.payload,
+                                        };
+                                      case 'DELETEDATAUSER':
+                                        return {
+                                          ...state,
+                                          // Puedes realizar otras actualizaciones del estado aquí si es necesario
+                                        };
+                                      // Otros cases del reducer...
+                                      default:
+                                        return state;
+                                    }
+                                  };
+                
+                                  const userReducer = (state = initialState, action) => {
+                                    switch (action.type) {
+                                      case 'SET_USERS':
+                                        return {
+                                          ...state,
+                                          users: action.payload,
+                                        };
+                                      case 'BAN_USER':
+                                        const { userId, banStatus } = action.payload;
+                                        const updatedUsers = state.users.map((user) => {
+                                          if (user.id === userId) {
+                                            return {
+                                              ...user,
+                                              ban: banStatus,
+                                            };
+                                          }
+                                          return user;
+                                        });
+                                        return {
+                                          ...state,
+                                          users: updatedUsers,
+                                        };
+                                      // Agrega otros casos de acciones si los tienes
+                                      default:
+                                        return state;
+                                    }
+                                  };
+                                  
+                                  
+                                  
+                              
+                    }
     }
-};
+
 
 
 export default rootReducer;
