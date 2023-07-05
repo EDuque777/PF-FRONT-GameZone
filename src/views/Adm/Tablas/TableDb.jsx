@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as act from "../../redux/actions";
+import * as act from "../../../redux/actions";
 import MUIDataTable from "mui-datatables";
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';

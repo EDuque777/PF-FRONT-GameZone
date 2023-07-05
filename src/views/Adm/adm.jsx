@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserList from './Tablas/userList';
 import AllReviews from "./Tablas/allReviews";
+import { TableDb } from "./Tablas/TableDb";
 
 
 function Dashboard() {
@@ -43,6 +44,9 @@ function Dashboard() {
 
   const [showUserList, setShowUserList] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
+  const [showTableDb, setShowTableDb]= useState(false);
+
+
 
   const handleGameSubmit = (event) => {
     event.preventDefault();
@@ -280,6 +284,7 @@ function Dashboard() {
     setShowForm(true);
     setShowUserForm(false);
     setShowUserList(false);
+    setShowTableDb(false);
   };
 
   const handleCreateUserClick = () => {
@@ -287,6 +292,7 @@ function Dashboard() {
     setShowUserForm(true);
     setShowForm(false);
     setShowUserList(false);
+    setShowTableDb(false);
   };
 
   const handleUserListClick = () => {
@@ -294,6 +300,7 @@ function Dashboard() {
     setShowUserList(true)
     setShowForm(false);
     setShowUserForm(false);
+    setShowTableDb(false);
   };
 
   const handleAllReviewsClick = () => {
@@ -301,6 +308,16 @@ function Dashboard() {
     setShowUserList(false);
     setShowForm(false);
     setShowUserForm(false);
+    setShowTableDb(false);
+    
+  };
+  const handleTableDbClick = () => {
+    setShowTableDb(true);
+    setShowAllReviews(false);
+    setShowUserList(false);
+    setShowForm(false);
+    setShowUserForm(false);
+    
     
   };
 
@@ -337,7 +354,7 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="#" >
+              <a href="#" onClick={handleTableDbClick}>
                 <i className={`fa fa-gamepad ${styles["fa-2x"]}`}></i>
                 <span className={styles.nav_text}>
                   Search Games
@@ -524,6 +541,9 @@ function Dashboard() {
         )}
         {showAllReviews && (
           <AllReviews />
+        )}
+        {showTableDb && (
+          <TableDb/>
         )}
 
       </body>
