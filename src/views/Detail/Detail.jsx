@@ -6,6 +6,7 @@ import style from "./Detail.module.css";
 import { PacmanLoader } from "react-spinners";
 import * as act from "../../redux/actions";
 import { FaStar } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const Detail = (props) => {
@@ -15,28 +16,13 @@ const Detail = (props) => {
   const isLoading = game === undefined || game === null;
   const genres = game && game?.genres;
   const [videoUrl, setVideoUrl] = useState("");
-  // const categoriesLimited = game && game?.categories?.slice(0, 3);
   const id = props.match.params.id
   let idReview
   
   const datosUser = JSON.parse(localStorage.getItem("user"));
   console.log("asdfghjhgfds",datosUser?.name)
 
-  // const leftRef = useRef(null);
-  // const rightRef = useRef(null);
 
-  // useEffect(() => {
-  //   const leftHeight = leftRef.current;
-  //   const rightHeight = rightRef.current;
-  //   const minHeight = Math.max(leftHeight, rightHeight);
-
-  //   leftRef.current.style.height = `${minHeight}px`;
-  //   rightRef.current.style.height = `${minHeight}px`;
-    
-  // }, []);
-
-
-  
   useEffect(() => {
     if (id) {
       dispatch(gameDetail(id))
@@ -79,6 +65,16 @@ const Detail = (props) => {
   }
   
   const handleAddWhish = () => {
+    if (!datosUser) {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please register or log in to be able to add to the list',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return;
+    }
     dispatch(act.addWhishList({ id: bkId, price: isNaN(price) ? 0 : price, name:name, image: img }));
   };
   
@@ -145,17 +141,6 @@ const Detail = (props) => {
     return ratingPercentages;
   };
 
-  // const handleEditReview = () => {
-  //   dispatch(act.getGameReview({review: reviews, rating: reviews?.rating}))
-  // };
-
-  // const handleDeleteReview = () => {
-  //   dispatch(act.getDeleteReview(idReview))
-  //   window.location.reload()
-  //   // console.log("IIIIDDDD HANDLER",idReview);
-  // };
-  
-  
   const reviews = game?.Reviews || [];
   const averageRating = calculateAverageRating(game?.Reviews);
   const ratingCounts = calculateRatingCounts(game?.Reviews);
@@ -167,38 +152,34 @@ const Detail = (props) => {
   const bkId = game && game?.id;
   const name = game && game?.name
 
-  const handleBack = () => {
-    history.push("/home");
+  const handleGoBack = () => {
+    history.goBack();
   };
-
-
-
-  console.log("GAMEEEEEEEEEEEEEEE",game);
-  // console.log(game && game.Reviews);
-  // console.log("REVIEEEEEEEEEEEEW", game?.Reviews[0].id);
-  // console.log(game?.Reviews[0].Users[0].profileImage);
-
-
 
   return (
     
     <div className={style.info}>
+      
       {isLoading ? (
         <div className={style.loading}>
           <PacmanLoader color="blue" size={80} speedMultiplier={1} />
         </div>
       ) : (
         <div className={style.container}>
+          <button className={`fa fa-arrow-circle-left ${style["backButton"]}`} onClick={() => handleGoBack()}></button>
           <div className={style.container_juego}>
-          <button className={`fa fa-arrow-circle-left ${style["backButton"]}`} onClick={() => handleBack()}></button>
+          <div className={style.container_back}>
+            </div>
             <div className={style.container_texto}>
-              <div className={style.name_margen}>
-                <h1 className={style.name} translate="no">
+              <div className={style.name}>
+                <div className={style.nameCont}>
                   {sanitizeText(game.name)}
-                </h1>
+                </div>
               </div>
               <p className={style.descripcion}>
+              <p className={style.descripcionCont}>
                 {sanitizeText(game.detailed_description)}
+              </p>
               </p>
               <div className={style.comprar}>
                 <p className={style.texto_comprar}>
@@ -206,7 +187,7 @@ const Detail = (props) => {
                 </p>
                 <div className={style.div_comprar}>
                 <p className={style.texto_precio}>
-                  {`Price: ${
+                  {`Price: $${
                     sanitizeText(game.price_overview) ||
                     "Free"
                   }`}
@@ -235,52 +216,48 @@ const Detail = (props) => {
             
             <div className={style.container_screenshots}>
             {game?.Videos && game?.Videos.length > 0 ? (
-  <video className={style.video} controls>
-    <source src={game.Videos[0].video} />
-  </video>
-) : (
-  game.Images.slice(0, 4).map((image, index) => (
-    <div key={index} className={style[`container_screenshots${index + 1}`]}>
-      <img
-        className={style.img}
-        src={image.image}
-        alt={`Screenshot ${index + 1}`}
-      />
-    </div>
-  ))
-)}
+            <video className={style.video} controls>
+              <source src={game.Videos[0].video} />
+            </video>
+            ) : (
+            game.Images.slice(0, 4).map((image, index) => (
+            <div key={index} className={style[`container_screenshots${index + 1}`]}>
+            <img
+                    className={style.images}
+                    src={image.image}
+                    alt={`Screenshot ${index + 1}`}
+                  />
+                </div>
+              ))
+            )}
 
-{game?.Videos && game?.Videos.length > 0 && (
-  game.Images.slice(0, 3).map((image, index) => (
-    <div key={index} className={style[`container_screenshots${index + 1}`]}>
-      <img
-        className={style.img}
-        src={image.image}
-        alt={`Screenshot ${index + 1}`}
-      />
-    </div>
-  ))
-)}
+            {game?.Videos && game?.Videos.length > 0 && (
+              game.Images.slice(0, 3).map((image, index) => (
+                <div key={index} className={style[`container_screenshots${index + 1}`]}>
+                  <img
+                    className={style.images}
+                    src={image.image}
+                    alt={`Screenshot ${index + 1}`}
+                  />
+                </div>
+              ))
+            )}
         </div>
 
           </div>
           </div>
-
-
-
           <div className={style.detail_container}>
-
-            
-            <div className={style.detail_left } >
+            <div className={style.detail_left }>
               <h2>
                 <strong>Requirements </strong>
               </h2>
-              <p>{sanitizeText(game?.pc_requirements.minimum)}</p>
-              <p>{sanitizeText(game?.pc_requirements.recommended)}</p>
+              <p>{sanitizeText(game?.pc_requirements?.minimum?.replace(/:/g, ': '))}</p>
+              <p>{sanitizeText(game?.pc_requirements?.recommended?.replace(/:/g, ': '))}</p>
+
               <h2>
                 <strong>Languages </strong>
               </h2>
-              <p>{sanitizeText(game?.Languages.map(l => `<p>${l.language}</p>`).join(', '))}</p>
+              <p>{sanitizeText(game?.Languages?.map(l => `<p>${l.language}</p>`).join(', '))}</p>
 
               <h2>
                 <strong>Minimum age </strong>
@@ -289,33 +266,27 @@ const Detail = (props) => {
               <h2>
                 <strong>Developers </strong>
               </h2>
-              <p>{sanitizeText(game?.Developers.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
+              <p>{sanitizeText(game?.Developers?.map(d => `<p>${d.developer}</p>`).join(', '))}</p>
             </div>
 
-
-
-
-            <div className={style.detail_rigth } >
+            <div className={style.detail_rigth} >
               <h2>
                 <strong>Categories</strong>
               </h2>
-              {/* {categoriesLimited && categoriesLimited.map((category) => ( */}
-                <p>{sanitizeText(game?.Categories.map(c => `<p>${c.category}</p>`).join(', '))}</p>
-              {/* ))} */}
+                <p>{sanitizeText(game?.Categories?.map(c => `<p>${c.category}</p>`).join(', '))}</p>
               <h2>
                 <strong>Genres </strong>
               </h2>
-              <p>{sanitizeText(game?.Genres.map(g => `<p>${g.genre}</p>`).join(', '))}</p>
+              <p>{sanitizeText(game?.Genres?.map(g => `<p>${g.genre}</p>`).join(', '))}</p>
               <h2>
                 <strong>Released date </strong>
               </h2>
-              <p>{game.release_date}</p>
+              <p>{game?.release_date}</p>
               <h2>
                 <strong>ID :</strong>
               </h2>
               <p>{game?.id}</p>
-            </div>
-              
+            </div>  
             </div>
 
 
@@ -345,19 +316,19 @@ const Detail = (props) => {
             ></div>
             </div>
             <div className={style.ratingPercentage}>
-              <span>{`${ratingPercentages[rating].toFixed(0)}%`}</span>
+              <span>{`${ratingPercentages[rating]?.toFixed(0)}%`}</span>
               </div>
          </div>
-    ))}
-  </div>
-</div>
-</div>
+            ))}
+          </div>
+        </div>
+        </div>
 
 
                 <div className={style.opiniones}>
 
                 {game?.Reviews &&
-                game?.Reviews.map((review, index) => (
+                game?.Reviews?.map((review, index) => (
                   <div className={style.opinion} key={index}>
                     <div className={style.opiniontop} >
                       <div className={style.opiniontopleft} >
@@ -365,7 +336,7 @@ const Detail = (props) => {
                        </div>
                        <div className={style.opiniontopright} >
                         <h3>{review?.author}</h3>
-                        <p>{review?.Users[0].name}</p>
+                        <p>{review?.Users[0]?.name}</p>
                         <p>{review?.date}</p>
                         <Rating rating={review?.rating} />
                        </div> 
@@ -373,14 +344,7 @@ const Detail = (props) => {
                     <div className={style.opinionback} >
                       <p>{review?.reviews}</p>
                       <p hidden>{idReview = review?.id}</p>
-                      {/* {review?.Users[0].name  === datosUser.name &&
-                      <div className={style.opinionbuton} >
-                      <Link to={`reviews/${review?.id}` }>
-                      <button onClick={() => handleEditReview(review?.id)}>Edit Review</button>
-                      </Link>
-                      <button onClick={() => handleDeleteReview(review?.id)}>Delete Review</button>
-                      </div>
-                      } */}
+                      
                     </div>
                   </div>
                 ))}

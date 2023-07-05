@@ -89,5 +89,8 @@ object-assign
  */
 
 //! agregar la ruta al detail
+<<<<<<<< HEAD:build/static/js/main.5914cb96.js.LICENSE.txt
 
 //!revisar ruta al detail
+========
+>>>>>>>> 23694fe337384676978eb45f00221e2f6b29852d:build/static/js/main.cebffd03.js.LICENSE.txt

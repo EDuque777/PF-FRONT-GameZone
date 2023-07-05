@@ -17,7 +17,7 @@ const initialState = {
     gamesFiltered: null,
     createAccount: [],
     user: null,
-    // userGoogle : null,
+    //userGoogle : null,
     orderCreated: false,
     error: null,
     gamesPlatforms: [],
@@ -49,7 +49,6 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 review: game
             }
-
         case act.DELETEREVIEW:
             //console.log(action.payload);
             Swal.fire({
@@ -65,6 +64,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 deleteReview: action.payload
             }
+            
 
 
         case act.GETGAMEREVIEW:
@@ -73,6 +73,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 review: action.payload
             }
+            
         //?filtros de busqueda
         case act.FILTER_LANGUAGES:
             const language = action.payload.toLowerCase();
@@ -346,20 +347,20 @@ const rootReducer = (state = initialState, action) => {
                 error: action.payload
             }
 
-        case act.FREE_ORDER:
-            console.log(action.payload);
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Thanks for your purchase",
-                showConfirmButton: false,
-                timer: 2000
-            });
-            return {
-                ...state,
-                orderCreated: true,
-                error: null
-            }
+            case act.FREE_ORDER:
+                console.log(action.payload);
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Thanks for your purchase",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                return {
+                    ...state,
+                    orderCreated: true,
+                    error: null
+                }
 
         //? CASOS DE LA LISTA DE DESEADOS
         case act.ADD_TO_WHISH_LIST:
@@ -586,6 +587,70 @@ const rootReducer = (state = initialState, action) => {
 
         default:
             return { ...state };
+
+            case act.EDITDATAUSER:
+                return {
+                  ...state,
+                  user: {
+                    ...state.user,
+                    ...action.payload,
+                  },
+                };
+
+                const initialState = {
+                    users: [],
+                    user: null,
+                  };
+                  
+                  const reducer = (state = initialState, action) => {
+                    switch (action.type) {
+                      case 'SET_USERS':
+                        return {
+                          ...state,
+                          users: action.payload,
+                        };
+                      case 'DELETEDATAUSER':
+                        return {
+                          ...state,
+                          // Puedes realizar otras actualizaciones del estado aquí si es necesario
+                        };
+                      // Otros cases del reducer...
+                      default:
+                        return state;
+                    }
+                  };
+
+                  const userReducer = (state = initialState, action) => {
+                    switch (action.type) {
+                      case 'SET_USERS':
+                        return {
+                          ...state,
+                          users: action.payload,
+                        };
+                      case 'BAN_USER':
+                        const { userId, banStatus } = action.payload;
+                        const updatedUsers = state.users.map((user) => {
+                          if (user.id === userId) {
+                            return {
+                              ...user,
+                              ban: banStatus,
+                            };
+                          }
+                          return user;
+                        });
+                        return {
+                          ...state,
+                          users: updatedUsers,
+                        };
+                      // Agrega otros casos de acciones si los tienes
+                      default:
+                        return state;
+                    }
+                  };
+                  
+                  
+                  
+              
     }
 };
 

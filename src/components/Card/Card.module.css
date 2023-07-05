@@ -49,17 +49,9 @@
 }
 
 .rating {
-  padding-right: 10px;
-  padding-left: 10px;
-  outline: 1px solid rgb(255, 225, 0);
-  display: flex;
-  position: absolute;
-  /* bottom: 0; */
-  top: 0;
-  right: 0;
+  /* outline: 1px solid rgb(255, 225, 0); */
   color: white;
-  /* z-index: 0; */
-  background-color: black;
+  align-items: center;
 }
 
 .price {
