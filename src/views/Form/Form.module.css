@@ -234,3 +234,14 @@
 		z-index: 5;
 	}
 }
+
+@media only screen and (max-width: 600px) {
+	.body_form{
+		width: 422px;
+		height: 876px;
+	}
+	.container{
+		width: 400px;
+		height: 400px;
+	}
+}

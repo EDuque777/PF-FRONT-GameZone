@@ -49,3 +49,16 @@
     background-color: rgb(83, 83, 83);
     transition: 500ms;
 }
+
+
+@media only screen and (max-width: 60px) {
+    .navbar {
+        position: static;
+    }
+    .searchcontainer {
+        flex-direction: column;
+    }
+    .buttonsearch {
+        border-radius: 10px;
+    }
+}

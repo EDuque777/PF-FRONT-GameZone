@@ -66,6 +66,14 @@
     color: #f1f1f1;
     margin: 3px 50px;
   }
+
+
+  @media only screen and (max-width: 600px) {
+    .container {
+      width: 100px;
+        height: 70px; 
+    }
+  }
   
 
   
