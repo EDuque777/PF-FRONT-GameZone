@@ -62,6 +62,10 @@
   align-items: center;
 }
 
+.createGame {
+  color: #e4e4e4;
+}
+
 .input {
   display: flex;
   width: 85%;
