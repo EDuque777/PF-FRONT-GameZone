@@ -32,10 +32,12 @@ const initialState = {
     deleteReview: null,
     allusers: [],
     users: [],
-
+    ban:{}
+    
 };
 
 const rootReducer = (state = initialState, action) => {
+    
     switch (action.type) {
         //filtros combinadosconst combtype = "COMBTYPE"
 
@@ -541,10 +543,10 @@ const rootReducer = (state = initialState, action) => {
                   },
                 };
 
-                const initialState = {
-                    users: [],
-                    user: null,
-                  };
+                // const initialState = {
+                //     users: [],
+                //     user: null,
+                //   };
                   
                   const reducer = (state = initialState, action) => {
                     switch (action.type) {
@@ -573,22 +575,24 @@ const rootReducer = (state = initialState, action) => {
                         };
                       case 'BAN_USER':
                         const { userId, banStatus } = action.payload;
+                        console.log('Información de la acción BAN_USER:', userId, banStatus);
                         const updatedUsers = state.users.map((user) => {
-                          if (user.id === userId) {
-                            return {
-                              ...user,
-                              ban: banStatus,
-                            };
-                          }
-                          return user;
+                            if (user.id === userId) {
+                                return {
+                                    ...user,
+                                    ban: banStatus,
+                                };
+                            }
+                            return user;
                         });
                         return {
-                          ...state,
-                          users: updatedUsers,
+                            ...state,
+                            users: updatedUsers,
                         };
-                      // Agrega otros casos de acciones si los tienes
-                      default:
-                        return state;
+                        // Agrega otros casos de acciones si los tienes
+                        default:
+                            return state;
+                           
                     }
                   };
                   
